@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="460.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ServiceList">
+    <children>
+        <HBox alignment="CENTER_LEFT" layoutY="5.0" prefHeight="33.0" prefWidth="460.0">
+            <children>
+                <Button fx:id="Import_Button" mnemonicParsing="false" onAction="#Import_Button_Pressed" prefHeight="21.0" prefWidth="130.0" text="Εισαγώγη" textFill="WHITE">
+                    <HBox.margin>
+                        <Insets left="3.0" />
+                    </HBox.margin></Button>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
+                    <HBox.margin>
+                  <Insets left="10.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+        <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="351.0" prefWidth="460.0">
+            <columns>
+                <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
+                <TableColumn fx:id="ServiceType_Column" prefWidth="111.0" text="Τύπος" />
+                <TableColumn fx:id="Date_Column" prefWidth="75.0" text="Ημερομίνια" />
+                <TableColumn fx:id="Kilometers_Column" prefWidth="75.0" text="Χιλίομετρα" />
+            </columns>
+            <padding>
+                <Insets left="3.0" />
+            </padding>
+        </TableView>
+    </children>
+
+</AnchorPane>

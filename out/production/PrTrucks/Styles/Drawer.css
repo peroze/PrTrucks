@@ -1,0 +1,27 @@
+.Drawer{
+    -fx-background-color: #737373;
+    -fx-border-width: 0px 2px 2px 0px;
+    -fx-border-color: black;
+
+}
+
+.button{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-width: 0px 0px 0.5px 0px;
+    -fx-border-color: #585858;
+     -fx-text-fill: white;
+}
+
+.button:pressed{
+    -fx-background-color: black;
+}
+
+.button:hover{
+    -fx-background-color: black;
+}
+
+.label{
+
+    -fx-background-color: #000000;
+}
