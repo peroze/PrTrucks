@@ -8,5 +8,7 @@
 }
 
 .button:pressed{
-    -fx-background-color: #333333;
+    -fx-border-color: #ff2f00;
+    -fx-border-width: 2px;
+    -fx-background-color: #575757;
 }

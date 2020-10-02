@@ -6,6 +6,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.text.TabableView;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +50,19 @@ public class TrucksList implements Initializable {
     private TableColumn<ModelTruck, String> Service_Column;
 
     @FXML
+    private TableColumn<ModelTruck, String> Location_Column;
+
+    @FXML
+    private TableColumn<ModelTruck, String> Type_Column;
+
+    @FXML
+    private TableColumn<ModelTruck, String> Plaisio_Column;
+
+    @FXML
     private ImageView Import_Button;
+
+    @FXML
+    private TextField Search_Bar;
 
     private ObservableList<ModelTruck> Oblist;
 
@@ -63,7 +78,7 @@ public class TrucksList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("Date")));
+                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("Date"),rs.getString("Plaisio"),rs.getString("type"),rs.getString("Location")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,9 +88,54 @@ public class TrucksList implements Initializable {
         Manufactor_Column.setCellValueFactory(new PropertyValueFactory<>("Manufactor"));
         Model_Column.setCellValueFactory(new PropertyValueFactory<>("Model"));
         Service_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        Truck_Table.setItems(Oblist);
+        Location_Column.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Plaisio_Column.setCellValueFactory(new PropertyValueFactory<>("Plaisio"));
+        Type_Column.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        FilteredList<ModelTruck> Filter =new FilteredList<>(Oblist,b->true);
+        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
+            Filter.setPredicate(ModelTruck->{
+                if(newValue==null||newValue.isEmpty()){
+                    return true;
+                }
+                String LowerCase=newValue.toLowerCase();
+                if (ModelTruck.getId().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getLocation().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getManufactor().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getModel().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getType().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
 
-
+                else {
+                    if(!(ModelTruck.getPlaisio()==null)) {
+                        if (ModelTruck.getPlaisio().toLowerCase().indexOf(LowerCase) != -1) {
+                            return true;
+                        }
+                    }
+                    if (!(ModelTruck.getDate()==null)){
+                        if (ModelTruck.getDate().toLowerCase().indexOf(LowerCase)!=-1){
+                            return true;
+                        }
+                        else return false;
+                    }
+                    else return false;
+                }
+            });
+        } );
+        SortedList<ModelTruck> sorted=new SortedList<>(Filter);
+        sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
+        Truck_Table.setItems(sorted);
     }
 
     @FXML

@@ -35,7 +35,7 @@ public class Sql {
     public ResultSet Query_General_Trucks(){
         ResultSet rs= null;
         try {
-            String sql="SELECT Trucks.id, Trucks.LiscPlate,Trucks.Manufactor,Trucks.Model, Service.Date FROM Trucks LEFT JOIN Service ON Trucks.id=Service.id";
+            String sql="SELECT Trucks.id, Trucks.LiscPlate,Trucks.Manufactor,Trucks.Model,Trucks.Plaisio,Trucks.Type,Trucks.Location,Service.Date FROM Trucks LEFT JOIN Service ON Trucks.id=Service.id";
             Statement stmt= conn.createStatement();
             rs=stmt.executeQuery(sql);
 

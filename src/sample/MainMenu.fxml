@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane fx:id="Border_Pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
+<BorderPane fx:id="Border_Pane" prefHeight="487.0" prefWidth="814.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
    <center>
       <GridPane prefHeight="332.0" prefWidth="600.0" stylesheets="@../Styles/Main_Menu.css" BorderPane.alignment="CENTER">
         <columnConstraints>
