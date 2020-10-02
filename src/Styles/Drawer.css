@@ -9,7 +9,6 @@
     -fx-background-color: transparent;
     -fx-cursor: hand;
     -fx-border-width: 0px 0px 0.5px 0px;
-    -fx-border-color: #585858;
      -fx-text-fill: white;
 }
 
@@ -18,7 +17,7 @@
 }
 
 .button:hover{
-    -fx-background-color: black;
+    -fx-background-color: #8B74BD;
 }
 
 .label{

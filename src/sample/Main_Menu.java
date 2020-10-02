@@ -84,8 +84,6 @@ public class Main_Menu {
     void Exit_Button_Pressed(ActionEvent event) {
         Stage stage= (Stage)((Button)event.getSource()).getScene().getWindow();
         stage.close();
-
-
     }
 
     @FXML
