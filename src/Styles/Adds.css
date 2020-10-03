@@ -1,0 +1,54 @@
+#Pane {
+    -fx-background-color: #383838;
+}
+
+
+.text-field {
+    -fx-background-color: #383838;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #FA8072;
+    -fx-text-fill: white;
+}
+
+
+.button {
+
+    -fx-background-color: #FA8072;
+    -fx-background-radius: 5em;
+    -fx-border-color: black;
+    -fx-border-radius: 5em;
+    -fx-border-width: 2;
+}
+
+.text-field:focused {
+    -fx-border-color: #8B74BD;
+}
+
+.date-picker {
+    -fx-border-width: 0px;
+    -fx-focus-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #FA8072;
+    -fx-text-fill: white;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #FA8072;
+}
+
+.combo-box:focused {
+    -fx-border-color: #8B74BD;
+}
+
+
+.date-picker:editable .arrow-button .arrow {
+    -fx-background-color: #FA8072;
+}
+
+.combo-box .list-cell .text{
+    -fx-fill: grey;
+}
