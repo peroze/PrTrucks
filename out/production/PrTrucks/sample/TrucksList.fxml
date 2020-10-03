@@ -3,14 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="460.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TrucksList">
+<AnchorPane prefHeight="487.0" prefWidth="734.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TrucksList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="5.0" prefHeight="33.0" prefWidth="460.0">
          <children>
@@ -21,25 +23,35 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="351.0" prefWidth="460.0">
+      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="438.0" prefWidth="734.0">
         <columns>
           <TableColumn fx:id="id_Column" prefWidth="35.0" text="Id" />
           <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
             <TableColumn fx:id="Manufactor_Column" prefWidth="111.0" text="Μάρκα" />
             <TableColumn fx:id="Model_Column" prefWidth="75.0" text="Μόντελο" />
             <TableColumn fx:id="Service_Column" prefWidth="75.0" text="Τελ. Service" />
+            <TableColumn fx:id="Location_Column" prefWidth="75.0" text="Τοποθεσία" />
+            <TableColumn fx:id="Type_Column" prefWidth="75.0" text="Κατηγορία" />
+            <TableColumn fx:id="Plaisio_Column" prefWidth="204.0" text="Πλαίσιο" />
         </columns>
          <padding>
             <Insets left="3.0" />
          </padding>
       </TableView>
-      <ImageView fx:id="Import_Button" fitHeight="65.0" fitWidth="80.0" layoutX="365.0" layoutY="303.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Import_Button" fitHeight="60.0" fitWidth="66.0" layoutX="633.0" layoutY="377.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Resources/52892491537356032-64.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </ImageView>
+      <TextField fx:id="Search_Bar" layoutX="544.0" layoutY="14.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
+      <Label fx:id="Search_icon" layoutX="529.0" layoutY="14.0" prefHeight="25.0" prefWidth="21.0" />
+      <ImageView fitHeight="14.0" fitWidth="18.0" layoutX="534.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
+         </image>
       </ImageView>
    </children>
 </AnchorPane>

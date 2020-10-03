@@ -88,11 +88,40 @@ public class Main_Menu {
 
     @FXML
     void Gas_Button_Pressed(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Gas.fxml"));
+            Parent root2 = (Parent) fxmlloader.load();
+            fxmlloader.<Drawer>getController().setActive("Service");
+            fxmlloader.<Drawer>getController().changeBg();
+            fxmlloader.<Drawer>getController().setParent(this);
+            Border_Pane.setCenter(root);
+            Border_Pane.setLeft(root2);
+            new FadeIn(root).play();
+            new FadeIn(root2).play();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void Kteo_Button_Pressed(ActionEvent event) {
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Kteo.fxml"));
+            Parent root2 = (Parent) fxmlloader.load();
+            fxmlloader.<Drawer>getController().setActive("Service");
+            fxmlloader.<Drawer>getController().changeBg();
+            fxmlloader.<Drawer>getController().setParent(this);
+            Border_Pane.setCenter(root);
+            Border_Pane.setLeft(root2);
+            new FadeIn(root).play();
+            new FadeIn(root2).play();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -100,7 +129,7 @@ public class Main_Menu {
     void ServiceButton_Pressed(ActionEvent event) {
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("ServiceList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Service");
             fxmlloader.<Drawer>getController().changeBg();
@@ -117,7 +146,21 @@ public class Main_Menu {
 
     @FXML
     void Speed_Button_Pressed(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+            Parent root2 = (Parent) fxmlloader.load();
+            fxmlloader.<Drawer>getController().setActive("Speed");
+            fxmlloader.<Drawer>getController().changeBg();
+            fxmlloader.<Drawer>getController().setParent(this);
+            Border_Pane.setCenter(root);
+            Border_Pane.setLeft(root2);
+            new FadeIn(root).play();
+            new FadeIn(root2).play();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

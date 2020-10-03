@@ -1,5 +1,6 @@
 package sample;
 
+import animatefx.animation.FadeIn;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
@@ -10,7 +11,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -18,9 +22,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import javax.swing.text.TabableView;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,6 +75,25 @@ public class TrucksList implements Initializable {
 
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
+        Stage primaryStage= new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        try {
+            Parent root=fxmlloader.load();
+            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+            fxmlloader.<AddCar>getController().setMax_i(max);
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 600, 400));
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+            //fxmlloader.<Drawer>getController().setParent(this);
+
+            //Border_Pane.setLeft(root2);
+            //new FadeIn(root).play();
+            //new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -78,7 +103,7 @@ public class TrucksList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("Date"),rs.getString("Plaisio"),rs.getString("type"),rs.getString("Location")));
+                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,6 +117,7 @@ public class TrucksList implements Initializable {
         Plaisio_Column.setCellValueFactory(new PropertyValueFactory<>("Plaisio"));
         Type_Column.setCellValueFactory(new PropertyValueFactory<>("Type"));
         FilteredList<ModelTruck> Filter =new FilteredList<>(Oblist,b->true);
+
         Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
             Filter.setPredicate(ModelTruck->{
                 if(newValue==null||newValue.isEmpty()){
@@ -117,6 +143,9 @@ public class TrucksList implements Initializable {
                     return true;
                 }
 
+                else if (ModelTruck.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
                 else {
                     if(!(ModelTruck.getPlaisio()==null)) {
                         if (ModelTruck.getPlaisio().toLowerCase().indexOf(LowerCase) != -1) {

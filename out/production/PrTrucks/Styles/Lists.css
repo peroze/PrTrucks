@@ -4,6 +4,13 @@
     -fx-background-radius: 5em;
     /*-fx-border-radius: 50%;*/
 }
+.text-field{
+    -fx-background-radius:0em 5em  5em  0em;
+    -fx-background-color:  white;
+}
 
-.circle{
+#Search_icon {
+    -fx-background-color: white;
+    -fx-background-radius: 5em 0em 0em 5em;
+
 }

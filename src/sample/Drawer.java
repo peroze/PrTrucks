@@ -53,12 +53,12 @@ public class Drawer {
                 resetBg();
                 Active="Service";
                 changeBg();
-                try {
+                /*try {
                     Parent root = FXMLLoader.load(getClass().getResource("ServiceList.fxml"));
                     Parent.getBorder_Pane().setCenter(root);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
 
         }
