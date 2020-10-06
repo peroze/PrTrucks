@@ -127,6 +127,54 @@ public class Sql {
         }
     }
 
+    public int InsertRepair(ModelRepair a){
+        ArrayList<String> repair = new ArrayList<>();
+
+        repair.add(a.getKilometers());
+        repair.add(a.getDiscreption());
+        repair.add(a.getWorkshop());
+        repair.add(a.getDate());
+        repair.add(a.getChanges());
+        repair.add(a.getPrice());
+
+
+        String sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Whorkshop,Price) VALUES (?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+            pstmt.setString(2, repair.get(1));
+            pstmt.setInt(3, Integer.valueOf(repair.get(0)));
+            pstmt.setString(4, repair.get(3));
+            pstmt.setString(5, repair.get(4));
+            pstmt.setString(6, repair.get(2));
+            pstmt.setInt(7, Integer.valueOf(repair.get(5)));
+
+
+            pstmt.executeUpdate();
+            return 1;
+
+
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public String GetIdFromLisx(String lisc){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  id FROM Trucks  WHERE LiscPlate="+lisc;
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            return rs.getString("LiscPlate");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**
      * This method gets a date and the table and returns all entries in this date
      *

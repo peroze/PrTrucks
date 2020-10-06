@@ -52,3 +52,23 @@
 .combo-box .list-cell .text{
     -fx-fill: grey;
 }
+
+/*.table-view:row-selection .label {
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+    -fx-border-color: #FA8072;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+
+
+.table-view:row-selection  {
+    -fx-background-color: #383838;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-color: #FA8072;
+
+}
+.table-view:row-selection .placeholder .label  {
+    -fx-border-width: 0px 0px 0px 0px;
+
+}

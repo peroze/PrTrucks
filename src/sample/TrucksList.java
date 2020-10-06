@@ -80,12 +80,12 @@ public class TrucksList implements Initializable {
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
         Stage primaryStage= new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddService.fxml"));
         try {
             Parent root=fxmlloader.load();
-            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-            fxmlloader.<AddCar>getController().setMax_i(max);
-            AddCar addcar =fxmlloader.getController();
+            //int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+           // fxmlloader.<AddCar>getController().setMax_i(max);
+           // AddCar addcar =fxmlloader.getController();
             primaryStage.setOnHidden(e->{
                 RenewTable();
             });
@@ -93,7 +93,7 @@ public class TrucksList implements Initializable {
                 RenewTable();
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 600, 700));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
