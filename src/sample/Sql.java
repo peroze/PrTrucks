@@ -71,8 +71,9 @@ public class Sql {
      * This method inserts a new car on the db
      *
      * @param a the new car
+     * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public void InsertCar(ModelTruck a, int max_i) {
+    public int InsertCar(ModelTruck a, int max_i) {
         ArrayList<String> car = new ArrayList<>();
 
         car.add(a.getLiscPlate());
@@ -89,7 +90,6 @@ public class Sql {
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            System.out.println(max_i);
             pstmt.setInt(1, max_i+1);
             pstmt.setString(2, car.get(0));
             pstmt.setString(3, car.get(1));
@@ -102,14 +102,30 @@ public class Sql {
 
 
             pstmt.executeUpdate();
-
+            return 1;
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            return 0;
         }
     }
 
+    /**
+     * This method deletes a car from the database
+     * @param id The id of the car to be deleted from the databse
+     * @return 1 if the deletion is complete or 0if there is an error
+     */
+    public int DeleteCar(int id){
+        String stmt="DELETE FROM Trucks WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
 
     /**
      * This method gets a date and the table and returns all entries in this date

@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddCar implements Initializable {
@@ -77,18 +78,28 @@ public class AddCar implements Initializable {
 
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        max_i = 3;
         Sql sql = new Sql();
         ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText());
-        sql.InsertCar(toAdd, max_i);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Εισαγωγή Επιτυχής");
-        //alert.setHeaderText("DB Creation Complete");
-        alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
-        alert.showAndWait();
-        Stage stage = (Stage) Ok_Button.getScene().getWindow();
-        // do what you have to do
-        stage.close();
+        int i=sql.InsertCar(toAdd, max_i);
+        if(i==1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Εισαγωγή Επιτυχής");
+            //alert.setHeaderText("DB Creation Complete");
+            alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
+            alert.showAndWait();
+            Stage stage = (Stage) Ok_Button.getScene().getWindow();
+            stage.close();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Εισαγωγή Απέτυχε");
+            alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+            alert.showAndWait();
+        }
+    }
+
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
+        return Entry;
     }
 
 }

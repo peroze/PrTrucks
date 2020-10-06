@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TrucksList implements Initializable {
@@ -68,6 +69,9 @@ public class TrucksList implements Initializable {
     private ImageView Import_Button;
 
     @FXML
+    private Button Delete_Button;
+
+    @FXML
     private TextField Search_Bar;
 
     private ObservableList<ModelTruck> Oblist;
@@ -81,6 +85,13 @@ public class TrucksList implements Initializable {
             Parent root=fxmlloader.load();
             int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
             fxmlloader.<AddCar>getController().setMax_i(max);
+            AddCar addcar =fxmlloader.getController();
+            primaryStage.setOnHidden(e->{
+                RenewTable();
+            });
+            primaryStage.setOnCloseRequest(e->{
+                RenewTable();
+            });
             primaryStage.setTitle("PrTrucks");
             primaryStage.setScene(new Scene(root, 600, 400));
             //primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -92,6 +103,32 @@ public class TrucksList implements Initializable {
             //new FadeIn(root2).play();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void Delete_Button_Pressed(ActionEvent event) {
+        ModelTruck temp=Truck_Table.getSelectionModel().getSelectedItem();
+        if (!(temp==null)) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Επιβαιβέωση");
+            alert.setHeaderText("Διαγραφή στοιχείου");
+            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το όχημα με πινακίδα " + temp.getLiscPlate() + ".");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Sql sql = new Sql();
+                int k =sql.DeleteCar(Integer.valueOf(temp.getId()));
+                if(k==0){
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setTitle("Αποτυχία");
+                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+                    alert2.showAndWait();
+                }
+                RenewTable();
+            }
+
         }
 
     }
@@ -199,6 +236,68 @@ public class TrucksList implements Initializable {
 
         });
 
+    }
+
+    public void RenewTable(){
+
+        Sql db = new Sql();
+        ResultSet rs = db.Query_General_Trucks();
+        Oblist = FXCollections.observableArrayList();
+        try {
+            while (rs.next()) {
+                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        FilteredList<ModelTruck> Filter =new FilteredList<>(Oblist,b->true);
+        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
+            Filter.setPredicate(ModelTruck->{
+                if(newValue==null||newValue.isEmpty()){
+                    return true;
+                }
+                String LowerCase=newValue.toLowerCase();
+                if (ModelTruck.getId().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getLocation().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getManufactor().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getModel().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else if (ModelTruck.getType().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+
+                else if (ModelTruck.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
+                    return true;
+                }
+                else {
+                    if(!(ModelTruck.getPlaisio()==null)) {
+                        if (ModelTruck.getPlaisio().toLowerCase().indexOf(LowerCase) != -1) {
+                            return true;
+                        }
+                    }
+                    if (!(ModelTruck.getDate()==null)){
+                        if (ModelTruck.getDate().toLowerCase().indexOf(LowerCase)!=-1){
+                            return true;
+                        }
+                        else return false;
+                    }
+                    else return false;
+                }
+            });
+        } );
+        SortedList<ModelTruck> sorted=new SortedList<>(Filter);
+        sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
+        Truck_Table.setItems(sorted);
     }
 
 }
