@@ -16,10 +16,13 @@
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="5.0" prefHeight="33.0" prefWidth="460.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
+            <Button fx:id="Delete_Button" mnemonicParsing="false" onAction="#Delete_Button_Pressed" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>

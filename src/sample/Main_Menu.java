@@ -19,8 +19,8 @@ import java.io.IOException;
 
 public class Main_Menu {
 
-    private double x_Offset=0;
-    private double y_Offset=0;
+    private double x_Offset = 0;
+    private double y_Offset = 0;
 
 
     @FXML
@@ -53,18 +53,28 @@ public class Main_Menu {
     @FXML
     private BorderPane Border_Pane;
 
-
+    /**
+     * This method returns the main panel
+     *
+     * @return The panel
+     */
     public BorderPane getBorder_Pane() {
         return Border_Pane;
     }
 
+
+    /**
+     * This method opens the Cars List Window
+     *
+     * @param event The event when an action id made
+     */
     @FXML
     void Cars_Button_Pressed(ActionEvent event) {
         try {
 
-            FXMLLoader fxmlloader=new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
-            Parent root2=(Parent)fxmlloader.load();
+            Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Trucks");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
@@ -80,12 +90,23 @@ public class Main_Menu {
 
     }
 
+
+    /**
+     * This method Closes the program
+     *
+     * @param event The event when the action is made
+     */
     @FXML
     void Exit_Button_Pressed(ActionEvent event) {
-        Stage stage= (Stage)((Button)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
+
+    /**
+     * This method opens the Gas List Window
+     * @param event The event when an action is made
+     */
     @FXML
     void Gas_Button_Pressed(ActionEvent event) {
         try {
@@ -99,12 +120,16 @@ public class Main_Menu {
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
             new FadeIn(root2).play();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
+    /**
+     * This method opens the Kteo List Window
+     * @param event The event when an action id made
+     */
     @FXML
     void Kteo_Button_Pressed(ActionEvent event) {
         try {
@@ -118,13 +143,17 @@ public class Main_Menu {
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
             new FadeIn(root2).play();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+
+    /**
+     * This method opens the Service List Window
+     * @param event The event when an action id made
+     */
     @FXML
     void ServiceButton_Pressed(ActionEvent event) {
         try {
@@ -138,12 +167,16 @@ public class Main_Menu {
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
             new FadeIn(root2).play();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
+    /**
+     * This method opens the Speedometer List Window
+     * @param event The event when an action id made
+     */
     @FXML
     void Speed_Button_Pressed(ActionEvent event) {
         try {
@@ -157,41 +190,60 @@ public class Main_Menu {
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
             new FadeIn(root2).play();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
+    /**
+     * This Closes the program
+     * @param event The event when an action id made
+     */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage= (Stage)((ImageView)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
 
     @FXML
     void All_Hover(MouseEvent event) {
 
     }
 
+
+    /**
+     * This is used to make the window draggable
+     * @param event This it the given event
+     */
     @FXML
     void Top_Bar_Dragged(MouseEvent event) {
-        ((Stage)((HBox)event.getSource()).getScene().getWindow()).setX(event.getSceneX()+x_Offset);
-        ((Stage)((HBox)event.getSource()).getScene().getWindow()).setY(event.getSceneY()+y_Offset);
+        Border_Pane.getScene().getWindow().setX(event.getScreenX() - x_Offset);
+        Border_Pane.getScene().getWindow().setY(event.getScreenY() - y_Offset);
     }
 
+
+    /**
+     * This is used to make the window draggable
+     * @param event This it the given event
+     */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset= ((Stage)((HBox)event.getSource()).getScene().getWindow()).getX()-event.getSceneX();
-        y_Offset= ((Stage)((HBox)event.getSource()).getScene().getWindow()).getY()-event.getSceneY();
+        x_Offset=event.getSceneX();
+        y_Offset=event.getSceneY();
     }
 
+
+    /**
+     * This method is used to minimize the Window
+     * @param event This it the given event
+     */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage= (Stage)((ImageView)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-
 
 
 }
