@@ -94,7 +94,7 @@ public class TrucksList implements Initializable {
             });
             primaryStage.setTitle("PrTrucks");
             primaryStage.setScene(new Scene(root, 600, 400));
-            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
 
