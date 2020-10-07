@@ -121,6 +121,8 @@ public class AddService implements Initializable {
             Discreption.clear();
             AddPart.clear();
             Price.clear();
+            Oblist= FXCollections.observableArrayList();
+            Table.setItems(Oblist);
         }
     }
 

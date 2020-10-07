@@ -98,14 +98,13 @@ public class AddRepair implements Initializable {
         for(int i=1;i<Oblist.size();i++){
            Changes= Changes+"|"+Oblist.get(i).getString();
         }
-
         ModelRepair toAdd=new ModelRepair(Lisc_Plate.getText(),Price.getText(),Kilometers.getText(),Date.getValue().toString(),Discreption.getText(),Workshop.getText(),Changes);
         int i=sql.InsertRepair(toAdd);
         if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
+            alert.setContentText("Η επισκευή εισήχθει με επιτυχία στην Βαση");
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
             stage.close();
@@ -113,8 +112,15 @@ public class AddRepair implements Initializable {
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+            alert.setContentText("Η επισκευή δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
+            Kilometers.clear();
+            Lisc_Plate.clear();
+            Discreption.clear();
+            AddPart.clear();
+            Price.clear();
+            Oblist= FXCollections.observableArrayList();
+            Table.setItems(Oblist);
         }
     }
 
