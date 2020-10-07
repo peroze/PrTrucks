@@ -160,6 +160,46 @@ public class Sql {
         }
     }
 
+
+    public int InsertService(ModelService a){
+        ArrayList<String> repair = new ArrayList<>();
+
+        repair.add(a.getKilometers());
+        repair.add(a.getType());
+        repair.add(a.getWorkshop());
+        repair.add(a.getDate());
+        repair.add(a.getChanges());
+        repair.add(a.getNextDate());
+        repair.add(a.getNextKilometers());
+        repair.add(a.getPrice());
+
+
+        String sql = "INSERT INTO Service(id,Type,Kilometers,Date,Changes,Whorkshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+            pstmt.setString(2, repair.get(1));
+            pstmt.setInt(3, Integer.valueOf(repair.get(0)));
+            pstmt.setString(4, repair.get(3));
+            pstmt.setString(5, repair.get(4));
+            pstmt.setString(6, repair.get(2));
+            pstmt.setString(7, repair.get(5));
+            pstmt.setString(8, repair.get(6));
+            pstmt.setInt(9, Integer.valueOf(repair.get(7)));
+
+
+            pstmt.executeUpdate();
+            return 1;
+
+
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+
     public String GetIdFromLisx(String lisc){
         ResultSet rs = null;
         try {

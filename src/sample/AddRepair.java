@@ -16,10 +16,9 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-public class AddService implements Initializable {
+public class AddRepair implements Initializable {
 
 
     private double x_Offset = 0;
@@ -97,16 +96,16 @@ public class AddService implements Initializable {
         String Changes;
         Changes=Oblist.get(0).getString();
         for(int i=1;i<Oblist.size();i++){
-            Changes= Changes+"|"+Oblist.get(i).getString();
+           Changes= Changes+"|"+Oblist.get(i).getString();
         }
 
-        ModelService toAdd=new ModelService(Lisc_Plate.getText(),Price.getText(),Kilometers.getText(),Date.getValue().toString(),Discreption.getText(),Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Changes);
-        int i=sql.InsertService(toAdd);
+        ModelRepair toAdd=new ModelRepair(Lisc_Plate.getText(),Price.getText(),Kilometers.getText(),Date.getValue().toString(),Discreption.getText(),Workshop.getText(),Changes);
+        int i=sql.InsertRepair(toAdd);
         if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
+            alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
             stage.close();
@@ -114,13 +113,8 @@ public class AddService implements Initializable {
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+            alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
-            Kilometers.clear();
-            Lisc_Plate.clear();
-            Discreption.clear();
-            AddPart.clear();
-            Price.clear();
         }
     }
 
