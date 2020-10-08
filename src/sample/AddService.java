@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,8 +78,12 @@ public class AddService implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Oblist = FXCollections.observableArrayList();
-
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Pane.requestFocus();
+            }
+        });
     }
 
 

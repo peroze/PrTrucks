@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,6 +76,12 @@ public class AddCar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Pane.requestFocus();
+            }
+        });
         ObservableList<String> Types = FXCollections.observableArrayList();
         Types.add("ΙΧ");
         Types.add("ΦΙΧ");

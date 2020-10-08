@@ -1,5 +1,13 @@
 #Pane {
     -fx-background-color: #383838;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+#Panel {
+    -fx-background-color: #383838;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
 }
 
 

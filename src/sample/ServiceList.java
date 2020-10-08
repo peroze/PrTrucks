@@ -29,6 +29,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class ServiceList implements Initializable {
 
@@ -142,6 +143,15 @@ public class ServiceList implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Truck_Table.setRowFactory((tv-> {
+            TableRow<ModelService> row=new TableRow<>();
+            row.setOnMouseClicked(event->{
+                if (event.getClickCount()==2&& (!row.isEmpty())){
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
         Service_Id_Column.setCellValueFactory(new PropertyValueFactory<>("id"));
         LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
         Type_Column.setCellValueFactory(new PropertyValueFactory<>("Type"));
@@ -184,6 +194,22 @@ public class ServiceList implements Initializable {
         SortedList<ModelService> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+    }
+
+    void DoubleClickTable() {
+        ModelService temp = Truck_Table.getSelectionModel().getSelectedItem();
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewService.fxml"));
+        try {
+            Parent root = fxmlloader.load();
+            fxmlloader.<ViewService>getController().setService(temp);
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 708, 646));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
