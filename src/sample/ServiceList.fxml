@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TrucksList">
+<AnchorPane prefHeight="648.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ServiceList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="460.0">
          <children>
@@ -26,22 +26,22 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="599.0" prefWidth="864.0">
+      <TableView fx:id="Truck_Table" layoutY="52.0" prefHeight="599.0" prefWidth="864.0">
         <columns>
-          <TableColumn fx:id="id_Column" prefWidth="35.0" text="Id" />
-          <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
-            <TableColumn fx:id="Manufactor_Column" prefWidth="111.0" text="Μάρκα" />
-            <TableColumn fx:id="Model_Column" prefWidth="75.0" text="Μόντελο" />
-            <TableColumn fx:id="Service_Column" prefWidth="94.0" text="1η Κυκλοφορία" />
-            <TableColumn fx:id="Location_Column" prefWidth="86.0" text="Τοποθεσία" />
-            <TableColumn fx:id="Type_Column" prefWidth="73.0" text="Κατηγορία" />
-            <TableColumn fx:id="Plaisio_Column" prefWidth="308.0" text="Πλαίσιο" />
+            <TableColumn fx:id="Service_Id_Column" prefWidth="37.0" text="Id" />
+          <TableColumn fx:id="LisancePlate_Column" prefWidth="109.0" text="Πινακίδα" />
+            <TableColumn fx:id="Type_Column" prefWidth="113.0" text="Τύπος" />
+            <TableColumn fx:id="Date_Column" prefWidth="103.0" text="Ημερομηνία" />
+            <TableColumn fx:id="Workshop_Column" prefWidth="219.0" text="Συνεργείο" />
+            <TableColumn fx:id="KM_Column" prefWidth="77.0" text="Χιλίομετρα" />
+            <TableColumn fx:id="NextD_Column" prefWidth="107.0" text="Επόμενο (Ημερ)" />
+            <TableColumn fx:id="NextK_Column" prefWidth="96.0" text="Επόμενο (KM)" />
         </columns>
          <padding>
             <Insets left="3.0" />
          </padding>
       </TableView>
-      <ImageView fx:id="Import_Button" fitHeight="63.0" fitWidth="63.0" layoutX="754.0" layoutY="543.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Import_Button" fitHeight="62.0" fitWidth="87.0" layoutX="730.0" layoutY="553.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Resources/52892491537356032-64.png" />
          </image>

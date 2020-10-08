@@ -67,10 +67,9 @@ public class AddRepair implements Initializable {
     private TableView<StringsForTables> Table;
 
     @FXML
-    private TableColumn<StringsForTables,String> Parts;
+    private TableColumn<StringsForTables, String> Parts;
 
     private ObservableList<StringsForTables> Oblist;
-
 
 
     @Override
@@ -92,15 +91,15 @@ public class AddRepair implements Initializable {
 
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql=new Sql();
+        Sql sql = new Sql();
         String Changes;
-        Changes=Oblist.get(0).getString();
-        for(int i=1;i<Oblist.size();i++){
-           Changes= Changes+"|"+Oblist.get(i).getString();
+        Changes = Oblist.get(0).getString();
+        for (int i = 1; i < Oblist.size(); i++) {
+            Changes = Changes + "|" + Oblist.get(i).getString();
         }
-        ModelRepair toAdd=new ModelRepair(Lisc_Plate.getText(),Price.getText(),Kilometers.getText(),Date.getValue().toString(),Discreption.getText(),Workshop.getText(),Changes);
-        int i=sql.InsertRepair(toAdd);
-        if(i==1) {
+        ModelRepair toAdd = new ModelRepair(Lisc_Plate.getText(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
+        int i = sql.InsertRepair(toAdd);
+        if (i == 1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");
@@ -108,8 +107,7 @@ public class AddRepair implements Initializable {
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
             stage.close();
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Απέτυχε");
             alert.setContentText("Η επισκευή δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
@@ -119,13 +117,15 @@ public class AddRepair implements Initializable {
             Discreption.clear();
             AddPart.clear();
             Price.clear();
-            Oblist= FXCollections.observableArrayList();
+            Oblist = FXCollections.observableArrayList();
             Table.setItems(Oblist);
         }
     }
 
+
     /**
      * This Closes the program
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -143,6 +143,7 @@ public class AddRepair implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
@@ -154,17 +155,19 @@ public class AddRepair implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset=event.getSceneX();
-        y_Offset=event.getSceneY();
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
+     *
      * @param event This it the given event
      */
     @FXML
@@ -173,7 +176,14 @@ public class AddRepair implements Initializable {
         stage.setIconified(true);
     }
 
-    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
+
+    /**
+     * Τhis method is used to return the new Entry
+     *
+     * @param Entry The new entry
+     * @return The new Entry
+     */
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry) {
         return Entry;
     }
 

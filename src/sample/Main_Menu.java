@@ -158,7 +158,7 @@ public class Main_Menu {
     void ServiceButton_Pressed(ActionEvent event) {
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ServiceList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Service");
             fxmlloader.<Drawer>getController().changeBg();

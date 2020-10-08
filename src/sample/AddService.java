@@ -100,7 +100,8 @@ public class AddService implements Initializable {
             Changes= Changes+"|"+Oblist.get(i).getString();
         }
 
-        ModelService toAdd=new ModelService(Lisc_Plate.getText(),Price.getText(),Kilometers.getText(),Date.getValue().toString(),Discreption.getText(),Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Changes);
+        ModelService toAdd=new ModelService(Lisc_Plate.getText(),Date.getValue().toString(),Kilometers.getText(),Discreption.getText(),Changes,Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Price.getText());
+
         int i=sql.InsertService(toAdd);
         if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

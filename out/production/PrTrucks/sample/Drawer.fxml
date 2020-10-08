@@ -22,7 +22,10 @@
                   <Image url="@Resources/Χωρίς%20τίτλο.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <VBox.margin>
+            <Insets top="4.0" />
+         </VBox.margin></Button>
       <Button fx:id="Gas_Button" mnemonicParsing="false" onAction="#Gas_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
@@ -42,9 +45,9 @@
                </image>
             </ImageView>
          </graphic>
-         <padding>
+         <VBox.margin>
             <Insets top="4.0" />
-         </padding></Button>
+         </VBox.margin></Button>
       <Button fx:id="Service_Button" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="44.0" prefWidth="51.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -53,19 +56,19 @@
                </image>
             </ImageView>
          </graphic>
-         <padding>
+         <VBox.margin>
             <Insets top="4.0" />
-         </padding></Button>
+         </VBox.margin></Button>
       <Button fx:id="Speed_Button" mnemonicParsing="false" onAction="#Speed_Button_Pressed" prefHeight="43.0" prefWidth="51.0">
-         <padding>
-            <Insets top="4.0" />
-         </padding>
          <graphic>
             <ImageView fitHeight="52.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Resources/clipart1956683.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <VBox.margin>
+            <Insets top="4.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>

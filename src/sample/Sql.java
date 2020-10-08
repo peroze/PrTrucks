@@ -56,7 +56,7 @@ public class Sql {
     public ResultSet Query_General_Service() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  Trucks.LiscPlate,Service.Date,Service.Kilometers,Service.Date,Service.Type FROM Trucks  JOIN Service ON Trucks.id=Service.id";
+            String sql = "SELECT  * FROM Service  ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -127,6 +127,18 @@ public class Sql {
         }
     }
 
+    public int DeleteService(int ServiceId){
+        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,ServiceId);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     public int InsertRepair(ModelRepair a){
         ArrayList<String> repair = new ArrayList<>();
 
@@ -138,7 +150,7 @@ public class Sql {
         repair.add(a.getPrice());
 
 
-        String sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Whorkshop,Price) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price) VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -173,12 +185,12 @@ public class Sql {
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
 
-
-        String sql = "INSERT INTO Service(id,Type,Kilometers,Date,Changes,Whorkshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+
             pstmt.setString(2, repair.get(1));
             pstmt.setInt(3, Integer.valueOf(repair.get(0)));
             pstmt.setString(4, repair.get(3));
@@ -187,13 +199,14 @@ public class Sql {
             pstmt.setString(7, repair.get(5));
             pstmt.setString(8, repair.get(6));
             pstmt.setInt(9, Integer.valueOf(repair.get(7)));
-
-
             pstmt.executeUpdate();
             return 1;
 
 
-        } catch (SQLException e) {
+        } /* catch (SQLException e) {
+            return 0;
+        }*/ catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -203,7 +216,21 @@ public class Sql {
     public String GetIdFromLisx(String lisc){
         ResultSet rs = null;
         try {
-            String sql = "SELECT  id FROM Trucks  WHERE LiscPlate="+lisc;
+            String sql = "SELECT  id FROM Trucks  WHERE LiscPlate=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, lisc);
+            rs = pstmt.executeQuery();
+            return rs.getString("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String GetLisxxFromId(String id){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  LiscPlate FROM Trucks  WHERE id="+id;
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 

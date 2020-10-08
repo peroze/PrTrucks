@@ -83,9 +83,9 @@ public class TrucksList implements Initializable {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
         try {
             Parent root=fxmlloader.load();
-            //int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-           // fxmlloader.<AddCar>getController().setMax_i(max);
-           // AddCar addcar =fxmlloader.getController();
+            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+            fxmlloader.<AddCar>getController().setMax_i(max);
+            AddCar addcar =fxmlloader.getController();
             primaryStage.setOnHidden(e->{
                 RenewTable();
             });
