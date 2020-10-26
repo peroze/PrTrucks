@@ -11,10 +11,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="648.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ServiceList">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="460.0">
+      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="158.0">
          <children>
             <Button fx:id="Delete_Button" mnemonicParsing="false" onAction="#Delete_Button_Pressed" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
                <HBox.margin>
@@ -56,5 +57,18 @@
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
+      <Label fx:id="Filter" alignment="CENTER_RIGHT" layoutX="563.0" layoutY="17.0" onMouseClicked="#Select_Filter_pressed" prefHeight="17.0" prefWidth="85.0" text="Φιλτρα" textFill="WHITE">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="356.0" layoutY="9.0" prefHeight="35.0" prefWidth="76.0" text="Service" textFill="#f8f8f8">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

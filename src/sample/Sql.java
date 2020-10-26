@@ -85,6 +85,19 @@ public class Sql {
 
     }
 
+    public ResultSet Query_General_KTEO(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM KTEO  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     /**
      * This method returns all liscense plate numbers
      * @return all liscence plate numbers
@@ -101,6 +114,8 @@ public class Sql {
         }
         return rs;
     }
+
+
 
     /**
      * This method inserts a new car on the db
@@ -154,12 +169,11 @@ public class Sql {
     public ResultSet Query_Specific_With_Lisc(String lisc,String table){
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM  ? WHERE id=? ";
+            String sql = "SELECT  * FROM  "+table+" WHERE id=? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,table);
-            pstmt.setString(2,GetIdFromLisx(lisc));
-            pstmt.executeQuery();
+            pstmt.setString(1,GetIdFromLisx(lisc));
+            rs=pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }

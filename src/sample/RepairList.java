@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -34,6 +36,9 @@ public class RepairList implements Initializable {
 
 
     RotateTransition rotate;
+
+    @FXML
+    private Label Filter;
 
     @FXML
     private Button Delete_Button;
@@ -123,6 +128,39 @@ public class RepairList implements Initializable {
 
         }
 
+    }
+
+    @FXML
+    void Select_Filter_pressed(MouseEvent event){
+        if(Filter.getText().equals("Φιλτρα")) {
+            List<String> choices = new ArrayList<>();
+            Sql sql = new Sql();
+            ResultSet rs = sql.Query_All_Lisc();
+
+            try {
+                while (rs.next()) {
+                    choices.add(rs.getString("LiscPlate"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
+            dialog.setTitle("Φιλτράρισμα Πινακίδας");
+            dialog.setHeaderText("Επέλεξε ένα αυτοκήνιτο");
+            dialog.setContentText("Όχημα");
+            Optional<String> result = dialog.showAndWait();
+            String temp = result.toString().replace("[", "");
+            temp = temp.replace("]", "");
+            temp = temp.replace("Optional", "");
+            if(temp.equals(".empty")||temp.equals("Πινακίδα")){
+                return;
+            };
+            SearchByLisc(temp);
+            Filter.setText("Κατάργηση Φίλτρου");
+            return;
+        }
+        Filter.setText("Φιλτρα");
+        RenewTable(null);
     }
 
     @Override
@@ -238,7 +276,7 @@ public class RepairList implements Initializable {
 
     public void SearchByLisc(String Lisc){
         Sql  sql=new Sql();
-        ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Service");
+        ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Repairs");
         RenewTable(rs);
     }
 
