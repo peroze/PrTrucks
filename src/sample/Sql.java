@@ -115,6 +115,19 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_Group_Service(){
+        String sql="Select id, MAX(Next_Date) From Service Group BY id";
+        ResultSet rs = null;
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
 
 
     /**
