@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -45,7 +47,7 @@ public class AddService implements Initializable {
     private TextField Price;
 
     @FXML
-    private TextField Lisc_Plate;
+    private ComboBox Lisc_Plate;
 
     @FXML
     private TextField Kilometers;
@@ -84,6 +86,18 @@ public class AddService implements Initializable {
                 Pane.requestFocus();
             }
         });
+        ObservableList<String> Cars = FXCollections.observableArrayList();
+        Sql sql=new Sql();
+        ResultSet rs=sql.Query_All_Lisc();
+        try {
+            while (rs.next()) {
+                Cars.add(rs.getString("LiscPlate"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Lisc_Plate.setItems(Cars);
+
     }
 
 
@@ -105,7 +119,7 @@ public class AddService implements Initializable {
             Changes= Changes+"|"+Oblist.get(i).getString();
         }
 
-        ModelService toAdd=new ModelService(Lisc_Plate.getText(),Date.getValue().toString(),Kilometers.getText(),Discreption.getText(),Changes,Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Price.getText());
+        ModelService toAdd=new ModelService(Lisc_Plate.getValue().toString(),Date.getValue().toString(),Kilometers.getText(),Discreption.getText(),Changes,Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Price.getText());
 
         int i=sql.InsertService(toAdd);
         if(i==1) {
@@ -123,7 +137,7 @@ public class AddService implements Initializable {
             alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
             Kilometers.clear();
-            Lisc_Plate.clear();
+            Lisc_Plate.setValue(new Object());
             Discreption.clear();
             AddPart.clear();
             Price.clear();

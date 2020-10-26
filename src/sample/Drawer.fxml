@@ -50,20 +50,20 @@
          </VBox.margin></Button>
       <Button fx:id="Service_Button" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="44.0" prefWidth="51.0">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Resources/Χωρίς%20τίτλοs.png" />
+                  <Image url="@Resources/kisspng-computer-icons-service-user-travel-ims-an-amadeus-setting-svg-png-icon-free-download-1999-2-onl-5b7f0a40efaaa4.2383686015350523529817.png" />
                </image>
             </ImageView>
          </graphic>
          <VBox.margin>
             <Insets top="4.0" />
          </VBox.margin></Button>
-      <Button fx:id="Speed_Button" mnemonicParsing="false" onAction="#Speed_Button_Pressed" prefHeight="43.0" prefWidth="51.0">
+      <Button fx:id="Repair_Button" mnemonicParsing="false" onAction="#Repair_Button_Pressed" prefHeight="43.0" prefWidth="51.0">
          <graphic>
-            <ImageView fitHeight="52.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Resources/clipart1956683.png" />
+                  <Image url="@Resources/Χωρίς%20τίτλοs.png" />
                </image>
             </ImageView>
          </graphic>

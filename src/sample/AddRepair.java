@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -44,7 +46,7 @@ public class AddRepair implements Initializable {
     private TextField Price;
 
     @FXML
-    private TextField Lisc_Plate;
+    private ComboBox Lisc_Plate;
 
     @FXML
     private TextField Kilometers;
@@ -82,6 +84,17 @@ public class AddRepair implements Initializable {
                 Pane.requestFocus();
             }
         });
+        ObservableList<String> Cars = FXCollections.observableArrayList();
+        Sql sql=new Sql();
+        ResultSet rs=sql.Query_All_Lisc();
+        try {
+            while (rs.next()) {
+                Cars.add(rs.getString("LiscPlate"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Lisc_Plate.setItems(Cars);
 
 
     }
@@ -104,7 +117,7 @@ public class AddRepair implements Initializable {
         for (int i = 1; i < Oblist.size(); i++) {
             Changes = Changes + "|" + Oblist.get(i).getString();
         }
-        ModelRepair toAdd = new ModelRepair(Lisc_Plate.getText(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
+        ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
         int i = sql.InsertRepair(toAdd);
         if (i == 1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -120,7 +133,7 @@ public class AddRepair implements Initializable {
             alert.setContentText("Η επισκευή δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
             Kilometers.clear();
-            Lisc_Plate.clear();
+            Lisc_Plate.setValue(null);
             Discreption.clear();
             AddPart.clear();
             Price.clear();

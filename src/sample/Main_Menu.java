@@ -45,7 +45,7 @@ public class Main_Menu {
     private Button Service_Button;
 
     @FXML
-    private Button Speed_Button;
+    private Button Repair_Button;
 
     @FXML
     private Button Exit_Button;
@@ -109,7 +109,7 @@ public class Main_Menu {
      */
     @FXML
     void Gas_Button_Pressed(ActionEvent event) {
-        try {
+        /*try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("Gas.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
@@ -122,7 +122,8 @@ public class Main_Menu {
             new FadeIn(root2).play();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
     }
 
 
@@ -132,7 +133,7 @@ public class Main_Menu {
      */
     @FXML
     void Kteo_Button_Pressed(ActionEvent event) {
-        try {
+       /* try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("Kteo.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
@@ -146,7 +147,7 @@ public class Main_Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
     }
 
 
@@ -178,12 +179,12 @@ public class Main_Menu {
      * @param event The event when an action id made
      */
     @FXML
-    void Speed_Button_Pressed(ActionEvent event) {
+    void Repair_Button_Pressed(ActionEvent event) {
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("RepairList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
-            fxmlloader.<Drawer>getController().setActive("Speed");
+            fxmlloader.<Drawer>getController().setActive("Repair");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);

@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="814.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
+<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="944.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
    <center>
-      <BorderPane BorderPane.alignment="CENTER">
+      <BorderPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="652.0" prefWidth="944.0" BorderPane.alignment="CENTER">
          <center>
-            <GridPane prefHeight="458.0" prefWidth="814.0" stylesheets="@../Styles/Main_Menu.css">
+            <GridPane minWidth="944.0" prefHeight="571.0" prefWidth="944.0" stylesheets="@../Styles/Main_Menu.css" BorderPane.alignment="CENTER_RIGHT">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="Cars_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Cars_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="Αυτοκίνητα" textFill="WHITE">
+                  <Button fx:id="Cars_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Cars_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="Αυτοκίνητα" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="79.0" fitWidth="95.0">
                            <image>
@@ -43,7 +43,7 @@
                         <Insets left="122.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Gas_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Gas_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="Κάρτα  Καυσαερίων" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="Gas_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Gas_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="Κάρτα  Καυσαερίων" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="68.0" fitWidth="64.0">
                            <image>
@@ -58,7 +58,7 @@
                         <Insets left="122.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Kteo_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="ΚΤΕΟ" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="Kteo_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="ΚΤΕΟ" textFill="WHITE" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fitHeight="70.0" fitWidth="63.0">
                            <image>
@@ -73,9 +73,24 @@
                         <Insets left="122.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Service_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ServiceButton_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="Service" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="Service_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ServiceButton_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="Service" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <graphic>
-                        <ImageView fitHeight="67.0" fitWidth="60.0">
+                        <ImageView fitHeight="57.0" fitWidth="60.0">
+                           <image>
+                              <Image url="@Resources/kisspng-computer-icons-service-user-travel-ims-an-amadeus-setting-svg-png-icon-free-download-1999-2-onl-5b7f0a40efaaa4.2383686015350523529817.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <GridPane.margin>
+                        <Insets left="122.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="Repair_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Repair_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="Επισκευές" textFill="WHITE" GridPane.rowIndex="2">
+                     <graphic>
+                        <ImageView fitHeight="69.0" fitWidth="76.0">
                            <image>
                               <Image url="@Resources/Χωρίς%20τίτλοs.png" />
                            </image>
@@ -88,22 +103,7 @@
                         <Insets left="122.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Speed_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Speed_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="Ταχογράφος" textFill="WHITE" GridPane.rowIndex="2">
-                     <graphic>
-                        <ImageView fitHeight="69.0" fitWidth="76.0">
-                           <image>
-                              <Image url="@Resources/76245.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <GridPane.margin>
-                        <Insets left="122.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="Exit_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Exit_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="162.0" text="Έξοδος" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="Exit_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Exit_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="157.0" prefWidth="210.0" text="Έξοδος" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <graphic>
                         <ImageView fitHeight="71.0" fitWidth="75.0">
                            <image>
@@ -122,7 +122,7 @@
             </GridPane>
          </center>
          <top>
-            <Label prefHeight="46.0" prefWidth="213.0" text="PrTrucks" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label prefHeight="46.0" prefWidth="213.0" text="PrTrucks" textFill="WHITE" BorderPane.alignment="TOP_CENTER">
                <font>
                   <Font size="55.0" />
                </font>

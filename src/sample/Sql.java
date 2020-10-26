@@ -67,6 +67,33 @@ public class Sql {
 
     }
 
+    public ResultSet Query_General_Repair() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Repairs  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+    public ResultSet Query_All_Lisc(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  LiscPlate FROM  Trucks ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     /**
      * This method inserts a new car on the db
      *
@@ -132,6 +159,18 @@ public class Sql {
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1,ServiceId);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public int DeleteRepair(int RepairId){
+        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,RepairId);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {

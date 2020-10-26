@@ -31,7 +31,7 @@ public class Drawer {
         private Button Service_Button;
 
         @FXML
-        private Button Speed_Button;
+        private Button Repair_Button;
 
         @FXML
         void Gas_Button_Pressed(ActionEvent event) {
@@ -64,10 +64,18 @@ public class Drawer {
         }
 
         @FXML
-        void Speed_Button_Pressed(ActionEvent event) {
-            resetBg();
-            Active="Speed";
-            changeBg();
+        void Repair_Button_Pressed(ActionEvent event) {
+            if(!Active.equals("Repair")) {
+                resetBg();
+                Active = "Repair";
+                changeBg();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("RepairList.fxml"));
+                    Parent.getBorder_Pane().setCenter(root);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
         }
 
         @FXML
@@ -98,8 +106,8 @@ public class Drawer {
                  case "Gas" :
                      Gas_Button.setStyle(null);
                      break;
-                 case "Speed":
-                     Speed_Button.setStyle(null);
+                 case "Repair":
+                     Repair_Button.setStyle(null);
                      break;
                  case "Kteo":
                      Kteo_Button.setStyle(null);
@@ -118,8 +126,8 @@ public class Drawer {
                 case "Gas" :
                     Gas_Button.setStyle("-fx-background-color: #686466");
                     break;
-                case "Speed":
-                    Speed_Button.setStyle("-fx-background-color: #686466");
+                case "Repair":
+                    Repair_Button.setStyle("-fx-background-color: #686466");
                     break;
                 case "Kteo":
                     Kteo_Button.setStyle("-fx-background-color: #686466");

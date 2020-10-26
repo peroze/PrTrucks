@@ -1,7 +1,14 @@
 package sample;
 
 public class ModelRepair {
-    private String LiscPlate,Price,Kilometers,Date,Discreption,Workshop,Changes;
+    private String LiscPlate;
+    private String Price;
+    private String Kilometers;
+    private String Date;
+    private String Discreption;
+    private String Workshop;
+    private String Changes;
+    private String id;
 
     public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes) {
         LiscPlate = liscPlate;
@@ -11,6 +18,25 @@ public class ModelRepair {
         Discreption = discreption;
         Workshop = workshop;
         Changes = changes;
+    }
+
+    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes, String Id) {
+        LiscPlate = liscPlate;
+        Price = price;
+        Kilometers = kilometers;
+        Date = date;
+        Discreption = discreption;
+        Workshop = workshop;
+        Changes = changes;
+        id = Id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String Id) {
+        id = Id;
     }
 
     public String getLiscPlate() {
