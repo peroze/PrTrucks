@@ -262,7 +262,6 @@ public class ServiceList implements Initializable {
         else {
             rs=rs1;
         }
-
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
