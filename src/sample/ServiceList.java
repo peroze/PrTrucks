@@ -85,10 +85,10 @@ public class ServiceList implements Initializable {
         try {
             Parent root = fxmlloader.load();
             primaryStage.setOnHidden(e -> {
-                RenewTable();
+                RenewTable(null);
             });
             primaryStage.setOnCloseRequest(e -> {
-                RenewTable();
+                RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
             primaryStage.setScene(new Scene(root, 600, 580));
@@ -124,7 +124,7 @@ public class ServiceList implements Initializable {
                     alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
                     alert2.showAndWait();
                 }
-                RenewTable();
+                RenewTable(null);
             }
 
         }
@@ -246,10 +246,23 @@ public class ServiceList implements Initializable {
 
     }
 
-    public void RenewTable() {
-        Oblist = FXCollections.observableArrayList();
+    public void SearchByLisc(String Lisc){
+       Sql  sql=new Sql();
+       ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Service");
+       RenewTable(rs);
+    }
+
+    public void RenewTable(ResultSet rs1) {
+        ResultSet rs=null;
         Sql db = new Sql();
-        ResultSet rs = db.Query_General_Service();
+        if (rs1==null){
+        Oblist = FXCollections.observableArrayList();
+            rs = db.Query_General_Service();
+        }
+        else {
+            rs=rs1;
+        }
+
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {

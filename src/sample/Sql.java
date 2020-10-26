@@ -67,6 +67,10 @@ public class Sql {
 
     }
 
+    /**
+     * This method returns all Repairs
+     * @return All stored Repairs
+     */
     public ResultSet Query_General_Repair() {
         ResultSet rs = null;
         try {
@@ -81,6 +85,10 @@ public class Sql {
 
     }
 
+    /**
+     * This method returns all liscense plate numbers
+     * @return all liscence plate numbers
+     */
     public ResultSet Query_All_Lisc(){
         ResultSet rs = null;
         try {
@@ -135,6 +143,28 @@ public class Sql {
         } catch (SQLException e) {
             return 0;
         }
+    }
+
+    /**
+     * This method returns all entries of a specific car in a specific table
+     * @param lisc The liscence plate of the car
+     * @param table The table we want to search
+     * @return the dataset with the right data
+     */
+    public ResultSet Query_Specific_With_Lisc(String lisc,String table){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM  ? WHERE id=? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,table);
+            pstmt.setString(2,GetIdFromLisx(lisc));
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
     }
 
     /**
