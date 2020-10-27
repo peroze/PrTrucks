@@ -47,7 +47,7 @@ public class Drawer {
                 Active="Kteo";
                 changeBg();
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("KteoList.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("KTEOList.fxml"));
                     Parent.getBorder_Pane().setCenter(root);
                 } catch (IOException e) {
                     e.printStackTrace();

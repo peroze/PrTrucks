@@ -11,10 +11,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TrucksList">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="460.0">
+      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="162.0">
          <children>
             <Button fx:id="Delete_Button" mnemonicParsing="false" onAction="#Delete_Button_Pressed" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
                <HBox.margin>
@@ -49,12 +50,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <TextField fx:id="Search_Bar" layoutX="547.0" layoutY="13.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
-      <Label fx:id="Search_icon" layoutX="532.0" layoutY="13.0" prefHeight="25.0" prefWidth="21.0" />
-      <ImageView fitHeight="14.0" fitWidth="18.0" layoutX="537.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="Search_Bar" layoutX="677.0" layoutY="13.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
+      <Label fx:id="Search_icon" layoutX="662.0" layoutY="13.0" prefHeight="25.0" prefWidth="21.0" />
+      <ImageView fitHeight="14.0" fitWidth="18.0" layoutX="667.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
+      <Label layoutX="332.0" layoutY="9.0" text="Οχήματα" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
