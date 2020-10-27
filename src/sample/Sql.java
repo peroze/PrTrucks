@@ -116,7 +116,7 @@ public class Sql {
     }
 
     public ResultSet Query_Group_Service(){
-        String sql="Select id, MAX(Next_Date) From Service Group BY id";
+        String sql="Select id, MAX(Next_Date),Kilometers,Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();

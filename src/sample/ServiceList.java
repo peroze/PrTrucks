@@ -39,7 +39,7 @@ public class ServiceList implements Initializable {
     RotateTransition rotate;
 
     @FXML
-        private Label Filter;
+    private Label Filter;
     @FXML
     private Button Delete_Button;
 
@@ -110,8 +110,8 @@ public class ServiceList implements Initializable {
     }
 
     @FXML
-    void Select_Filter_pressed(MouseEvent event){
-        if(Filter.getText().equals("Φιλτρα")) {
+    void Select_Filter_pressed(MouseEvent event) {
+        if (Filter.getText().equals("Ιστορικό")) {
             List<String> choices = new ArrayList<>();
             Sql sql = new Sql();
             ResultSet rs = sql.Query_All_Lisc();
@@ -131,14 +131,15 @@ public class ServiceList implements Initializable {
             String temp = result.toString().replace("[", "");
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
-            if(temp.equals(".empty")||temp.equals("Πινακίδα")){
+            if (temp.equals(".empty") || temp.equals("Πινακίδα")) {
                 return;
-            };
+            }
+            ;
             SearchByLisc(temp);
-            Filter.setText("Κατάργηση Φίλτρου");
+            Filter.setText("Κλείσιμο Ιστορικού");
             return;
         }
-        Filter.setText("Φιλτρα");
+        Filter.setText("Ιστορικό");
         RenewTable(null);
     }
 
@@ -150,7 +151,7 @@ public class ServiceList implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Επιβαιβέωση");
             alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το Service με  id="+Integer.valueOf(temp.getId()));          // Διαγραφή
+            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το Service με  id=" + Integer.valueOf(temp.getId()));          // Διαγραφή
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Sql sql = new Sql();
@@ -171,19 +172,19 @@ public class ServiceList implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Sql db = new Sql();
-        ResultSet rs = db.Query_General_Service();
+        ResultSet rs = db.Query_Group_Service();
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("MAX(Next_Date)"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Truck_Table.setRowFactory((tv-> {
-            TableRow<ModelService> row=new TableRow<>();
-            row.setOnMouseClicked(event->{
-                if (event.getClickCount()==2&& (!row.isEmpty())){
+        Truck_Table.setRowFactory((tv -> {
+            TableRow<ModelService> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     DoubleClickTable();
                 }
             });
@@ -283,26 +284,29 @@ public class ServiceList implements Initializable {
 
     }
 
-    public void SearchByLisc(String Lisc){
-       Sql  sql=new Sql();
-       ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Service");
-       RenewTable(rs);
+    public void SearchByLisc(String Lisc) {
+        Sql sql = new Sql();
+        ResultSet rs = sql.Query_Specific_With_Lisc(Lisc, "Service");
+        RenewTable(rs);
     }
 
     public void RenewTable(ResultSet rs1) {
-        ResultSet rs=null;
+        ResultSet rs = null;
         Sql db = new Sql();
-        if (rs1==null){
-        Oblist = FXCollections.observableArrayList();
-            rs = db.Query_General_Service();
-        }
-        else {
-            rs=rs1;
+        if (rs1 == null) {
+            Oblist = FXCollections.observableArrayList();
+            rs = db.Query_Group_Service();
+        } else {
+            rs = rs1;
         }
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                if (rs1 == null) {
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("MAX(Next_Date)"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                } else {
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
