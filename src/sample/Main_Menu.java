@@ -133,11 +133,11 @@ public class Main_Menu {
      */
     @FXML
     void Kteo_Button_Pressed(ActionEvent event) {
-       /* try {
+        try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("Kteo.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("KTEOList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
-            fxmlloader.<Drawer>getController().setActive("Service");
+            fxmlloader.<Drawer>getController().setActive("Kteo");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
@@ -147,7 +147,7 @@ public class Main_Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
+
     }
 
 

@@ -42,9 +42,17 @@ public class Drawer {
 
         @FXML
         void Kteo_Button_Pressed(ActionEvent event) {
-            resetBg();
-            Active="Kteo";
-            changeBg();
+            if(!Active.equals("Kteo")) {
+                resetBg();
+                Active="Kteo";
+                changeBg();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("KteoList.fxml"));
+                    Parent.getBorder_Pane().setCenter(root);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @FXML

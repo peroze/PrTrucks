@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TrucksList">
+<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.KTEOList">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="162.0">
+      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="149.0">
          <children>
             <Button fx:id="Delete_Button" mnemonicParsing="false" onAction="#Delete_Button_Pressed" prefHeight="25.0" prefWidth="130.0" text="Διαγραφή" textFill="WHITE">
                <HBox.margin>
@@ -29,14 +29,13 @@
       </HBox>
       <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="599.0" prefWidth="864.0">
         <columns>
-          <TableColumn fx:id="id_Column" prefWidth="35.0" text="Id" />
           <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
-            <TableColumn fx:id="Manufactor_Column" prefWidth="111.0" text="Μάρκα" />
-            <TableColumn fx:id="Model_Column" prefWidth="75.0" text="Μόντελο" />
-            <TableColumn fx:id="Service_Column" prefWidth="94.0" text="1η Κυκλοφορία" />
-            <TableColumn fx:id="Location_Column" prefWidth="86.0" text="Τοποθεσία" />
-            <TableColumn fx:id="Type_Column" prefWidth="73.0" text="Κατηγορία" />
-            <TableColumn fx:id="Plaisio_Column" prefWidth="308.0" text="Πλαίσιο" />
+            <TableColumn fx:id="Date_Column" prefWidth="81.0" text="Ημερομινία" />
+            <TableColumn fx:id="Kilometers_Column" prefWidth="82.0" text="Χιλιόμετρα" />
+            <TableColumn fx:id="Company_Column" prefWidth="117.0" text="Εταιρία" />
+            <TableColumn fx:id="Next_Column" prefWidth="76.0" text="Επόμενο" />
+            <TableColumn fx:id="Price_Column" prefWidth="58.0" text="Τιμή" />
+            <TableColumn fx:id="Warnings_Column" prefWidth="368.0" text="Παρατηρήσεις" />
         </columns>
          <padding>
             <Insets left="3.0" />
@@ -57,7 +56,7 @@
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
-      <Label layoutX="332.0" layoutY="9.0" text="Οχήματα" textFill="WHITE">
+      <Label layoutX="375.0" layoutY="10.0" text="KTEO" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

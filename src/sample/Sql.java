@@ -211,6 +211,20 @@ public class Sql {
         }
     }
 
+
+    public int DeleteΚΤΕΟ(String Lisc){
+        int id =Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt="DELETE FROM KTEO WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     public int DeleteService(int ServiceId){
         String stmt="DELETE FROM Service WHERE Service_Id=?;";
         try {
