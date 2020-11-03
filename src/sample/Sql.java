@@ -25,16 +25,6 @@ public class Sql {
 
 
     /**
-     * This method deletes an entry from the table
-     *
-     * @param id    The Id of the car
-     * @param Table The Table from whitch the delete will happend
-     */
-    public void DeleteWith(int id, String Table) {
-
-    }
-
-    /**
      * This Method Returns The List With All the cars
      *
      * @return The Cars
@@ -53,6 +43,11 @@ public class Sql {
 
     }
 
+
+    /**
+     * This method returns the list with all Services
+     * @return All Services
+     */
     public ResultSet Query_General_Service() {
         ResultSet rs = null;
         try {
@@ -66,6 +61,7 @@ public class Sql {
         return rs;
 
     }
+
 
     /**
      * This method returns all Repairs
@@ -85,6 +81,11 @@ public class Sql {
 
     }
 
+
+    /**
+     * This method return the list with all KTEO
+     * @return All KTEOs
+     */
     public ResultSet Query_General_KTEO(){
         ResultSet rs = null;
         try {
@@ -98,6 +99,11 @@ public class Sql {
         return rs;
     }
 
+
+    /**
+     * This method returns the list with all Emmision Cards
+     * @return
+     */
     public ResultSet Query_General_EmmisionCard(){
         ResultSet rs = null;
         try {
@@ -110,7 +116,6 @@ public class Sql {
         }
         return rs;
     }
-
 
 
     /**
@@ -130,6 +135,11 @@ public class Sql {
         return rs;
     }
 
+
+    /**
+     * This method returns the latest  service for each car (Based on the Date of the next Service
+     * @return The Latest Service of each car
+     */
     public ResultSet Query_Group_Service(){
         String sql="Select id, MAX(Next_Date),Kilometers,Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
         ResultSet rs = null;
@@ -143,6 +153,27 @@ public class Sql {
         return rs;
     }
 
+
+    /**
+     * This method returns all entries of a specific car in a specific table
+     * @param lisc The liscence plate of the car
+     * @param table The table we want to search
+     * @return the dataset with the right data
+     */
+    public ResultSet Query_Specific_With_Lisc(String lisc,String table){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM  "+table+" WHERE id=? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,GetIdFromLisx(lisc));
+            rs=pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
 
 
     /**
@@ -188,95 +219,13 @@ public class Sql {
         }
     }
 
-    /**
-     * This method returns all entries of a specific car in a specific table
-     * @param lisc The liscence plate of the car
-     * @param table The table we want to search
-     * @return the dataset with the right data
-     */
-    public ResultSet Query_Specific_With_Lisc(String lisc,String table){
-        ResultSet rs = null;
-        try {
-            String sql = "SELECT  * FROM  "+table+" WHERE id=? ";
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,GetIdFromLisx(lisc));
-            rs=pstmt.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-
-    }
 
     /**
-     * This method deletes a car from the database
-     * @param id The id of the car to be deleted from the databse
-     * @return 1 if the deletion is complete or 0if there is an error
+     * This method inserts a new repair on the db
+     *
+     * @param a the new Repair
+     * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int DeleteCar(int id){
-        String stmt="DELETE FROM Trucks WHERE id=?;";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
-            pstmt.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
-
-    public int DeleteΚΤΕΟ(String Lisc){
-        int id =Integer.valueOf(GetIdFromLisx(Lisc));
-        String stmt="DELETE FROM KTEO WHERE id=?;";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
-            pstmt.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
-    public int DeleteEmissionCard(String Lisc){
-        int id =Integer.valueOf(GetIdFromLisx(Lisc));
-        String stmt="DELETE FROM EmmisionCard WHERE id=?;";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
-            pstmt.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
-    public int DeleteService(int ServiceId){
-        String stmt="DELETE FROM Service WHERE Service_Id=?;";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,ServiceId);
-            pstmt.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
-    public int DeleteRepair(int RepairId){
-        String stmt="DELETE FROM Service WHERE Service_Id=?;";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,RepairId);
-            pstmt.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
     public int InsertRepair(ModelRepair a){
         ArrayList<String> repair = new ArrayList<>();
 
@@ -311,6 +260,11 @@ public class Sql {
     }
 
 
+    /**
+     * This method inserts a new Service on the db
+     * @param a the new service
+     * @return 1 if the insertion is complete or 0 if there is an error
+     */
     public int InsertService(ModelService a){
         ArrayList<String> repair = new ArrayList<>();
 
@@ -341,16 +295,111 @@ public class Sql {
             return 1;
 
 
-        } /* catch (SQLException e) {
-            return 0;
-        }*/ catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
     }
 
 
+    /**
+     * This method deletes a car from the database
+     * @param id The id of the car to be deleted from the databse
+     * @return 1 if the deletion is complete or 0if there is an error
+     */
+    public int DeleteCar(int id){
+        String stmt="DELETE FROM Trucks WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
 
+
+    /**
+     * This method deletes the KTEO of a specific car
+     * @param Lisc The car which will have its KTEO Deleted
+     * @return 1 if completed 0 if not
+     */
+    public int DeleteΚΤΕΟ(String Lisc){
+        int id =Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt="DELETE FROM KTEO WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * This method deletes the Emmision Card of a specific car
+     * @param Lisc The car which will have its Emmision Card Deleted
+     * @return 1 if completed 0 if not
+     */
+    public int DeleteEmissionCard(String Lisc){
+        int id =Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt="DELETE FROM EmmisionCard WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * This method deletes a specific Service from the list
+     * @param ServiceId The id of the service to be deleted
+     * @return 1 if completed 0 if not
+     */
+    public int DeleteService(int ServiceId){
+        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,ServiceId);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * This method deletes a specific Repair  from the list
+     * @param RepairId The id of the Repair to be deleted
+     * @return 1 if completed 0 if not
+     */
+    public int DeleteRepair(int RepairId){
+        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,RepairId);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * This method return the id of the car given a its Liscence plate number
+     * @param lisc The liscence plate number
+     * @return The id
+     */
     public String GetIdFromLisx(String lisc){
         ResultSet rs = null;
         try {
@@ -365,6 +414,12 @@ public class Sql {
         return null;
     }
 
+
+    /**
+     * This method return the liscence of the car given  its id
+     * @param id The id of the car
+     * @return The liscence plate number
+     */
     public String GetLisxxFromId(String id){
         ResultSet rs = null;
         try {
@@ -379,22 +434,17 @@ public class Sql {
         return null;
     }
 
+
+    /**
+     * This method is used to transfrom the boolean type variable, which are in English, to Greek.
+     * @param bool The boolean variable
+     * @return " Ναι " or "Οχι"
+     */
     public String BooleantoGreek(boolean bool){
         if(bool==true){
             return "Ναί";
         }
         return "Όχι";
-    }
-
-
-    /**
-     * This method gets a date and the table and returns all entries in this date
-     *
-     * @param Date  The date
-     * @param Table The Table
-     */
-    public void Query_By_Date(String Date, String Table) {
-
     }
 
 
