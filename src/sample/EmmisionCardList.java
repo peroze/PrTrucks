@@ -24,6 +24,11 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is the controller for EmmisionCardList.fxml which shows the emmision cards of the cars
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class EmmisionCardList implements Initializable {
 
 
@@ -31,7 +36,6 @@ public class EmmisionCardList implements Initializable {
 
     @FXML
     private TableView<ModelEmmisionCard> Truck_Table;
-
 
     @FXML
     private TableColumn<ModelEmmisionCard, String> LisancePlate_Column;
@@ -62,61 +66,7 @@ public class EmmisionCardList implements Initializable {
     private ObservableList<ModelEmmisionCard> Oblist;
 
 
-    @FXML
-    void Import_Button_Pressed(MouseEvent event) {
-        /*Stage primaryStage= new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
-        try {
-            Parent root=fxmlloader.load();
-            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-            fxmlloader.<AddCar>getController().setMax_i(max);
-            AddCar addcar =fxmlloader.getController();
-            primaryStage.setOnHidden(e->{
-                RenewTable();
-            });
-            primaryStage.setOnCloseRequest(e->{
-                RenewTable();
-            });
-            primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-            //fxmlloader.<Drawer>getController().setParent(this);
 
-            //Border_Pane.setLeft(root2);
-            //new FadeIn(root).play();
-            //new FadeIn(root2).play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-    }
-
-    @FXML
-    void Delete_Button_Pressed(ActionEvent event) {
-        ModelEmmisionCard temp=Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp==null)) {
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Επιβαιβέωση");
-            alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την Κάρτα του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Sql sql = new Sql();
-                int k =sql.DeleteEmissionCard(temp.getLiscPlate());
-                if(k==0){
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Αποτυχία");
-                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
-                    alert2.showAndWait();
-                }
-                RenewTable();
-            }
-
-        }
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -166,6 +116,75 @@ public class EmmisionCardList implements Initializable {
         Truck_Table.setItems(sorted);
     }
 
+
+    /**
+     * This method is called when the import button is pressed and it adds a new Emmision Card in the database
+     * @param event The event
+     */
+    @FXML
+    void Import_Button_Pressed(MouseEvent event) {
+        /*Stage primaryStage= new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        try {
+            Parent root=fxmlloader.load();
+            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+            fxmlloader.<AddCar>getController().setMax_i(max);
+            AddCar addcar =fxmlloader.getController();
+            primaryStage.setOnHidden(e->{
+                RenewTable();
+            });
+            primaryStage.setOnCloseRequest(e->{
+                RenewTable();
+            });
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+            //fxmlloader.<Drawer>getController().setParent(this);
+
+            //Border_Pane.setLeft(root2);
+            //new FadeIn(root).play();
+            //new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+    }
+
+    /**
+     * This method is called when the delete button is pressed and it delletes the selected card from the database
+     * @param event The event
+     */
+    @FXML
+    void Delete_Button_Pressed(ActionEvent event) {
+        ModelEmmisionCard temp=Truck_Table.getSelectionModel().getSelectedItem();
+        if (!(temp==null)) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Επιβαιβέωση");
+            alert.setHeaderText("Διαγραφή στοιχείου");
+            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την Κάρτα του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Sql sql = new Sql();
+                int k =sql.DeleteEmissionCard(temp.getLiscPlate());
+                if(k==0){
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setTitle("Αποτυχία");
+                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+                    alert2.showAndWait();
+                }
+                RenewTable();
+            }
+
+        }
+
+    }
+
+    /**
+     * This method is used to activate the animation of the add button when the user hovers over it
+     * @param event The event
+     */
     @FXML
     void Import_Button_Hover(MouseEvent event) {
 
@@ -180,10 +199,7 @@ public class EmmisionCardList implements Initializable {
         rotate.statusProperty().addListener(new ChangeListener<Animation.Status>() {
             @Override
             public void changed(ObservableValue<? extends Animation.Status> observable, Animation.Status oldValue, Animation.Status newValue) {
-
                 if (newValue == Animation.Status.STOPPED) {
-
-
                     if (Import_Button.getRotate() != 0 || Import_Button.getRotate() != 360) {
                         RotateTransition transition = new RotateTransition(Duration.seconds(1), Import_Button);
                         transition.setFromAngle(Import_Button.getRotate());
@@ -193,15 +209,14 @@ public class EmmisionCardList implements Initializable {
                         transition.play();
                     }
                 }
-
             }
-
         });
-
     }
 
+    /**
+     * This method renews the table
+     */
     public void RenewTable(){
-
         Sql db = new Sql();
         ResultSet rs = db.Query_General_EmmisionCard();
         Oblist = FXCollections.observableArrayList();
@@ -247,6 +262,5 @@ public class EmmisionCardList implements Initializable {
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
     }
-
 }
 

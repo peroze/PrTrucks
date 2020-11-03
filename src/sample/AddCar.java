@@ -18,6 +18,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * This Class is the Corntoller for AddCar.fxml which adds a new Car in the db
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class AddCar implements Initializable {
 
 
@@ -104,6 +109,10 @@ public class AddCar implements Initializable {
         this.max_i = max_i;
     }
 
+    /**
+     * This class is used when the Ok button is pressed and it ads a new car in data Base
+     * @param event The event
+     */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         Sql sql = new Sql();
@@ -136,11 +145,6 @@ public class AddCar implements Initializable {
         stage.close();
     }
 
-
-    @FXML
-    void All_Hover(MouseEvent event) {
-
-    }
 
 
     /**

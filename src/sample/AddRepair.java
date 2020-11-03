@@ -21,6 +21,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
+/**
+ * Thid class is the controller for AddRepair which add a new Repair in the db
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class AddRepair implements Initializable {
 
 
@@ -99,7 +105,10 @@ public class AddRepair implements Initializable {
 
     }
 
-
+    /**
+     * This method is called when the AddPart button is pressed and it adds the part which have been replaced in the car int the changes list
+     * @param event The event
+     */
     @FXML
     void AddPart_Btn_Pr(ActionEvent event) {
         Oblist.add(new StringsForTables(AddPart.getText()));
@@ -108,7 +117,10 @@ public class AddRepair implements Initializable {
         Table.setItems(Oblist);
     }
 
-
+    /**
+     * This button adds the new repair in the db
+     * @param event The event
+     */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         Sql sql = new Sql();

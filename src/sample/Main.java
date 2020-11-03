@@ -23,6 +23,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * The main class of the program
+ */
 public class Main extends Application {
 
     @Override

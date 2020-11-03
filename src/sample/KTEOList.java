@@ -30,6 +30,13 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+/**
+ * This class is the controller for EmmisionCardList.fxml which shows the KTEOs of the cars
+ *
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class KTEOList implements Initializable {
 
 
@@ -72,6 +79,65 @@ public class KTEOList implements Initializable {
     private ObservableList<ModelKTEO> Oblist;
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Sql db = new Sql();
+        ResultSet rs = db.Query_General_KTEO();
+        Oblist = FXCollections.observableArrayList();
+        try {
+            while (rs.next()) {
+                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("DateNext"), rs.getString("Company")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
+        Company_Column.setCellValueFactory(new PropertyValueFactory<>("Company"));
+        Price_Column.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        Warnings_Column.setCellValueFactory(new PropertyValueFactory<>("Warnings"));
+        Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
+        Next_Column.setCellValueFactory(new PropertyValueFactory<>("Next"));
+        FilteredList<ModelKTEO> Filter = new FilteredList<>(Oblist, b -> true);
+
+        Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            Filter.setPredicate(ModelKTEO -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String LowerCase = newValue.toLowerCase();
+                if (ModelKTEO.getLiscPlate().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else if (ModelKTEO.getCompany().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else if (ModelKTEO.getDate().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else if (ModelKTEO.getKilometers().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else if (ModelKTEO.getNext().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else if (ModelKTEO.getPrice().toLowerCase().indexOf(LowerCase) != -1) {
+                    return true;
+                } else {
+                    if (!(ModelKTEO.getWarnings() == null)) {
+                        if (ModelKTEO.getWarnings().toLowerCase().indexOf(LowerCase) != -1) {
+                            return true;
+                        }
+                    } else return false;
+                }
+                return false;
+            });
+        });
+        SortedList<ModelKTEO> sorted = new SortedList<>(Filter);
+        sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
+        Truck_Table.setItems(sorted);
+    }
+
+    /**
+     * This method is called when the import button is pressed and it adds a new KTEO in the database
+     *
+     * @param event The event
+     */
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
         /*Stage primaryStage= new Stage();
@@ -102,10 +168,16 @@ public class KTEOList implements Initializable {
 */
     }
 
+
+    /**
+     * This method is called when the delete button is pressed and it delletes the selected card from the database
+     *
+     * @param event The event
+     */
     @FXML
     void Delete_Button_Pressed(ActionEvent event) {
-        ModelKTEO temp=Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp==null)) {
+        ModelKTEO temp = Truck_Table.getSelectionModel().getSelectedItem();
+        if (!(temp == null)) {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Επιβαιβέωση");
@@ -114,8 +186,8 @@ public class KTEOList implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Sql sql = new Sql();
-                int k =sql.DeleteΚΤΕΟ(temp.getLiscPlate());
-                if(k==0){
+                int k = sql.DeleteΚΤΕΟ(temp.getLiscPlate());
+                if (k == 0) {
                     Alert alert2 = new Alert(Alert.AlertType.ERROR);
                     alert2.setTitle("Αποτυχία");
                     alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
@@ -128,68 +200,11 @@ public class KTEOList implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Sql db = new Sql();
-        ResultSet rs = db.Query_General_KTEO();
-        Oblist = FXCollections.observableArrayList();
-        try {
-            while (rs.next()) {
-                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"),rs.getString("Kilometers"), rs.getString("Date"),rs.getString("Warnings"),rs.getString("DateNext"), rs.getString("Company")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
-        Company_Column.setCellValueFactory(new PropertyValueFactory<>("Company"));
-        Price_Column.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        Warnings_Column.setCellValueFactory(new PropertyValueFactory<>("Warnings"));
-        Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
-        Next_Column.setCellValueFactory(new PropertyValueFactory<>("Next"));
-        FilteredList<ModelKTEO> Filter =new FilteredList<>(Oblist,b->true);
-
-        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
-            Filter.setPredicate(ModelKTEO->{
-                if(newValue==null||newValue.isEmpty()){
-                    return true;
-                }
-                String LowerCase=newValue.toLowerCase();
-                if (ModelKTEO.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-                else if (ModelKTEO.getCompany().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-                else if (ModelKTEO.getDate().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-                else if (ModelKTEO.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-                else if (ModelKTEO.getNext().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-
-                else if (ModelKTEO.getPrice().toLowerCase().indexOf(LowerCase)!=-1){
-                    return true;
-                }
-                else {
-                    if(!(ModelKTEO.getWarnings()==null)) {
-                        if (ModelKTEO.getWarnings().toLowerCase().indexOf(LowerCase) != -1) {
-                            return true;
-                        }
-                    }
-                    else return false;
-                }
-                return false;
-            });
-        } );
-        SortedList<ModelKTEO> sorted=new SortedList<>(Filter);
-        sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
-        Truck_Table.setItems(sorted);
-    }
-
+    /**
+     * This method is used to activate the animation of the add button when the user hovers over it
+     *
+     * @param event The event
+     */
     @FXML
     void Import_Button_Hover(MouseEvent event) {
 
@@ -224,14 +239,18 @@ public class KTEOList implements Initializable {
 
     }
 
-    public void RenewTable(){
+
+    /**
+     * This method renews the table
+     */
+    public void RenewTable() {
 
         Sql db = new Sql();
         ResultSet rs = db.Query_General_KTEO();
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"),rs.getString("Kilometers"), rs.getString("Date"),rs.getString("Warnings"),rs.getString("Next"), rs.getString("Company")));
+                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("Next"), rs.getString("Company")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -243,45 +262,37 @@ public class KTEOList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         Next_Column.setCellValueFactory(new PropertyValueFactory<>("Next"));
-        FilteredList<ModelKTEO> Filter =new FilteredList<>(Oblist,b->true);
+        FilteredList<ModelKTEO> Filter = new FilteredList<>(Oblist, b -> true);
 
-        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
-            Filter.setPredicate(ModelKTEO->{
-                if(newValue==null||newValue.isEmpty()){
+        Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            Filter.setPredicate(ModelKTEO -> {
+                if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String LowerCase=newValue.toLowerCase();
-                if (ModelKTEO.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
+                String LowerCase = newValue.toLowerCase();
+                if (ModelKTEO.getLiscPlate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelKTEO.getCompany().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelKTEO.getCompany().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelKTEO.getDate().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelKTEO.getDate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelKTEO.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelKTEO.getKilometers().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelKTEO.getNext().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelKTEO.getNext().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-
-                else if (ModelKTEO.getPrice().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelKTEO.getPrice().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else {
-                    if(!(ModelKTEO.getWarnings()==null)) {
+                } else {
+                    if (!(ModelKTEO.getWarnings() == null)) {
                         if (ModelKTEO.getWarnings().toLowerCase().indexOf(LowerCase) != -1) {
                             return true;
                         }
-                    }
-                    else return false;
+                    } else return false;
                 }
                 return false;
             });
-        } );
-        SortedList<ModelKTEO> sorted=new SortedList<>(Filter);
+        });
+        SortedList<ModelKTEO> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
     }

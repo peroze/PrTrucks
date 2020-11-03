@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+
+/**
+ * Thid class is the controller for AddService which add a new Service in the db
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class AddService implements Initializable {
 
 
@@ -100,7 +106,10 @@ public class AddService implements Initializable {
 
     }
 
-
+    /**
+     * This method is called when the AddPart button is pressed and it adds the part which have been replaced in the car int the changes list
+     * @param event The event
+     */
     @FXML
     void AddPart_Btn_Pr(ActionEvent event) {
         Oblist.add(new StringsForTables(AddPart.getText()));
@@ -109,7 +118,10 @@ public class AddService implements Initializable {
         Table.setItems(Oblist);
     }
 
-
+    /**
+     * This button adds the new repair in the db
+     * @param event The event
+     */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         Sql sql=new Sql();
@@ -118,9 +130,7 @@ public class AddService implements Initializable {
         for(int i=1;i<Oblist.size();i++){
             Changes= Changes+"|"+Oblist.get(i).getString();
         }
-
         ModelService toAdd=new ModelService(Lisc_Plate.getValue().toString(),Date.getValue().toString(),Kilometers.getText(),Discreption.getText(),Changes,Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Price.getText());
-
         int i=sql.InsertService(toAdd);
         if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -157,12 +167,6 @@ public class AddService implements Initializable {
     }
 
 
-    @FXML
-    void All_Hover(MouseEvent event) {
-
-    }
-
-
     /**
      * This is used to make the window draggable
      * @param event This it the given event
@@ -195,6 +199,11 @@ public class AddService implements Initializable {
         stage.setIconified(true);
     }
 
+    /**
+     * This method returns the new Entry
+     * @param Entry The new Entry
+     * @return The new Entry
+     */
     public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
         return Entry;
     }
