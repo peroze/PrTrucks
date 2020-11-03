@@ -98,6 +98,21 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_General_EmmisionCard(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM EmmisionCard  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+
+
     /**
      * This method returns all liscense plate numbers
      * @return all liscence plate numbers
@@ -215,6 +230,19 @@ public class Sql {
     public int DeleteΚΤΕΟ(String Lisc){
         int id =Integer.valueOf(GetIdFromLisx(Lisc));
         String stmt="DELETE FROM KTEO WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public int DeleteEmissionCard(String Lisc){
+        int id =Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt="DELETE FROM EmmisionCard WHERE id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1,id);
@@ -349,6 +377,13 @@ public class Sql {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String BooleantoGreek(boolean bool){
+        if(bool==true){
+            return "Ναί";
+        }
+        return "Όχι";
     }
 
 

@@ -109,11 +109,11 @@ public class Main_Menu {
      */
     @FXML
     void Gas_Button_Pressed(ActionEvent event) {
-        /*try {
+        try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("Gas.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
-            fxmlloader.<Drawer>getController().setActive("Service");
+            fxmlloader.<Drawer>getController().setActive("Gas");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
@@ -122,7 +122,7 @@ public class Main_Menu {
             new FadeIn(root2).play();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
 

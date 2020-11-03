@@ -35,9 +35,17 @@ public class Drawer {
 
         @FXML
         void Gas_Button_Pressed(ActionEvent event) {
-            resetBg();
-            Active="Gas";
-            changeBg();
+            if(!Active.equals("Gas")) {
+                resetBg();
+                Active="Gas";
+                changeBg();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
+                    Parent.getBorder_Pane().setCenter(root);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @FXML
