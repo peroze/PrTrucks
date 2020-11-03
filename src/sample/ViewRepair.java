@@ -21,6 +21,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+
+/**
+ * This Class is the controller for ViewRepair.fxml which shows every detail of a specific Repair
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class ViewRepair implements Initializable {
 
     @FXML
@@ -83,10 +89,19 @@ public class ViewRepair implements Initializable {
 
     }
 
+    /**
+     * This  is getter for the repair
+     * @return The repair
+     */
     public ModelRepair getRepair() {
         return repair;
     }
 
+    /**
+     * **
+     * Tηis is a setter for the repair
+     * @param repair The repair
+     */
     public void setService(ModelRepair repair) {
         this.repair = repair;
         ObList = FXCollections.observableArrayList();
@@ -104,7 +119,10 @@ public class ViewRepair implements Initializable {
 
     }
 
-
+    /**
+     * This method closes the window when the OK button is pressed
+     * @param event The event
+     */
     @FXML
     void Ok_Button_Pressed(ActionEvent event) {
         Stage stage = (Stage) Ok.getScene().getWindow();

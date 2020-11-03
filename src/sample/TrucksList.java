@@ -33,6 +33,11 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is the controller for TrucksList.fxml
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class TrucksList implements Initializable {
 
 
@@ -76,62 +81,6 @@ public class TrucksList implements Initializable {
 
     private ObservableList<ModelTruck> Oblist;
 
-
-    @FXML
-    void Import_Button_Pressed(MouseEvent event) {
-        Stage primaryStage= new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
-        try {
-            Parent root=fxmlloader.load();
-            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-            fxmlloader.<AddCar>getController().setMax_i(max);
-            AddCar addcar =fxmlloader.getController();
-            primaryStage.setOnHidden(e->{
-                RenewTable();
-            });
-            primaryStage.setOnCloseRequest(e->{
-                RenewTable();
-            });
-            primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-            //fxmlloader.<Drawer>getController().setParent(this);
-
-            //Border_Pane.setLeft(root2);
-            //new FadeIn(root).play();
-            //new FadeIn(root2).play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    void Delete_Button_Pressed(ActionEvent event) {
-        ModelTruck temp=Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp==null)) {
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Επιβαιβέωση");
-            alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το όχημα με πινακίδα " + temp.getLiscPlate() + ".");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Sql sql = new Sql();
-                int k =sql.DeleteCar(Integer.valueOf(temp.getId()));
-                if(k==0){
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Αποτυχία");
-                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
-                    alert2.showAndWait();
-                }
-                RenewTable();
-            }
-
-        }
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -204,6 +153,70 @@ public class TrucksList implements Initializable {
         Truck_Table.setItems(sorted);
     }
 
+
+    /**
+     * This method inserts a new Truck in the list when the insert button is pressed
+     * @param event The event
+     */
+    @FXML
+    void Import_Button_Pressed(MouseEvent event) {
+        Stage primaryStage= new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        try {
+            Parent root=fxmlloader.load();
+            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+            fxmlloader.<AddCar>getController().setMax_i(max);
+            AddCar addcar =fxmlloader.getController();
+            primaryStage.setOnHidden(e->{
+                RenewTable();
+            });
+            primaryStage.setOnCloseRequest(e->{
+                RenewTable();
+            });
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * This method Deletes a car when the Delete button is pressed
+     * @param event The event
+     */
+    @FXML
+    void Delete_Button_Pressed(ActionEvent event) {
+        ModelTruck temp=Truck_Table.getSelectionModel().getSelectedItem();
+        if (!(temp==null)) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Επιβαιβέωση");
+            alert.setHeaderText("Διαγραφή στοιχείου");
+            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το όχημα με πινακίδα " + temp.getLiscPlate() + ".");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Sql sql = new Sql();
+                int k =sql.DeleteCar(Integer.valueOf(temp.getId()));
+                if(k==0){
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setTitle("Αποτυχία");
+                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+                    alert2.showAndWait();
+                }
+                RenewTable();
+            }
+
+        }
+
+    }
+
+    /**
+     * This method performs a spin animation of the import button when the users hover over it
+     * @param event The event
+     */
     @FXML
     void Import_Button_Hover(MouseEvent event) {
 
@@ -238,6 +251,9 @@ public class TrucksList implements Initializable {
 
     }
 
+    /**
+     * This method renews the visible table (its the same as initialize())
+     */
     public void RenewTable(){
 
         Sql db = new Sql();

@@ -3,6 +3,11 @@ package sample;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * This class contains all the methods which are needed in order to sexport data from the database
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class Sql {
 
 

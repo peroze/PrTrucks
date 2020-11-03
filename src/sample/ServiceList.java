@@ -33,6 +33,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+
+/**
+ * This class is the controller of  ServiceList.fxml which shows on the screen all Services that is vehicle have done
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class ServiceList implements Initializable {
 
 
@@ -82,92 +88,7 @@ public class ServiceList implements Initializable {
     private ObservableList<ModelService> Oblist;
 
 
-    @FXML
-    void Import_Button_Pressed(MouseEvent event) {
-        Stage primaryStage = new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddService.fxml"));
-        try {
-            Parent root = fxmlloader.load();
-            primaryStage.setOnHidden(e -> {
-                RenewTable(null);
-            });
-            primaryStage.setOnCloseRequest(e -> {
-                RenewTable(null);
-            });
-            primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 580));
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-            //fxmlloader.<Drawer>getController().setParent(this);
 
-            //Border_Pane.setLeft(root2);
-            //new FadeIn(root).play();
-            //new FadeIn(root2).play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    void Select_Filter_pressed(MouseEvent event) {
-        if (Filter.getText().equals("Ιστορικό")) {
-            List<String> choices = new ArrayList<>();
-            Sql sql = new Sql();
-            ResultSet rs = sql.Query_All_Lisc();
-
-            try {
-                while (rs.next()) {
-                    choices.add(rs.getString("LiscPlate"));
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
-            dialog.setTitle("Φιλτράρισμα Πινακίδας");
-            dialog.setHeaderText("Επέλεξε ένα αυτοκήνιτο");
-            dialog.setContentText("Όχημα");
-            Optional<String> result = dialog.showAndWait();
-            String temp = result.toString().replace("[", "");
-            temp = temp.replace("]", "");
-            temp = temp.replace("Optional", "");
-            if (temp.equals(".empty") || temp.equals("Πινακίδα")) {
-                return;
-            }
-            ;
-            SearchByLisc(temp);
-            Filter.setText("Κλείσιμο Ιστορικού");
-            return;
-        }
-        Filter.setText("Ιστορικό");
-        RenewTable(null);
-    }
-
-    @FXML
-    void Delete_Button_Pressed(ActionEvent event) {
-        ModelService temp = Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp == null)) {
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Επιβαιβέωση");
-            alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το Service με  id=" + Integer.valueOf(temp.getId()));          // Διαγραφή
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Sql sql = new Sql();
-                int k = sql.DeleteService(Integer.valueOf(temp.getId()));
-                if (k == 0) {
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Αποτυχία");
-                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
-                    alert2.showAndWait();
-                }
-                RenewTable(null);
-            }
-
-        }
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -234,6 +155,10 @@ public class ServiceList implements Initializable {
         Truck_Table.setItems(sorted);
     }
 
+
+    /**
+     * This method is used to open the all the details of the selected Service when the user double clicks on it
+     */
     void DoubleClickTable() {
         ModelService temp = Truck_Table.getSelectionModel().getSelectedItem();
         Stage primaryStage = new Stage();
@@ -250,6 +175,109 @@ public class ServiceList implements Initializable {
         }
     }
 
+    /**
+     * This method inserts a new Service in the list when the insert button is pressed
+     * @param event The event
+     */
+    @FXML
+    void Import_Button_Pressed(MouseEvent event) {
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddService.fxml"));
+        try {
+            Parent root = fxmlloader.load();
+            primaryStage.setOnHidden(e -> {
+                RenewTable(null);
+            });
+            primaryStage.setOnCloseRequest(e -> {
+                RenewTable(null);
+            });
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 600, 580));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+            //fxmlloader.<Drawer>getController().setParent(this);
+
+            //Border_Pane.setLeft(root2);
+            //new FadeIn(root).play();
+            //new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * This method is used to Filter the data shown on the table.
+     * @param event The event
+     */
+    @FXML
+    void Select_Filter_pressed(MouseEvent event) {
+        if (Filter.getText().equals("Ιστορικό")) {
+            List<String> choices = new ArrayList<>();
+            Sql sql = new Sql();
+            ResultSet rs = sql.Query_All_Lisc();
+
+            try {
+                while (rs.next()) {
+                    choices.add(rs.getString("LiscPlate"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
+            dialog.setTitle("Φιλτράρισμα Πινακίδας");
+            dialog.setHeaderText("Επέλεξε ένα αυτοκήνιτο");
+            dialog.setContentText("Όχημα");
+            Optional<String> result = dialog.showAndWait();
+            String temp = result.toString().replace("[", "");
+            temp = temp.replace("]", "");
+            temp = temp.replace("Optional", "");
+            if (temp.equals(".empty") || temp.equals("Πινακίδα")) {
+                return;
+            }
+            ;
+            SearchByLisc(temp);
+            Filter.setText("Κλείσιμο Ιστορικού");
+            return;
+        }
+        Filter.setText("Ιστορικό");
+        RenewTable(null);
+    }
+
+    /**
+     * This method is used to delete a particular Service
+     * @param event The Event
+     */
+    @FXML
+    void Delete_Button_Pressed(ActionEvent event) {
+        ModelService temp = Truck_Table.getSelectionModel().getSelectedItem();
+        if (!(temp == null)) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Επιβαιβέωση");
+            alert.setHeaderText("Διαγραφή στοιχείου");
+            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις το Service με  id=" + Integer.valueOf(temp.getId()));          // Διαγραφή
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Sql sql = new Sql();
+                int k = sql.DeleteService(Integer.valueOf(temp.getId()));
+                if (k == 0) {
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setTitle("Αποτυχία");
+                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+                    alert2.showAndWait();
+                }
+                RenewTable(null);
+            }
+
+        }
+
+    }
+
+    /**
+     * This method performs a spin animation of the import button when the users hover over it
+     * @param event The event
+     */
     @FXML
     void Import_Button_Hover(MouseEvent event) {
 
@@ -284,12 +312,21 @@ public class ServiceList implements Initializable {
 
     }
 
+    /**
+     * This method is used to preview the data of a spcific car (Only one) on the table
+     * @param Lisc The liscence of the car
+     */
     public void SearchByLisc(String Lisc) {
         Sql sql = new Sql();
         ResultSet rs = sql.Query_Specific_With_Lisc(Lisc, "Service");
         RenewTable(rs);
     }
 
+    /**
+     * This method renews the visible table (its the same as initialize())
+     *
+     * @param rs1 This is used to limit the data to a specific
+     */
     public void RenewTable(ResultSet rs1) {
         ResultSet rs = null;
         Sql db = new Sql();

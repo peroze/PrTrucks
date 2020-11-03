@@ -22,6 +22,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+/**
+ * This Class is the controller for ViewService.fxml which shows every detail of a specific Service
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class ViewService implements Initializable {
 
     @FXML
@@ -90,10 +95,18 @@ public class ViewService implements Initializable {
 
     }
 
+    /**
+     * This method is a getter for the Service
+     * @return The comlpete information of a specific Service
+     */
     public ModelService getService() {
         return service;
     }
 
+    /**
+     * This method is a setter for the specific service
+     * @param service The complete information of a specific service
+     */
     public void setService(ModelService service) {
         this.service = service;
         ObList = FXCollections.observableArrayList();
@@ -114,7 +127,10 @@ public class ViewService implements Initializable {
 
     }
 
-
+    /**
+     * This method closes the window when the OK button is pressed
+     * @param event
+     */
     @FXML
     void Ok_Button_Pressed(ActionEvent event) {
         Stage stage = (Stage) Ok.getScene().getWindow();
