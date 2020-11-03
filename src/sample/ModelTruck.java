@@ -1,7 +1,38 @@
 package sample;
 
+
+/**
+ * This class represents a Car
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class ModelTruck {
     private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio;
+
+    /**
+     * The constructor of th car
+     * @param id  The id pf the car
+     * @param liscPlate The Liscence plate number of the car
+     * @param manufactor The Manufactor of the car
+     * @param model The Model of the car
+     * @param date  The 1st Registration date of the car
+     * @param plaisio The Plaisio of the car
+     * @param type The type of the car
+     * @param location The Location of the car
+     * @param kilometers The kilometers of the car
+     */
+    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers) {
+        this.id = id;
+        LiscPlate = liscPlate;
+        Manufactor = manufactor;
+        Model = model;
+        Date = date;
+        Plaisio = plaisio;
+        Type = type;
+        Location = location;
+        Kilometers=kilometers;
+    }
+
 
     /**
      * Getter for Id of the car
@@ -115,6 +146,7 @@ public class ModelTruck {
         Type = type;
     }
 
+
     /**
      * Getter for the Location of the car
      * @return The Location
@@ -122,6 +154,7 @@ public class ModelTruck {
     public String getLocation() {
         return Location;
     }
+
 
     /**
      * Setter for the Location of the car
@@ -149,27 +182,5 @@ public class ModelTruck {
         Kilometers = kilometers;
     }
 
-    /**
-     * The constructor of th car
-     * @param id  The id pf the car
-     * @param liscPlate The Liscence plate number of the car
-     * @param manufactor The Manufactor of the car
-     * @param model The Model of the car
-     * @param date  The 1st Registration date of the car
-     * @param plaisio The Plaisio of the car
-     * @param type The type of the car
-     * @param location The Location of the car
-     * @param kilometers The kilometers of the car
-     */
-    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers) {
-        this.id = id;
-        LiscPlate = liscPlate;
-        Manufactor = manufactor;
-        Model = model;
-        Date = date;
-        Plaisio = plaisio;
-        Type = type;
-        Location = location;
-        Kilometers=kilometers;
-    }
+
 }

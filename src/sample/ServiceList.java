@@ -175,6 +175,7 @@ public class ServiceList implements Initializable {
         }
     }
 
+
     /**
      * This method inserts a new Service in the list when the insert button is pressed
      * @param event The event
@@ -205,6 +206,7 @@ public class ServiceList implements Initializable {
         }
 
     }
+
 
     /**
      * This method is used to Filter the data shown on the table.
@@ -244,6 +246,7 @@ public class ServiceList implements Initializable {
         RenewTable(null);
     }
 
+
     /**
      * This method is used to delete a particular Service
      * @param event The Event
@@ -273,6 +276,7 @@ public class ServiceList implements Initializable {
         }
 
     }
+
 
     /**
      * This method performs a spin animation of the import button when the users hover over it
@@ -312,6 +316,7 @@ public class ServiceList implements Initializable {
 
     }
 
+
     /**
      * This method is used to preview the data of a spcific car (Only one) on the table
      * @param Lisc The liscence of the car
@@ -321,6 +326,7 @@ public class ServiceList implements Initializable {
         ResultSet rs = sql.Query_Specific_With_Lisc(Lisc, "Service");
         RenewTable(rs);
     }
+
 
     /**
      * This method renews the visible table (its the same as initialize())
