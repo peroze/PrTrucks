@@ -26,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * The main class of the program
+ * @author peroze
+ * @version 1.0 Alpha
  */
 public class Main extends Application {
 

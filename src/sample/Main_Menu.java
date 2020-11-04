@@ -17,6 +17,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This Class is the controller of the main Menu
+ * @author peroze
+ * @version 1.0 Alpha
+ */
 public class Main_Menu {
 
     private double x_Offset = 0;
