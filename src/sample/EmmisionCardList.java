@@ -222,7 +222,7 @@ public class EmmisionCardList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),rs.getString("WithKTEO"),rs.getString("DateNext")));
+                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),rs.getString("WithKTEO"),rs.getString("NextDate")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

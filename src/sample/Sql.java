@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 /**
  * This class contains all the methods which are needed in order to sexport data from the database
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -51,6 +52,7 @@ public class Sql {
 
     /**
      * This method returns the list with all Services
+     *
      * @return All Services
      */
     public ResultSet Query_General_Service() {
@@ -70,6 +72,7 @@ public class Sql {
 
     /**
      * This method returns all Repairs
+     *
      * @return All stored Repairs
      */
     public ResultSet Query_General_Repair() {
@@ -89,9 +92,10 @@ public class Sql {
 
     /**
      * This method return the list with all KTEO
+     *
      * @return All KTEOs
      */
-    public ResultSet Query_General_KTEO(){
+    public ResultSet Query_General_KTEO() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM KTEO  ";
@@ -107,9 +111,10 @@ public class Sql {
 
     /**
      * This method returns the list with all Emmision Cards
+     *
      * @return
      */
-    public ResultSet Query_General_EmmisionCard(){
+    public ResultSet Query_General_EmmisionCard() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM EmmisionCard  ";
@@ -125,9 +130,10 @@ public class Sql {
 
     /**
      * This method returns all liscense plate numbers
+     *
      * @return all liscence plate numbers
      */
-    public ResultSet Query_All_Lisc(){
+    public ResultSet Query_All_Lisc() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  LiscPlate FROM  Trucks ";
@@ -143,10 +149,11 @@ public class Sql {
 
     /**
      * This method returns the latest  service for each car (Based on the Date of the next Service
+     *
      * @return The Latest Service of each car
      */
-    public ResultSet Query_Group_Service(){
-        String sql="Select id, MAX(Next_Date),Kilometers,Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
+    public ResultSet Query_Group_Service() {
+        String sql = "Select id, MAX(Next_Date),Kilometers,Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -161,18 +168,19 @@ public class Sql {
 
     /**
      * This method returns all entries of a specific car in a specific table
-     * @param lisc The liscence plate of the car
+     *
+     * @param lisc  The liscence plate of the car
      * @param table The table we want to search
      * @return the dataset with the right data
      */
-    public ResultSet Query_Specific_With_Lisc(String lisc,String table){
+    public ResultSet Query_Specific_With_Lisc(String lisc, String table) {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM  "+table+" WHERE id=? ";
+            String sql = "SELECT  * FROM  " + table + " WHERE id=? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,GetIdFromLisx(lisc));
-            rs=pstmt.executeQuery();
+            pstmt.setString(1, GetIdFromLisx(lisc));
+            rs = pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -204,7 +212,7 @@ public class Sql {
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, max_i+1);
+            pstmt.setInt(1, max_i + 1);
             pstmt.setString(2, car.get(0));
             pstmt.setString(3, car.get(1));
             pstmt.setString(4, car.get(2));
@@ -231,7 +239,7 @@ public class Sql {
      * @param a the new Repair
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertRepair(ModelRepair a){
+    public int InsertRepair(ModelRepair a) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -267,10 +275,11 @@ public class Sql {
 
     /**
      * This method inserts a new Service on the db
+     *
      * @param a the new service
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertService(ModelService a){
+    public int InsertService(ModelService a) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -300,8 +309,102 @@ public class Sql {
             return 1;
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
-        catch (SQLException e) {
+    }
+
+
+    /**
+     * This method inserts a new KTEO on the db. It also add the included emmisions card in the corresponding Table
+     * If EmmisionDate variable is null it means that its not a clean insert but a reinsert of a previous so we just add the new one without Deleteing the previous or adding emission card
+     *
+     * @param a            the new KTEO
+     * @param EmmisionDate The Expiration of the Emmision Card coming with KTEO
+     * @return 1 if the insertion is complete or 0 if there is an error
+     */
+    public int InsertKTEO(ModelKTEO a, String EmmisionDate) {
+        try {
+            int i = 1;
+            ResultSet rs = null;
+            if (EmmisionDate != null) {
+                rs = Query_Specific_With_Lisc(a.getLiscPlate(), "KTEO");
+                i = DeleteΚΤΕΟ(a.getLiscPlate());  // Only one KTEO is stored from each car so we delete the previous one
+                if (i == 0) {
+                    throw new SQLException();
+                }
+            }
+            ArrayList<String> repair = new ArrayList<>();
+            repair.add(a.getKilometers());
+            repair.add(a.getWarnings());
+            repair.add(a.getDate());
+            repair.add(a.getCompany());
+            repair.add(a.getNext());
+            repair.add(a.getPrice());
+            String sql = "INSERT INTO KTEO(id,Warnings,Kilometers,Date,Company,DateNext,Price) VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+            pstmt.setString(2, repair.get(1));
+            pstmt.setInt(3, Integer.valueOf(repair.get(0)));
+            pstmt.setString(4, repair.get(2));
+            pstmt.setString(5, repair.get(3));
+            pstmt.setString(6, repair.get(4));
+            pstmt.setString(7, repair.get(5));
+            pstmt.executeUpdate();
+            if (EmmisionDate==null){
+                return 1;
+            }
+            System.out.println("Εδω");
+            i=InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(),a.getKilometers(),a.getDate(),"TRUE",EmmisionDate));
+            if (i == 1) {
+                return 1;
+            } else {
+                DeleteΚΤΕΟ(a.getLiscPlate());// If we get here it means that the new KTEO is added but the Card is mot so we must delete the KTEO which was added and add the previous one
+                InsertKTEO(new ModelKTEO(GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("DateNext"), rs.getString("Company")),null);
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * This method inserts a new Emmision card
+     * @param a The new emmision card
+     * @return 1 if comleted 0 if not
+     */
+    public int InstertEmmisionCard(ModelEmmisionCard a) {
+        try {
+            int i ;
+            ResultSet rs = Query_Specific_With_Lisc(a.getLiscPlate(), "KTEO");
+            i = DeleteEmissionCard(a.getLiscPlate());  // Only one Emmision is stored from each car so we delete the previous one
+            if (i == 0) {
+                throw new SQLException();
+            }
+            boolean bool;
+            if(a.getWithKTEO().equals("TRUE")){
+                bool=true;
+            }
+            else{
+                bool=false;
+            }
+            ArrayList<String> repair = new ArrayList<>();
+            repair.add(a.getKilometers());
+            repair.add(a.getDate());
+            repair.add(a.getNext());
+            repair.add(a.getWithKTEO());
+            String sql = "INSERT INTO EmmisionCard(id,Kilometers,Date,NextDate,WithKTEO) VALUES (?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+            pstmt.setInt(2, Integer.valueOf(repair.get(0)));
+            pstmt.setString(3, repair.get(1));
+            pstmt.setString(4, repair.get(2));
+            pstmt.setBoolean(5, bool);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
@@ -310,14 +413,15 @@ public class Sql {
 
     /**
      * This method deletes a car from the database
+     *
      * @param id The id of the car to be deleted from the databse
      * @return 1 if the deletion is complete or 0if there is an error
      */
-    public int DeleteCar(int id){
-        String stmt="DELETE FROM Trucks WHERE id=?;";
+    public int DeleteCar(int id) {
+        String stmt = "DELETE FROM Trucks WHERE id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -328,15 +432,16 @@ public class Sql {
 
     /**
      * This method deletes the KTEO of a specific car
+     *
      * @param Lisc The car which will have its KTEO Deleted
      * @return 1 if completed 0 if not
      */
-    public int DeleteΚΤΕΟ(String Lisc){
-        int id =Integer.valueOf(GetIdFromLisx(Lisc));
-        String stmt="DELETE FROM KTEO WHERE id=?;";
+    public int DeleteΚΤΕΟ(String Lisc) {
+        int id = Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt = "DELETE FROM KTEO WHERE id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -347,15 +452,16 @@ public class Sql {
 
     /**
      * This method deletes the Emmision Card of a specific car
+     *
      * @param Lisc The car which will have its Emmision Card Deleted
      * @return 1 if completed 0 if not
      */
-    public int DeleteEmissionCard(String Lisc){
-        int id =Integer.valueOf(GetIdFromLisx(Lisc));
-        String stmt="DELETE FROM EmmisionCard WHERE id=?;";
+    public int DeleteEmissionCard(String Lisc) {
+        int id = Integer.valueOf(GetIdFromLisx(Lisc));
+        String stmt = "DELETE FROM EmmisionCard WHERE id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -366,14 +472,15 @@ public class Sql {
 
     /**
      * This method deletes a specific Service from the list
+     *
      * @param ServiceId The id of the service to be deleted
      * @return 1 if completed 0 if not
      */
-    public int DeleteService(int ServiceId){
-        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+    public int DeleteService(int ServiceId) {
+        String stmt = "DELETE FROM Service WHERE Service_Id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,ServiceId);
+            pstmt.setInt(1, ServiceId);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -384,14 +491,15 @@ public class Sql {
 
     /**
      * This method deletes a specific Repair  from the list
+     *
      * @param RepairId The id of the Repair to be deleted
      * @return 1 if completed 0 if not
      */
-    public int DeleteRepair(int RepairId){
-        String stmt="DELETE FROM Service WHERE Service_Id=?;";
+    public int DeleteRepair(int RepairId) {
+        String stmt = "DELETE FROM Service WHERE Service_Id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1,RepairId);
+            pstmt.setInt(1, RepairId);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -402,10 +510,11 @@ public class Sql {
 
     /**
      * This method return the id of the car given a its Liscence plate number
+     *
      * @param lisc The liscence plate number
      * @return The id
      */
-    public String GetIdFromLisx(String lisc){
+    public String GetIdFromLisx(String lisc) {
         ResultSet rs = null;
         try {
             String sql = "SELECT  id FROM Trucks  WHERE LiscPlate=?";
@@ -422,13 +531,14 @@ public class Sql {
 
     /**
      * This method return the liscence of the car given  its id
+     *
      * @param id The id of the car
      * @return The liscence plate number
      */
-    public String GetLisxxFromId(String id){
+    public String GetLisxxFromId(String id) {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  LiscPlate FROM Trucks  WHERE id="+id;
+            String sql = "SELECT  LiscPlate FROM Trucks  WHERE id=" + id;
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -442,11 +552,13 @@ public class Sql {
 
     /**
      * This method is used to transfrom the boolean type variable, which are in English, to Greek.
+     *
      * @param bool The boolean variable
      * @return " Ναι " or "Οχι"
      */
-    public String BooleantoGreek(boolean bool){
-        if(bool==true){
+    public String BooleantoGreek(boolean bool) {
+        System.out.println(bool);
+        if (bool == true) {
             return "Ναί";
         }
         return "Όχι";

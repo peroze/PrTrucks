@@ -140,21 +140,18 @@ public class KTEOList implements Initializable {
      */
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
-        /*Stage primaryStage= new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddKTEO.fxml"));
         try {
-            Parent root=fxmlloader.load();
-            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-            fxmlloader.<AddCar>getController().setMax_i(max);
-            AddCar addcar =fxmlloader.getController();
-            primaryStage.setOnHidden(e->{
+            Parent root = fxmlloader.load();
+            primaryStage.setOnHidden(e -> {
                 RenewTable();
             });
-            primaryStage.setOnCloseRequest(e->{
+            primaryStage.setOnCloseRequest(e -> {
                 RenewTable();
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 600, 580));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -165,7 +162,8 @@ public class KTEOList implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
+
+
     }
 
 
@@ -177,6 +175,7 @@ public class KTEOList implements Initializable {
     @FXML
     void Delete_Button_Pressed(ActionEvent event) {
         ModelKTEO temp = Truck_Table.getSelectionModel().getSelectedItem();
+        System.out.println(temp.getLiscPlate());
         if (!(temp == null)) {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -250,7 +249,7 @@ public class KTEOList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("Next"), rs.getString("Company")));
+                Oblist.add(new ModelKTEO(db.GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("DateNext"), rs.getString("Company")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

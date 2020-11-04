@@ -1,10 +1,6 @@
 package sample;
 
-import animatefx.animation.BounceIn;
-import animatefx.animation.FadeIn;
-import animatefx.animation.Jello;
-import animatefx.animation.RollIn;
-import javafx.animation.FadeTransition;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,7 +34,8 @@ public class Main extends Application {
         Tray(rs, "KTEO");
         rs = sql.Query_Group_Service();
         Tray(rs, "Service");
-
+        rs=sql.Query_General_EmmisionCard();
+        Tray(rs,"Emmision");
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         primaryStage.setTitle("PrTrucks");
         primaryStage.setScene(new Scene(root, 944, 675));
@@ -65,18 +62,22 @@ public class Main extends Application {
                 String next = "";
                 rs.getString("id");
                 if (Type.equals("Service")) {
-                    next = rs.getString("MAX(Next_Date)");
-                } else {
+                    next = rs.getString("MAX(Next_Date)"); // The collumn of service is different because each car have many services stored but we only need the latest
+                } else if(Type.equals("KTEO")) {
                     next = rs.getString("DateNext");
+                }
+                else{
+                    next = rs.getString("NextDate");
                 }
                 String Lisc = rs.getString("id");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = sdf.parse(next);
                 Date date2 = new Date();
+                long tempDiffInMillies=date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
                 long diffInMillies = Math.abs(date.getTime() - date2.getTime());
                 int multi = 1;
                 long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                if (diffInMillies < 0) {
+                if (tempDiffInMillies < 0) {
                     multi = -1;
                 }
                 Sql sql = new Sql();
@@ -130,6 +131,9 @@ public class Main extends Application {
         String Cars = "";
         for (int i = 0; i < Liscs.size(); i++) {
             Cars = Cars.concat(Liscs.get(i) + "\n");
+        }
+        if(Type.equals("Emmision")){
+            Type="Κάρτα Ελέγχου Καυσαεριών";
         }
         if (error == 1) {
             trayIcon.displayMessage("Ειδοποίηση " + Type, "Τα Ακόλουθα οχήματα πρέπει να κάνουν " + Type + " σε λιγότερες από 15 μέρες:\n" + Cars, TrayIcon.MessageType.INFO);
