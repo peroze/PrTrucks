@@ -96,16 +96,7 @@ public class Main_Menu {
     }
 
 
-    /**
-     * This method Closes the program
-     *
-     * @param event The event when the action is made
-     */
-    @FXML
-    void Exit_Button_Pressed(ActionEvent event) {
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
+
 
 
     /**
@@ -203,6 +194,20 @@ public class Main_Menu {
 
 
     /**
+     * This method Closes the program
+     *
+     * @param event The event when the action is made
+     */
+    @FXML
+    void Exit_Button_Pressed(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+        System.exit(1);
+    }
+
+
+
+    /**
      * This Closes the program
      * @param event The event when an action id made
      */
@@ -210,6 +215,7 @@ public class Main_Menu {
     void X_Button_Pressed(MouseEvent event) {
         Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
 

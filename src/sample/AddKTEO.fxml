@@ -53,7 +53,7 @@
          </font>
       </Label>
       <TextField fx:id="AddWarn" layoutX="112.0" layoutY="277.0" prefHeight="26.0" prefWidth="138.0" promptText="Παρατηρήσεις" />
-      <Button fx:id="AddWarn_Btn" layoutX="366.0" layoutY="276.0" mnemonicParsing="false" onAction="#AddPart_Btn_Pr" prefHeight="29.0" prefWidth="162.0" text="Εισαγωγή Παρατήρησης">
+      <Button fx:id="AddWarn_Btn" layoutX="366.0" layoutY="276.0" mnemonicParsing="false" onAction="#AddWarn_Btn_Pr" prefHeight="29.0" prefWidth="162.0" text="Εισαγωγή Παρατήρησης">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

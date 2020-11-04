@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,14 +19,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 /**
- * Thid class is the controller for AddΚΤΕΟ which add a new ΚΤΕΟ in the db
- *
+ * This Class is the Corntoller for AddEmmisionCard.fxml which adds a new Emmision Card in the db
  * @author peroze
  * @version 1.0 Alpha
  */
-public class AddKTEO implements Initializable {
+public class AddEmmisionCard implements Initializable {
 
 
     private double x_Offset = 0;
@@ -47,41 +44,25 @@ public class AddKTEO implements Initializable {
 
 
     @FXML
-    private TextField Price;
-
-    @FXML
     private ComboBox Lisc_Plate;
+
 
     @FXML
     private TextField Kilometers;
 
+
+
     @FXML
     private DatePicker Date;
+
+
 
     @FXML
     private Button Ok_Button;
 
-    @FXML
-    private TextField AddWarn;
-
-    @FXML
-    private Button AddWarn_Btn;
-
-    @FXML
-    private TextField Workshop;
-
-    @FXML
-    private TableView<StringsForTables> Table;
-
-    @FXML
-    private TableColumn<StringsForTables, String> Parts;
-
-    private ObservableList<StringsForTables> Oblist;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -89,8 +70,8 @@ public class AddKTEO implements Initializable {
             }
         });
         ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql = new Sql();
-        ResultSet rs = sql.Query_All_Lisc();
+        Sql sql=new Sql();
+        ResultSet rs=sql.Query_All_Lisc();
         try {
             while (rs.next()) {
                 Cars.add(rs.getString("LiscPlate"));
@@ -102,64 +83,35 @@ public class AddKTEO implements Initializable {
 
     }
 
-    /**
-     * This method is called when the AddWarn button is pressed and it adds a warning which have been given in KTEO
-     *
-     * @param event The event
-     */
-    @FXML
-    void AddWarn_Btn_Pr(ActionEvent event) {
-        Oblist.add(new StringsForTables(AddWarn.getText()));
-        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
-        AddWarn.clear();
-        Table.setItems(Oblist);
-    }
 
     /**
-     * This button adds the new KTEO in the db
-     *
+     * This class is used when the Ok button is pressed and it ads a new car in data Base
      * @param event The event
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         Sql sql = new Sql();
-        String Warnings=null;
-        if(!Oblist.isEmpty()){
-        Warnings = Oblist.get(0).getString();
-        for (int i = 1; i < Oblist.size(); i++) {
-            Warnings = Warnings + "|" + Oblist.get(i).getString();
-        }
-        }
-        ModelKTEO toAdd = new ModelKTEO(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Warnings, Date.getValue().plusYears(2).toString(), Workshop.getText());
-        int i = sql.InsertKTEO(toAdd, Date.getValue().plusYears(1).toString());
-        if (i == 1) {
+        ModelEmmisionCard toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(),Kilometers.getText(),Date.getValue().toString(),"FALSE",Date.getValue().plusYears(1).toString());
+        int i=sql.InstertEmmisionCard(toAdd);
+        if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
+            alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
             stage.close();
-        } else {
+        }
+        else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+            alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
-            Kilometers.clear();
-            Lisc_Plate.setValue(new Object());
-            AddWarn.clear();
-            Price.clear();
-            Workshop.clear();
-            Date.setValue(null);
-            Oblist = FXCollections.observableArrayList();
-            Table.setItems(Oblist);
+        }
     }
-
-}
 
     /**
      * This Closes the program
-     *
      * @param event The event when an action id made
      */
     @FXML
@@ -169,9 +121,9 @@ public class AddKTEO implements Initializable {
     }
 
 
+
     /**
      * This is used to make the window draggable
-     *
      * @param event This it the given event
      */
     @FXML
@@ -183,19 +135,17 @@ public class AddKTEO implements Initializable {
 
     /**
      * This is used to make the window draggable
-     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset = event.getSceneX();
-        y_Offset = event.getSceneY();
+        x_Offset=event.getSceneX();
+        y_Offset=event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
-     *
      * @param event This it the given event
      */
     @FXML
@@ -204,13 +154,7 @@ public class AddKTEO implements Initializable {
         stage.setIconified(true);
     }
 
-    /**
-     * This method returns the new Entry
-     *
-     * @param Entry The new Entry
-     * @return The new Entry
-     */
-    public ArrayList<String> GetNewEntry(ArrayList<String> Entry) {
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
         return Entry;
     }
 

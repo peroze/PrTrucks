@@ -119,7 +119,7 @@ public class AddService implements Initializable {
     }
 
     /**
-     * This button adds the new repair in the db
+     * This button adds the new Service in the db
      * @param event The event
      */
     @FXML

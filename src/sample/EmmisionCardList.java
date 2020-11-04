@@ -10,14 +10,20 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,21 +129,18 @@ public class EmmisionCardList implements Initializable {
      */
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
-        /*Stage primaryStage= new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddEmmisionCard.fxml"));
         try {
-            Parent root=fxmlloader.load();
-            int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
-            fxmlloader.<AddCar>getController().setMax_i(max);
-            AddCar addcar =fxmlloader.getController();
-            primaryStage.setOnHidden(e->{
+            Parent root = fxmlloader.load();
+            primaryStage.setOnHidden(e -> {
                 RenewTable();
             });
-            primaryStage.setOnCloseRequest(e->{
+            primaryStage.setOnCloseRequest(e -> {
                 RenewTable();
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 600, 580));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -148,7 +151,7 @@ public class EmmisionCardList implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
+
     }
 
     /**
@@ -222,7 +225,7 @@ public class EmmisionCardList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),rs.getString("WithKTEO"),rs.getString("NextDate")));
+                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),db.BooleantoGreek(rs.getBoolean("WithKTEO")),rs.getString("NextDate")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

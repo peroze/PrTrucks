@@ -557,7 +557,6 @@ public class Sql {
      * @return " Ναι " or "Οχι"
      */
     public String BooleantoGreek(boolean bool) {
-        System.out.println(bool);
         if (bool == true) {
             return "Ναί";
         }
