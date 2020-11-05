@@ -277,8 +277,6 @@ public class Sql {
             pstmt.setString(5, repair.get(4));
             pstmt.setString(6, repair.get(2));
             pstmt.setInt(7, Integer.valueOf(repair.get(5)));
-
-
             pstmt.executeUpdate();
             return 1;
 
@@ -465,7 +463,7 @@ public class Sql {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             conn.close();
-            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {

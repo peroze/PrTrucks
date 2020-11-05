@@ -176,6 +176,15 @@ public class RefillList implements Initializable {
     }
 
     /**
+     * This method show the basic statistics.
+     * @param event The event
+     */
+    @FXML
+    void Totals_Pressed(MouseEvent event) {
+        System.out.println("ToDo");
+    }
+
+    /**
      * This method is used to activate the animation of the add button when the user hovers over it
      *
      * @param event The event

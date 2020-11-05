@@ -153,9 +153,13 @@ public class Main_Menu {
 
     }
 
+    /**
+     * This method opens the expenses windows
+     * @param event The event
+     */
     @FXML
     void Expenses_Button_Pressed(ActionEvent event){
-
+        System.out.println("ToDo");
     }
 
 
