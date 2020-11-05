@@ -125,6 +125,7 @@ public class AddCar implements Initializable {
             alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
+            sql.Disconnect();
             stage.close();
         }
         else{

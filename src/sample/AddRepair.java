@@ -101,7 +101,7 @@ public class AddRepair implements Initializable {
             e.printStackTrace();
         }
         Lisc_Plate.setItems(Cars);
-
+        sql.Disconnect();
 
     }
 
@@ -138,6 +138,7 @@ public class AddRepair implements Initializable {
             alert.setContentText("Η επισκευή εισήχθει με επιτυχία στην Βαση");
             alert.showAndWait();
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
+            sql.Disconnect();
             stage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

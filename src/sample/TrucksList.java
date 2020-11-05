@@ -151,6 +151,7 @@ public class TrucksList implements Initializable {
         SortedList<ModelTruck> sorted=new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 
@@ -206,6 +207,7 @@ public class TrucksList implements Initializable {
                     alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
                     alert2.showAndWait();
                 }
+                sql.Disconnect();
                 RenewTable();
             }
 
@@ -314,6 +316,7 @@ public class TrucksList implements Initializable {
         SortedList<ModelTruck> sorted=new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 }

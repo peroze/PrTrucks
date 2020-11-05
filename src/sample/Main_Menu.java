@@ -19,6 +19,7 @@ import java.io.IOException;
 
 /**
  * This Class is the controller of the main Menu
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -51,6 +52,13 @@ public class Main_Menu {
 
     @FXML
     private Button Repair_Button;
+
+    @FXML
+    private Button Refill_Button;
+
+    @FXML
+    private Button Expenses_Button;
+
 
     @FXML
     private Button Exit_Button;
@@ -96,11 +104,9 @@ public class Main_Menu {
     }
 
 
-
-
-
     /**
      * This method opens the Gas List Window
+     *
      * @param event The event when an action is made
      */
     @FXML
@@ -109,7 +115,7 @@ public class Main_Menu {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
-            fxmlloader.<Drawer>getController().setActive("Gas");
+            fxmlloader.<Drawer>getController().setActive("EmmisionCard");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
@@ -125,6 +131,7 @@ public class Main_Menu {
 
     /**
      * This method opens the Kteo List Window
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -146,9 +153,15 @@ public class Main_Menu {
 
     }
 
+    @FXML
+    void Expenses_Button_Pressed(ActionEvent event){
+
+    }
+
 
     /**
      * This method opens the Service List Window
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -172,6 +185,7 @@ public class Main_Menu {
 
     /**
      * This method opens the Speedometer List Window
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -181,6 +195,30 @@ public class Main_Menu {
             Parent root = FXMLLoader.load(getClass().getResource("RepairList.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Repair");
+            fxmlloader.<Drawer>getController().changeBg();
+            fxmlloader.<Drawer>getController().setParent(this);
+            Border_Pane.setCenter(root);
+            Border_Pane.setLeft(root2);
+            new FadeIn(root).play();
+            new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method opens the Refill Window
+     *
+     * @param event The event when an action id made
+     */
+    @FXML
+    void Refill_Button_Pressed(ActionEvent event) {
+        try {
+
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("RefillList.fxml"));
+            Parent root2 = (Parent) fxmlloader.load();
+            fxmlloader.<Drawer>getController().setActive("Gas");
             fxmlloader.<Drawer>getController().changeBg();
             fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
@@ -206,9 +244,9 @@ public class Main_Menu {
     }
 
 
-
     /**
      * This Closes the program
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -227,6 +265,7 @@ public class Main_Menu {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
@@ -238,17 +277,19 @@ public class Main_Menu {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset=event.getSceneX();
-        y_Offset=event.getSceneY();
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
+     *
      * @param event This it the given event
      */
     @FXML

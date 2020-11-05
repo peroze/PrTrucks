@@ -21,7 +21,7 @@ public class Drawer {
     private Button Trucks_Button;
 
     @FXML
-    private Button Gas_Button;
+    private Button EmmisionCard_Button;
 
     @FXML
     private Button Kteo_Button;
@@ -32,16 +32,19 @@ public class Drawer {
     @FXML
     private Button Repair_Button;
 
+    @FXML
+    private Button Refill_Button;
+
     /**
      * This method is pressed when the Gas Button is pressed and it opens the gas Table in the main scene
      *
      * @param event The event
      */
     @FXML
-    void Gas_Button_Pressed(ActionEvent event) {
-        if (!Active.equals("Gas")) {
+    void EmmisionCard_Button_Pressed(ActionEvent event) {
+        if (!Active.equals("EmmisionCard")) {
             resetBg();
-            Active = "Gas";
+            Active = "EmmisionCard";
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
@@ -113,6 +116,21 @@ public class Drawer {
         }
     }
 
+    @FXML
+    void Refill_Button_Pressed(ActionEvent event) {
+        if (!Active.equals("Refill")) {
+            resetBg();
+            Active = "Refill";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("RefillList.fxml"));
+                Parent.getBorder_Pane().setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * This method is called when the Trucks button is pressed and it opens the Trucks table in the main window
      *
@@ -149,8 +167,8 @@ public class Drawer {
             case "Trucks":
                 Trucks_Button.setStyle(null);
                 break;
-            case "Gas":
-                Gas_Button.setStyle(null);
+            case "EmmisionCard":
+                EmmisionCard_Button.setStyle(null);
                 break;
             case "Repair":
                 Repair_Button.setStyle(null);
@@ -160,6 +178,9 @@ public class Drawer {
                 break;
             case "Service":
                 Service_Button.setStyle(null);
+                break;
+            case "Refill":
+                Refill_Button.setStyle(null);
                 break;
         }
     }
@@ -172,8 +193,8 @@ public class Drawer {
             case "Trucks":
                 Trucks_Button.setStyle("-fx-background-color: #686466");
                 break;
-            case "Gas":
-                Gas_Button.setStyle("-fx-background-color: #686466");
+            case "EmmisionCard":
+                EmmisionCard_Button.setStyle("-fx-background-color: #686466");
                 break;
             case "Repair":
                 Repair_Button.setStyle("-fx-background-color: #686466");
@@ -183,6 +204,9 @@ public class Drawer {
                 break;
             case "Service":
                 Service_Button.setStyle("-fx-background-color: #686466");
+                break;
+            case "Refill":
+                Refill_Button.setStyle("-fx-background-color: #686466");
                 break;
         }
     }

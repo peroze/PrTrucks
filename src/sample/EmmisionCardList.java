@@ -120,6 +120,7 @@ public class EmmisionCardList implements Initializable {
         SortedList<ModelEmmisionCard> sorted=new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 
@@ -264,6 +265,7 @@ public class EmmisionCardList implements Initializable {
         SortedList<ModelEmmisionCard> sorted=new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 }
 

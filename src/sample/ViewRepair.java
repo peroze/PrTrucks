@@ -117,6 +117,7 @@ public class ViewRepair implements Initializable {
         Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
         Table.setItems(ObList);
 
+
     }
 
     /**

@@ -26,7 +26,7 @@
          <VBox.margin>
             <Insets top="4.0" />
          </VBox.margin></Button>
-      <Button fx:id="Gas_Button" mnemonicParsing="false" onAction="#Gas_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
+      <Button fx:id="EmmisionCard_Button" mnemonicParsing="false" onAction="#EmmisionCard_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -70,5 +70,14 @@
          <VBox.margin>
             <Insets top="4.0" />
          </VBox.margin></Button>
+      <Button fx:id="Refill_Button" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Resources/808362-200.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </VBox>

@@ -153,6 +153,7 @@ public class ServiceList implements Initializable {
         SortedList<ModelService> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 
@@ -237,9 +238,9 @@ public class ServiceList implements Initializable {
             if (temp.equals(".empty") || temp.equals("Πινακίδα")) {
                 return;
             }
-            ;
             SearchByLisc(temp);
             Filter.setText("Κλείσιμο Ιστορικού");
+            sql.Disconnect();
             return;
         }
         Filter.setText("Ιστορικό");
@@ -270,6 +271,7 @@ public class ServiceList implements Initializable {
                     alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
                     alert2.showAndWait();
                 }
+                sql.Disconnect();
                 RenewTable(null);
             }
 
@@ -387,6 +389,7 @@ public class ServiceList implements Initializable {
         SortedList<ModelService> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 }

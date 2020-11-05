@@ -92,7 +92,6 @@ public class Sql {
 
     /**
      * This method return the list with all KTEO
-     *
      * @return All KTEOs
      */
     public ResultSet Query_General_KTEO() {
@@ -111,13 +110,29 @@ public class Sql {
 
     /**
      * This method returns the list with all Emmision Cards
-     *
-     * @return
+     * @return The set with all Emmision cards
      */
     public ResultSet Query_General_EmmisionCard() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM EmmisionCard  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    /**
+     * This method returns the list with all Refills
+     * @return The set with all refills
+     */
+    public ResultSet Query_General_Refill() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Refill  ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -187,6 +202,7 @@ public class Sql {
         return rs;
 
     }
+
 
 
     /**
@@ -377,8 +393,8 @@ public class Sql {
      */
     public int InstertEmmisionCard(ModelEmmisionCard a) {
         try {
+
             int i ;
-            ResultSet rs = Query_Specific_With_Lisc(a.getLiscPlate(), "KTEO");
             i = DeleteEmissionCard(a.getLiscPlate());  // Only one Emmision is stored from each car so we delete the previous one
             if (i == 0) {
                 throw new SQLException();
@@ -405,6 +421,31 @@ public class Sql {
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * This method inserts a new Refill card
+     * @param a The new Refill
+     * @return 1 if comleted 0 if not
+     */
+    public int InstertRefill(ModelRefill a) {
+        try {
+            ArrayList<String> repair = new ArrayList<>();
+            repair.add(a.getKilometers());
+            repair.add(a.getDate());
+            repair.add(a.getAmount());
+            String sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount) VALUES (?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
+            pstmt.setInt(2, Integer.valueOf(repair.get(0)));
+            pstmt.setString(3, repair.get(1));
+            pstmt.setString(4, repair.get(2));
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
@@ -423,8 +464,11 @@ public class Sql {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             return 0;
         }
     }
@@ -443,8 +487,11 @@ public class Sql {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             return 0;
         }
     }
@@ -463,8 +510,34 @@ public class Sql {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    /**
+     * This method deletes the Refill of a specific car
+     *
+     * @param Id The car which will have its Refill Deleted
+     * @return 1 if completed 0 if not
+     */
+    public int DeleteRefill(String Id) {
+        String stmt = "DELETE FROM Refill WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1, Integer.valueOf(Id));
+            pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
+            return 1;
+        } catch (SQLException | ClassNotFoundException e) {
             return 0;
         }
     }
@@ -482,8 +555,11 @@ public class Sql {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1, ServiceId);
             pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             return 0;
         }
     }
@@ -561,6 +637,15 @@ public class Sql {
             return "Ναί";
         }
         return "Όχι";
+    }
+
+
+    public void Disconnect(){
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

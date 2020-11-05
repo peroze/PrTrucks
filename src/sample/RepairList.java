@@ -124,6 +124,7 @@ public class RepairList implements Initializable {
                     alert2.showAndWait();
                 }
                 RenewTable(null);
+                sql.Disconnect();
             }
 
         }
@@ -156,9 +157,11 @@ public class RepairList implements Initializable {
                 return;
             };
             SearchByLisc(temp);
+            sql.Disconnect();
             Filter.setText("Κατάργηση Φίλτρου");
             return;
         }
+
         Filter.setText("Φιλτρα");
         RenewTable(null);
     }
@@ -222,6 +225,7 @@ public class RepairList implements Initializable {
         SortedList<ModelRepair> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
     void DoubleClickTable() {
@@ -344,6 +348,7 @@ public class RepairList implements Initializable {
         SortedList<ModelRepair> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 }
