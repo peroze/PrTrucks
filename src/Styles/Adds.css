@@ -32,9 +32,9 @@
     -fx-border-color: #8B74BD;
 }
 
-.date-picker {
-    -fx-border-width: 0px;
-    -fx-focus-color: transparent;
+.date-picker:editable {
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color:  #383838;
 }
 
 .combo-box {
@@ -44,9 +44,23 @@
     -fx-text-fill: white;
 }
 
-.combo-box .arrow-button .arrow {
-    -fx-background-color: #FA8072;
+.combo-box .arrow-button    {
+    -fx-background-color:#FA8072;
+    -fx-background-radius: 0;
 }
+
+.combo-box:focused .arrow-button    {
+    -fx-background-color: #8B74BD;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #8B74BD;;
+}
+
+.combo-box:focused .arrow-button .arrow {
+    -fx-background-color:#FA8072;
+}
+
 
 .combo-box:focused {
     -fx-border-color: #8B74BD;
@@ -54,11 +68,39 @@
 
 
 .date-picker:editable .arrow-button .arrow {
-    -fx-background-color: #FA8072;
+    -fx-background-color: #8B74BD
+
+}
+
+.date-picker:editable:focused .arrow-button .arrow {
+    -fx-background-color:#FA8072;
+
+}
+
+.date-picker:editable .arrow-button    {
+    -fx-background-color:#FA8072;
+    -fx-background-radius: 0;
+}
+
+.date-picker:editable:focused .arrow-button    {
+    -fx-background-color: #8B74BD;
 }
 
 .combo-box .list-cell .text{
     -fx-fill: grey;
+}
+
+.tab-pane:top .tab-header-area .tab-header-background{
+    -fx-background-color: #8B74BD;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top{
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+}
+
+.tab:selected .tab-label{
+    -fx-text-fill: white;
 }
 
 /*.table-view:row-selection .label {
