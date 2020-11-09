@@ -38,7 +38,7 @@ public class Main extends Application {
         Tray(rs,"Emmision");
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         primaryStage.setTitle("PrTrucks");
-        primaryStage.setScene(new Scene(root, 944, 675));
+        primaryStage.setScene(new Scene(root, 1007, 675));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }

@@ -369,7 +369,6 @@ public class Sql {
             if (EmmisionDate==null){
                 return 1;
             }
-            System.out.println("Εδω");
             i=InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(),a.getKilometers(),a.getDate(),"TRUE",EmmisionDate));
             if (i == 1) {
                 return 1;

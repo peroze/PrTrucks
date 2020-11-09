@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="944.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
+<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="1007.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main_Menu">
    <center>
       <BorderPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="652.0" prefWidth="944.0" BorderPane.alignment="CENTER">
          <center>
@@ -41,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Gas_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Gas_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Κάρτα  Καυσαερίων" textFill="WHITE" GridPane.columnIndex="1">
@@ -56,7 +56,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Kteo_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="ΚΤΕΟ" textFill="WHITE" GridPane.rowIndex="1">
@@ -71,7 +71,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Service_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ServiceButton_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Service" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -86,7 +86,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Repair_Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#Repair_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Επισκευές" textFill="WHITE" GridPane.rowIndex="2">
@@ -101,7 +101,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Exit_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Exit_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Έξοδος" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -116,7 +116,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Refill_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Refill_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Κάυσιμα" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -124,7 +124,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="Expenses_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Expenses_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Δαπάνες" textFill="WHITE" GridPane.rowIndex="3">
@@ -132,14 +132,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <GridPane.margin>
-                        <Insets left="122.0" />
+                        <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
                </children>
             </GridPane>
          </center>
          <top>
-            <Label prefHeight="46.0" prefWidth="213.0" text="PrTrucks" textFill="WHITE" BorderPane.alignment="TOP_CENTER">
+            <Label prefHeight="46.0" prefWidth="213.0" text="PrTrucks" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="55.0" />
                </font>

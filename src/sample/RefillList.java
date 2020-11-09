@@ -181,7 +181,22 @@ public class RefillList implements Initializable {
      */
     @FXML
     void Totals_Pressed(MouseEvent event) {
-        System.out.println("ToDo");
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("LitersTotal.fxml"));
+        try {
+            Parent root = fxmlloader.load();
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 730, 440));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+            //fxmlloader.<Drawer>getController().setParent(this);
+
+            //Border_Pane.setLeft(root2);
+            //new FadeIn(root).play();
+            //new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

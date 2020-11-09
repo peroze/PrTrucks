@@ -53,7 +53,7 @@
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
-      <Label layoutX="267.0" layoutY="8.0" text="Καύσιμα" textFill="WHITE">
+      <Label layoutX="315.0" layoutY="8.0" text="Καύσιμα" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

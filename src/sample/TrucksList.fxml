@@ -57,7 +57,7 @@
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
-      <Label layoutX="332.0" layoutY="9.0" text="Οχήματα" textFill="WHITE">
+      <Label layoutX="310.5" layoutY="9.0" text="Οχήματα" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

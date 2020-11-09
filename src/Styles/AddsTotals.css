@@ -10,6 +10,23 @@
     -fx-border-color: black;
 }
 
+#Totals_Button{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 0 3;
+    -fx-border-color: #FA8072;
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+
+#ByCar_Button{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+    -fx-background-color: #000013;
+    -fx-text-fill: white;
+}
+
 
 .text-field {
     -fx-background-color: #383838;
@@ -96,10 +113,20 @@
 
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top{
     -fx-background-color: #383838;
-    -fx-text-fill: white;
+    -fx-background-radius: 0;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:top{
+    -fx-background-color: #8B74BD;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0 1;
 }
 
 .tab:selected .tab-label{
+    -fx-text-fill: white;
+}
+
+.tab .tab-label{
     -fx-text-fill: white;
 }
 

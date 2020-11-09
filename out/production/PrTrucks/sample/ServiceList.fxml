@@ -65,7 +65,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label layoutX="356.0" layoutY="9.0" prefHeight="35.0" prefWidth="76.0" text="Service" textFill="#f8f8f8">
+      <Label layoutX="322.5" layoutY="9.0" prefHeight="35.0" prefWidth="76.0" text="Service" textFill="#f8f8f8">
          <font>
             <Font size="24.0" />
          </font>

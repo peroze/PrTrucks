@@ -3,81 +3,36 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="Drawer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="80.0" stylesheets="@../Styles/Drawer.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Drawer">
+<VBox fx:id="Drawer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="143.0" style="-fx-background-color: #000013;" stylesheets="@../Styles/Drawer.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Drawer">
    <children>
       <Label prefHeight="50.0" prefWidth="176.0" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Centaur" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="Trucks_Button" mnemonicParsing="false" onAction="#Trucks_Button_Pressed" prefHeight="40.0" prefWidth="43.0">
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/Χωρίς%20τίτλο.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="Trucks_Button" mnemonicParsing="false" onAction="#Trucks_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Οχήματα">
          <VBox.margin>
-            <Insets top="4.0" />
+            <Insets />
          </VBox.margin></Button>
-      <Button fx:id="EmmisionCard_Button" mnemonicParsing="false" onAction="#EmmisionCard_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/808362-200.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="EmmisionCard_Button" mnemonicParsing="false" onAction="#EmmisionCard_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Καρτα Καυσαερίων">
          <VBox.margin>
-            <Insets top="4.0" />
+            <Insets />
          </VBox.margin></Button>
-      <Button fx:id="Kteo_Button" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" prefHeight="45.0" prefWidth="51.0">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/unnamed.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="Kteo_Button" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="ΚΤΕΟ">
          <VBox.margin>
-            <Insets top="4.0" />
+            <Insets />
          </VBox.margin></Button>
-      <Button fx:id="Service_Button" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="44.0" prefWidth="51.0">
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/kisspng-computer-icons-service-user-travel-ims-an-amadeus-setting-svg-png-icon-free-download-1999-2-onl-5b7f0a40efaaa4.2383686015350523529817.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="Service_Button" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Service">
          <VBox.margin>
-            <Insets top="4.0" />
+            <Insets />
          </VBox.margin></Button>
-      <Button fx:id="Repair_Button" mnemonicParsing="false" onAction="#Repair_Button_Pressed" prefHeight="43.0" prefWidth="51.0">
-         <graphic>
-            <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/Χωρίς%20τίτλοs.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="Repair_Button" mnemonicParsing="false" onAction="#Repair_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Επισκευές">
          <VBox.margin>
-            <Insets top="4.0" />
+            <Insets />
          </VBox.margin></Button>
-      <Button fx:id="Refill_Button" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="26.0" prefWidth="36.0">
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resources/808362-200.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Button fx:id="Refill_Button" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Καύσιμα" />
    </children>
 </VBox>

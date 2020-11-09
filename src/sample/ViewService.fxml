@@ -13,23 +13,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@../Styles/Adds.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewService">
+<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewService">
    <children>
-      <TextField fx:id="LiscPlate" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@../Styles/Adds.css" />
-      <TextField fx:id="Workshop" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Συνεργείο" stylesheets="@../Styles/Adds.css" />
-      <TextField fx:id="NextKm" editable="false" layoutX="113.0" layoutY="193.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (KM)" stylesheets="@../Styles/Adds.css" />
+      <TextField fx:id="LiscPlate" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@../Styles/AddsTotals.css" />
+      <TextField fx:id="Workshop" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Συνεργείο" stylesheets="@../Styles/AddsTotals.css" />
+      <TextField fx:id="NextKm" editable="false" layoutX="113.0" layoutY="193.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (KM)" stylesheets="@../Styles/AddsTotals.css" />
       <Label layoutX="28.0" layoutY="91.0" prefHeight="17.0" prefWidth="63.0" text="Πινακίδα" textFill="#fcfcfc" />
       <Label layoutX="28.0" layoutY="144.0" prefHeight="17.0" prefWidth="63.0" text="Συνεργείο" textFill="#fcfcfc" />
       <Label layoutX="28.0" layoutY="198.0" prefHeight="17.0" prefWidth="76.0" text="Επόμενο (KM)" textFill="#fcfcfc" />
-      <TextField fx:id="Date" editable="false" layoutX="495.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@../Styles/Adds.css" />
-      <TextField fx:id="Kilometers" editable="false" layoutX="495.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@../Styles/Adds.css" />
-      <TextField fx:id="NextD" editable="false" layoutX="495.0" layoutY="194.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (ΗΜ)" stylesheets="@../Styles/Adds.css" />
+      <TextField fx:id="Date" editable="false" layoutX="495.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@../Styles/AddsTotals.css" />
+      <TextField fx:id="Kilometers" editable="false" layoutX="495.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@../Styles/AddsTotals.css" />
+      <TextField fx:id="NextD" editable="false" layoutX="495.0" layoutY="194.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (ΗΜ)" stylesheets="@../Styles/AddsTotals.css" />
       <Label layoutX="410.0" layoutY="91.0" prefHeight="17.0" prefWidth="63.0" text="Ημερομινία" textFill="#fcfcfc" />
       <Label layoutX="410.0" layoutY="144.0" prefHeight="17.0" prefWidth="63.0" text="Χιλιόμετρα" textFill="#fcfcfc" />
       <Label layoutX="410.0" layoutY="199.0" prefHeight="17.0" prefWidth="76.0" text="Επόμενο (ΗΜ)" textFill="#fcfcfc" />
-      <TextField fx:id="Price" editable="false" layoutX="495.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@../Styles/Adds.css" />
+      <TextField fx:id="Price" editable="false" layoutX="495.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@../Styles/AddsTotals.css" />
       <Label layoutX="410.0" layoutY="248.0" prefHeight="17.0" prefWidth="63.0" text="Τιμή" textFill="#fcfcfc" />
-      <TextField fx:id="Type" editable="false" layoutX="113.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος" stylesheets="@../Styles/Adds.css" />
+      <TextField fx:id="Type" editable="false" layoutX="113.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος" stylesheets="@../Styles/AddsTotals.css" />
       <Label layoutX="28.0" layoutY="248.0" prefHeight="17.0" prefWidth="76.0" text="Τύπος" textFill="#fcfcfc" />
       <Label layoutX="311.0" layoutY="36.0" prefHeight="39.0" prefWidth="89.0" text="Service" textFill="WHITE">
          <font>

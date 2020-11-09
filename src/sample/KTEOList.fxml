@@ -56,7 +56,7 @@
             <Image url="@Resources/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
-      <Label layoutX="375.0" layoutY="10.0" text="KTEO" textFill="WHITE">
+      <Label layoutX="332.0" layoutY="10.0" text="KTEO" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

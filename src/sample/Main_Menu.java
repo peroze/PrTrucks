@@ -4,6 +4,7 @@ import animatefx.animation.FadeIn;
 import animatefx.animation.FadeOut;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
@@ -16,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * This Class is the controller of the main Menu
@@ -23,7 +26,7 @@ import java.io.IOException;
  * @author peroze
  * @version 1.0 Alpha
  */
-public class Main_Menu {
+public class Main_Menu implements Initializable {
 
     private double x_Offset = 0;
     private double y_Offset = 0;
@@ -303,4 +306,22 @@ public class Main_Menu {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+            Parent root2 = (Parent) fxmlloader.load();
+            fxmlloader.<Drawer>getController().setActive("Trucks");
+            fxmlloader.<Drawer>getController().changeBg();
+            fxmlloader.<Drawer>getController().setParent(this);
+            Border_Pane.setCenter(root);
+            Border_Pane.setLeft(root2);
+            new FadeIn(root).play();
+            new FadeIn(root2).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

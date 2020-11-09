@@ -191,22 +191,22 @@ public class Drawer {
     public void changeBg() {
         switch (Active) {
             case "Trucks":
-                Trucks_Button.setStyle("-fx-background-color: #686466");
+                Trucks_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "EmmisionCard":
-                EmmisionCard_Button.setStyle("-fx-background-color: #686466");
+                EmmisionCard_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Repair":
-                Repair_Button.setStyle("-fx-background-color: #686466");
+                Repair_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Kteo":
-                Kteo_Button.setStyle("-fx-background-color: #686466");
+                Kteo_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Service":
-                Service_Button.setStyle("-fx-background-color: #686466");
+                Service_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Refill":
-                Refill_Button.setStyle("-fx-background-color: #686466");
+                Refill_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }
