@@ -258,8 +258,8 @@ public class Sql {
 
     /**
      * This method returns the total amount of fuel between a specific Date
-     * @From The 1st Date
-     * @To The 2nd Date
+     * @param From The 1st Date
+     * @param To The 2nd Date
      * @return The total Fuel and KM
      */
     public ResultSet Querry_All_Refill_Date(String From, String To) {
