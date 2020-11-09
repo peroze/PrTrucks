@@ -238,6 +238,23 @@ public class Sql {
         }
     }
 
+    /**
+     * This method returns the total amount of fuel
+     * @return The total Fuel and KM
+     */
+    public ResultSet Querry_All_Refill() {
+        ResultSet rs;
+        try {
+            String Query = "Select SUM(Amount) as Total From Refill";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            rs = pstm.executeQuery();
+            Disconnect();
+            return rs;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
 
     /**
      * This method returns all liscense plate numbers
@@ -256,6 +273,8 @@ public class Sql {
         }
         return rs;
     }
+
+
 
 
     /**
