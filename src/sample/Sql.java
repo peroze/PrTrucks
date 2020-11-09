@@ -144,6 +144,102 @@ public class Sql {
 
 
     /**
+     * This question the total cost of a table for a specific car
+     * @param Table The table that we need to sum
+     * @param Lisc The car
+     * @return The total cost
+     */
+    public ResultSet Query_Car_Price(String Table,String Lisc){
+        ResultSet rs;
+        try{
+            String Query="Select SUM(Price) as Total From ? WHERE id=?";
+            PreparedStatement pstm=conn.prepareStatement(Query);
+            pstm.setInt(2,Integer.valueOf(GetIdFromLisx(Lisc)));
+            pstm.setString(1,Table);
+            rs=pstm.executeQuery();
+            Disconnect();
+            return rs;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+
+    /**
+     * This method returns the total coast of all cars
+     * @param Table
+     * @return
+     */
+    public ResultSet Querry_All_Price(String Table){
+        ResultSet rs;
+        try{
+            String Query="Select SUM(Price) as Total From ?";
+            PreparedStatement pstm=conn.prepareStatement(Query);
+            pstm.setString(1,Table);
+            rs=pstm.executeQuery();
+            Disconnect();
+            return rs;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+    }
+
+
+    /**
+     * This question the total cost of a table for a specific car between a specific date
+     * @param Table The table that we need to sum
+     * @param Lisc The car
+     * @return The total cost
+     */
+    public ResultSet Query_Car_Price_Date(String Table,String Lisc,String From, String To){
+        ResultSet rs;
+        try{
+            String Query="Select SUM(Price) as Total From ? WHERE id=? AND Date BETWEEN ? AND ?";
+            PreparedStatement pstm=conn.prepareStatement(Query);
+            pstm.setString(1,Table);
+            pstm.setInt(2,Integer.valueOf(GetIdFromLisx(Lisc)));
+            pstm.setString(3,From);
+            pstm.setString(4,To);
+            rs=pstm.executeQuery();
+            Disconnect();
+            return rs;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+
+    /**
+     * This method return the cost of all cars between two Dates
+     * @param Table The table of the SQL DB
+     * @param From The 1st Date
+     * @param To The Second Date
+     * @return The total cost
+     */
+    public ResultSet Querry_All_Price_Date(String Table,String From, String To){
+        ResultSet rs;
+        try{
+            String Query="Select SUM(Price) as Total From ?  WHERE Date BETWEEN ? AND ?";
+            PreparedStatement pstm=conn.prepareStatement(Query);
+            pstm.setString(1,Table);
+            pstm.setString(2,From);
+            pstm.setString(3,To);
+            rs=pstm.executeQuery();
+            Disconnect();
+            return rs;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+    }
+
+
+    /**
      * This method returns all liscense plate numbers
      *
      * @return all liscence plate numbers
@@ -637,6 +733,8 @@ public class Sql {
     }
 
 
+
+
     public void Disconnect(){
         try {
             conn.close();
@@ -644,6 +742,8 @@ public class Sql {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
