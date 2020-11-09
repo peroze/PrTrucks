@@ -257,6 +257,28 @@ public class Sql {
 
 
     /**
+     * This method returns the total amount of fuel between a specific Date
+     * @From The 1st Date
+     * @To The 2nd Date
+     * @return The total Fuel and KM
+     */
+    public ResultSet Querry_All_Refill_Date(String From, String To) {
+        ResultSet rs;
+        try {
+            String Query = "Select SUM(Amount) as Total From Refill WHERE Date BETWEEN ? AND ?";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setString(1,From);
+            pstm.setString(2,To);
+            rs = pstm.executeQuery();
+            Disconnect();
+            return rs;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+
+    /**
      * This method returns all liscense plate numbers
      *
      * @return all liscence plate numbers
