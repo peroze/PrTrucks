@@ -1,110 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="440.0" prefWidth="728.0" style="-fx-background-color: #383838;" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LitersTotal">
-   <top>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="600.0" style="-fx-background-color: #FA8072;" BorderPane.alignment="CENTER">
+<AnchorPane prefWidth="864.0" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LitersTotal">
+   <children>
+      <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Resources/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Resources/windows-minimize-icon-25.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </children>
-      </HBox>
-   </top>
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-        <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="630.0" style="-fx-background-color: #383838;" visible="false">
-               <children>
-                  <ComboBox fx:id="Distance" layoutX="41.0" layoutY="114.0" prefWidth="150.0" promptText="Διάστημα" />
-                  <TableView fx:id="Table1" layoutX="41.0" layoutY="170.0" prefHeight="223.0" prefWidth="530.0">
-                    <columns>
-                      <TableColumn fx:id="Date" prefWidth="122.0" text="Διάστιμα" />
-                      <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
-                    </columns>
-                  </TableView>
-                  <DatePicker fx:id="From" layoutX="231.0" layoutY="114.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" />
-                  <DatePicker fx:id="To" layoutX="416.0" layoutY="114.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" />
-                  <Label layoutX="121.0" layoutY="14.0" text="Συνολική Κατανάλωση Καυσίμου" textFill="WHITE">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ByCar_Pane" minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="630.0" style="-fx-background-color: #383838;">
-               <children>
-                  <ComboBox fx:id="Lisc" layoutX="54.0" layoutY="114.0" prefHeight="23.0" prefWidth="110.0" promptText="Πινακίδα" />
-                  <TableView fx:id="TableBC" layoutX="41.0" layoutY="170.0" prefHeight="223.0" prefWidth="530.0">
-                     <columns>
-                        <TableColumn fx:id="Date1" prefWidth="122.0" text="Διάστιμα" />
-                        <TableColumn fx:id="Amount1" prefWidth="110.0" text="Ποσότητα" />
-                        <TableColumn prefWidth="150.0" text="Κατανάλωση (Lt/100km" />
-                     </columns>
-                  </TableView>
-                  <DatePicker fx:id="FromBC" layoutX="337.0" layoutY="114.0" prefHeight="23.0" prefWidth="111.0" promptText="Από" />
-                  <DatePicker fx:id="ToBC" layoutX="456.0" layoutY="114.0" prefHeight="23.0" prefWidth="110.0" promptText="Έως" />
-                  <Label layoutX="164.0" layoutY="14.0" text="Κατανάλωση Ανα Όχημα" textFill="WHITE">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="DistanceBC" layoutX="195.0" layoutY="114.0" prefHeight="23.0" prefWidth="111.0" promptText="Διάστημα" />
-               </children>
-            </AnchorPane>
+            <ComboBox fx:id="Distance" layoutX="79.0" layoutY="161.0" prefWidth="150.0" promptText="Διάστημα" />
+            <TableView fx:id="Table1" layoutX="79.0" layoutY="226.0" prefHeight="320.0" prefWidth="707.0">
+               <columns>
+                  <TableColumn fx:id="Date" prefWidth="122.0" text="Διάστιμα" />
+                  <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
+               </columns>
+            </TableView>
+            <DatePicker fx:id="From" layoutX="269.0" layoutY="161.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" />
+            <DatePicker fx:id="To" layoutX="454.0" layoutY="161.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" />
+            <Label layoutX="349.0" layoutY="53.0" text="Συνολική  Κάυσιμα" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="Show_Button" layoutX="705.0" layoutY="159.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
          </children>
       </AnchorPane>
-   </center>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #000013;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="Totals_Button" mnemonicParsing="false" onAction="#Totals_Button_Pr" prefHeight="30.0" prefWidth="100.0" text="Συνολικα">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="ByCar_Button" mnemonicParsing="false" onAction="#ByCar_Button_Pr" prefHeight="32.0" prefWidth="100.0" text="Ανά Όχημα">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-         </children>
-      </VBox>
-   </left>
-</BorderPane>
+   </children>
+</AnchorPane>

@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  * @author peroze
  * @version 1.0 Alpha
  */
-public class Main_Menu implements Initializable {
+public class Main_Menu /*implements Initializable */{
 
     private double x_Offset = 0;
     private double y_Offset = 0;
@@ -306,11 +306,11 @@ public class Main_Menu implements Initializable {
     }
 
 
-    @Override
+    /*@Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Trucks");
             fxmlloader.<Drawer>getController().changeBg();
@@ -323,5 +323,5 @@ public class Main_Menu implements Initializable {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

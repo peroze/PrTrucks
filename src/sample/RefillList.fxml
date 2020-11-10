@@ -58,13 +58,5 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="585.0" layoutY="17.0" onMousePressed="#Totals_Pressed" prefHeight="17.0" prefWidth="45.0" text="Σύνολα" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

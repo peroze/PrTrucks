@@ -12,15 +12,49 @@
      -fx-text-fill: white;
 }
 
-.button:pressed{
-    -fx-background-color: black;
+
+.menu-button{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-width: 0px 0px 0.5px 0px;
+    -fx-text-fill: white;
 }
 
-.button:hover{
+.menu-button:focused{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: #FA8072;
+    -fx-background-color: #FA8072;
+    -fx-text-fill: white;
+}
+
+.menu-button .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.context-menu{
+    -fx-background-color:  #000013 ;
+}
+
+.menu-item:hover{
     -fx-background-color: #FA8072;
 }
 
-.label{
+.menu-item:focused{
+    -fx-background-color: #FA8072;
+}
 
-    -fx-background-color: #000000;
+.menu-button  .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button  .arrow-button  .arrow {
+    -fx-padding: 0;
+}
+
+
+.button:hover{
+    -fx-background-color: #FA8072;
 }

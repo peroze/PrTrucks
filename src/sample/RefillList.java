@@ -175,29 +175,6 @@ public class RefillList implements Initializable {
         }
     }
 
-    /**
-     * This method show the basic statistics.
-     * @param event The event
-     */
-    @FXML
-    void Totals_Pressed(MouseEvent event) {
-        Stage primaryStage = new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("LitersTotal.fxml"));
-        try {
-            Parent root = fxmlloader.load();
-            primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 730, 440));
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-            //fxmlloader.<Drawer>getController().setParent(this);
-
-            //Border_Pane.setLeft(root2);
-            //new FadeIn(root).play();
-            //new FadeIn(root2).play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * This method is used to activate the animation of the add button when the user hovers over it
