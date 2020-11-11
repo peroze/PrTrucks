@@ -34,5 +34,6 @@
             <Insets />
          </VBox.margin></Button>
       <Button fx:id="Refill_Button" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Καύσιμα" />
+      <Button fx:id="More_Button" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Αλλά" />
    </children>
 </VBox>

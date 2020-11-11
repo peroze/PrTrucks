@@ -270,7 +270,6 @@ public class Sql {
             pstm.setString(1,From);
             pstm.setString(2,To);
             rs = pstm.executeQuery();
-            Disconnect();
             return rs;
         } catch (SQLException e) {
             return null;

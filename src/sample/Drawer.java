@@ -35,6 +35,9 @@ public class Drawer {
     @FXML
     private Button Refill_Button;
 
+    @FXML
+    private Button More_Button;
+
     /**
      * This method is pressed when the Gas Button is pressed and it opens the gas Table in the main scene
      *
@@ -151,6 +154,21 @@ public class Drawer {
         }
     }
 
+    @FXML
+    void More_Button_Pressed(ActionEvent event) {
+        if (!Active.equals("More")) {
+            resetBg();
+            Active = "More";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
+                Parent.getBorder_Pane().setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * This method changes the Active variable which indicates which page is currently on the main frame
      * @param active The active page
@@ -182,6 +200,9 @@ public class Drawer {
             case "Refill":
                 Refill_Button.setStyle(null);
                 break;
+            case "More":
+                More_Button.setStyle(null);
+                break;
         }
     }
 
@@ -207,6 +228,9 @@ public class Drawer {
                 break;
             case "Refill":
                 Refill_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case "More":
+                More_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

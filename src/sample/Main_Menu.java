@@ -62,12 +62,13 @@ public class Main_Menu /*implements Initializable */{
     @FXML
     private Button Expenses_Button;
 
-
     @FXML
     private Button Exit_Button;
 
     @FXML
     private BorderPane Border_Pane;
+
+
 
     /**
      * This method returns the main panel
@@ -236,6 +237,8 @@ public class Main_Menu /*implements Initializable */{
             e.printStackTrace();
         }
     }
+
+
 
 
     /**
