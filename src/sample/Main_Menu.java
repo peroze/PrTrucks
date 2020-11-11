@@ -163,7 +163,20 @@ public class Main_Menu /*implements Initializable */{
      */
     @FXML
     void Expenses_Button_Pressed(ActionEvent event){
-        System.out.println("ToDo");
+        try{
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
+        Parent root2 = (Parent) fxmlloader.load();
+        fxmlloader.<Drawer>getController().setActive("More");
+        fxmlloader.<Drawer>getController().changeBg();
+        fxmlloader.<Drawer>getController().setParent(this);
+        Border_Pane.setCenter(root);
+        Border_Pane.setLeft(root2);
+        new FadeIn(root).play();
+        new FadeIn(root2).play();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
 
