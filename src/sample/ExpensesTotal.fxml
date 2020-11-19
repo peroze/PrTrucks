@@ -21,7 +21,7 @@
                   <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
                </columns>
             </TableView>
-            <DatePicker fx:id="From" layoutX="364.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" />
+            <DatePicker fx:id="From" layoutX="364.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" visible="false" />
             <DatePicker fx:id="To" layoutX="530.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" />
             <Label layoutX="349.0" layoutY="53.0" text="Συνολική  Έξοδα" textFill="WHITE">
                <font>
@@ -29,7 +29,7 @@
                </font>
             </Label>
             <Button fx:id="Show_Button" layoutX="705.0" layoutY="159.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
-            <TextField fx:id="Pyear" layoutX="277.0" layoutY="160.0" promptText="Έτος" visible="false" />
+            <TextField fx:id="Pyear" layoutX="369.0" layoutY="160.0" promptText="Έτος" />
             <ComboBox fx:id="Type" layoutX="218.0" layoutY="160.0" prefHeight="23.0" prefWidth="131.0" promptText="Είδος" />
          </children>
       </AnchorPane>
