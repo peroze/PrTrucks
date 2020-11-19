@@ -10,26 +10,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="864.0" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LitersTotal">
+<AnchorPane prefWidth="864.0" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExpensesTotal">
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
-            <ComboBox fx:id="Distance" layoutX="79.0" layoutY="161.0" prefWidth="150.0" promptText="Διάστημα" />
+            <ComboBox fx:id="Distance" layoutX="79.0" layoutY="161.0" prefHeight="23.0" prefWidth="131.0" promptText="Διάστημα" />
             <TableView fx:id="Table1" layoutX="79.0" layoutY="226.0" prefHeight="320.0" prefWidth="707.0">
                <columns>
                   <TableColumn fx:id="Date" prefWidth="122.0" text="Διάστιμα" />
                   <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
                </columns>
             </TableView>
-            <DatePicker fx:id="From" layoutX="269.0" layoutY="161.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" visible="false" />
-            <DatePicker fx:id="To" layoutX="454.0" layoutY="161.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" visible="false" />
-            <Label layoutX="349.0" layoutY="53.0" text="Συνολική  Κάυσιμα" textFill="WHITE">
+            <DatePicker fx:id="From" layoutX="364.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" />
+            <DatePicker fx:id="To" layoutX="530.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" />
+            <Label layoutX="349.0" layoutY="53.0" text="Συνολική  Έξοδα" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
             <Button fx:id="Show_Button" layoutX="705.0" layoutY="159.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
             <TextField fx:id="Pyear" layoutX="277.0" layoutY="160.0" promptText="Έτος" visible="false" />
+            <ComboBox fx:id="Type" layoutX="218.0" layoutY="160.0" prefHeight="23.0" prefWidth="131.0" promptText="Είδος" />
          </children>
       </AnchorPane>
    </children>

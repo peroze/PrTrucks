@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.util.Date;
 import java.net.URL;
@@ -43,19 +40,23 @@ public class LitersTotal implements Initializable {
     private ComboBox Distance;
 
     @FXML
-    private TableView<ModelTotalFuel> Table1;
+    private TableView<ModelTotal> Table1;
 
     @FXML
-    private TableColumn<ModelTotalFuel, String> Date;
+    private TableColumn<ModelTotal, String> Date;
 
     @FXML
-    private TableColumn<ModelTotalFuel, String> Amount;
+    private TableColumn<ModelTotal, String> Amount;
 
     @FXML
     private DatePicker From;
 
     @FXML
     private DatePicker To;
+
+    @FXML
+    private TextField Pyear;
+
 
 
     @FXML
@@ -76,6 +77,7 @@ public class LitersTotal implements Initializable {
         Distance.setItems(oblist);
         To.setVisible(false);
         From.setVisible(false);
+        Pyear.setVisible(false);
         Distance.setOnAction(e -> {
             Show_Rest();
         });
@@ -95,25 +97,25 @@ public class LitersTotal implements Initializable {
             int Month = Integer.valueOf(TableDay[1]);
             int Day = Integer.valueOf(TableDay[2]);
             String dist = "";
-            ObservableList<ModelTotalFuel> Data = FXCollections.observableArrayList();
+            ObservableList<ModelTotal> Data = FXCollections.observableArrayList();
             switch (Distance.getValue().toString()) {
                 case "Τελευταία 5 Έτοι":
                     for (int i = 0; i < 6; i++) {
                         String temp = Year - i + "-01-01";
                         String temp2 = Year - i + "-12-31";
                         dist = String.valueOf(Year - i);
-                        rs = db.Querry_All_Refill_Date(temp, temp2);
-                        ModelTotalFuel model;
+                        rs = db.Query_All_Refill_Date(temp, temp2);
+                        ModelTotal model;
                         if(rs.getString("Total")==null){
-                             model = new ModelTotalFuel(dist, "0");
+                             model = new ModelTotal(dist, "0");
                         }
                         else {
-                             model = new ModelTotalFuel(dist, rs.getString("Total"));
+                             model = new ModelTotal(dist, rs.getString("Total"));
                         }
                         Data.add(model);
                     }
                     String date2 = Year - 5 + "-01-01";
-                    rs = db.Querry_All_Refill_Date(date2, Today);
+                    rs = db.Query_All_Refill_Date(date2, Today);
                     break;
                 case "Πρωηγούμενο Έτος":
                     for (int i = 1; i < 13; i++) {
@@ -125,20 +127,20 @@ public class LitersTotal implements Initializable {
                             temp = Year - 1 + "-" + i + "-01";
                             temp2 = Year - 1 + "-" + i + "-31";
                         }
-                        dist = String.valueOf(i);
-                        rs = db.Querry_All_Refill_Date(temp, temp2);
-                        ModelTotalFuel model;
+                        dist = String.valueOf(i)+"ος";
+                        rs = db.Query_All_Refill_Date(temp, temp2);
+                        ModelTotal model;
                         if(rs.getString("Total")==null){
-                            model = new ModelTotalFuel(dist, "0");
+                            model = new ModelTotal(dist, "0");
                         }
                         else {
-                            model = new ModelTotalFuel(dist, rs.getString("Total"));
+                            model = new ModelTotal(dist, rs.getString("Total"));
                         }
                         Data.add(model);
                     }
                     String date3 = Year - 1 + "-01-01";
                     String date4 = Year - 1 + "-12-31";
-                    rs = db.Querry_All_Refill_Date(date3, date4);
+                    rs = db.Query_All_Refill_Date(date3, date4);
                     break;
                 case "Τρέχων Έτος":
                     for (int i = 1; i < Month+1; i++) {
@@ -151,36 +153,63 @@ public class LitersTotal implements Initializable {
                             temp2 = Year + "-" + i + "-31";
                         }
 
-                        dist = String.valueOf(i);
-                        rs = db.Querry_All_Refill_Date(temp, temp2);
-                        ModelTotalFuel model;
+                        dist = String.valueOf(i)+"ος";
+                        rs = db.Query_All_Refill_Date(temp, temp2);
+                        ModelTotal model;
                         if(rs.getString("Total")==null){
-                            model = new ModelTotalFuel(dist, "0");
+                            model = new ModelTotal(dist, "0");
                         }
                         else {
-                            model = new ModelTotalFuel(dist, rs.getString("Total"));
+                            model = new ModelTotal(dist, rs.getString("Total"));
                         }
                         Data.add(model);
                     }
                     String date5 = Year + "-01-01";
-                    rs = db.Querry_All_Refill_Date(date5, Today);
+                    rs = db.Query_All_Refill_Date(date5, Today);
                     break;
 
                 case "Πρωηγούμενος Μήνας":
-                    String date6 = Year + Month - 1 + "-01";
-                    String date7 = Year + Month - 1 + "-31";
-                    rs = db.Querry_All_Refill_Date(date6, date7);
+                    String date6 = Year+"-" + (Month - 1) + "-01";
+                    String date7 = Year+"-" + (Month - 1) + "-31";
+                    rs = db.Query_All_Refill_Date(date6, date7);
                     break;
                 case "Τρέχων Μήνας":
                     String date8 = Year + "-" + Month + "-01";
-                    rs = db.Querry_All_Refill_Date(date8, Today);
+                    rs = db.Query_All_Refill_Date(date8, Today);
                     break;
                 case "Συγκεκριμένο Έτος":
+                    String tempor =Pyear.getText();
+                    String[] Array=tempor.split("-");
+                    String top=Array[0]+"-01-01";
+                    String end=Array[0]+"-12-31";
+                    int flag=13;
+                    if(Array[0].equals(String.valueOf(Year))) flag=Month+1;
+                    for (int i = 1; i < flag; i++) {
+                        String temp, temp2;
+                        if (i < 10) {
+                            temp = Integer.valueOf(Array[0])  + "-" + "0" + i + "-01";
+                            temp2 = Integer.valueOf(Array[0]) + "-" + "0" + i + "-31";
+                        } else {
+                            temp = Integer.valueOf(Array[0])  + "-" + i + "-01";
+                            temp2 = Integer.valueOf(Array[0]) + "-" + i + "-31";
+                        }
+                        dist = String.valueOf(i);
+                        rs = db.Query_All_Refill_Date(temp, temp2);
+                        ModelTotal model;
+                        if(rs.getString("Total")==null){
+                            model = new ModelTotal(dist, "0");
+                        }
+                        else {
+                            model = new ModelTotal(dist, rs.getString("Total"));
+                        }
+                        Data.add(model);
+                    }
+                    rs = db.Query_All_Refill_Date(top,end);
                     break;
                 case "Άλλο Διάστημα":
                     String from = From.getValue().toString();
                     String to = To.getValue().toString();
-                    rs = db.Querry_All_Refill_Date(from, to);
+                    rs = db.Query_All_Refill_Date(from, to);
                     break;
             }
             while (rs.next()) {
@@ -194,12 +223,12 @@ public class LitersTotal implements Initializable {
                 } else {
                     dist = "Σύνολο";
                 }
-                ModelTotalFuel model;
+                ModelTotal model;
                 if(rs.getString("Total")==null){
-                    model = new ModelTotalFuel(dist, "0");
+                    model = new ModelTotal(dist, "0");
                 }
                 else {
-                    model = new ModelTotalFuel(dist, rs.getString("Total"));
+                    model = new ModelTotal(dist, rs.getString("Total"));
                 }
                 Data.add(model);
                 Table1.setItems(Data);
@@ -215,10 +244,11 @@ public class LitersTotal implements Initializable {
             To.setVisible(true);
             From.setVisible(true);
         } else if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος")) {
-            //To do
+            Pyear.setVisible(true);
         } else {
             To.setVisible(false);
             From.setVisible(false);
+            Pyear.setVisible(false);
         }
     }
 

@@ -1,10 +1,10 @@
 package sample;
 
-public class ModelTotalFuel {
+public class ModelTotal {
     String Period;
     String Amount;
 
-    public ModelTotalFuel(String period, String amount) {
+    public ModelTotal(String period, String amount) {
         Period = period;
         Amount = amount;
     }

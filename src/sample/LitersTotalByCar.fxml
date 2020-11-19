@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,20 +17,20 @@
             <ComboBox fx:id="Lisc" layoutX="79.0" layoutY="145.0" prefHeight="23.0" prefWidth="110.0" promptText="Πινακίδα" />
             <TableView fx:id="TableBC" layoutX="79.0" layoutY="217.0" prefHeight="320.0" prefWidth="707.0">
                <columns>
-                  <TableColumn fx:id="Date1" prefWidth="122.0" text="Διάστιμα" />
-                  <TableColumn fx:id="Amount1" prefWidth="110.0" text="Ποσότητα" />
-                  <TableColumn prefWidth="150.0" text="Κατανάλωση (Lt/100km" />
+                  <TableColumn fx:id="Date" prefWidth="122.0" text="Διάστιμα" />
+                  <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
                </columns>
             </TableView>
-            <DatePicker fx:id="FromBC" layoutX="362.0" layoutY="145.0" prefHeight="23.0" prefWidth="111.0" promptText="Από" />
-            <DatePicker fx:id="ToBC" layoutX="481.0" layoutY="145.0" prefHeight="23.0" prefWidth="110.0" promptText="Έως" />
+            <DatePicker fx:id="From" layoutX="362.0" layoutY="145.0" prefHeight="23.0" prefWidth="111.0" promptText="Από" visible="false" />
+            <DatePicker fx:id="To" layoutX="481.0" layoutY="145.0" prefHeight="23.0" prefWidth="110.0" promptText="Έως" visible="false" />
             <Label layoutX="313.0" layoutY="41.0" prefHeight="36.0" prefWidth="238.0" text="Καύσιμα ανα Όχημα" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <ComboBox fx:id="DistanceBC" layoutX="220.0" layoutY="145.0" prefHeight="23.0" prefWidth="111.0" promptText="Διάστημα" />
+            <ComboBox fx:id="Distance" layoutX="220.0" layoutY="145.0" prefHeight="23.0" prefWidth="111.0" promptText="Διάστημα" />
             <Button fx:id="Show_Button" layoutX="676.0" layoutY="144.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
+            <TextField fx:id="Pyear" layoutX="358.0" layoutY="144.0" prefHeight="24.0" prefWidth="82.0" promptText="Έτος" />
          </children>
       </AnchorPane>
    </children>

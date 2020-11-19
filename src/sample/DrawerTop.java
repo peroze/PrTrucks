@@ -51,7 +51,7 @@ public class DrawerTop implements Initializable {
         Active2="Total";
         changeBg();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LitersTotal.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ExpensesTotal.fxml"));
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -122,7 +122,7 @@ public class DrawerTop implements Initializable {
             Active = "Expenses";
             changeBg();
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("LitersTotal.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("ExpensesTotal.fxml"));
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {

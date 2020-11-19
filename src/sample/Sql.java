@@ -157,7 +157,6 @@ public class Sql {
             pstm.setInt(2,Integer.valueOf(GetIdFromLisx(Lisc)));
             pstm.setString(1,Table);
             rs=pstm.executeQuery();
-            Disconnect();
             return rs;
         }
         catch (SQLException e) {
@@ -179,7 +178,6 @@ public class Sql {
             PreparedStatement pstm=conn.prepareStatement(Query);
             pstm.setString(1,Table);
             rs=pstm.executeQuery();
-            Disconnect();
             return rs;
         }
         catch (SQLException e) {
@@ -204,7 +202,6 @@ public class Sql {
             pstm.setString(3,From);
             pstm.setString(4,To);
             rs=pstm.executeQuery();
-            Disconnect();
             return rs;
         }
         catch (SQLException e) {
@@ -221,16 +218,15 @@ public class Sql {
      * @param To The Second Date
      * @return The total cost
      */
-    public ResultSet Querry_All_Price_Date(String Table,String From, String To){
+    public ResultSet Query_All_Price_Date(String Table,String From, String To){
         ResultSet rs;
         try{
-            String Query="Select SUM(Price) as Total From ?  WHERE Date BETWEEN ? AND ?";
+            String Query="Select SUM(Price) as Total From "+Table+"  WHERE Date BETWEEN ? AND ?";
             PreparedStatement pstm=conn.prepareStatement(Query);
-            pstm.setString(1,Table);
-            pstm.setString(2,From);
-            pstm.setString(3,To);
+           // pstm.setString(1,Table);
+            pstm.setString(1,From);
+            pstm.setString(2,To);
             rs=pstm.executeQuery();
-            Disconnect();
             return rs;
         }
         catch (SQLException e) {
@@ -242,13 +238,31 @@ public class Sql {
      * This method returns the total amount of fuel
      * @return The total Fuel and KM
      */
-    public ResultSet Querry_All_Refill() {
+    public ResultSet Query_All_Refill() {
         ResultSet rs;
         try {
             String Query = "Select SUM(Amount) as Total From Refill";
             PreparedStatement pstm = conn.prepareStatement(Query);
             rs = pstm.executeQuery();
-            Disconnect();
+            return rs;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+
+    /**
+     * This method returns the total amount of fuel of a specific car
+     * @param lisc The car
+     * @return The total Fuel and KM of the car
+     */
+    public ResultSet Query_Car_Refill(String lisc) {
+        ResultSet rs;
+        try {
+            String Query = "Select SUM(Amount) as Total From Refill WHERE Car_id=?";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setString(1,GetLisxxFromId(lisc));
+            rs = pstm.executeQuery();
             return rs;
         } catch (SQLException e) {
             return null;
@@ -262,7 +276,7 @@ public class Sql {
      * @param To The 2nd Date
      * @return The total Fuel and KM
      */
-    public ResultSet Querry_All_Refill_Date(String From, String To) {
+    public ResultSet Query_All_Refill_Date(String From, String To) {
         ResultSet rs;
         try {
             String Query = "Select SUM(Amount) as Total From Refill WHERE Date BETWEEN ? AND ?";
@@ -275,7 +289,26 @@ public class Sql {
             return null;
         }
     }
-
+    /**
+     * This method returns the total amount of fuel between a specific Date of a specific car
+     * @param From The 1st Date
+     * @param To The 2nd Date
+     * @return The total Fuel and KM
+     */
+    public ResultSet Query_Car_Refill_Date(String lisc,String From, String To) {
+        ResultSet rs;
+        try {
+            String Query = "Select SUM(Amount) as Total From Refill WHERE Car_id=? AND Date BETWEEN ? AND ?";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setString(1,GetIdFromLisx(lisc));
+            pstm.setString(2,From);
+            pstm.setString(3,To);
+            rs = pstm.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     /**
      * This method returns all liscense plate numbers
