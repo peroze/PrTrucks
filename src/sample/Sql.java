@@ -195,12 +195,11 @@ public class Sql {
     public ResultSet Query_Car_Price_Date(String Table,String Lisc,String From, String To){
         ResultSet rs;
         try{
-            String Query="Select SUM(Price) as Total From ? WHERE id=? AND Date BETWEEN ? AND ?";
+            String Query="Select SUM(Price) as Total From "+Table+" WHERE id=? AND Date BETWEEN ? AND ?";
             PreparedStatement pstm=conn.prepareStatement(Query);
-            pstm.setString(1,Table);
-            pstm.setInt(2,Integer.valueOf(GetIdFromLisx(Lisc)));
-            pstm.setString(3,From);
-            pstm.setString(4,To);
+            pstm.setInt(1,Integer.valueOf(GetIdFromLisx(Lisc)));
+            pstm.setString(2,From);
+            pstm.setString(3,To);
             rs=pstm.executeQuery();
             return rs;
         }

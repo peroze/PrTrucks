@@ -50,8 +50,6 @@ public class LitersTotalByCar implements Initializable {
     @FXML
     private TableView<ModelTotal> TableBC;
 
-
-
     @FXML
     private TextField Pyear;
 

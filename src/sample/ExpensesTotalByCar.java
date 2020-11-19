@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 
-public class ExpensesTotal implements Initializable {
+public class ExpensesTotalByCar implements Initializable {
 
     private double x_Offset = 0;
     private double y_Offset = 0;
@@ -62,9 +62,12 @@ public class ExpensesTotal implements Initializable {
     @FXML
     private TextField Pyear;
 
+    @FXML
+    private ComboBox Lisc;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Sql db=new Sql();
         ObservableList<String> oblist = FXCollections.observableArrayList();
         Date.setCellValueFactory(new PropertyValueFactory<>("Period"));
         Amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
@@ -82,6 +85,17 @@ public class ExpensesTotal implements Initializable {
         oblist2.add("ΚΤΕΟ");
         oblist2.add("Όλα");
         Type.setItems(oblist2);
+        ResultSet rs=db.Query_All_Lisc();
+        ObservableList<String> oblist3=FXCollections.observableArrayList();
+        try {
+            while (rs.next()) {
+                oblist3.add(rs.getString("LiscPlate"));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        Lisc.setItems(oblist3);
         To.setVisible(false);
         From.setVisible(false);
         Pyear.setVisible(false);
@@ -94,6 +108,7 @@ public class ExpensesTotal implements Initializable {
     @FXML
     void Show_Button_Pr(ActionEvent event) {
         try {
+            String LiscPlate=Lisc.getValue().toString();
             ArrayList<ResultSet> rs = new ArrayList<>();
             Sql db = new Sql();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,7 +143,7 @@ public class ExpensesTotal implements Initializable {
                         String temp2 = Year - i + "-12-31";
                         dist = String.valueOf(Year - i);
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         int total = 0;
@@ -145,7 +160,7 @@ public class ExpensesTotal implements Initializable {
                     }
                     String date2 = Year - 5 + "-01-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), date2, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date2, Today));
                     }
                     break;
                 case "Πρωηγούμενο Έτος":
@@ -175,7 +190,7 @@ public class ExpensesTotal implements Initializable {
                         }
                         dist = String.valueOf(i) + "ος";
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         int total = 0;
@@ -193,7 +208,7 @@ public class ExpensesTotal implements Initializable {
                     String date3 = Year - 1 + "-01-01";
                     String date4 = Year - 1 + "-12-31";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), date3, date4));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date3, date4));
                     }
                     break;
                 case "Τρέχων Έτος":
@@ -224,7 +239,7 @@ public class ExpensesTotal implements Initializable {
 
                         dist = String.valueOf(i) + "ος";
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         int total = 0;
@@ -241,7 +256,7 @@ public class ExpensesTotal implements Initializable {
                     }
                     String date5 = Year + "-01-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), date5, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date5, Today));
                     }
                     break;
 
@@ -264,7 +279,7 @@ public class ExpensesTotal implements Initializable {
                     String date6 = Year+"-" + (Month - 1)+ "-01";
                     String date7 = Year+"-" + (Month - 1) + "-31";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), date6, date7));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date6, date7));
                     }
                     break;
                 case "Τρέχων Μήνας":
@@ -285,7 +300,7 @@ public class ExpensesTotal implements Initializable {
                     }
                     String date8 = Year + "-" + Month + "-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), date8, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date8, Today));
                     }
                     break;
                 case "Συγκεκριμένο Έτος":
@@ -321,7 +336,7 @@ public class ExpensesTotal implements Initializable {
                         }
                         dist = String.valueOf(i);
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         int total = 0;
@@ -337,7 +352,7 @@ public class ExpensesTotal implements Initializable {
                         Data.add(model);
                     }
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), top, end));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, top, end));
                     }
                     break;
                 case "Άλλο Διάστημα":
@@ -359,7 +374,7 @@ public class ExpensesTotal implements Initializable {
                     String from = From.getValue().toString();
                     String to = To.getValue().toString();
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_All_Price_Date(Table.get(k), from, to));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, from, to));
                     }
                     break;
             }

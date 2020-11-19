@@ -78,7 +78,7 @@ public class DrawerTop implements Initializable {
             Active = "Expenses";
             changeBg();
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("LitersTotalByCar.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("ExpensesTotalByCar.fxml"));
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {

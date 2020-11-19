@@ -59,9 +59,6 @@ public class LitersTotal implements Initializable {
 
 
 
-    @FXML
-    private ComboBox Lisc;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> oblist = FXCollections.observableArrayList();
