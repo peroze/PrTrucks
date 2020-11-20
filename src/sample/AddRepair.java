@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 /**
  * Thid class is the controller for AddRepair which add a new Repair in the db
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -91,8 +92,8 @@ public class AddRepair implements Initializable {
             }
         });
         ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql=new Sql();
-        ResultSet rs=sql.Query_All_Lisc();
+        Sql sql = new Sql();
+        ResultSet rs = sql.Query_All_Lisc();
         try {
             while (rs.next()) {
                 Cars.add(rs.getString("LiscPlate"));
@@ -101,12 +102,38 @@ public class AddRepair implements Initializable {
             e.printStackTrace();
         }
         Lisc_Plate.setItems(Cars);
+        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+        Table.setRowFactory((tv -> {
+            TableRow<StringsForTables> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
         sql.Disconnect();
+    }
 
+    /**
+     * This methods deletes an entry from the table and it is called when a row is double clicked
+     */
+    private void DoubleClickTable() {
+        StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+        int i = 0;
+        boolean check = false;
+        while (i < Oblist.size()) {
+            if (temp.equals(Oblist.get(i))) {
+                Oblist.remove(i);
+                check = true;
+                break;
+            }
+        }
     }
 
     /**
      * This method is called when the AddPart button is pressed and it adds the part which have been replaced in the car int the changes list
+     *
      * @param event The event
      */
     @FXML
@@ -119,6 +146,7 @@ public class AddRepair implements Initializable {
 
     /**
      * This button adds the new repair in the db
+     *
      * @param event The event
      */
     @FXML

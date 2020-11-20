@@ -7,7 +7,7 @@ package sample;
  * @version 1.0 Alpha
  */
 public class ModelTruck {
-    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio;
+    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio,Data;
 
     /**
      * The constructor of th car
@@ -20,8 +20,9 @@ public class ModelTruck {
      * @param type The type of the car
      * @param location The Location of the car
      * @param kilometers The kilometers of the car
+     * @param data The Special Characteristics of the car
      */
-    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers) {
+    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers,String data ) {
         this.id = id;
         LiscPlate = liscPlate;
         Manufactor = manufactor;
@@ -31,6 +32,7 @@ public class ModelTruck {
         Type = type;
         Location = location;
         Kilometers=kilometers;
+        Data=data;
     }
 
 
@@ -182,5 +184,19 @@ public class ModelTruck {
         Kilometers = kilometers;
     }
 
+    /**
+     * Getter for the Characteristics of the Car
+     * @return Data The Characteristics of the car
+     */
+    public String getData() {
+        return Data;
+    }
 
+    /**
+     * Setter for the characteristics of the car
+     * @param data The new Characteristics of the car
+     */
+    public void setData(String data) {
+        Data = data;
+    }
 }

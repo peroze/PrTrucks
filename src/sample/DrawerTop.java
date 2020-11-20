@@ -66,8 +66,24 @@ public class DrawerTop implements Initializable {
 
 
     @FXML
-    void Backup_Button_Pr(ActionEvent event) {
-
+    void Backup_Button_Pr(MouseEvent event) {
+        if (!(Active.equals("Settings"))) {
+            resetBg();
+            Active = "Settings";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        OutPane.requestFocus();
+                    }
+                });
+                OutPane.setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -183,6 +199,8 @@ public class DrawerTop implements Initializable {
             case "Fuel":
                 Fuel_Button.setStyle(null);
                 break;
+            case"Settings":
+                Backup_Button.setStyle(null);
         }
     }
 
@@ -196,6 +214,9 @@ public class DrawerTop implements Initializable {
                 break;
             case "Fuel":
                 Fuel_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case "Settings":
+                Backup_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

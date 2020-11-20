@@ -22,20 +22,61 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * The main class of the program
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
 public class Main extends Application {
+    private int days;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Sql sql = new Sql();
-        ResultSet rs = sql.Query_General_KTEO();
-        Tray(rs, "KTEO");
-        rs = sql.Query_Group_Service();
-        Tray(rs, "Service");
-        rs=sql.Query_General_EmmisionCard();
-        Tray(rs,"Emmision");
+        ResultSet rs;
+        FileManagment FS = new FileManagment();
+        String[] chks = FS.Read();
+        int daysBc;
+        if (chks[5].equals("0.0")) {
+            days = 1;
+        } else if (chks[5].equals("33.3")) {
+            days = 7;
+        } else if (chks[5].equals("66.6")) {
+            days = 14;
+        } else {
+            days = 30;
+        }
+        if (chks[1].equals("0.0")) {
+            daysBc = 1;
+        } else if (chks[1].equals("33.3")) {
+            daysBc = 7;
+        } else if (chks[1].equals("66.6")) {
+            daysBc = 14;
+        } else {
+            daysBc = 30;
+        }
+        if (chks[3].equals("true")) {
+            rs = sql.Query_General_KTEO();
+            Tray(rs, "KTEO");
+        }
+        if (chks[2].equals("true")) {
+            rs = sql.Query_Group_Service();
+            Tray(rs, "Service");
+        }
+        if (chks[4].equals("true")) {
+            rs = sql.Query_General_EmmisionCard();
+            Tray(rs, "Emmision");
+        }
+        if (chks[0].equals("true")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sdf.parse(chks[6]);
+            Date date2 = new Date();
+            long tempDiffInMillies = date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
+            long diffInMillies = Math.abs(date.getTime() - date2.getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            if (diff >= daysBc) {
+                System.out.println("To Do Backup DB to ExcelFile");
+            }
+        }
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         primaryStage.setTitle("PrTrucks");
         primaryStage.setScene(new Scene(root, 1007, 675));
@@ -63,17 +104,16 @@ public class Main extends Application {
                 rs.getString("id");
                 if (Type.equals("Service")) {
                     next = rs.getString("MAX(Next_Date)"); // The collumn of service is different because each car have many services stored but we only need the latest
-                } else if(Type.equals("KTEO")) {
+                } else if (Type.equals("KTEO")) {
                     next = rs.getString("DateNext");
-                }
-                else{
+                } else {
                     next = rs.getString("NextDate");
                 }
                 String Lisc = rs.getString("id");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = sdf.parse(next);
                 Date date2 = new Date();
-                long tempDiffInMillies=date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
+                long tempDiffInMillies = date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
                 long diffInMillies = Math.abs(date.getTime() - date2.getTime());
                 int multi = 1;
                 long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -81,7 +121,7 @@ public class Main extends Application {
                     multi = -1;
                 }
                 Sql sql = new Sql();
-                if (diff < 15) {
+                if (diff < days) {
 
                     LiscsToDo.add(sql.GetLisxxFromId(Lisc));
 
@@ -132,8 +172,8 @@ public class Main extends Application {
         for (int i = 0; i < Liscs.size(); i++) {
             Cars = Cars.concat(Liscs.get(i) + "\n");
         }
-        if(Type.equals("Emmision")){
-            Type="Κάρτα Ελέγχου Καυσαεριών";
+        if (Type.equals("Emmision")) {
+            Type = "Κάρτα Ελέγχου Καυσαεριών";
         }
         if (error == 1) {
             trayIcon.displayMessage("Ειδοποίηση " + Type, "Τα Ακόλουθα οχήματα πρέπει να κάνουν " + Type + " σε λιγότερες από 15 μέρες:\n" + Cars, TrayIcon.MessageType.INFO);

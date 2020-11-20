@@ -38,7 +38,7 @@ public class Sql {
     public ResultSet Query_General_Trucks() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT Trucks.id, Trucks.LiscPlate,Trucks.Manufactor,Trucks.Model,Trucks.Plaisio,Trucks.Type,Trucks.Location,Trucks.First_Date,Trucks.Kilometers FROM Trucks";
+            String sql = "SELECT  * FROM Trucks";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -390,9 +390,10 @@ public class Sql {
         car.add(a.getLocation());
         car.add(a.getType());
         car.add(a.getDate());
+        car.add(a.getData());
 
 
-        String sql = "INSERT INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -405,6 +406,7 @@ public class Sql {
             pstmt.setString(7, car.get(5));
             pstmt.setString(8, car.get(6));
             pstmt.setString(9, car.get(7));
+            pstmt.setString(10,car.get(8));
 
 
             pstmt.executeUpdate();

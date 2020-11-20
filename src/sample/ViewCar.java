@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * This Class is the controller for ViewRepair.fxml which shows every detail of a specific Repair
+ * This Class is the controller for ViewCar.fxml which shows every detail of a specific Repair
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -40,9 +40,12 @@ public class ViewCar implements Initializable {
     @FXML
     private TextField LiscPlate;
 
-    @FXML
-    private TextField Workshop;
 
+    @FXML
+    private TextField Location;
+
+    @FXML
+    private TextField Type;
 
     @FXML
     private TextField Date;
@@ -52,14 +55,17 @@ public class ViewCar implements Initializable {
 
 
     @FXML
-    private TextField Price;
+    private TextField Plaisio;
 
 
     @FXML
     private TableView<StringsForTables> Table;
 
     @FXML
-    private TableColumn<StringsForTables, String> Changes;
+    private TableColumn<StringsForTables, String> Dat_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Code_Col;
 
     @FXML
     private HBox Top_Bar;
@@ -70,7 +76,7 @@ public class ViewCar implements Initializable {
     @FXML
     private ImageView X_Button;
 
-    ModelRepair repair;
+    ModelTruck truck;
 
     private double x_Offset = 0;
 
@@ -80,6 +86,8 @@ public class ViewCar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Dat_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
+        Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -87,38 +95,43 @@ public class ViewCar implements Initializable {
             }
         });
 
+
     }
 
     /**
      * This  is getter for the repair
      * @return The repair
      */
-    public ModelRepair getRepair() {
-        return repair;
+    public ModelTruck getRepair() {
+        return truck;
     }
 
     /**
      * **
-     * Tηis is a setter for the repair
-     * @param repair The repair
+     * Tηis is a setter for the truck
+     * @param truck The truck
      */
-    public void setService(ModelRepair repair) {
-        this.repair = repair;
+    public void setTruck(ModelTruck truck) {
+        this.truck = truck;
         ObList = FXCollections.observableArrayList();
-        LiscPlate.setText(repair.getLiscPlate());
-        Workshop.setText(repair.getWorkshop());
-        Date.setText(repair.getDate());
-        Kilometers.setText(repair.getKilometers());
-        Price.setText(repair.getPrice()+" €");
-        String[] Ch=repair.getChanges().split(Pattern.quote("|"));
-        for(int i=0;i<Ch.length;i++){
-            ObList.add(new StringsForTables(Ch[i]));
+        LiscPlate.setText(truck.getLiscPlate());
+        Location.setText(truck.getLocation());
+        Date.setText(truck.getDate());
+        Kilometers.setText(truck.getKilometers());
+        Plaisio.setText(truck.getPlaisio());
+        Type.setText(truck.getType());
+        String[] Ch=truck.getData().split(Pattern.quote("|"));
+        String[][] Dat= new String[Ch.length][2];
+        for (int i=0;i<Ch.length;i++){
+            Dat[i]=Ch[i].split(Pattern.quote("~"));
         }
-        Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
+        for(int i=0;i<Ch.length;i++){
+            ObList.add(new StringsForTables(Dat[i][0],Dat[i][1]));
+        }
         Table.setItems(ObList);
-
-
     }
+
+
 
     /**
      * This method closes the window when the OK button is pressed
@@ -129,7 +142,6 @@ public class ViewCar implements Initializable {
         Stage stage = (Stage) Ok.getScene().getWindow();
         stage.close();
     }
-
 
 
     /**

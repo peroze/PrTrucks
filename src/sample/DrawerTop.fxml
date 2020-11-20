@@ -21,7 +21,7 @@
                   <MenuItem fx:id="ByCarFuel_Button" mnemonicParsing="false" onAction="#ByCarFuel_Button_Pr" text="Καύσιμα Ανά Όχημα" />
                </items>
             </MenuButton>
-            <MenuButton fx:id="Backup_Button" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Backup_Button_Pr" prefHeight="46.0" prefWidth="154.0" text="Αντίγραφα Ασφαλείας" textFill="#fcf7f7" />
+            <MenuButton fx:id="Backup_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Backup_Button_Pr" prefHeight="46.0" prefWidth="154.0" text="Αντίγραφα Ασφαλείας" textFill="#fcf7f7" />
          </children>
       </HBox>
    </top>

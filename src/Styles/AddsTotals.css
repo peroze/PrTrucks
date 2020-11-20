@@ -27,6 +27,16 @@
     -fx-text-fill: white;
 }
 
+#Backup:hover{
+    -fx-text-fill: #FA8072;
+}
+
+.check-box:selected:determinate .box .mark {
+     -fx-background-color: #FA8072;
+ }
+.check-box:selected:determinate .box {
+    -fx-background-color: white;
+}
 
 .text-field {
     -fx-background-color: #383838;
@@ -35,6 +45,9 @@
     -fx-text-fill: white;
 }
 
+.slider .thumb{
+    -fx-background-color: #FA8072;
+}
 
 .button {
 

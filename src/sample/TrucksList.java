@@ -89,7 +89,7 @@ public class TrucksList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers")));
+                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers"),rs.getString("Data")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,7 +151,35 @@ public class TrucksList implements Initializable {
         SortedList<ModelTruck> sorted=new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        Truck_Table.setRowFactory((tv -> {
+            TableRow<ModelTruck> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
         db.Disconnect();
+    }
+
+    /**
+     * This method is used to open the all the details of the selected Service when the user double clicks on it
+     */
+    void DoubleClickTable() {
+        ModelTruck temp = Truck_Table.getSelectionModel().getSelectedItem();
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewCar.fxml"));
+        try {
+            Parent root = fxmlloader.load();
+            fxmlloader.<ViewCar>getController().setTruck(temp);
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 708, 646));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -175,7 +203,7 @@ public class TrucksList implements Initializable {
                 RenewTable();
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 600, 660));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
         } catch (IOException e) {
@@ -263,7 +291,7 @@ public class TrucksList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers")));
+                Oblist.add(new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"),rs.getString("Plaisio"),rs.getString("Type"),rs.getString("Location"),rs.getString("Kilometers"),rs.getString("Data")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

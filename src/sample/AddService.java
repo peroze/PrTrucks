@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 
 /**
  * Thid class is the controller for AddService which add a new Service in the db
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -77,10 +78,9 @@ public class AddService implements Initializable {
     private TableView<StringsForTables> Table;
 
     @FXML
-    private TableColumn<StringsForTables,String> Parts;
+    private TableColumn<StringsForTables, String> Parts;
 
     private ObservableList<StringsForTables> Oblist;
-
 
 
     @Override
@@ -93,8 +93,8 @@ public class AddService implements Initializable {
             }
         });
         ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql=new Sql();
-        ResultSet rs=sql.Query_All_Lisc();
+        Sql sql = new Sql();
+        ResultSet rs = sql.Query_All_Lisc();
         try {
             while (rs.next()) {
                 Cars.add(rs.getString("LiscPlate"));
@@ -102,12 +102,40 @@ public class AddService implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
         Lisc_Plate.setItems(Cars);
+        Table.setRowFactory((tv -> {
+            TableRow<StringsForTables> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
+        sql.Disconnect();
 
     }
 
     /**
+     * This methods deletes an entry from the table and it is called when a row is double clicked
+     */
+    private void DoubleClickTable() {
+        StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+        int i = 0;
+        boolean check = false;
+        while (i < Oblist.size()) {
+            if (temp.equals(Oblist.get(i))) {
+                Oblist.remove(i);
+                check = true;
+                break;
+            }
+        }
+    }
+
+    /**
      * This method is called when the AddPart button is pressed and it adds the part which have been replaced in the car int the changes list
+     *
      * @param event The event
      */
     @FXML
@@ -120,19 +148,20 @@ public class AddService implements Initializable {
 
     /**
      * This button adds the new Service in the db
+     *
      * @param event The event
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql=new Sql();
+        Sql sql = new Sql();
         String Changes;
-        Changes=Oblist.get(0).getString();
-        for(int i=1;i<Oblist.size();i++){
-            Changes= Changes+"|"+Oblist.get(i).getString();
+        Changes = Oblist.get(0).getString();
+        for (int i = 1; i < Oblist.size(); i++) {
+            Changes = Changes + "|" + Oblist.get(i).getString();
         }
-        ModelService toAdd=new ModelService(Lisc_Plate.getValue().toString(),Date.getValue().toString(),Kilometers.getText(),Discreption.getText(),Changes,Workshop.getText(),Date.getValue().plusYears(1).toString(),String.valueOf(Integer.valueOf(Kilometers.getText())+60000),Price.getText());
-        int i=sql.InsertService(toAdd);
-        if(i==1) {
+        ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + 60000), Price.getText());
+        int i = sql.InsertService(toAdd);
+        if (i == 1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");
@@ -141,8 +170,7 @@ public class AddService implements Initializable {
             Stage stage = (Stage) Ok_Button.getScene().getWindow();
             sql.Disconnect();
             stage.close();
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Απέτυχε");
             alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
@@ -152,13 +180,14 @@ public class AddService implements Initializable {
             Discreption.clear();
             AddPart.clear();
             Price.clear();
-            Oblist= FXCollections.observableArrayList();
+            Oblist = FXCollections.observableArrayList();
             Table.setItems(Oblist);
         }
     }
 
     /**
      * This Closes the program
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -170,6 +199,7 @@ public class AddService implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
@@ -181,17 +211,19 @@ public class AddService implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset=event.getSceneX();
-        y_Offset=event.getSceneY();
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
+     *
      * @param event This it the given event
      */
     @FXML
@@ -202,10 +234,11 @@ public class AddService implements Initializable {
 
     /**
      * This method returns the new Entry
+     *
      * @param Entry The new Entry
      * @return The new Entry
      */
-    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry) {
         return Entry;
     }
 
