@@ -127,7 +127,7 @@
                         <Insets left="146.75" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Expenses_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Expenses_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Δαπάνες" textFill="WHITE" GridPane.rowIndex="3">
+                  <Button fx:id="Expenses_Button" contentDisplay="TOP" mnemonicParsing="false" onAction="#Expenses_Button_Pressed" onMouseEntered="#All_Hover" prefHeight="125.0" prefWidth="210.0" text="Άλλα" textFill="WHITE" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
