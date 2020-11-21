@@ -91,25 +91,48 @@ public class AddEmmisionCard implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql = new Sql();
-        ModelEmmisionCard toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(),Kilometers.getText(),Date.getValue().toString(),"FALSE",Date.getValue().plusYears(1).toString());
-        int i=sql.InstertEmmisionCard(toAdd);
-        if(i==1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Επιτυχής");
-            //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
-            alert.showAndWait();
-            Stage stage = (Stage) Ok_Button.getScene().getWindow();
-            sql.Disconnect();
-            stage.close();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-            alert.showAndWait();
-        }
+       try {
+           Sql sql = new Sql();
+           ResultSet rs = null;
+           rs = sql.Query_Specific_NextGas(Lisc_Plate.getValue().toString());
+           String nextGas = rs.getString("GasIn");
+           int nextG = 1;
+           switch (nextGas) {
+               case "6 Μήνες":
+                   nextG = 6;
+                   break;
+               case "1 Έτος":
+                   nextG = 1;
+                   break;
+               case "Οχι Κάρτα":
+                   return;
+           }
+           ModelEmmisionCard toAdd;
+           if (nextG == 6) {
+               toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusMonths(nextG).toString());
+
+           } else {
+               toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusYears(nextG).toString());
+           }
+           int i = sql.InstertEmmisionCard(toAdd);
+           if (i == 1) {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Εισαγωγή Επιτυχής");
+               //alert.setHeaderText("DB Creation Complete");
+               alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
+               alert.showAndWait();
+               Stage stage = (Stage) Ok_Button.getScene().getWindow();
+               sql.Disconnect();
+               stage.close();
+           } else {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Εισαγωγή Απέτυχε");
+               alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+               alert.showAndWait();
+           }
+       }catch (SQLException e){
+           e.printStackTrace();
+       }
     }
 
     /**
