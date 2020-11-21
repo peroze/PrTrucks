@@ -7,7 +7,7 @@ package sample;
  * @version 1.0 Alpha
  */
 public class ModelTruck {
-    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio,Data;
+    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio,Data,ServiceInkm,GasIn,KteoIn;
 
     /**
      * The constructor of th car
@@ -22,7 +22,7 @@ public class ModelTruck {
      * @param kilometers The kilometers of the car
      * @param data The Special Characteristics of the car
      */
-    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers,String data ) {
+    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers,String data,String serviceInKm,String gasIn,String kteoIn ) {
         this.id = id;
         LiscPlate = liscPlate;
         Manufactor = manufactor;
@@ -33,6 +33,9 @@ public class ModelTruck {
         Location = location;
         Kilometers=kilometers;
         Data=data;
+        ServiceInkm=serviceInKm;
+        GasIn=gasIn;
+        KteoIn=kteoIn;
     }
 
 
@@ -199,4 +202,31 @@ public class ModelTruck {
     public void setData(String data) {
         Data = data;
     }
+
+
+    public String getServiceInkm() {
+        return ServiceInkm;
+    }
+
+    public void setServiceInkm(String serviceInkm) {
+        ServiceInkm = serviceInkm;
+    }
+
+    public String getGasIn() {
+        return GasIn;
+    }
+
+    public void setGasIn(String gasIn) {
+        GasIn = gasIn;
+    }
+
+    public String getKteoIn() {
+        return KteoIn;
+    }
+
+    public void setKteoIn(String kteoIn) {
+        KteoIn = kteoIn;
+    }
 }
+
+

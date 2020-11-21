@@ -153,35 +153,43 @@ public class AddService implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql = new Sql();
-        String Changes;
-        Changes = Oblist.get(0).getString();
-        for (int i = 1; i < Oblist.size(); i++) {
-            Changes = Changes + "|" + Oblist.get(i).getString();
+        try {
+            Sql sql = new Sql();
+            String Changes;
+            Changes = Oblist.get(0).getString();
+            for (int i = 1; i < Oblist.size(); i++) {
+                Changes = Changes + "|" + Oblist.get(i).getString();
+            }
+            ResultSet rs = sql.Query_Specific_NextServiceKm(Lisc_Plate.getValue().toString());
+            int Nextkm = rs.getInt("ServiceInKm");
+            ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
+            int i = sql.InsertService(toAdd);
+            if (i == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Επιτυχής");
+                //alert.setHeaderText("DB Creation Complete");
+                alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
+                alert.showAndWait();
+                Stage stage = (Stage) Ok_Button.getScene().getWindow();
+                sql.Disconnect();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+                Kilometers.clear();
+                Lisc_Plate.setValue(new Object());
+                Discreption.clear();
+                AddPart.clear();
+                Price.clear();
+                Oblist = FXCollections.observableArrayList();
+                Table.setItems(Oblist);
+
+            }
         }
-        ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + 60000), Price.getText());
-        int i = sql.InsertService(toAdd);
-        if (i == 1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Επιτυχής");
-            //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
-            alert.showAndWait();
-            Stage stage = (Stage) Ok_Button.getScene().getWindow();
-            sql.Disconnect();
-            stage.close();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-            alert.showAndWait();
-            Kilometers.clear();
-            Lisc_Plate.setValue(new Object());
-            Discreption.clear();
-            AddPart.clear();
-            Price.clear();
-            Oblist = FXCollections.observableArrayList();
-            Table.setItems(Oblist);
+        catch (SQLException e){
+            e.printStackTrace();
         }
     }
 

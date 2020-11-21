@@ -228,6 +228,14 @@ public class RepairList implements Initializable {
         SortedList<ModelRepair> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        ContextMenu Cont=new ContextMenu();
+        MenuItem view=new MenuItem("Άνοιγμα");
+        view.setOnAction(this::View);
+        MenuItem Del=new MenuItem("Διαγραφή");
+        Del.setOnAction(this::Delete_Button_Pressed);
+        Cont.getItems().add(view);
+        Cont.getItems().add(Del);
+        Truck_Table.setContextMenu(Cont);
         db.Disconnect();
     }
 
@@ -245,6 +253,11 @@ public class RepairList implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void View(ActionEvent event) {
+        DoubleClickTable();
     }
 
     @FXML

@@ -16,7 +16,7 @@
 <AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@../Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCar">
    <children>
       <TextField fx:id="LiscPlate" editable="false" layoutX="127.0" layoutY="88.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@../Styles/AddsTotals.css" />
-      <TextField fx:id="Plaisio" editable="false" layoutX="494.0" layoutY="143.0" prefHeight="24.0" prefWidth="185.0" promptText="Συνεργείο" stylesheets="@../Styles/AddsTotals.css" />
+      <TextField fx:id="Plaisio" editable="false" layoutX="494.0" layoutY="143.0" prefHeight="24.0" prefWidth="185.0" stylesheets="@../Styles/AddsTotals.css" />
       <Label layoutX="42.0" layoutY="93.0" prefHeight="17.0" prefWidth="63.0" text="Πινακίδα" textFill="#fcfcfc" />
       <Label layoutX="369.0" layoutY="148.0" prefHeight="17.0" prefWidth="103.0" text="Αριθμος Πλαισίου" textFill="#fcfcfc" />
       <TextField fx:id="Date" editable="false" layoutX="494.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@../Styles/AddsTotals.css" text="Ημερομινία 1ης Κυκλ." />

@@ -123,41 +123,80 @@ public class AddKTEO implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql = new Sql();
-        String Warnings=null;
-        if(!Oblist.isEmpty()){
-        Warnings = Oblist.get(0).getString();
-        for (int i = 1; i < Oblist.size(); i++) {
-            Warnings = Warnings + "|" + Oblist.get(i).getString();
-        }
-        }
-        ModelKTEO toAdd = new ModelKTEO(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Warnings, Date.getValue().plusYears(2).toString(), Workshop.getText());
-        int i = sql.InsertKTEO(toAdd, Date.getValue().plusYears(1).toString());
-        if (i == 1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Επιτυχής");
-            //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
-            alert.showAndWait();
-            Stage stage = (Stage) Ok_Button.getScene().getWindow();
-            sql.Disconnect();
-            stage.close();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το Service δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-            alert.showAndWait();
-            Kilometers.clear();
-            Lisc_Plate.setValue(new Object());
-            AddWarn.clear();
-            Price.clear();
-            Workshop.clear();
-            Date.setValue(null);
-            Oblist = FXCollections.observableArrayList();
-            Table.setItems(Oblist);
-    }
+        try {
 
-}
+            Sql sql = new Sql();
+            String Warnings = null;
+            if (!Oblist.isEmpty()) {
+                Warnings = Oblist.get(0).getString();
+                for (int i = 1; i < Oblist.size(); i++) {
+                    Warnings = Warnings + "|" + Oblist.get(i).getString();
+                }
+            }
+            ResultSet rs = sql.Query_Specific_NextKteo(Lisc_Plate.getValue().toString());
+            String nextKteo = rs.getString("KTEOIn");
+
+            int nextK = 2;
+            switch (nextKteo) {
+                case "1 Έτος":
+                    nextK = 1;
+                    break;
+                case "2 Έτοι":
+                    nextK = 2;
+                    break;
+                case "Οχι ΚΤΕΟ":
+                    return;
+            }
+            rs = sql.Query_Specific_NextGas(Lisc_Plate.getValue().toString());
+            String nextGas = rs.getString("GasIn");
+            int nextG = 1;
+
+            switch (nextGas) {
+                case "6 Μήνες":
+                    nextG = 6;
+                    break;
+                case "1 Έτος":
+                    nextG = 1;
+                    break;
+                case "Οχι Κάρτα":
+                    return;
+            }
+            ModelKTEO toAdd = new ModelKTEO(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Warnings, Date.getValue().plusYears(nextK).toString(), Workshop.getText());
+            int i;
+            if (nextG == 6) {
+                i = sql.InsertKTEO(toAdd, Date.getValue().plusMonths(6).toString());
+            } else {
+                i = sql.InsertKTEO(toAdd, Date.getValue().plusYears(1).toString());
+            }
+
+            if (i == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Επιτυχής");
+                //alert.setHeaderText("DB Creation Complete");
+                alert.setContentText("Το Service εισήχθει με επιτυχία στην Βαση");
+                alert.showAndWait();
+                Stage stage = (Stage) Ok_Button.getScene().getWindow();
+                sql.Disconnect();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Το KTEO δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+                Kilometers.clear();
+                Lisc_Plate.setValue(new Object());
+                AddWarn.clear();
+                Price.clear();
+                Workshop.clear();
+                Date.setValue(null);
+                Oblist = FXCollections.observableArrayList();
+                Table.setItems(Oblist);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This Closes the program

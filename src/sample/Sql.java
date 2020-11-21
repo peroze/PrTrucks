@@ -371,6 +371,56 @@ public class Sql {
 
     }
 
+    public ResultSet Query_Specific_NextKteo(String lisc){
+
+        ResultSet rs = null;
+        try {
+        String sql = "SELECT  KTEOIn FROM  Trucks WHERE id=? ";
+        String id=GetIdFromLisx(lisc);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, id);
+        rs = pstmt.executeQuery();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet Query_Specific_NextGas(String lisc){
+
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  GasIn FROM  Trucks WHERE id=? ";
+            String id=GetIdFromLisx(lisc);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet Query_Specific_NextServiceKm(String lisc){
+
+        ResultSet rs = null;
+        try {
+            String id=GetIdFromLisx(lisc);
+            String sql = "SELECT  ServiceInKm FROM  Trucks WHERE id=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+
+
 
 
     /**
@@ -391,9 +441,12 @@ public class Sql {
         car.add(a.getType());
         car.add(a.getDate());
         car.add(a.getData());
+        car.add(a.getGasIn());
+        car.add(a.getKteoIn());
+        car.add(a.getServiceInkm());
 
 
-        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data,GasIn,KTEOIn,ServiceInKm) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -412,6 +465,9 @@ public class Sql {
             pstmt.setString(8, car.get(6));
             pstmt.setString(9, car.get(7));
             pstmt.setString(10,car.get(8));
+            pstmt.setString(11,car.get(9));
+            pstmt.setString(12,car.get(10));
+            pstmt.setInt(13,Integer.valueOf(car.get(11)));
 
 
             pstmt.executeUpdate();
@@ -479,9 +535,7 @@ public class Sql {
         repair.add(a.getNextDate());
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
-
         String sql = "INSERT INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
-
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
@@ -509,21 +563,18 @@ public class Sql {
      * This method inserts a new KTEO on the db. It also add the included emmisions card in the corresponding Table
      * If EmmisionDate variable is null it means that its not a clean insert but a reinsert of a previous so we just add the new one without Deleteing the previous or adding emission card
      *
-     * @param a            the new KTEO
+     * @param a  the new KTEO
      * @param EmmisionDate The Expiration of the Emmision Card coming with KTEO
      * @return 1 if the insertion is complete or 0 if there is an error
      */
     public int InsertKTEO(ModelKTEO a, String EmmisionDate) {
         try {
-            int i = 1;
-            ResultSet rs = null;
-            if (EmmisionDate != null) {
-                rs = Query_Specific_With_Lisc(a.getLiscPlate(), "KTEO");
-                i = DeleteΚΤΕΟ(a.getLiscPlate());  // Only one KTEO is stored from each car so we delete the previous one
-                if (i == 0) {
-                    throw new SQLException();
-                }
+            int i=InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(),a.getKilometers(),a.getDate(),"TRUE",EmmisionDate));
+            if (i == 0) {
+                return 0;
             }
+
+            ResultSet rs = null;
             ArrayList<String> repair = new ArrayList<>();
             repair.add(a.getKilometers());
             repair.add(a.getWarnings());
@@ -531,7 +582,7 @@ public class Sql {
             repair.add(a.getCompany());
             repair.add(a.getNext());
             repair.add(a.getPrice());
-            String sql = "INSERT INTO KTEO(id,Warnings,Kilometers,Date,Company,DateNext,Price) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT OR REPLACE INTO KTEO(id,Warnings,Kilometers,Date,Company,DateNext,Price) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
             pstmt.setString(2, repair.get(1));
@@ -541,17 +592,7 @@ public class Sql {
             pstmt.setString(6, repair.get(4));
             pstmt.setString(7, repair.get(5));
             pstmt.executeUpdate();
-            if (EmmisionDate==null){
-                return 1;
-            }
-            i=InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(),a.getKilometers(),a.getDate(),"TRUE",EmmisionDate));
-            if (i == 1) {
-                return 1;
-            } else {
-                DeleteΚΤΕΟ(a.getLiscPlate());// If we get here it means that the new KTEO is added but the Card is mot so we must delete the KTEO which was added and add the previous one
-                InsertKTEO(new ModelKTEO(GetLisxxFromId(rs.getString("id")), rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Warnings"), rs.getString("DateNext"), rs.getString("Company")),null);
-                throw new SQLException();
-            }
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
@@ -565,12 +606,7 @@ public class Sql {
      */
     public int InstertEmmisionCard(ModelEmmisionCard a) {
         try {
-
             int i ;
-            i = DeleteEmissionCard(a.getLiscPlate());  // Only one Emmision is stored from each car so we delete the previous one
-            if (i == 0) {
-                throw new SQLException();
-            }
             boolean bool;
             if(a.getWithKTEO().equals("TRUE")){
                 bool=true;
@@ -582,8 +618,7 @@ public class Sql {
             repair.add(a.getKilometers());
             repair.add(a.getDate());
             repair.add(a.getNext());
-            repair.add(a.getWithKTEO());
-            String sql = "INSERT INTO EmmisionCard(id,Kilometers,Date,NextDate,WithKTEO) VALUES (?,?,?,?,?)";
+            String sql = "INSERT OR REPLACE INTO EmmisionCard(id,Kilometers,Date,NextDate,WithKTEO) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
             pstmt.setInt(2, Integer.valueOf(repair.get(0)));
@@ -593,6 +628,7 @@ public class Sql {
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }

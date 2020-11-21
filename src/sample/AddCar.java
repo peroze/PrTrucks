@@ -107,6 +107,15 @@ public class AddCar implements Initializable {
     @FXML
     private Button Ok_Button;
 
+    @FXML
+    private ComboBox KTEO;
+
+    @FXML
+    private ComboBox Gas;
+
+    @FXML
+    private TextField Service;
+
     private boolean edit=false;
 
     private ModelTruck toEdit;
@@ -138,6 +147,16 @@ public class AddCar implements Initializable {
         Locations.add("Αθήνα");
         Locations.add("Λαμία");
         Location.setItems(Locations);
+        ObservableList<String> Kteo=FXCollections.observableArrayList();
+        Kteo.add("1 Έτος");
+        Kteo.add("2 Έτοι");
+        Kteo.add("Όχι Κτεο");
+        ObservableList<String> Gasc=FXCollections.observableArrayList();
+        Gasc.add("6 Μήνες");
+        Gasc.add("1 Έτος");
+        Gasc.add("Όχι Κάρτα");
+        KTEO.setItems(Kteo);
+        Gas.setItems(Gasc);
         Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
         Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
         Table.setRowFactory((tv -> {
@@ -192,7 +211,7 @@ public class AddCar implements Initializable {
         }
         int i;
         if(edit==false) {
-            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data);
+            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data,Service.getText(),Gas.getValue().toString(),KTEO.getValue().toString());
             i = sql.InsertCar(toAdd, max_i,edit);
         }
         else{
@@ -206,6 +225,9 @@ public class AddCar implements Initializable {
             toEdit.setLocation(Location.getValue().toString());
             toEdit.setKilometers(Kilometers.getText());
             toEdit.setData(Data);
+            toEdit.setKteoIn(KTEO.getValue().toString());
+            toEdit.setGasIn(Gas.getValue().toString());
+            toEdit.setServiceInkm(Service.getText());
             i=sql.InsertCar(toEdit,max_i,edit);
 
         }
@@ -249,15 +271,20 @@ public class AddCar implements Initializable {
         Kilometers.setText(s.getKilometers());
         Location.setValue(s.getLocation());
         Type.setValue(s.getType());
-        String[] Ch=s.getData().split(Pattern.quote("|"));
-        String[][] Dat= new String[Ch.length][2];
-        for (int i=0;i<Ch.length;i++){
-            Dat[i]=Ch[i].split(Pattern.quote("~"));
+        Service.setText(s.getServiceInkm());
+        KTEO.setValue(s.getKteoIn());
+        Gas.setValue(s.getGasIn());
+        if(s.getData()!=null) {
+            String[] Ch = s.getData().split(Pattern.quote("|"));
+            String[][] Dat = new String[Ch.length][2];
+            for (int i = 0; i < Ch.length; i++) {
+                Dat[i] = Ch[i].split(Pattern.quote("~"));
+            }
+            for (int i = 0; i < Ch.length; i++) {
+                oblist.add(new StringsForTables(Dat[i][0], Dat[i][1]));
+            }
+            Table.setItems(oblist);
         }
-        for(int i=0;i<Ch.length;i++){
-            oblist.add(new StringsForTables(Dat[i][0],Dat[i][1]));
-        }
-        Table.setItems(oblist);
         toEdit=s;
     }
 
