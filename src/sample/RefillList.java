@@ -65,6 +65,12 @@ public class RefillList implements Initializable {
     @FXML
     private TextField Search_Bar;
 
+    @FXML
+    private TableColumn<ModelRepair, String> Driver_Collumn;
+
+    @FXML
+    private TableColumn<ModelRepair, String> Loc_Collumn;
+
     private ObservableList<ModelRefill> Oblist;
 
 
@@ -76,7 +82,7 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"),String.valueOf(rs.getInt("Id"))));
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,6 +91,8 @@ public class RefillList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         Amount_Column.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        Loc_Collumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Driver_Collumn.setCellValueFactory(new PropertyValueFactory<>("Driver"));
         FilteredList<ModelRefill> Filter = new FilteredList<>(Oblist, b -> true);
 
         Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -219,7 +227,8 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"),String.valueOf(rs.getInt("Id"))));
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver")));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -228,6 +237,8 @@ public class RefillList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         Amount_Column.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        Loc_Collumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Driver_Collumn.setCellValueFactory(new PropertyValueFactory<>("Driver"));
         FilteredList<ModelRefill> Filter = new FilteredList<>(Oblist, b -> true);
 
         Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -244,7 +255,15 @@ public class RefillList implements Initializable {
                     return true;
                 } else if (ModelRefill.getAmount().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
+                } else if (!(ModelRefill.getLocation() == null)) {
+                    if (ModelRefill.getLocation().toLowerCase().indexOf(LowerCase) != -1) {
+                        return true;
+                    } else if (!(ModelRefill.getDriver() == null)) {
+                        if (ModelRefill.getLocation().toLowerCase().indexOf(LowerCase) != -1) {
+                            return true;
+                        } else return false;
+                    }
+                } else return false;
                 return false;
             });
         });

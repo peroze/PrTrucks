@@ -9,6 +9,8 @@ public class ModelRefill {
     private String Date;
     private String Amount;
     private String Id;
+    private String Driver;
+    private String Location;
 
     /**
      * This is the constarctor of the class
@@ -19,12 +21,14 @@ public class ModelRefill {
      * @param amount      The amount of petrol
      * @param id          The unique id of each refill
      */
-    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String id) {
+    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String id,String driver,String location) {
         LiscPlate = liscPlate;
         Kilometers = kilometers;
         Date = date;
         Amount = amount;
         Id = id;
+        Driver=driver;
+        Location=location;
     }
 
 
@@ -36,11 +40,13 @@ public class ModelRefill {
      * @param date        The date in which the card has been published
      * @param amount      The amount of petrol
      */
-    public ModelRefill(String liscPlate, String kilometers, String date, String amount) {
+    public ModelRefill(String liscPlate, String kilometers, String date, String amount,String driver,String location) {
         LiscPlate = liscPlate;
         Kilometers = kilometers;
         Date = date;
         Amount = amount;
+        Driver=driver;
+        Location=location;
     }
 
     /**
@@ -133,5 +139,21 @@ public class ModelRefill {
      */
     public void setId(String id) {
         Id = id;
+    }
+
+    public String getDriver() {
+        return Driver;
+    }
+
+    public void setDriver(String driver) {
+        Driver = driver;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
     }
 }

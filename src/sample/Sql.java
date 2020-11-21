@@ -38,7 +38,7 @@ public class Sql {
     public ResultSet Query_General_Trucks() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM Trucks";
+            String sql = "SELECT  * FROM Trucks ORDER BY id";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -379,7 +379,7 @@ public class Sql {
      * @param a the new car
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertCar(ModelTruck a, int max_i) {
+    public int InsertCar(ModelTruck a, int max_i, boolean edit) {
         ArrayList<String> car = new ArrayList<>();
 
         car.add(a.getLiscPlate());
@@ -393,11 +393,16 @@ public class Sql {
         car.add(a.getData());
 
 
-        String sql = "INSERT INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, max_i + 1);
+            if (edit==false) {
+                pstmt.setInt(1, max_i + 1);
+            }
+            else{
+                pstmt.setInt(1, Integer.valueOf(a.getId()));
+            }
             pstmt.setString(2, car.get(0));
             pstmt.setString(3, car.get(1));
             pstmt.setString(4, car.get(2));

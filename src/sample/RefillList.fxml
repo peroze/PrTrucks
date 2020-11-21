@@ -33,6 +33,8 @@
             <TableColumn fx:id="Date_Column" prefWidth="96.0" text="Ημερομινία" />
             <TableColumn fx:id="Kilometers_Column" prefWidth="117.0" text="Χιλιόμετρα" />
             <TableColumn fx:id="Amount_Column" prefWidth="97.0" text="Ποσότητα (Lt)" />
+            <TableColumn fx:id="Driver_Collumn" prefWidth="117.0" text="Οδηγός" />
+            <TableColumn fx:id="Loc_Collumn" prefWidth="169.0" text="Δρομολόγιο" />
         </columns>
          <padding>
             <Insets left="3.0" />

@@ -46,7 +46,6 @@ public class AddRefill implements Initializable {
     @FXML
     private ComboBox Lisc_Plate;
 
-
     @FXML
     private TextField Kilometers;
 
@@ -56,7 +55,11 @@ public class AddRefill implements Initializable {
     @FXML
     private DatePicker Date;
 
+    @FXML
+    private TextField Driver;
 
+    @FXML
+    private TextField Location;
 
     @FXML
     private Button Ok_Button;
@@ -93,7 +96,7 @@ public class AddRefill implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         Sql sql = new Sql();
-        ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(),Kilometers.getText(),Date.getValue().toString(),Amount.getText());
+        ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(),Kilometers.getText(),Date.getValue().toString(),Amount.getText(),Driver.getText(),Location.getText());
         int i=sql.InstertRefill(toAdd);
         if(i==1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

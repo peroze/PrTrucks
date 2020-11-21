@@ -16,8 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 /**
  * This Class is the Corntoller for AddCar.fxml which adds a new Car in the db
@@ -102,6 +107,10 @@ public class AddCar implements Initializable {
     @FXML
     private Button Ok_Button;
 
+    private boolean edit=false;
+
+    private ModelTruck toEdit;
+
     private int max_i;
 
 
@@ -110,6 +119,7 @@ public class AddCar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        toEdit=null;
         oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -157,6 +167,8 @@ public class AddCar implements Initializable {
         }
     }
 
+
+
     public int getMax_i() {
         return max_i;
     }
@@ -178,8 +190,25 @@ public class AddCar implements Initializable {
         for (int i = 1; i < oblist.size(); i++) {
             Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
         }
-        ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data);
-        int i = sql.InsertCar(toAdd, max_i);
+        int i;
+        if(edit==false) {
+            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data);
+            i = sql.InsertCar(toAdd, max_i,edit);
+        }
+        else{
+            sql.DeleteCar(Integer.valueOf(toEdit.getId()));
+            toEdit.setLiscPlate(Lisc_Plate.getText());
+            toEdit.setManufactor(manufactor.getText());
+            toEdit.setModel(toEdit.getModel());
+            toEdit.setDate(Date.getValue().toString());
+            toEdit.setPlaisio(Plaisio.getText());
+            toEdit.setType(Type.getValue().toString());
+            toEdit.setLocation(Location.getValue().toString());
+            toEdit.setKilometers(Kilometers.getText());
+            toEdit.setData(Data);
+            i=sql.InsertCar(toEdit,max_i,edit);
+
+        }
         if (i == 1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
@@ -205,6 +234,31 @@ public class AddCar implements Initializable {
         Char_Text.setText("");
         Code_Text.setText("");
         Table.setItems(oblist);
+
+    }
+
+    public void edit(ModelTruck s){
+        edit=true;
+        Model.setText(s.getModel());
+        manufactor.setText(s.getManufactor());
+        Plaisio.setText(s.getPlaisio());
+        LocalDate dat;
+        dat = LocalDate.parse(s.getDate());
+        Date.setValue(dat);
+        Lisc_Plate.setText(s.getLiscPlate());
+        Kilometers.setText(s.getKilometers());
+        Location.setValue(s.getLocation());
+        Type.setValue(s.getType());
+        String[] Ch=s.getData().split(Pattern.quote("|"));
+        String[][] Dat= new String[Ch.length][2];
+        for (int i=0;i<Ch.length;i++){
+            Dat[i]=Ch[i].split(Pattern.quote("~"));
+        }
+        for(int i=0;i<Ch.length;i++){
+            oblist.add(new StringsForTables(Dat[i][0],Dat[i][1]));
+        }
+        Table.setItems(oblist);
+        toEdit=s;
     }
 
     /**

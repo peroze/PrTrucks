@@ -79,6 +79,11 @@ public class TrucksList implements Initializable {
     @FXML
     private TextField Search_Bar;
 
+
+    @FXML
+    private ContextMenu Cont;
+
+    private boolean edit;
     private ObservableList<ModelTruck> Oblist;
 
 
@@ -160,6 +165,15 @@ public class TrucksList implements Initializable {
             });
             return row;
         }));
+        MenuItem Del=new MenuItem();
+        Del.setText("Διαγραφή");
+        Del.setOnAction(this::Delete_Button_Pressed);
+
+        MenuItem Edits=new MenuItem();
+        Edits.setText("Επεξεργασία");
+        Edits.setOnAction(this::Ed);
+        Cont.getItems().add(Edits);
+        Cont.getItems().add(Del);
         db.Disconnect();
     }
 
@@ -182,6 +196,17 @@ public class TrucksList implements Initializable {
         }
     }
 
+    @FXML
+    void View(ActionEvent event) {
+        DoubleClickTable();
+    }
+
+    @FXML
+    void Ed(ActionEvent event){
+        edit=true;
+        Import_Button_Pressed(null);
+    }
+
 
     /**
      * This method inserts a new Truck in the list when the insert button is pressed
@@ -194,6 +219,10 @@ public class TrucksList implements Initializable {
         try {
             Parent root=fxmlloader.load();
             int max=Integer.valueOf(Oblist.get(Oblist.size()-1).getId());
+            if(edit==true){
+                edit=false;
+                fxmlloader.<AddCar>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
+            }
             fxmlloader.<AddCar>getController().setMax_i(max);
             AddCar addcar =fxmlloader.getController();
             primaryStage.setOnHidden(e->{
