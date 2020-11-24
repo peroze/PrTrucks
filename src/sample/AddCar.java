@@ -116,7 +116,40 @@ public class AddCar implements Initializable {
     @FXML
     private TextField Service;
 
-    private boolean edit=false;
+    @FXML
+    private Label Plais_Label;
+
+    @FXML
+    private Label Manu_Label;
+
+    @FXML
+    private Label Km_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Model_Label;
+
+    @FXML
+    private Label Date_Label;
+
+    @FXML
+    private Label Locat_Label;
+
+    @FXML
+    private Label Emmis_Label;
+
+    @FXML
+    private Label Categ_Label;
+
+    @FXML
+    private Label Kteo_Label;
+
+    @FXML
+    private Label ServKm_Label;
+
+    private boolean edit = false;
 
     private ModelTruck toEdit;
 
@@ -128,7 +161,7 @@ public class AddCar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        toEdit=null;
+        toEdit = null;
         oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -147,11 +180,11 @@ public class AddCar implements Initializable {
         Locations.add("Αθήνα");
         Locations.add("Λαμία");
         Location.setItems(Locations);
-        ObservableList<String> Kteo=FXCollections.observableArrayList();
+        ObservableList<String> Kteo = FXCollections.observableArrayList();
         Kteo.add("1 Έτος");
         Kteo.add("2 Έτοι");
         Kteo.add("Όχι Κτεο");
-        ObservableList<String> Gasc=FXCollections.observableArrayList();
+        ObservableList<String> Gasc = FXCollections.observableArrayList();
         Gasc.add("6 Μήνες");
         Gasc.add("1 Έτος");
         Gasc.add("Όχι Κάρτα");
@@ -187,7 +220,6 @@ public class AddCar implements Initializable {
     }
 
 
-
     public int getMax_i() {
         return max_i;
     }
@@ -203,48 +235,145 @@ public class AddCar implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql = new Sql();
-        String Data;
-        Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
-        for (int i = 1; i < oblist.size(); i++) {
-            Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
-        }
-        int i;
-        if(edit==false) {
-            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data,Service.getText(),Gas.getValue().toString(),KTEO.getValue().toString());
-            i = sql.InsertCar(toAdd, max_i,edit);
-        }
-        else{
-            sql.DeleteCar(Integer.valueOf(toEdit.getId()));
-            toEdit.setLiscPlate(Lisc_Plate.getText());
-            toEdit.setManufactor(manufactor.getText());
-            toEdit.setModel(toEdit.getModel());
-            toEdit.setDate(Date.getValue().toString());
-            toEdit.setPlaisio(Plaisio.getText());
-            toEdit.setType(Type.getValue().toString());
-            toEdit.setLocation(Location.getValue().toString());
-            toEdit.setKilometers(Kilometers.getText());
-            toEdit.setData(Data);
-            toEdit.setKteoIn(KTEO.getValue().toString());
-            toEdit.setGasIn(Gas.getValue().toString());
-            toEdit.setServiceInkm(Service.getText());
-            i=sql.InsertCar(toEdit,max_i,edit);
 
+        try {
+            int flag2=1;// This is used to know which field threw an excpetion
+            boolean flag = false;
+            Plaisio.setStyle(null);
+            Lisc_Plate.setStyle(null);
+            manufactor.setStyle(null);
+            Model.setStyle(null);
+            Kilometers.setStyle(null);
+            Date.setStyle(null);
+            Type.setStyle(null);
+            Location.setStyle(null);
+            KTEO.setStyle(null);
+            Gas.setStyle(null);
+            Service.setStyle(null);
+            Plais_Label.setVisible(false);
+            Manu_Label.setVisible(false);
+            Lisc_Label.setVisible(false);
+            Model_Label.setVisible(false);
+            Km_Label.setVisible(false);
+            Categ_Label.setVisible(false);
+            Date_Label.setVisible(false);
+            Locat_Label.setVisible(false);
+            Kteo_Label.setVisible(false);
+            Emmis_Label.setVisible(false);
+            ServKm_Label.setVisible(false);
+            if (Plaisio.getText().equals("")) {
+                Plais_Label.setVisible(true);
+                flag = true;
+                Plaisio.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Lisc_Plate.getText().equals("")) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (manufactor.getText().equals("")) {
+                Manu_Label.setVisible(true);
+                flag = true;
+                manufactor.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Model.getText().equals("")) {
+                Model_Label.setVisible(true);
+                flag = true;
+                Model.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true);
+                flag = true;
+
+            }
+            if (Type.getValue() == null) {
+                Categ_Label.setVisible(true);
+                flag = true;
+                Type.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Location.getValue() == null) {
+                Locat_Label.setVisible(true);
+                flag = true;
+                Location.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (KTEO.getValue() == null) {
+                Kteo_Label.setVisible(true);
+                flag = true;
+                KTEO.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Gas.getValue() == null) {
+                Emmis_Label.setVisible(true);
+                flag = true;
+                Gas.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Kilometers.getText().equals("")) {
+                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setVisible(true);
+                flag = true;
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+               Integer.valueOf(Kilometers.getText());
+            }
+            if (Service.getText().equals("")) {
+                ServKm_Label.setText("Το στοιχείο είναι κενό");
+                ServKm_Label.setVisible(true);
+                flag = true;
+                Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                flag2=2;
+                Integer.valueOf(Service.getText()); // if the given value contains characters a number format exception will be thrown
+            }
+            if (flag == true) {
+                return;
+            }
+            Sql sql = new Sql();
+            String Data;
+            Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
+            for (int i = 1; i < oblist.size(); i++) {
+                Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
+            }
+            int i;
+            if (edit == false) {
+                ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data, Service.getText(), Gas.getValue().toString(), KTEO.getValue().toString());
+                i = sql.InsertCar(toAdd, max_i, edit);
+            } else {
+                sql.DeleteCar(Integer.valueOf(toEdit.getId()));
+                toEdit.setLiscPlate(Lisc_Plate.getText());
+                toEdit.setManufactor(manufactor.getText());
+                toEdit.setModel(toEdit.getModel());
+                toEdit.setDate(Date.getValue().toString());
+                toEdit.setPlaisio(Plaisio.getText());
+                toEdit.setType(Type.getValue().toString());
+                toEdit.setLocation(Location.getValue().toString());
+                toEdit.setKilometers(Kilometers.getText());
+                toEdit.setData(Data);
+                toEdit.setKteoIn(KTEO.getValue().toString());
+                toEdit.setGasIn(Gas.getValue().toString());
+                toEdit.setServiceInkm(Service.getText());
+                i = sql.InsertCar(toEdit, max_i, edit);
+
+            }
+            if (i == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Επιτυχής");
+                //alert.setHeaderText("DB Creation Complete");
+                alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
+                alert.showAndWait();
+                Stage stage = (Stage) Ok_Button.getScene().getWindow();
+                sql.Disconnect();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+            }
         }
-        if (i == 1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Επιτυχής");
-            //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Το Αυτοκίνητο εισήχθει με επιτυχία στην Βαση");
-            alert.showAndWait();
-            Stage stage = (Stage) Ok_Button.getScene().getWindow();
-            sql.Disconnect();
-            stage.close();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-            alert.showAndWait();
+        catch (NumberFormatException e){
+            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+            Km_Label.setVisible(true);
+            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            // Add for Service Too
         }
     }
 
@@ -259,8 +388,8 @@ public class AddCar implements Initializable {
 
     }
 
-    public void edit(ModelTruck s){
-        edit=true;
+    public void edit(ModelTruck s) {
+        edit = true;
         Model.setText(s.getModel());
         manufactor.setText(s.getManufactor());
         Plaisio.setText(s.getPlaisio());
@@ -274,7 +403,7 @@ public class AddCar implements Initializable {
         Service.setText(s.getServiceInkm());
         KTEO.setValue(s.getKteoIn());
         Gas.setValue(s.getGasIn());
-        if(s.getData()!=null) {
+        if (s.getData() != null) {
             String[] Ch = s.getData().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];
             for (int i = 0; i < Ch.length; i++) {
@@ -285,7 +414,7 @@ public class AddCar implements Initializable {
             }
             Table.setItems(oblist);
         }
-        toEdit=s;
+        toEdit = s;
     }
 
     /**

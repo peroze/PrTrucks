@@ -70,5 +70,60 @@
       <ComboBox fx:id="KTEO" layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα ΚΤΕΟ" />
       <ComboBox fx:id="Gas" layoutX="375.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Καρτας" />
       <TextField fx:id="Service" layoutX="112.0" layoutY="310.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Service (KM) " />
+      <Label fx:id="Plais_Label" layoutX="112.0" layoutY="77.0" prefHeight="17.0" prefWidth="138.0" text="Ο αριθμός Πλαισίου είναι κενός" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Manu_Label" layoutX="109.0" layoutY="120.0" prefHeight="17.0" prefWidth="138.0" text="Η Μάρκα είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Km_Label" layoutX="106.0" layoutY="164.0" prefHeight="17.0" prefWidth="167.0" text="Τα Χίλιομετρα είναι κενά" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Lisc_Label" layoutX="374.0" layoutY="79.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Model_Label" layoutX="371.0" layoutY="122.0" prefHeight="17.0" prefWidth="138.0" text="Η Μάρκα είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Date_Label" layoutX="369.0" layoutY="163.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Locat_Label" layoutX="376.0" layoutY="204.0" prefHeight="17.0" prefWidth="138.0" text="Η Τοποθεσία είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Emmis_Label" layoutX="364.0" layoutY="252.0" prefHeight="17.0" prefWidth="138.0" text="Το Διάστημα Κάρτας είναι κενό" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Categ_Label" layoutX="108.0" layoutY="204.0" prefHeight="17.0" prefWidth="107.0" text="H Κατηγορία είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Kteo_Label" layoutX="107.0" layoutY="252.0" prefHeight="17.0" prefWidth="123.0" text="Τό διάστημα Κτέο είναι κενό" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="ServKm_Label" layoutX="109.0" layoutY="296.0" prefHeight="17.0" prefWidth="154.0" text="Τό διάστημα Κτέο είναι κενό" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

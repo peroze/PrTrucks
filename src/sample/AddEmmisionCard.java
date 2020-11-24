@@ -61,6 +61,7 @@ public class AddEmmisionCard implements Initializable {
     private Button Ok_Button;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(new Runnable() {
@@ -110,7 +111,6 @@ public class AddEmmisionCard implements Initializable {
            ModelEmmisionCard toAdd;
            if (nextG == 6) {
                toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusMonths(nextG).toString());
-
            } else {
                toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusYears(nextG).toString());
            }
