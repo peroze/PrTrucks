@@ -50,5 +50,20 @@
          </font>
       </Label>
       <ComboBox fx:id="Lisc_Plate" layoutX="95.0" layoutY="154.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
+      <Label fx:id="Km_Label" layoutX="95.0" layoutY="205.0" prefHeight="17.0" prefWidth="167.0" text="Τα Χίλιομετρα είναι κενά" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Lisc_Label" layoutX="95.0" layoutY="137.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Date_Label" layoutX="371.0" layoutY="137.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

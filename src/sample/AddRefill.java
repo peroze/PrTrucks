@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 /**
  * This Class is the Corntoller for AddRefill.fxml which adds a new Refill in the db
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -64,6 +65,18 @@ public class AddRefill implements Initializable {
     @FXML
     private Button Ok_Button;
 
+    @FXML
+    private Label Amount_Label;
+
+    @FXML
+    private Label Km_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Date_Label;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,8 +87,8 @@ public class AddRefill implements Initializable {
             }
         });
         ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql=new Sql();
-        ResultSet rs=sql.Query_All_Lisc();
+        Sql sql = new Sql();
+        ResultSet rs = sql.Query_All_Lisc();
         try {
             while (rs.next()) {
                 Cars.add(rs.getString("LiscPlate"));
@@ -91,33 +104,79 @@ public class AddRefill implements Initializable {
 
     /**
      * This class is used when the Ok button is pressed and it ads a new car in data Base
+     *
      * @param event The event
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-        Sql sql = new Sql();
-        ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(),Kilometers.getText(),Date.getValue().toString(),Amount.getText(),Driver.getText(),Location.getText());
-        int i=sql.InstertRefill(toAdd);
-        if(i==1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Επιτυχής");
-            //alert.setHeaderText("DB Creation Complete");
-            alert.setContentText("Ο ανεφοδιασμός εισήχθει με επιτυχία στην Βαση");
-            alert.showAndWait();
-            Stage stage = (Stage) Ok_Button.getScene().getWindow();
-            sql.Disconnect();
-            stage.close();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Εισαγωγή Απέτυχε");
-            alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-            alert.showAndWait();
+        try {
+            int flag2 = 1;// This is used to know which field threw an excpetion
+            boolean flag = false;
+            Lisc_Plate.setStyle(null);
+            Lisc_Label.setVisible(false);
+            Kilometers.setStyle(null);
+            Km_Label.setVisible(false);
+            Date.setStyle(null);
+            Date_Label.setVisible(false);
+            Amount_Label.setStyle(null);
+            Amount_Label.setVisible(false);
+            if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true); //Change Style
+                flag = true;
+
+            }
+            if (Kilometers.getText().equals("")) {
+                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setVisible(true);
+                flag = true;
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (Amount.getText().equals("")) {
+                Amount_Label.setText("Η ποσότητα είναι κενή");
+                Amount_Label.setVisible(true);
+                flag = true;
+                Amount.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (flag == true) {
+                return;
+            }
+            Sql sql = new Sql();
+            ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
+            int i = sql.InstertRefill(toAdd);
+            if (i == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Επιτυχής");
+                //alert.setHeaderText("DB Creation Complete");
+                alert.setContentText("Ο ανεφοδιασμός εισήχθει με επιτυχία στην Βαση");
+                alert.showAndWait();
+                Stage stage = (Stage) Ok_Button.getScene().getWindow();
+                sql.Disconnect();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+            }
+        } catch (NumberFormatException e) {
+            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+            Km_Label.setVisible(true);
+            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
     }
 
     /**
      * This Closes the program
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -127,9 +186,9 @@ public class AddRefill implements Initializable {
     }
 
 
-
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
@@ -141,17 +200,19 @@ public class AddRefill implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset=event.getSceneX();
-        y_Offset=event.getSceneY();
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
+     *
      * @param event This it the given event
      */
     @FXML
@@ -160,7 +221,7 @@ public class AddRefill implements Initializable {
         stage.setIconified(true);
     }
 
-    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry) {
         return Entry;
     }
 

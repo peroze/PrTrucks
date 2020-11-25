@@ -76,6 +76,21 @@ public class AddKTEO implements Initializable {
     @FXML
     private TableColumn<StringsForTables, String> Parts;
 
+    @FXML
+    private Label Km_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Model_Label;
+
+    @FXML
+    private Label Date_Label;
+
+    @FXML
+    private Label Locat_Label;
+
     private ObservableList<StringsForTables> Oblist;
 
 
@@ -124,7 +139,50 @@ public class AddKTEO implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
+            int flag2 = 1;// This is used to know which field threw an excpetion
+            boolean flag = false;
+            Lisc_Plate.setStyle(null);
+            Lisc_Label.setVisible(false);
+            Kilometers.setStyle(null);
+            Km_Label.setVisible(false);
+            Date.setStyle(null);
+            Date_Label.setVisible(false);
+            Model_Label.setStyle(null);
+            Locat_Label.setVisible(false);
+            if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Workshop.getText().equals("")) {
+                Locat_Label.setVisible(true);
+                flag = true;
+                Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true); //Change Style
+                flag = true;
 
+            }
+            if (Kilometers.getText().equals("")) {
+                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setVisible(true);
+                flag = true;
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (Price.getText().equals("")) {
+                Model_Label.setText("Η τιμή είναι κενή");
+                Model_Label.setVisible(true);
+                flag = true;
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (flag == true) {
+                return;
+            }
             Sql sql = new Sql();
             String Warnings = null;
             if (!Oblist.isEmpty()) {
@@ -135,7 +193,6 @@ public class AddKTEO implements Initializable {
             }
             ResultSet rs = sql.Query_Specific_NextKteo(Lisc_Plate.getValue().toString());
             String nextKteo = rs.getString("KTEOIn");
-
             int nextK = 2;
             switch (nextKteo) {
                 case "1 Έτος":
@@ -195,6 +252,12 @@ public class AddKTEO implements Initializable {
         }
         catch (SQLException e){
             e.printStackTrace();
+        }
+        catch (NumberFormatException e){
+            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+            Km_Label.setVisible(true);
+            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            // Add for Price Too
         }
     }
 

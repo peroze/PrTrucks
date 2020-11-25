@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 /**
  * This Class is the Corntoller for AddEmmisionCard.fxml which adds a new Emmision Card in the db
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -51,15 +52,22 @@ public class AddEmmisionCard implements Initializable {
     private TextField Kilometers;
 
 
-
     @FXML
     private DatePicker Date;
-
 
 
     @FXML
     private Button Ok_Button;
 
+
+    @FXML
+    private Label Km_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Date_Label;
 
 
     @Override
@@ -71,8 +79,8 @@ public class AddEmmisionCard implements Initializable {
             }
         });
         ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql=new Sql();
-        ResultSet rs=sql.Query_All_Lisc();
+        Sql sql = new Sql();
+        ResultSet rs = sql.Query_All_Lisc();
         try {
             while (rs.next()) {
                 Cars.add(rs.getString("LiscPlate"));
@@ -88,55 +96,88 @@ public class AddEmmisionCard implements Initializable {
 
     /**
      * This class is used when the Ok button is pressed and it ads a new car in data Base
+     *
      * @param event The event
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
-       try {
-           Sql sql = new Sql();
-           ResultSet rs = null;
-           rs = sql.Query_Specific_NextGas(Lisc_Plate.getValue().toString());
-           String nextGas = rs.getString("GasIn");
-           int nextG = 1;
-           switch (nextGas) {
-               case "6 Μήνες":
-                   nextG = 6;
-                   break;
-               case "1 Έτος":
-                   nextG = 1;
-                   break;
-               case "Οχι Κάρτα":
-                   return;
-           }
-           ModelEmmisionCard toAdd;
-           if (nextG == 6) {
-               toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusMonths(nextG).toString());
-           } else {
-               toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusYears(nextG).toString());
-           }
-           int i = sql.InstertEmmisionCard(toAdd);
-           if (i == 1) {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Εισαγωγή Επιτυχής");
-               //alert.setHeaderText("DB Creation Complete");
-               alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
-               alert.showAndWait();
-               Stage stage = (Stage) Ok_Button.getScene().getWindow();
-               sql.Disconnect();
-               stage.close();
-           } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Εισαγωγή Απέτυχε");
-               alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
-               alert.showAndWait();
-           }
-       }catch (SQLException e){
-           e.printStackTrace();
-       }
+        try {
+            int flag2 = 1;// This is used to know which field threw an excpetion
+            boolean flag = false;
+            Lisc_Plate.setStyle(null);
+            Kilometers.setStyle(null);
+            Date.setStyle(null);
+            if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true); //Change Style
+                flag = true;
+
+            }
+            if (Kilometers.getText().equals("")) {
+                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setVisible(true);
+                flag = true;
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (flag==true){
+                return;
+            }
+            Sql sql = new Sql();
+            ResultSet rs = null;
+            rs = sql.Query_Specific_NextGas(Lisc_Plate.getValue().toString());
+            String nextGas = rs.getString("GasIn");
+            int nextG = 1;
+            switch (nextGas) {
+                case "6 Μήνες":
+                    nextG = 6;
+                    break;
+                case "1 Έτος":
+                    nextG = 1;
+                    break;
+                case "Οχι Κάρτα":
+                    return;
+            }
+            ModelEmmisionCard toAdd;
+            if (nextG == 6) {
+                toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusMonths(nextG).toString());
+            } else {
+                toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusYears(nextG).toString());
+            }
+            int i = sql.InstertEmmisionCard(toAdd);
+            if (i == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Επιτυχής");
+                //alert.setHeaderText("DB Creation Complete");
+                alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
+                alert.showAndWait();
+                Stage stage = (Stage) Ok_Button.getScene().getWindow();
+                sql.Disconnect();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+                Sql s = new Sql();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+            Km_Label.setVisible(true);
+        }
     }
 
     /**
      * This Closes the program
+     *
      * @param event The event when an action id made
      */
     @FXML
@@ -146,9 +187,9 @@ public class AddEmmisionCard implements Initializable {
     }
 
 
-
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
@@ -160,17 +201,19 @@ public class AddEmmisionCard implements Initializable {
 
     /**
      * This is used to make the window draggable
+     *
      * @param event This it the given event
      */
     @FXML
     void Top_Bar_Pressed(MouseEvent event) {
-        x_Offset=event.getSceneX();
-        y_Offset=event.getSceneY();
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
     }
 
 
     /**
      * This method is used to minimize the Window
+     *
      * @param event This it the given event
      */
     @FXML
@@ -179,7 +222,7 @@ public class AddEmmisionCard implements Initializable {
         stage.setIconified(true);
     }
 
-    public ArrayList<String> GetNewEntry(ArrayList<String> Entry){
+    public ArrayList<String> GetNewEntry(ArrayList<String> Entry) {
         return Entry;
     }
 
