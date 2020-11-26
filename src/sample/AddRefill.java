@@ -153,6 +153,12 @@ public class AddRefill implements Initializable {
             ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
             int i = sql.InstertRefill(toAdd);
             if (i == 1) {
+                ResultSet rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                int km=rs.getInt("Kilometers");
+                if(km<Integer.valueOf(Kilometers.getText())){
+                    ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl,5,true);
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");
@@ -171,6 +177,9 @@ public class AddRefill implements Initializable {
             Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
             Km_Label.setVisible(true);
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        catch (SQLException e){
+            e.printStackTrace();
         }
     }
 

@@ -160,6 +160,18 @@ public class AddRepair implements Initializable {
         ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
         int i = sql.InsertRepair(toAdd);
         if (i == 1) {
+
+            try {
+                ResultSet rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                int km = rs.getInt("Kilometers");
+                if(km<Integer.valueOf(Kilometers.getText())){
+                    ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl,5,true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");

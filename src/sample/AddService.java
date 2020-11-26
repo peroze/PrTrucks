@@ -165,6 +165,16 @@ public class AddService implements Initializable {
             ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
             int i = sql.InsertService(toAdd);
             if (i == 1) {
+                try {
+                    rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                    int km = rs.getInt("Kilometers");
+                    if(km<Integer.valueOf(Kilometers.getText())){
+                        ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                        sql.InsertCar(repl,5,true);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");

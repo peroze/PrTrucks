@@ -387,6 +387,26 @@ public class Sql {
         return rs;
     }
 
+    /**
+     * This Method Returns the car with the given lisc. Plate
+     * @param lisc The liscence plate
+     * @return The Car
+     */
+    public ResultSet Query_Specific_Trucks(String lisc) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Trucks WHERE LiscPlate=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,lisc);
+            rs=pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
     public ResultSet Query_Specific_NextGas(String lisc){
 
         ResultSet rs = null;

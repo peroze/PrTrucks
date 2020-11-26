@@ -225,8 +225,14 @@ public class AddKTEO implements Initializable {
             } else {
                 i = sql.InsertKTEO(toAdd, Date.getValue().plusYears(1).toString());
             }
-
             if (i == 1) {
+                rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                int km = rs.getInt("Kilometers");
+                if (km < Integer.valueOf(Kilometers.getText())) {
+                    System.out.println("Mpike");
+                    ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl, 5, true);
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");
@@ -249,11 +255,9 @@ public class AddKTEO implements Initializable {
                 Oblist = FXCollections.observableArrayList();
                 Table.setItems(Oblist);
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
             Km_Label.setVisible(true);
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");

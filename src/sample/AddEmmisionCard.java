@@ -125,7 +125,7 @@ public class AddEmmisionCard implements Initializable {
             } else {
                 Integer.valueOf(Kilometers.getText());
             }
-            if (flag==true){
+            if (flag == true) {
                 return;
             }
             Sql sql = new Sql();
@@ -151,6 +151,12 @@ public class AddEmmisionCard implements Initializable {
             }
             int i = sql.InstertEmmisionCard(toAdd);
             if (i == 1) {
+                rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                int km = rs.getInt("Kilometers");
+                if (km < Integer.valueOf(Kilometers.getText())) {
+                    ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl, 5, true);
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");
