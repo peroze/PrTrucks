@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.ExpensesTotalByCar">
+   <children>
+      <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
+         <children>
+            <ComboBox fx:id="Distance" layoutX="194.0" layoutY="162.0" prefHeight="23.0" prefWidth="149.0" promptText="Διάστημα" />
+            <TableView fx:id="Table1" layoutX="79.0" layoutY="226.0" prefHeight="320.0" prefWidth="707.0">
+               <columns>
+                  <TableColumn fx:id="Date" prefWidth="154.0" text="Διάστιμα" />
+                  <TableColumn fx:id="Amount" prefWidth="102.0" text="Ποσότητα" />
+               </columns>
+            </TableView>
+            <DatePicker fx:id="From" layoutX="458.0" layoutY="163.0" prefHeight="23.0" prefWidth="112.0" promptText="Από" visible="false" />
+            <DatePicker fx:id="To" layoutX="584.0" layoutY="163.0" prefHeight="23.0" prefWidth="112.0" promptText="Έως" />
+            <Label layoutX="275.0" layoutY="51.0" text="Συνολικά Έξοδα Ανά Όχημα" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="Show_Button" layoutX="712.0" layoutY="160.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
+            <TextField fx:id="Pyear" layoutX="458.0" layoutY="163.0" prefHeight="24.0" prefWidth="89.0" promptText="Έτος" />
+            <ComboBox fx:id="Type" layoutX="356.0" layoutY="163.0" prefHeight="23.0" prefWidth="89.0" promptText="Είδος" />
+            <ComboBox fx:id="Lisc" layoutX="79.0" layoutY="162.0" prefHeight="23.0" prefWidth="104.0" promptText="Πινακίδα" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

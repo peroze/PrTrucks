@@ -1,0 +1,165 @@
+#Pane {
+    -fx-background-color: #383838;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+#Panel {
+    -fx-background-color: #383838;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+#Totals_Button{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 0 3;
+    -fx-border-color: #FA8072;
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+
+#ByCar_Button{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+    -fx-background-color: #000013;
+    -fx-text-fill: white;
+}
+
+#Backup:hover{
+    -fx-text-fill: #FA8072;
+}
+
+.check-box:selected:determinate .box .mark {
+     -fx-background-color: #FA8072;
+ }
+.check-box:selected:determinate .box {
+    -fx-background-color: white;
+}
+
+.text-field {
+    -fx-background-color: #383838;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #FA8072;
+    -fx-text-fill: white;
+
+}
+
+.slider .thumb{
+    -fx-background-color: #FA8072;
+}
+
+.button {
+
+    -fx-background-color: #FA8072;
+    -fx-background-radius: 5em;
+    -fx-border-color: black;
+    -fx-border-radius: 5em;
+    -fx-border-width: 2;
+}
+
+.text-field:focused {
+    -fx-border-color: #8B74BD;
+}
+
+.date-picker:editable {
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color:  #383838;
+}
+
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #FA8072;
+    -fx-text-fill: white;
+}
+
+.combo-box .arrow-button    {
+    -fx-background-color:#FA8072;
+    -fx-background-radius: 0;
+}
+
+.combo-box:focused .arrow-button    {
+    -fx-background-color: #8B74BD;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #8B74BD;;
+}
+
+.combo-box:focused .arrow-button .arrow {
+    -fx-background-color:#FA8072;
+}
+
+
+.combo-box:focused {
+    -fx-border-color: #8B74BD;
+}
+
+
+.date-picker:editable .arrow-button .arrow {
+    -fx-background-color: #8B74BD
+
+}
+
+.date-picker:editable:focused .arrow-button .arrow {
+    -fx-background-color:#FA8072;
+
+}
+
+.date-picker:editable .arrow-button    {
+    -fx-background-color:#FA8072;
+    -fx-background-radius: 0;
+}
+
+.date-picker:editable:focused .arrow-button    {
+    -fx-background-color: #8B74BD;
+}
+
+.combo-box .list-cell .text{
+    -fx-fill: grey;
+}
+
+.tab-pane:top .tab-header-area .tab-header-background{
+    -fx-background-color: #8B74BD;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top{
+    -fx-background-color: #383838;
+    -fx-background-radius: 0;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:top{
+    -fx-background-color: #8B74BD;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0 1;
+}
+
+.tab:selected .tab-label{
+    -fx-text-fill: white;
+}
+
+.tab .tab-label{
+    -fx-text-fill: white;
+}
+
+/*.table-view:row-selection .label {
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+    -fx-border-color: #FA8072;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+
+
+.table-view:row-selection  {
+    -fx-background-color: #383838;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-color: #FA8072;
+
+}
+.table-view:row-selection .placeholder .label  {
+    -fx-border-width: 0px 0px 0px 0px;
+
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane fx:id="OutPane" prefHeight="648.0" prefWidth="864.0" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.DrawerTop">
+   <top>
+      <HBox prefHeight="36.0" prefWidth="864.0" style="-fx-background-color: #000013;" BorderPane.alignment="CENTER">
+         <children>
+            <MenuButton fx:id="Totals_Button" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="58.0" text="Έξοδα" textFill="#fcf7f7">
+              <items>
+                <MenuItem fx:id="TotalExpenses_Button" mnemonicParsing="false" onAction="#TotalExpenses_Button_Pr" text="Συνολικά Έξοδα" />
+                <MenuItem fx:id="ByCarExp_Button" mnemonicParsing="false" onAction="#ByCarExp_Button_Pr" text="Έξοδα Ανά Όχημα" />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="Fuel_Button" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="71.0" text="Κάυσιμα" textFill="#fcf7f7">
+               <items>
+                  <MenuItem fx:id="TotalFuel_Button" mnemonicParsing="false" onAction="#TotalFuel_Button_Pr" text="Συνολικά Καύσιμα" />
+                  <MenuItem fx:id="ByCarFuel_Button" mnemonicParsing="false" onAction="#ByCarFuel_Button_Pr" text="Καύσιμα Ανά Όχημα" />
+               </items>
+            </MenuButton>
+            <MenuButton fx:id="Backup_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Backup_Button_Pr" prefHeight="36.0" prefWidth="78.0" text="Ρυθμίσεις" textFill="#fcf7f7" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

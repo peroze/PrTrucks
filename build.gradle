@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'application'
+}
+
+group 'Pr.Cars'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.xerial:sqlite-jdbc:3.32.3.2'
+    compile 'org.apache.poi:poi:3.9'
+    compile group: 'io.github.typhon0', name: 'AnimateFX', version: '1.2.0'
+}
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls' ,'javafx.base','javafx.fxml', 'javafx.media' ,'javafx.swing' ]
+}
+
+mainClassName = 'Pr.Cars.Main'
+jar {
+    manifest {
+        attributes 'Main-Class': 'Pr.Cars.FakeMain'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'

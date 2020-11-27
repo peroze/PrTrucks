@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.ViewRepair">
+   <children>
+      <TextField fx:id="LiscPlate" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Workshop" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Συνεργείο" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="28.0" layoutY="91.0" prefHeight="17.0" prefWidth="63.0" text="Πινακίδα" textFill="#fcfcfc" />
+      <Label layoutX="28.0" layoutY="144.0" prefHeight="17.0" prefWidth="63.0" text="Συνεργείο" textFill="#fcfcfc" />
+      <TextField fx:id="Date" editable="false" layoutX="495.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Kilometers" editable="false" layoutX="495.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="410.0" layoutY="91.0" prefHeight="17.0" prefWidth="63.0" text="Ημερομινία" textFill="#fcfcfc" />
+      <Label layoutX="410.0" layoutY="144.0" prefHeight="17.0" prefWidth="63.0" text="Χιλιόμετρα" textFill="#fcfcfc" />
+      <TextField fx:id="Price" editable="false" layoutX="113.0" layoutY="194.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="28.0" layoutY="199.0" prefHeight="17.0" prefWidth="63.0" text="Τιμή" textFill="#fcfcfc" />
+      <Label layoutX="290.0" layoutY="37.0" prefHeight="39.0" prefWidth="129.0" text="Επισκευή" textFill="WHITE">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="Ok" layoutX="306.0" layoutY="592.0" mnemonicParsing="false" onAction="#Ok_Button_Pressed" prefHeight="29.0" prefWidth="96.0" text="Επιστροφή">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TableView fx:id="Table" layoutX="218.0" layoutY="289.0" prefHeight="255.0" prefWidth="272.0">
+        <columns>
+          <TableColumn fx:id="Changes" prefWidth="271.0" text="Αλλάγες" />
+        </columns>
+      </TableView>
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
+         <children>
+            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
+               <image>
+                  <Image url="@Images/windows-minimize-icon-26.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets right="3.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
+               <image>
+                  <Image url="@Images/windows-minimize-icon-25.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets right="3.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
