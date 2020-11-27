@@ -1,7 +1,9 @@
 package Pr.Cars;
 
 
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
+import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 
@@ -31,7 +34,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+        primaryStage.setTitle("PrTrucks");
+        primaryStage.setScene(new Scene(root, 1007, 675));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.show();
+    }
+
+    @Override
+    public void init() throws Exception{
         Sql sql = new Sql();
+        double count=0;
+        double pr=0.5;
         ResultSet rs;
         FileManagment FS = new FileManagment();
         String[] chks = FS.Read();
@@ -54,10 +69,14 @@ public class Main extends Application {
         } else {
             daysBc = 30;
         }
+        LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.15));
+        Thread.sleep(500);
         if (chks[3].equals("true")) {
             rs = sql.Query_General_KTEO();
             Tray(rs, "KTEO");
         }
+        LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.20));
+        Thread.sleep(500);
         if (chks[2].equals("true")) {
             rs = sql.Query_Group_Service();
             Tray(rs, "Service");
@@ -66,6 +85,8 @@ public class Main extends Application {
             rs = sql.Query_General_EmmisionCard();
             Tray(rs, "Emmision");
         }
+        LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.25));
+        Thread.sleep(500);
         if (chks[0].equals("true")) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date = sdf.parse(chks[6]);
@@ -76,23 +97,36 @@ public class Main extends Application {
             if (diff >= daysBc) {
                 Backup bc=new Backup();
                 bc.CreateBackupService();
+                LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.30));
+                Thread.sleep(500);
                 bc.CreateBackupRefill();
+                LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.35));
+                Thread.sleep(500);
                 bc.CreateBackupKteo();
+                LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.40));
+                Thread.sleep(500);
                 bc.CreateBackupEmmision();
+                LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.45));
+                Thread.sleep(500);
                 bc.CreateBackupRepair();
                 FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+sdf.format(date2));
+                LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.50));
             }
         }
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        primaryStage.setTitle("PrTrucks");
-        primaryStage.setScene(new Scene(root, 1007, 675));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.show();
+        LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.50));
+        Thread.sleep(500);
+        for (count=0;count<1100000;count++){
+               if(count==0||count==100000||count==200000||count==300000||count==4000000||count==500000||count==600000||count==700000||count==800000||count==900000||count==1000000) {
+                   pr=pr+0.05;
+                   LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(pr));
+                   Thread.sleep(500);
+               }
+       }
     }
 
-
     public static void main(String[] args) {
-        launch(args);
+       LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
+       // launch(args);
     }
 
     public void Tray(ResultSet rs, String Type) {
