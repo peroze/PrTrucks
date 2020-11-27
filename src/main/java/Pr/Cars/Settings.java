@@ -231,7 +231,12 @@ public class Settings implements Initializable {
 
     @FXML
     void Backup_Pre(MouseEvent event) {
-
+        Backup bc=new Backup();
+        bc.CreateBackupService();
+        bc.CreateBackupRefill();
+        bc.CreateBackupKteo();
+        bc.CreateBackupEmmision();
+        bc.CreateBackupRepair();
         FileManagment FS = new FileManagment();
         String[] tmp = FS.Read();
         String pr = tmp[0];

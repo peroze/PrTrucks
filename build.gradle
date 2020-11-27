@@ -16,7 +16,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'org.xerial:sqlite-jdbc:3.32.3.2'
-    compile 'org.apache.poi:poi:3.9'
+    compile 'org.apache.poi:poi-ooxml:4.1.2'
     compile group: 'io.github.typhon0', name: 'AnimateFX', version: '1.2.0'
 }
 javafx {

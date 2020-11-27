@@ -12,6 +12,7 @@ import java.awt.*;
 import java.net.MalformedURLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,7 +74,13 @@ public class Main extends Application {
             long diffInMillies = Math.abs(date.getTime() - date2.getTime());
             long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
             if (diff >= daysBc) {
-                System.out.println("To Do Backup DB to ExcelFile");
+                Backup bc=new Backup();
+                bc.CreateBackupService();
+                bc.CreateBackupRefill();
+                bc.CreateBackupKteo();
+                bc.CreateBackupEmmision();
+                bc.CreateBackupRepair();
+                FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+sdf.format(date2));
             }
         }
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -81,11 +88,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1007, 675));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
-    }
-
-    public void CheckDate() {
-        Sql Sql = new Sql();
-
     }
 
 

@@ -360,7 +360,6 @@ public class Sql {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM  " + table + " WHERE id=? ";
-
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, GetIdFromLisx(lisc));
             rs = pstmt.executeQuery();
@@ -370,6 +369,27 @@ public class Sql {
         return rs;
 
     }
+
+    /**
+     * This method returns all entries of a specific car from Refill table
+     *
+     * @param lisc  The liscence plate of the car
+     * @return the dataset with the right data
+     */
+    public ResultSet Query_Specific_Refill(String lisc) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM  Refill WHERE Car_id=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, GetIdFromLisx(lisc));
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
 
     public ResultSet Query_Specific_NextKteo(String lisc){
 
@@ -386,6 +406,8 @@ public class Sql {
         }
         return rs;
     }
+
+
 
     /**
      * This Method Returns the car with the given lisc. Plate

@@ -257,7 +257,7 @@ public class Main_Menu /*implements Initializable */{
     void Exit_Button_Pressed(ActionEvent event) {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
-        System.exit(1);
+        System.exit(0);
     }
 
 
