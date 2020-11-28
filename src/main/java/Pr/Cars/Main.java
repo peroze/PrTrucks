@@ -125,8 +125,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-       //LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
-        launch(args);
+       LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
+        //launch(args);
     }
 
     public void Tray(ResultSet rs, String Type) {
