@@ -48,7 +48,7 @@
       <TextField fx:id="Kilometers" layoutX="375.0" layoutY="157.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
       <DatePicker fx:id="Date" layoutX="375.0" layoutY="112.0" prefHeight="25.0" prefWidth="138.0" promptText="Ημερομινία" />
       <Button fx:id="Ok_Button" layoutX="208.0" layoutY="528.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
-      <Label layoutX="201.0" layoutY="38.0" prefHeight="36.0" prefWidth="237.0" text="Εισαγωγή Επισκευής" textFill="WHITE">
+      <Label layoutX="218.0" layoutY="40.0" prefHeight="36.0" prefWidth="200.0" text="Εισαγωγή Service" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
@@ -65,5 +65,35 @@
       </TableView>
       <TextField fx:id="Workshop" layoutX="110.0" layoutY="200.0" prefHeight="25.0" prefWidth="138.0" promptText="Συνεργείο" />
       <ComboBox fx:id="Lisc_Plate" layoutX="110.0" layoutY="112.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
+      <Label fx:id="Workshop_Label" layoutX="110.0" layoutY="187.0" prefHeight="17.0" prefWidth="138.0" text="Το Συνεργείο είναι κενό" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Disc_Label" layoutX="109.0" layoutY="148.0" prefHeight="17.0" prefWidth="138.0" text="Η Περιγραφή είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Lisc_Label" layoutX="109.0" layoutY="104.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Price_Label" layoutX="377.0" layoutY="187.0" prefHeight="17.0" prefWidth="138.0" text="Η Τιμή είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Date_Label" layoutX="375.0" layoutY="99.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Km_Label" layoutX="378.0" layoutY="145.0" prefHeight="17.0" prefWidth="138.0" text="Τα Χιλίομετρα είναι κενά" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

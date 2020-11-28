@@ -214,16 +214,23 @@ public class AddCar implements Initializable {
      * This methods deletes an entry from the table and it is called when a row is double clicked
      */
     private void DoubleClickTable() {
-        StringsForTables temp = Table.getSelectionModel().getSelectedItem();
-        int i = 0;
-        boolean check = false;
-        while (i < oblist.size()) {
-            if (temp.equals(oblist.get(i))) {
-                oblist.remove(i);
-                check = true;
-                break;
+        try {
+            StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+            int i = 0;
+            boolean check = false;
+            while (i < oblist.size()) {
+                if (temp.equals(oblist.get(i))) {
+                    oblist.remove(i);
+                    check = true;
+                    break;
+                }
+                i++;
             }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -361,7 +368,7 @@ public class AddCar implements Initializable {
                 toEdit.setGasIn(Gas.getValue().toString());
                 toEdit.setServiceInkm(Service.getText());
                 i = sql.InsertCar(toEdit, max_i, edit);
-
+                sql.Disconnect();
             }
             if (i == 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

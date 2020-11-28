@@ -245,6 +245,7 @@ public class AddService implements Initializable {
             for (int i = 1; i < Oblist.size(); i++) {
                 Changes = Changes + "|" + Oblist.get(i).getString();
             }
+
             ResultSet rs = sql.Query_Specific_NextServiceKm(Lisc_Plate.getValue().toString());
             int Nextkm = rs.getInt("ServiceInKm");
             int i;
@@ -274,6 +275,7 @@ public class AddService implements Initializable {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                sql.Disconnect();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");

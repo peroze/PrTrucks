@@ -261,7 +261,7 @@ public class AddRepair implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            sql.Disconnect();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Εισαγωγή Επιτυχής");
             //alert.setHeaderText("DB Creation Complete");

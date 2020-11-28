@@ -159,6 +159,7 @@ public class AddRefill implements Initializable {
                     ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
                     sql.InsertCar(repl,5,true);
                 }
+                sql.Disconnect();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Επιτυχής");
                 //alert.setHeaderText("DB Creation Complete");
