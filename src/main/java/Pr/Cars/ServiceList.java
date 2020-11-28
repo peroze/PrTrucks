@@ -86,12 +86,15 @@ public class ServiceList implements Initializable {
 
     private ObservableList<ModelService> Oblist;
 
+    public boolean edit;
+
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Sql db = new Sql();
+        edit=false;
         ResultSet rs = db.Query_Group_Service();
         Oblist = FXCollections.observableArrayList();
         try {
@@ -157,8 +160,12 @@ public class ServiceList implements Initializable {
         view.setOnAction(this::View);
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
+        MenuItem Edits = new MenuItem("Επεξεργασία");
+        Edits.setOnAction(this::Ed);
         Cont.getItems().add(view);
         Cont.getItems().add(Del);
+        Cont.getItems().add(Edits);
+
         Truck_Table.setContextMenu(Cont);
         db.Disconnect();
     }
@@ -188,6 +195,12 @@ public class ServiceList implements Initializable {
         DoubleClickTable();
     }
 
+    @FXML
+    void Ed(ActionEvent event) {
+        edit = true;
+        Import_Button_Pressed(null);
+    }
+
 
     /**
      * This method inserts a new Service in the list when the insert button is pressed
@@ -199,6 +212,10 @@ public class ServiceList implements Initializable {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddService.fxml"));
         try {
             Parent root = fxmlloader.load();
+            if (edit == true) {
+                edit = false;
+                fxmlloader.<AddService>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
+            }
             primaryStage.setOnHidden(e -> {
                 RenewTable(null);
             });

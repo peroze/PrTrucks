@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="1007.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Splash.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.SplashScreen">
+<BorderPane fx:id="Border_Pane" prefHeight="675.0" prefWidth="1007.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Splash.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.SplashScreen">
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>

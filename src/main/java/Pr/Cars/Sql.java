@@ -528,7 +528,7 @@ public class Sql {
      * @param a the new Repair
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertRepair(ModelRepair a) {
+    public int InsertRepair(ModelRepair a,boolean edit) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -537,10 +537,13 @@ public class Sql {
         repair.add(a.getDate());
         repair.add(a.getChanges());
         repair.add(a.getPrice());
-
-
-        String sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price) VALUES (?,?,?,?,?,?,?)";
-
+        String sql;
+        if (edit==false) {
+            sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price) VALUES (?,?,?,?,?,?,?)";
+        }
+        else{
+            sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Repair_Id) VALUES (?,?,?,?,?,?,?,?)";
+        }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
@@ -550,6 +553,9 @@ public class Sql {
             pstmt.setString(5, repair.get(4));
             pstmt.setString(6, repair.get(2));
             pstmt.setInt(7, Integer.valueOf(repair.get(5)));
+            if(edit==true){
+                pstmt.setInt(8,Integer.valueOf(a.getId()));
+            }
             pstmt.executeUpdate();
             return 1;
 
@@ -566,7 +572,7 @@ public class Sql {
      * @param a the new service
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertService(ModelService a) {
+    public int InsertService(ModelService a,boolean edit) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -577,11 +583,17 @@ public class Sql {
         repair.add(a.getNextDate());
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
-        String sql = "INSERT INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql;
+        if(edit==false) {
+             sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+        }
+        else {
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+        }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
-
             pstmt.setString(2, repair.get(1));
             pstmt.setInt(3, Integer.valueOf(repair.get(0)));
             pstmt.setString(4, repair.get(3));
@@ -590,6 +602,9 @@ public class Sql {
             pstmt.setString(7, repair.get(5));
             pstmt.setString(8, repair.get(6));
             pstmt.setInt(9, Integer.valueOf(repair.get(7)));
+            if(edit==true){
+                pstmt.setInt(10,Integer.valueOf(a.getId()));
+            }
             pstmt.executeUpdate();
             return 1;
 

@@ -79,6 +79,8 @@ public class RepairList implements Initializable {
 
     private ObservableList<ModelRepair> Oblist;
 
+    private boolean edit;
+
 
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
@@ -86,6 +88,10 @@ public class RepairList implements Initializable {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddRepair.fxml"));
         try {
             Parent root = fxmlloader.load();
+            if (edit == true) {
+                edit = false;
+                fxmlloader.<AddRepair>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
+            }
             primaryStage.setOnHidden(e -> {
                 RenewTable(null);
             });
@@ -233,8 +239,11 @@ public class RepairList implements Initializable {
         view.setOnAction(this::View);
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
+        MenuItem Edits = new MenuItem("Επεξεργασία");
+        Edits.setOnAction(this::Ed);
         Cont.getItems().add(view);
         Cont.getItems().add(Del);
+        Cont.getItems().add(Edits);
         Truck_Table.setContextMenu(Cont);
         db.Disconnect();
     }
@@ -258,6 +267,12 @@ public class RepairList implements Initializable {
     @FXML
     void View(ActionEvent event) {
         DoubleClickTable();
+    }
+
+    @FXML
+    void Ed(ActionEvent event) {
+        edit = true;
+        Import_Button_Pressed(null);
     }
 
     @FXML

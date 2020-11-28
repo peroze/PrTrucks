@@ -131,6 +131,12 @@ public class KTEOList implements Initializable {
         SortedList<ModelKTEO> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        ContextMenu Cont=new ContextMenu();
+        MenuItem Del=new MenuItem("Διαγραφή");
+        Del.setOnAction(this::Delete_Button_Pressed);
+        Cont.getItems().add(Del);
+        Truck_Table.setContextMenu(Cont);
+        db.Disconnect();
     }
 
     /**

@@ -17,8 +17,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 /**
@@ -80,9 +82,14 @@ public class AddRepair implements Initializable {
 
     private ObservableList<StringsForTables> Oblist;
 
+    private boolean edit = false;
+
+    private ModelRepair toEdit;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        toEdit=null;
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -156,8 +163,21 @@ public class AddRepair implements Initializable {
         for (int i = 1; i < Oblist.size(); i++) {
             Changes = Changes + "|" + Oblist.get(i).getString();
         }
-        ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
-        int i = sql.InsertRepair(toAdd);
+        int i;
+        if(edit==false) {
+            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
+            i = sql.InsertRepair(toAdd,false);
+        }
+        else{
+            toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
+            toEdit.setDate(Date.getValue().toString());
+            toEdit.setPrice(Price.getText());
+            toEdit.setWorkshop(Workshop.getText());
+            toEdit.setKilometers(Kilometers.getText());
+            toEdit.setDiscreption(Discreption.getText());
+            toEdit.setChanges(Changes);
+            i=sql.InsertRepair(toEdit,true);
+        }
         if (i == 1) {
 
             try {
@@ -192,6 +212,26 @@ public class AddRepair implements Initializable {
             Oblist = FXCollections.observableArrayList();
             Table.setItems(Oblist);
         }
+    }
+
+    public void edit(ModelRepair s) {
+        edit = true;
+        Workshop.setText(s.getWorkshop());
+        Price.setText(s.getPrice());
+        Discreption.setText(s.getDiscreption());
+        LocalDate dat;
+        dat = LocalDate.parse(s.getDate());
+        Date.setValue(dat);
+        Lisc_Plate.setValue(s.getLiscPlate());
+        Kilometers.setText(s.getKilometers());
+        if (s.getChanges() != null) {
+            String[] Ch = s.getChanges().split(Pattern.quote("|"));
+            for (int i = 0; i < Ch.length; i++) {
+                Oblist.add(new StringsForTables(Ch[i]));
+            }
+            Table.setItems(Oblist);
+        }
+        toEdit = s;
     }
 
 

@@ -17,8 +17,11 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 /**
@@ -80,9 +83,14 @@ public class AddService implements Initializable {
 
     private ObservableList<StringsForTables> Oblist;
 
+    private boolean edit = false;
+
+    private ModelService toEdit;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        toEdit=null;
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -160,8 +168,23 @@ public class AddService implements Initializable {
             }
             ResultSet rs = sql.Query_Specific_NextServiceKm(Lisc_Plate.getValue().toString());
             int Nextkm = rs.getInt("ServiceInKm");
-            ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
-            int i = sql.InsertService(toAdd);
+            int i;
+            if(edit==false) {
+                ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
+                 i = sql.InsertService(toAdd,false);
+            }
+            else{
+                toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
+                toEdit.setDate(Date.getValue().toString());
+                toEdit.setPrice(Price.getText());
+                toEdit.setWorkshop(Workshop.getText());
+                toEdit.setKilometers(Kilometers.getText());
+                toEdit.setType(Discreption.getText());
+                toEdit.setChanges(Changes);
+                toEdit.setNextKilometers(String.valueOf(Integer.valueOf(Kilometers.getText())+Nextkm));
+                toEdit.setNextDate(Date.getValue().plusYears(1).toString());
+                i=sql.InsertService(toEdit,true);
+            }
             if (i == 1) {
                 try {
                     rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
@@ -199,6 +222,26 @@ public class AddService implements Initializable {
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public void edit(ModelService s) {
+        edit = true;
+        Workshop.setText(s.getWorkshop());
+        Price.setText(s.getPrice());
+        Discreption.setText(s.getType());
+        LocalDate dat;
+        dat = LocalDate.parse(s.getDate());
+        Date.setValue(dat);
+        Lisc_Plate.setValue(s.getLiscPlate());
+        Kilometers.setText(s.getKilometers());
+        if (s.getChanges() != null) {
+            String[] Ch = s.getChanges().split(Pattern.quote("|"));
+            for (int i = 0; i < Ch.length; i++) {
+                Oblist.add(new StringsForTables(Ch[i]));
+            }
+            Table.setItems(Oblist);
+        }
+        toEdit = s;
     }
 
     /**
