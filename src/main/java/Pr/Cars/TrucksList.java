@@ -207,7 +207,13 @@ public class TrucksList implements Initializable {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddCar.fxml"));
         try {
             Parent root = fxmlloader.load();
-            int max = Integer.valueOf(Oblist.get(Oblist.size() - 1).getId());
+            int max;
+            if(Oblist.isEmpty()){
+                max=0;
+            }
+            else {
+                max = Integer.valueOf(Oblist.get(Oblist.size() - 1).getId());
+            }
             if (edit == true) {
                 edit = false;
                 fxmlloader.<AddCar>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
