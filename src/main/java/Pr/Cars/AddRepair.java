@@ -80,6 +80,21 @@ public class AddRepair implements Initializable {
     @FXML
     private TableColumn<StringsForTables, String> Parts;
 
+    @FXML
+    private Label Workshop_Label;
+
+    @FXML
+    private Label Disc_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Price_Label;
+
+    @FXML
+    private Label Date_Label;
+
     private ObservableList<StringsForTables> Oblist;
 
     private boolean edit = false;
@@ -157,6 +172,52 @@ public class AddRepair implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
+        try {
+            boolean flag = false;
+            Lisc_Plate.setStyle(null);
+            Workshop.setStyle(null);
+            Kilometers.setStyle(null);
+            Date.setStyle(null);
+            Price.setStyle(null);
+            Discreption.setStyle(null);
+            Price_Label.setVisible(false);
+            Workshop_Label.setVisible(false);
+            Lisc_Label.setVisible(false);
+            Disc_Label.setVisible(false);
+            Date_Label.setVisible(false);
+            if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true);
+                flag = true;
+            }
+            if (Discreption.getText().equals("")) {
+                Disc_Label.setVisible(true);
+                Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Workshop.getText().equals("")) {
+                Workshop_Label.setVisible(true);
+                Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Price.getText().equals("")) {
+                Price_Label.setText("H τιμή είναι κενή");
+                Price_Label.setVisible(true);
+                flag = true;
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (flag == true) {
+                return;
+            }
+        } catch (NumberFormatException e){
+            Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
+            Price_Label.setVisible(true);
+            Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
         Sql sql = new Sql();
         String Changes;
         Changes = Oblist.get(0).getString();

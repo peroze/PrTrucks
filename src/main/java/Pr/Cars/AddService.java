@@ -81,16 +81,36 @@ public class AddService implements Initializable {
     @FXML
     private TableColumn<StringsForTables, String> Parts;
 
+    @FXML
+    private Label Workshop_Label;
+
+    @FXML
+    private Label Disc_Label;
+
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Price_Label;
+
+    @FXML
+    private Label Date_Label;
+
+    @FXML
+    private Label Km_Label;
+
     private ObservableList<StringsForTables> Oblist;
 
     private boolean edit = false;
 
     private ModelService toEdit;
 
+    private int flag2;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        toEdit=null;
+        toEdit = null;
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -160,6 +180,56 @@ public class AddService implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
+            flag2 = -1;
+            boolean flag = false;
+            Lisc_Plate.setStyle(null);
+            Workshop.setStyle(null);
+            Kilometers.setStyle(null);
+            Date.setStyle(null);
+            Price.setStyle(null);
+            Discreption.setStyle(null);
+            Price_Label.setVisible(false);
+            Workshop_Label.setVisible(false);
+            Lisc_Label.setVisible(false);
+            Disc_Label.setVisible(false);
+            Date_Label.setVisible(false);
+            if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                flag = true;
+                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Date.getValue() == null) {
+                Date_Label.setVisible(true);
+                flag = true;
+            }
+            if (Discreption.getText().equals("")) {
+                Disc_Label.setVisible(true);
+                Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Workshop.getText().equals("")) {
+                Workshop_Label.setVisible(true);
+                Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (Price.getText().equals("")) {
+                Price_Label.setText("H τιμή είναι κενή");
+                Price_Label.setVisible(true);
+                flag = true;
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                flag2 = 2;
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (Kilometers.getText().equals("")) {
+                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setVisible(true);
+                flag = true;
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            } else {
+                Integer.valueOf(Kilometers.getText());
+            }
+            if (flag == true) {
+                return;
+            }
             Sql sql = new Sql();
             String Changes;
             Changes = Oblist.get(0).getString();
@@ -169,11 +239,10 @@ public class AddService implements Initializable {
             ResultSet rs = sql.Query_Specific_NextServiceKm(Lisc_Plate.getValue().toString());
             int Nextkm = rs.getInt("ServiceInKm");
             int i;
-            if(edit==false) {
+            if (edit == false) {
                 ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
-                 i = sql.InsertService(toAdd,false);
-            }
-            else{
+                i = sql.InsertService(toAdd, false);
+            } else {
                 toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
                 toEdit.setDate(Date.getValue().toString());
                 toEdit.setPrice(Price.getText());
@@ -181,17 +250,17 @@ public class AddService implements Initializable {
                 toEdit.setKilometers(Kilometers.getText());
                 toEdit.setType(Discreption.getText());
                 toEdit.setChanges(Changes);
-                toEdit.setNextKilometers(String.valueOf(Integer.valueOf(Kilometers.getText())+Nextkm));
+                toEdit.setNextKilometers(String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm));
                 toEdit.setNextDate(Date.getValue().plusYears(1).toString());
-                i=sql.InsertService(toEdit,true);
+                i = sql.InsertService(toEdit, true);
             }
             if (i == 1) {
                 try {
-                    rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                    rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
                     int km = rs.getInt("Kilometers");
-                    if(km<Integer.valueOf(Kilometers.getText())){
-                        ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
-                        sql.InsertCar(repl,5,true);
+                    if (km < Integer.valueOf(Kilometers.getText())) {
+                        ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                        sql.InsertCar(repl, 5, true);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -218,9 +287,27 @@ public class AddService implements Initializable {
                 Table.setItems(Oblist);
 
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            if (flag2 == 2) {
+                Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
+                Price_Label.setVisible(true);
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (flag2==1){
+                Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                Km_Label.setVisible(true);
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if (flag2==3){
+                Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
+                Price_Label.setVisible(true);
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                Km_Label.setVisible(true);
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
         }
     }
 

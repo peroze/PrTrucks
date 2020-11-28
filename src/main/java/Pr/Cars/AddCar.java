@@ -151,6 +151,8 @@ public class AddCar implements Initializable {
 
     private int max_i;
 
+    private int flag2;
+
 
     private ObservableList<StringsForTables> oblist;
 
@@ -233,7 +235,7 @@ public class AddCar implements Initializable {
     void Ok_Button_Pr(ActionEvent event) {
 
         try {
-            int flag2=1;// This is used to know which field threw an excpetion
+            flag2=-1;
             boolean flag = false;
             Plaisio.setStyle(null);
             Lisc_Plate.setStyle(null);
@@ -316,7 +318,10 @@ public class AddCar implements Initializable {
                 flag = true;
                 Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                flag2=2;
+                if(flag2==1){
+                    flag2=3;
+                }
+                else  flag2=2;
                 Integer.valueOf(Service.getText()); // if the given value contains characters a number format exception will be thrown
             }
             if (flag == true) {
@@ -366,10 +371,24 @@ public class AddCar implements Initializable {
             }
         }
         catch (NumberFormatException e){
-            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-            Km_Label.setVisible(true);
-            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            // Add for Service Too
+            if(flag2==1) {
+                Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                Km_Label.setVisible(true);
+                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if(flag2==2){
+                ServKm_Label.setText("Τα Χιλιόμετρα Service πρέπει να είναι ακέραιος");
+                ServKm_Label.setVisible(true);
+                Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+           if(flag2==3){
+               Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+               Km_Label.setVisible(true);
+               Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+               ServKm_Label.setText("Τα Χιλιόμετρα Service πρέπει να είναι ακέραιος");
+               ServKm_Label.setVisible(true);
+               Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+           }
         }
     }
 

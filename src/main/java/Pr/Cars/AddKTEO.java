@@ -93,6 +93,8 @@ public class AddKTEO implements Initializable {
 
     private ObservableList<StringsForTables> Oblist;
 
+    private int flag2 ;// This is used to know which field threw an excpetion
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -139,7 +141,7 @@ public class AddKTEO implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
-            int flag2 = 1;// This is used to know which field threw an excpetion
+            flag2=-1;
             boolean flag = false;
             Lisc_Plate.setStyle(null);
             Lisc_Label.setVisible(false);
@@ -170,6 +172,7 @@ public class AddKTEO implements Initializable {
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
+                flag2=1;
                 Integer.valueOf(Kilometers.getText());
             }
             if (Price.getText().equals("")) {
@@ -178,6 +181,10 @@ public class AddKTEO implements Initializable {
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
+                if(flag2==1){
+                    flag2=3;
+                }
+                else flag2=2;
                 Integer.valueOf(Kilometers.getText());
             }
             if (flag == true) {
@@ -258,9 +265,24 @@ public class AddKTEO implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
-            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-            Km_Label.setVisible(true);
-            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+           if(flag2==1) {
+               Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+               Km_Label.setVisible(true);
+               Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+           }
+           else if(flag2==2){
+               Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+               Model_Label.setVisible(true);
+               Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+           }
+           else if(flag2==3){
+               Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+               Km_Label.setVisible(true);
+               Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+               Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+               Model_Label.setVisible(true);
+               Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+           }
             // Add for Price Too
         }
     }
