@@ -139,8 +139,17 @@ public class AddService implements Initializable {
             });
             return row;
         }));
+        ContextMenu Cont=new ContextMenu();
+        MenuItem Del=new MenuItem("Διαγραφή");
+        Del.setOnAction(this::Del);
+        Cont.getItems().add(Del);
+        Table.setContextMenu(Cont);
         sql.Disconnect();
 
+    }
+
+    public void Del(ActionEvent e){
+        DoubleClickTable();
     }
 
     /**

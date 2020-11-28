@@ -116,8 +116,42 @@ public class AddKTEO implements Initializable {
             e.printStackTrace();
         }
         Lisc_Plate.setItems(Cars);
+        Table.setRowFactory((tv -> {
+            TableRow<StringsForTables> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
+        ContextMenu Cont=new ContextMenu();
+        MenuItem Del=new MenuItem("Διαγραφή");
+        Del.setOnAction(this::Del);
+        Cont.getItems().add(Del);
+        Table.setContextMenu(Cont);
         sql.Disconnect();
 
+    }
+
+    public void Del(ActionEvent e){
+        DoubleClickTable();
+    }
+
+    /**
+     * This methods deletes an entry from the table and it is called when a row is double clicked
+     */
+    private void DoubleClickTable() {
+        StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+        int i = 0;
+        boolean check = false;
+        while (i < Oblist.size()) {
+            if (temp.equals(Oblist.get(i))) {
+                Oblist.remove(i);
+                check = true;
+                break;
+            }
+        }
     }
 
     /**
@@ -283,7 +317,6 @@ public class AddKTEO implements Initializable {
                Model_Label.setVisible(true);
                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
            }
-            // Add for Price Too
         }
     }
 
