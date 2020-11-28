@@ -206,8 +206,15 @@ public class AddKTEO implements Initializable {
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                flag2=1;
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                }
+                catch (NumberFormatException e){
+                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Km_Label.setVisible(true);
+                    flag=true;
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (Price.getText().equals("")) {
                 Model_Label.setText("Η τιμή είναι κενή");
@@ -215,11 +222,15 @@ public class AddKTEO implements Initializable {
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                if(flag2==1){
-                    flag2=3;
+                try {
+                    Integer.valueOf(Kilometers.getText());
                 }
-                else flag2=2;
-                Integer.valueOf(Kilometers.getText());
+                catch(NumberFormatException e){
+                    Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Model_Label.setVisible(true);
+                    flag=true;
+                    Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (flag == true) {
                 return;
@@ -270,7 +281,6 @@ public class AddKTEO implements Initializable {
                 rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
                 int km = rs.getInt("Kilometers");
                 if (km < Integer.valueOf(Kilometers.getText())) {
-                    System.out.println("Mpike");
                     ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
                     sql.InsertCar(repl, 5, true);
                 }
@@ -300,25 +310,6 @@ public class AddKTEO implements Initializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-           if(flag2==1) {
-               Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-               Km_Label.setVisible(true);
-               Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-           }
-           else if(flag2==2){
-               Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-               Model_Label.setVisible(true);
-               Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-           }
-           else if(flag2==3){
-               Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-               Km_Label.setVisible(true);
-               Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-               Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-               Model_Label.setVisible(true);
-               Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-           }
         }
     }
 

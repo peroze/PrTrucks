@@ -49,6 +49,46 @@ public class Sql {
 
     }
 
+    /**
+     * This Method Returns The List With All the cars of The External Comanies
+     *
+     * @return The Cars
+     */
+    public ResultSet Query_General_External_Trucks() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM External_Trucks ORDER BY id";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+    /**
+     * This Method Returns The List With All the cars of The External Comanies
+     *
+     * @return The Cars
+     */
+    public ResultSet Query_General_Company() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Companies ORDER BY id";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+
+
 
     /**
      * This method returns the list with all Services
@@ -327,8 +367,23 @@ public class Sql {
         return rs;
     }
 
+    /**
+     * This method returns all liscense plate numbers
+     *
+     * @return all liscence plate numbers
+     */
+    public ResultSet Query_All_Companies() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  Name FROM  Companies ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
 
-
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 
     /**
      * This method returns the latest  service for each car (Based on the Date of the next Service
@@ -465,6 +520,8 @@ public class Sql {
 
 
 
+
+
     /**
      * This method inserts a new car on the db
      *
@@ -564,6 +621,59 @@ public class Sql {
             return 0;
         }
     }
+
+    /**
+     * This method inserts a new repair on the db
+     *
+     * @param a the new Repair
+     * @return 1 if the insertion is complete or 0 if there is an error
+     */
+    public int InsertExternalCars(ModelExternalCars a,boolean edit) {
+        ArrayList<String> repair = new ArrayList<>();
+
+        repair.add(a.getLiscPlate());
+        repair.add(GetIdFromComp(a.getCompany()));
+        repair.add(a.getModel());
+        repair.add(a.getManufactor());
+        repair.add(a.getDriver());
+        repair.add(a.getPhone());
+        repair.add(a.getWidth());
+        repair.add(a.getLenght());
+        repair.add(a.getHeight());
+        String sql;
+        if (edit==false) {
+
+            sql = "INSERT INTO External_Trucks(LiscPlate,Company_id,Model,Manufactor,Driver,Phone,Width,Lenght,Height) VALUES (?,?,?,?,?,?,?,?,?)";
+        }
+        else{
+            sql = "INSERT OR REPLACE INTO External_Trucks(LiscPlate,Company_id,Model,Manufactor,Driver,Phone,Width,Lenght,Height,id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        }
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, repair.get(0));
+            pstmt.setInt(2, Integer.valueOf(repair.get(1)));
+            pstmt.setString(3, repair.get(2));
+            pstmt.setString(4, repair.get(3));
+            pstmt.setString(5, repair.get(4));
+            pstmt.setString(6, repair.get(5));
+            pstmt.setInt(7, Integer.valueOf(repair.get(6)));
+            pstmt.setInt(8, Integer.valueOf(repair.get(7)));
+            pstmt.setInt(9, Integer.valueOf(repair.get(8)));
+            if(edit==true){
+                pstmt.setInt(10,Integer.valueOf(a.getId()));
+            }
+            pstmt.executeUpdate();
+            return 1;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
+
 
 
     /**
@@ -716,6 +826,37 @@ public class Sql {
         }
     }
 
+    /**
+     * This method inserts a new Company
+     * @param a The new Company
+     * @return 1 if comleted 0 if not
+     */
+    public int InstertCompany(ModelCompany a,boolean edit) {
+        try {
+            ArrayList<String> repair = new ArrayList<>();
+            repair.add(a.getName());
+            repair.add(a.getPhone());
+            String sql;
+            if(edit==true){
+                 sql = "INSERT OR REPLACE INTO Companies(Name,Phone,id) VALUES (?,?,?)";
+            }
+            else {
+                 sql = "INSERT INTO Companies(Name,Phone) VALUES (?,?)";
+            }
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, repair.get(0));
+            pstmt.setString(2, repair.get(1));
+            if(edit==true){
+                pstmt.setInt(3, Integer.valueOf(a.getId()));
+            }
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 
     /**
      * This method deletes a car from the database
@@ -737,6 +878,50 @@ public class Sql {
             return 0;
         }
     }
+
+    /**
+     * This method deletes a car from the database
+     *
+     * @param id The id of the car to be deleted from the databse
+     * @return 1 if the deletion is complete or 0if there is an error
+     */
+    public int DeleteExternal_Truck(int id) {
+        String stmt = "DELETE FROM External_Trucks WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
+            return 1;
+        } catch (SQLException | ClassNotFoundException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * This method deletes a car from the database
+     *
+     * @param id The id of the car to be deleted from the databse
+     * @return 1 if the deletion is complete or 0if there is an error
+     */
+    public int DeleteCompanies(int id) {
+        String stmt = "DELETE FROM Companies WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
+            return 1;
+        } catch (SQLException | ClassNotFoundException e) {
+            return 0;
+        }
+    }
+
+
 
 
     /**
@@ -884,6 +1069,45 @@ public class Sql {
             rs = stmt.executeQuery(sql);
 
             return rs.getString("LiscPlate");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * This method return the Name of the Company  given  its id
+     *
+     * @param id The id of the Comnpany
+     * @return The Name of the Company
+     */
+    public String GetCompFromId(String id) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  Name FROM Companies  WHERE id=" + id;
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            return rs.getString("Name");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * This method return the id of the Company  given  its Name
+     *
+     * @param Names The name of the Comnpany
+     * @return The id of the Company
+     */
+    public String GetIdFromComp(String Names) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  id FROM Companies  WHERE Name=" +"\""+ Names+"\"";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            return rs.getString("id");
         } catch (SQLException e) {
             e.printStackTrace();
         }

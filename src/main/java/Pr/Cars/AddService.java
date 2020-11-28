@@ -225,8 +225,15 @@ public class AddService implements Initializable {
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                flag2 = 2;
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                }
+                catch (NumberFormatException e){
+                    Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
+                    Price_Label.setVisible(true);
+                    flag=true;
+                    Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (Kilometers.getText().equals("")) {
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
@@ -234,7 +241,15 @@ public class AddService implements Initializable {
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                }
+                catch (NumberFormatException e){
+                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Km_Label.setVisible(true);
+                    flag=true;
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (flag == true) {
                 return;
@@ -300,25 +315,6 @@ public class AddService implements Initializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            if (flag2 == 2) {
-                Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
-                Price_Label.setVisible(true);
-                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
-            if (flag2==1){
-                Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-                Km_Label.setVisible(true);
-                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
-            if (flag2==3){
-                Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
-                Price_Label.setVisible(true);
-                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-                Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-                Km_Label.setVisible(true);
-                Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
         }
     }
 
