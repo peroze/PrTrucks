@@ -2,40 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCompany.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddExternalCar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/CompanyList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/DrawerTopComp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExternalCarsList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelCompany.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelExternalCars.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddCompany.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddExternalCar.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/CompanyList.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/DrawerTopComp.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExternalCarsList.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/PrTrucks.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/TrucksList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/TrucksList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/TrucksList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/TrucksList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +187,7 @@
       <workItem from="1606526393069" duration="6518000" />
       <workItem from="1606548975551" duration="140000" />
       <workItem from="1606550671815" duration="1349000" />
-      <workItem from="1606573074215" duration="16173000" />
+      <workItem from="1606573074215" duration="19550000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -270,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606551953132</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Edit Transport Companinies and External Trucks">
+      <created>1606590839320</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1606590839320</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +270,8 @@
     <MESSAGE value="Added SplashScree" />
     <MESSAGE value="Edits Completed in Service and Repair" />
     <MESSAGE value="Edits Completed in Service and Repair plus Warning in null values for AddService and AddRepair" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edits Completed in Service and Repair plus Warning in null values for AddService and AddRepair" />
+    <MESSAGE value="Edit Transport Companinies and External Trucks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit Transport Companinies and External Trucks" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1606471104497">
@@ -292,30 +282,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606586532579" />
-    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606551951788">
+    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606590836681">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606551951788" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606589663046">
+    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606590836681" />
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606593637982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606589663046" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606589663046">
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606593637982" />
+    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606593637982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606589663046" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606589663046">
+    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606593637982" />
+    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606593637982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606589663046" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606589663046">
+    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606593637982" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606593637982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606589663046" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606551682141">
+    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606593637982" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606590844310">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606551682141" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606590844310" />
     <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1606573073373">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.Settings">
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Settings">
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
@@ -95,15 +95,67 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label layoutX="208.0" layoutY="422.0" prefHeight="17.0" prefWidth="145.0" text="Προηδοποίηση πριν από :" textFill="#fffdfd" />
+            <Label layoutX="209.0" layoutY="422.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Service πριν από :" textFill="#fffdfd" />
             <Label layoutX="208.0" layoutY="372.0" text="Service" textFill="#fffdfd" />
             <Label layoutX="354.0" layoutY="373.0" text="ΚΤΕΟ" textFill="#fffdfd" />
             <Label layoutX="475.0" layoutY="373.0" text="Κάρτα Καυσαερίων" textFill="#fffdfd" />
-            <Button fx:id="Save_Button" layoutX="400.0" layoutY="532.0" mnemonicParsing="false" onAction="#Save_Button_Pr" text="Αποθήκευση">
+            <Button fx:id="Save_Button" layoutX="400.0" layoutY="566.0" mnemonicParsing="false" onAction="#Save_Button_Pr" text="Αποθήκευση">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Slider fx:id="SliderNot1" layoutX="411.0" layoutY="464.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Label fx:id="Day111" layoutX="399.0" layoutY="478.0" text="1 Μέρα" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day711" layoutX="472.0" layoutY="478.0" text="7 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day1411" layoutX="544.0" layoutY="479.0" text="14 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day3011" layoutX="618.0" layoutY="480.0" text="30 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label layoutX="209.0" layoutY="463.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση ΚΤΕΟ πριν από :" textFill="#fffdfd" />
+            <Slider fx:id="SliderNot2" layoutX="409.0" layoutY="505.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Label fx:id="Day112" layoutX="397.0" layoutY="519.0" text="1 Μέρα" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day712" layoutX="470.0" layoutY="519.0" text="7 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day1412" layoutX="542.0" layoutY="520.0" text="14 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day3012" layoutX="616.0" layoutY="521.0" text="30 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label layoutX="209.0" layoutY="504.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Κάρτας πριν από :" textFill="#fffdfd" />
          </children>
       </AnchorPane>
    </children>

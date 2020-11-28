@@ -54,6 +54,12 @@ public class Settings implements Initializable {
     private Slider SliderNot;
 
     @FXML
+    private Slider SliderNot1;
+
+    @FXML
+    private Slider SliderNot2;
+
+    @FXML
     private Label Day11;
 
     @FXML
@@ -64,6 +70,30 @@ public class Settings implements Initializable {
 
     @FXML
     private Label Day301;
+
+    @FXML
+    private Label Day111;
+
+    @FXML
+    private Label Day711;
+
+    @FXML
+    private Label Day1411;
+
+    @FXML
+    private Label Day3011;
+
+    @FXML
+    private Label Day112;
+
+    @FXML
+    private Label Day712;
+
+    @FXML
+    private Label Day1412;
+
+    @FXML
+    private Label Day3012;
 
     @FXML
     private Button Save_Button;
@@ -86,21 +116,25 @@ public class Settings implements Initializable {
         } else {
             onoffBackServ.setValue(0);
         }
-        if (fs[3].equals("true")) {
+        if (fs[4].equals("true")) {
             onoffBackKteo.setValue(100);
         } else {
             onoffBackKteo.setValue(0);
         }
-        if (fs[4].equals("true")) {
+        if (fs[6].equals("true")) {
             onoffBackGas.setValue(100);
         } else {
             onoffBackGas.setValue(0);
         }
         Slider.setValue(Double.valueOf(fs[1]));
         labelColour(Double.valueOf(fs[1]), 0);
-        SliderNot.setValue(Double.valueOf(fs[5]));
-        labelColour(Double.valueOf(fs[5]), 1);
-        SaveDate = fs[6];
+        SliderNot.setValue(Double.valueOf(fs[3]));
+        labelColour(Double.valueOf(fs[3]), 1);
+        SliderNot1.setValue(Double.valueOf(fs[5]));
+        labelColour(Double.valueOf(fs[5]), 2);
+        SliderNot2.setValue(Double.valueOf(fs[7]));
+        labelColour(Double.valueOf(fs[7]), 3);
+        SaveDate = fs[8];
         Slider.valueProperty().addListener(numberChangeListenerSl);
         onoffBack.valueProperty().addListener(OnOff);
         onoffBackServ.valueProperty().addListener(OnOffSer);
@@ -108,6 +142,8 @@ public class Settings implements Initializable {
         onoffBackGas.valueProperty().addListener(OnOffGas);
 
         SliderNot.valueProperty().addListener(numberChangeListenerSlN);
+        SliderNot1.valueProperty().addListener(numberChangeListenerSlN1);
+        SliderNot2.valueProperty().addListener(numberChangeListenerSlN2);
     }
 
     final ChangeListener<Number> numberChangeListenerSl = (obs, old, val) -> {
@@ -127,6 +163,26 @@ public class Settings implements Initializable {
         }
         labelColour(roundedValue, 1);
         SliderNot.valueProperty().set(roundedValue);
+
+    };
+
+    final ChangeListener<Number> numberChangeListenerSlN1 = (obs, old, val) -> {
+        double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
+        if (roundedValue > 99) {
+            roundedValue = 100;
+        }
+        labelColour(roundedValue, 2);
+        SliderNot1.valueProperty().set(roundedValue);
+
+    };
+
+    final ChangeListener<Number> numberChangeListenerSlN2 = (obs, old, val) -> {
+        double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
+        if (roundedValue > 99) {
+            roundedValue = 100;
+        }
+        labelColour(roundedValue, 3);
+        SliderNot2.valueProperty().set(roundedValue);
 
     };
 
@@ -153,48 +209,62 @@ public class Settings implements Initializable {
 
     public void labelColour(double i, int sl) {
         if (sl == 0) {
+            Day1.setStyle(null);
+            Day7.setStyle(null);
+            Day14.setStyle(null);
+            Day30.setStyle(null);
             if (i == 0) {
                 Day1.setStyle("-fx-text-fill: #FA8072");
-                Day7.setStyle(null);
-                Day14.setStyle(null);
-                Day30.setStyle(null);
             } else if (i == 33.3) {
-                Day1.setStyle(null);
                 Day7.setStyle("-fx-text-fill: #FA8072");
-                Day14.setStyle(null);
-                Day30.setStyle(null);
             } else if (i == 100) {
-                Day1.setStyle(null);
-                Day7.setStyle(null);
-                Day14.setStyle(null);
                 Day30.setStyle("-fx-text-fill: #FA8072");
             } else {
-                Day1.setStyle(null);
-                Day7.setStyle(null);
                 Day14.setStyle("-fx-text-fill: #FA8072");
-                Day30.setStyle(null);
             }
-        } else {
+        } else if(sl==1) {
+            Day11.setStyle(null);
+            Day71.setStyle(null);
+            Day141.setStyle(null);
+            Day301.setStyle(null);
             if (i == 0) {
                 Day11.setStyle("-fx-text-fill: #FA8072");
-                Day71.setStyle(null);
-                Day141.setStyle(null);
-                Day301.setStyle(null);
             } else if (i == 33.3) {
-                Day11.setStyle(null);
                 Day71.setStyle("-fx-text-fill: #FA8072");
-                Day141.setStyle(null);
-                Day301.setStyle(null);
             } else if (i == 100) {
-                Day11.setStyle(null);
-                Day71.setStyle(null);
-                Day141.setStyle(null);
                 Day301.setStyle("-fx-text-fill: #FA8072");
             } else {
-                Day11.setStyle(null);
-                Day71.setStyle(null);
                 Day141.setStyle("-fx-text-fill: #FA8072");
-                Day301.setStyle(null);
+            }
+        }
+        else if(sl==2){
+            Day111.setStyle(null);
+            Day711.setStyle(null);
+            Day1411.setStyle(null);
+            Day3011.setStyle(null);
+            if (i == 0) {
+                Day111.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 33.3) {
+                Day711.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 100) {
+                Day3011.setStyle("-fx-text-fill: #FA8072");
+            } else {
+                Day1411.setStyle("-fx-text-fill: #FA8072");
+            }
+        }
+        else if(sl==3){
+            Day112.setStyle(null);
+            Day712.setStyle(null);
+            Day1412.setStyle(null);
+            Day3012.setStyle(null);
+            if (i == 0) {
+                Day112.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 33.3) {
+                Day712.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 100) {
+                Day3012.setStyle("-fx-text-fill: #FA8072");
+            } else {
+                Day1412.setStyle("-fx-text-fill: #FA8072");
             }
         }
     }
@@ -202,28 +272,30 @@ public class Settings implements Initializable {
     @FXML
     void Save_Button_Pr(ActionEvent event) {
         String ForFile;
-        if (onoffBack.getValue() > 60) {
+        if (onoffBack.getValue() > 50) {
             ForFile = "true";
         } else {
             ForFile = "False";
         }
         ForFile = ForFile + "~" + Slider.getValue();
-        if (onoffBackServ.getValue() > 60) {
-            ForFile = ForFile + "~" + "true";
-        } else {
-            ForFile = ForFile + "~" + "false";
-        }
-        if (onoffBackKteo.getValue() > 60) {
-            ForFile = ForFile + "~" + "true";
-        } else {
-            ForFile = ForFile + "~" + "false";
-        }
-        if (onoffBackGas.getValue() > 60) {
+        if (onoffBackServ.getValue() > 50) {
             ForFile = ForFile + "~" + "true";
         } else {
             ForFile = ForFile + "~" + "false";
         }
         ForFile = ForFile + "~" + SliderNot.getValue();
+        if (onoffBackKteo.getValue() > 50) {
+            ForFile = ForFile + "~" + "true";
+        } else {
+            ForFile = ForFile + "~" + "false";
+        }
+        ForFile = ForFile + "~" + SliderNot1.getValue();
+        if (onoffBackGas.getValue() > 50) {
+            ForFile = ForFile + "~" + "true";
+        } else {
+            ForFile = ForFile + "~" + "false";
+        }
+        ForFile = ForFile + "~" + SliderNot2.getValue();
         ForFile = ForFile + "~" + SaveDate;
         FileManagment FS = new FileManagment();
         FS.Write(ForFile);

@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0 Alpha
  */
 public class Main extends Application {
-    private int days;
+    private int[] days;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,14 +51,21 @@ public class Main extends Application {
         FileManagment FS = new FileManagment();
         String[] chks = FS.Read();
         int daysBc;
-        if (chks[5].equals("0.0")) {
-            days = 1;
-        } else if (chks[5].equals("33.3")) {
-            days = 7;
-        } else if (chks[5].equals("66.6")) {
-            days = 14;
-        } else {
-            days = 30;
+        days=new int[3];
+        int flg=3;
+        int arPos=0;
+        while(flg<8) {
+            if (chks[flg].equals("0.0")) {
+                days[arPos] = 1;
+            } else if (chks[flg].equals("33.3")) {
+                days[arPos] = 7;
+            } else if (chks[flg].equals("66.6")) {
+                days[arPos] = 14;
+            } else {
+                days[arPos] = 30;
+            }
+            flg=flg+2;
+            arPos++;
         }
         if (chks[1].equals("0.0")) {
             daysBc = 1;
@@ -71,7 +78,7 @@ public class Main extends Application {
         }
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.15));
         Thread.sleep(500);
-        if (chks[3].equals("true")) {
+        if (chks[4].equals("true")) {
             rs = sql.Query_General_KTEO();
             Tray(rs, "KTEO");
         }
@@ -81,7 +88,7 @@ public class Main extends Application {
             rs = sql.Query_Group_Service();
             Tray(rs, "Service");
         }
-        if (chks[4].equals("true")) {
+        if (chks[6].equals("true")) {
             rs = sql.Query_General_EmmisionCard();
             Tray(rs, "Emmision");
         }
@@ -89,7 +96,7 @@ public class Main extends Application {
         Thread.sleep(500);
         if (chks[0].equals("true")) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(chks[6]);
+            Date date = sdf.parse(chks[8]);
             Date date2 = new Date();
             long tempDiffInMillies = date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
             long diffInMillies = Math.abs(date.getTime() - date2.getTime());
@@ -109,7 +116,7 @@ public class Main extends Application {
                 LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.45));
                 Thread.sleep(500);
                 bc.CreateBackupRepair();
-                FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+sdf.format(date2));
+                FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+chks[6]+"~"+chks[7]+"~"+sdf.format(date2));
                 LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.50));
             }
         }
@@ -134,14 +141,18 @@ public class Main extends Application {
         ArrayList<String> LiscsExp = new ArrayList<>();
 
         try {
+            int corDays;
             while (rs.next()) {
                 String next = "";
                 rs.getString("id");
                 if (Type.equals("Service")) {
+                    corDays=days[0];
                     next = rs.getString("MAX(Next_Date)"); // The collumn of service is different because each car have many services stored but we only need the latest
                 } else if (Type.equals("KTEO")) {
+                    corDays=days[1];
                     next = rs.getString("DateNext");
                 } else {
+                    corDays=days[2];
                     next = rs.getString("NextDate");
                 }
                 String Lisc = rs.getString("id");
@@ -156,16 +167,12 @@ public class Main extends Application {
                     multi = -1;
                 }
                 Sql sql = new Sql();
-                if (diff < days) {
-
+                if (diff < corDays) {
                     LiscsToDo.add(sql.GetLisxxFromId(Lisc));
-
                 }
                 if (multi == -1) {
                     LiscsExp.add(sql.GetLisxxFromId(Lisc));
                 }
-
-
             }
             if (SystemTray.isSupported()) {
                 try {
