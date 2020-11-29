@@ -1,8 +1,10 @@
 package Pr.Cars;
 
+import animatefx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -151,6 +153,7 @@ public class Drawer {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
                 Parent.getBorder_Pane().setCenter(root);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,8 +182,10 @@ public class Drawer {
             Active = "More";
             changeBg();
             try {
+
                 Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
                 Parent.getBorder_Pane().setCenter(root);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

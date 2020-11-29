@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.FileReader;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,13 +97,29 @@ public class Settings implements Initializable {
     private Label Day3012;
 
     @FXML
+    private TextField OldPrice;
+
+    @FXML
+    private TextField NewPrice;
+
+    @FXML
     private Button Save_Button;
+
+    @FXML
+    private Label Pr_Label;
+
+
+    boolean changes;
 
 
     String SaveDate;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FileManagment FS1=new FileManagment();
+        FS1.setFile("FuelPrice.txt","Fuel");
+        OldPrice.setText(String.valueOf(FS1.ReadFuelPrice()));
+        changes=false;
         FileManagment FS = new FileManagment();
         String[] fs = FS.Read();
         if (fs[0].equals("true")) {
@@ -147,6 +164,7 @@ public class Settings implements Initializable {
     }
 
     final ChangeListener<Number> numberChangeListenerSl = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
         if (roundedValue > 99) {
             roundedValue = 100;
@@ -157,6 +175,7 @@ public class Settings implements Initializable {
     };
 
     final ChangeListener<Number> numberChangeListenerSlN = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
         if (roundedValue > 99) {
             roundedValue = 100;
@@ -167,6 +186,7 @@ public class Settings implements Initializable {
     };
 
     final ChangeListener<Number> numberChangeListenerSlN1 = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
         if (roundedValue > 99) {
             roundedValue = 100;
@@ -177,6 +197,7 @@ public class Settings implements Initializable {
     };
 
     final ChangeListener<Number> numberChangeListenerSlN2 = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
         if (roundedValue > 99) {
             roundedValue = 100;
@@ -187,21 +208,25 @@ public class Settings implements Initializable {
     };
 
     final ChangeListener<Number> OnOff = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 100) * 100;
         onoffBack.valueProperty().set(roundedValue);
     };
 
     final ChangeListener<Number> OnOffSer = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 100) * 100;
         onoffBackServ.valueProperty().set(roundedValue);
     };
 
     final ChangeListener<Number> OnOffKteo = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 100) * 100;
         onoffBackKteo.valueProperty().set(roundedValue);
     };
 
     final ChangeListener<Number> OnOffGas = (obs, old, val) -> {
+        changes=true;
         double roundedValue = Math.round(val.doubleValue() / 100) * 100;
         onoffBackGas.valueProperty().set(roundedValue);
     };
@@ -271,34 +296,50 @@ public class Settings implements Initializable {
 
     @FXML
     void Save_Button_Pr(ActionEvent event) {
-        String ForFile;
-        if (onoffBack.getValue() > 50) {
-            ForFile = "true";
-        } else {
-            ForFile = "False";
-        }
-        ForFile = ForFile + "~" + Slider.getValue();
-        if (onoffBackServ.getValue() > 50) {
-            ForFile = ForFile + "~" + "true";
-        } else {
-            ForFile = ForFile + "~" + "false";
-        }
-        ForFile = ForFile + "~" + SliderNot.getValue();
-        if (onoffBackKteo.getValue() > 50) {
-            ForFile = ForFile + "~" + "true";
-        } else {
-            ForFile = ForFile + "~" + "false";
-        }
-        ForFile = ForFile + "~" + SliderNot1.getValue();
-        if (onoffBackGas.getValue() > 50) {
-            ForFile = ForFile + "~" + "true";
-        } else {
-            ForFile = ForFile + "~" + "false";
-        }
-        ForFile = ForFile + "~" + SliderNot2.getValue();
-        ForFile = ForFile + "~" + SaveDate;
+        Pr_Label.setVisible(false);
+        NewPrice.setStyle(null);
         FileManagment FS = new FileManagment();
-        FS.Write(ForFile);
+        if(changes==true) {
+            String ForFile;
+            if (onoffBack.getValue() > 50) {
+                ForFile = "true";
+            } else {
+                ForFile = "False";
+            }
+            ForFile = ForFile + "~" + Slider.getValue();
+            if (onoffBackServ.getValue() > 50) {
+                ForFile = ForFile + "~" + "true";
+            } else {
+                ForFile = ForFile + "~" + "false";
+            }
+            ForFile = ForFile + "~" + SliderNot.getValue();
+            if (onoffBackKteo.getValue() > 50) {
+                ForFile = ForFile + "~" + "true";
+            } else {
+                ForFile = ForFile + "~" + "false";
+            }
+            ForFile = ForFile + "~" + SliderNot1.getValue();
+            if (onoffBackGas.getValue() > 50) {
+                ForFile = ForFile + "~" + "true";
+            } else {
+                ForFile = ForFile + "~" + "false";
+            }
+            ForFile = ForFile + "~" + SliderNot2.getValue();
+            ForFile = ForFile + "~" + SaveDate;
+
+            FS.Write(ForFile);
+        }
+        try {
+            Double.valueOf(NewPrice.getText());
+        }
+        catch(NumberFormatException e){
+            Pr_Label.setVisible(true);
+            NewPrice.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if(!NewPrice.equals("")){
+            FS.setFile("FuelPrice.txt","Fuel");
+            FS.Write(NewPrice.getText());
+        }
     }
 
     @FXML

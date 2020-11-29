@@ -165,7 +165,7 @@ public class Backup {
             hStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
             for (int i = 0; i < Cars.size(); i++) {
                 Sheet sh = workbook.createSheet(Cars.get(i));
-                String[] ColumnHeaders = {"Ημερομηνία","Ποσότητα(Lt)", "Χιλίομετρα","Οδηγός","Δρομολόγιο","id"};
+                String[] ColumnHeaders = {"Ημερομηνία","Ποσότητα(Lt)", "Χιλίομετρα","Οδηγός","Δρομολόγιο","Κατανάλωση (lt/100)","Κόστος","id"};
                 Row Header = sh.createRow(0);
                 for (int j=0;j<ColumnHeaders.length;j++) {
                     Cell cell = Header.createCell(j);
@@ -186,6 +186,10 @@ public class Backup {
                     Driver.setCellValue(rs1.getString("Driver"));
                     Cell Location=row.createCell(4);
                     Location.setCellValue(rs1.getString("Location"));
+                    Cell Consamptuion=row.createCell(5);
+                    Location.setCellValue(rs1.getString("Consumption"));
+                    Cell Cost=row.createCell(6);
+                    Location.setCellValue(rs1.getString("Cost"));
                     Cell id=row.createCell(5);
                     id.setCellValue(rs1.getString("Id"));
                     k++;

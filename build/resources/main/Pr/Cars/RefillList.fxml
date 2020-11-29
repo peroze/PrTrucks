@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.RefillList">
+<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.RefillList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="149.0">
          <children>
@@ -34,7 +34,9 @@
             <TableColumn fx:id="Kilometers_Column" prefWidth="117.0" text="Χιλιόμετρα" />
             <TableColumn fx:id="Amount_Column" prefWidth="97.0" text="Ποσότητα (Lt)" />
             <TableColumn fx:id="Driver_Collumn" prefWidth="117.0" text="Οδηγός" />
-            <TableColumn fx:id="Loc_Collumn" prefWidth="169.0" text="Δρομολόγιο" />
+            <TableColumn fx:id="Loc_Collumn" prefWidth="144.0" text="Δρομολόγιο" />
+            <TableColumn fx:id="Consmption" prefWidth="129.0" text="Κατανάλωσή (Lt/100)" />
+            <TableColumn fx:id="Cost" prefWidth="75.0" text="Κόστος" />
         </columns>
          <padding>
             <Insets left="3.0" />

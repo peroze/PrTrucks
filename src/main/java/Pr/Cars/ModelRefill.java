@@ -11,6 +11,8 @@ public class ModelRefill {
     private String Id;
     private String Driver;
     private String Location;
+    private String Consumption;
+    private String Cost;
 
     /**
      * This is the constarctor of the class
@@ -21,7 +23,7 @@ public class ModelRefill {
      * @param amount      The amount of petrol
      * @param id          The unique id of each refill
      */
-    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String id,String driver,String location) {
+    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String id,String driver,String location,String consumption,String cost) {
         LiscPlate = liscPlate;
         Kilometers = kilometers;
         Date = date;
@@ -29,8 +31,46 @@ public class ModelRefill {
         Id = id;
         Driver=driver;
         Location=location;
+        Consumption = consumption;
+        Cost = cost;
     }
 
+    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String id, String driver, String location) {
+        LiscPlate = liscPlate;
+        Kilometers = kilometers;
+        Date = date;
+        Amount = amount;
+        Id = id;
+        Driver = driver;
+        Location = location;
+    }
+
+    public ModelRefill(String liscPlate, String kilometers, String date, String amount, String driver, String location, String consumption, String cost) {
+        LiscPlate = liscPlate;
+        Kilometers = kilometers;
+        Date = date;
+        Amount = amount;
+        Driver = driver;
+        Location = location;
+        Consumption = consumption;
+        Cost = cost;
+    }
+
+    public String getCost() {
+        return Cost;
+    }
+
+    public void setCost(String cost) {
+        Cost = cost;
+    }
+
+    public String getConsumption() {
+        return Consumption;
+    }
+
+    public void setConsumption(String consumption) {
+        Consumption = consumption;
+    }
 
     /**
      * This is the constarctor of the class with out id

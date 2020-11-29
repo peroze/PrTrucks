@@ -150,14 +150,38 @@ public class AddRefill implements Initializable {
                 return;
             }
             Sql sql = new Sql();
-            ModelRefill toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
+            ResultSet rs2 = sql.Query_Specific_LastRefill(Lisc_Plate.getValue().toString());
+            ModelRefill toAdd;
+            if (rs2.next()) {
+                int km_old = rs2.getInt("Kilometers");
+                int km_new = Integer.valueOf(Kilometers.getText());
+                if (km_old > km_new) {
+                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
+                Double cons = Double.valueOf(Amount.getText()) / Double.valueOf(km_new - km_old) * 100.0;
+                FileManagment Fs = new FileManagment();
+                Fs.setFile("FuelPrice.txt", "Price");
+                Double pr = Fs.ReadFuelPrice();
+                if (pr != -5) {
+                    double cost = Double.valueOf(Amount.getText()) * pr;
+                    toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText(), String.valueOf(cons), String.valueOf(cost));
+                }
+                else{
+                    toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
+                }
+            } else {
+                toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
+            }
             int i = sql.InstertRefill(toAdd);
             if (i == 1) {
-                ResultSet rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
-                int km=rs.getInt("Kilometers");
-                if(km<Integer.valueOf(Kilometers.getText())){
-                    ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
-                    sql.InsertCar(repl,5,true);
+                ResultSet rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                int km = rs.getInt("Kilometers");
+                if (km < Integer.valueOf(Kilometers.getText())) {
+                    ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl, 5, true);
                 }
                 sql.Disconnect();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -171,15 +195,14 @@ public class AddRefill implements Initializable {
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Απέτυχε");
-                alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.setContentText("Ο ανευφοδίασμος δεν ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
             }
         } catch (NumberFormatException e) {
             Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
             Km_Label.setVisible(true);
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

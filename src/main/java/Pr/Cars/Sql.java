@@ -484,6 +484,18 @@ public class Sql {
 
     }
 
+    public ResultSet Query_Specific_LastRefill(String lisc){
+        String sql="SELECT  MAX(Date),Amount,Kilometers FROM Refill WHERE Car_id="+GetIdFromLisx(lisc);
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ResultSet Query_Specific_NextGas(String lisc){
 
         ResultSet rs = null;
@@ -808,16 +820,29 @@ public class Sql {
      */
     public int InstertRefill(ModelRefill a) {
         try {
+            String sql;
             ArrayList<String> repair = new ArrayList<>();
             repair.add(a.getKilometers());
             repair.add(a.getDate());
             repair.add(a.getAmount());
-            String sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount) VALUES (?,?,?,?)";
+        if(a.getConsumption()!=null&&a.getCost()!=null) {
+            repair.add(a.getConsumption());
+            repair.add(a.getCost());
+            sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount,Consumption,Cost) VALUES (?,?,?,?,?,?)";
+        }
+         else{
+            sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount) VALUES (?,?,?,?)";
+        }
+
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
             pstmt.setInt(2, Integer.valueOf(repair.get(0)));
             pstmt.setString(3, repair.get(1));
             pstmt.setString(4, repair.get(2));
+            if(a.getConsumption()!=null&&a.getCost()!=null){
+                pstmt.setString(5, repair.get(3));
+                pstmt.setString(6, repair.get(4));
+            }
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package Pr.Cars;
 
+import animatefx.animation.FadeIn;
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,9 @@ public class PreLoader extends Preloader {
         Stage=primaryStage;
         Stage.setScene(scene);
         Stage.initStyle(StageStyle.UNDECORATED);
+        FadeIn a=new FadeIn(Stage.getScene().getRoot());
+        a.setSpeed(0.4);
+        a.play();
         Stage.show();
     }
 

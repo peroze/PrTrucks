@@ -71,6 +71,12 @@ public class RefillList implements Initializable {
     @FXML
     private TableColumn<ModelRepair, String> Loc_Collumn;
 
+    @FXML
+    private TableColumn<ModelRepair, String> Consmption;
+
+    @FXML
+    private TableColumn<ModelRepair, String> Cost;
+
     private ObservableList<ModelRefill> Oblist;
 
 
@@ -82,7 +88,7 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver")));
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"),rs.getString("Consumption"),rs.getString("Cost")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,6 +99,8 @@ public class RefillList implements Initializable {
         Amount_Column.setCellValueFactory(new PropertyValueFactory<>("Amount"));
         Loc_Collumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
         Driver_Collumn.setCellValueFactory(new PropertyValueFactory<>("Driver"));
+        Consmption.setCellValueFactory(new PropertyValueFactory<>("Consumption"));
+        Cost.setCellValueFactory(new PropertyValueFactory<>("Cost"));
         FilteredList<ModelRefill> Filter = new FilteredList<>(Oblist, b -> true);
 
         Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -233,8 +241,7 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver")));
-
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"),rs.getString("Consumption"),rs.getString("Cost")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

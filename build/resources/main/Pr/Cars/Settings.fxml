@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,146 +17,166 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="Backup" layoutX="209.0" layoutY="260.0" onMousePressed="#Backup_Pre" text="Αποθήκεθση Αντιγράφου Τώρα" textFill="WHITE" underline="true">
+            <Label fx:id="Backup" layoutX="209.0" layoutY="231.0" onMousePressed="#Backup_Pre" text="Αποθήκεθση Αντιγράφου Τώρα" textFill="WHITE" underline="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="372.0" layoutY="132.0" text="Αντίγραφα Ασφαλείας" textFill="WHITE" />
-            <Slider fx:id="Slider" layoutX="411.0" layoutY="217.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Slider>
-            <Label fx:id="Day1" layoutX="399.0" layoutY="231.0" text="1 Μέρα" textFill="WHITE">
+            <Label layoutX="372.0" layoutY="103.0" text="Αντίγραφα Ασφαλείας" textFill="WHITE">
                <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="Day7" layoutX="472.0" layoutY="231.0" text="7 Μέρες" textFill="WHITE">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="Day14" layoutX="544.0" layoutY="232.0" text="14 Μέρες" textFill="WHITE">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="Day30" layoutX="618.0" layoutY="233.0" text="30 Μέρες" textFill="WHITE">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label layoutX="388.0" layoutY="323.0" text="Υπενθημήσεις" textFill="WHITE" />
-            <Slider fx:id="onoffBack" layoutX="409.0" layoutY="174.0" prefHeight="14.0" prefWidth="31.0">
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Slider fx:id="Slider" layoutX="411.0" layoutY="188.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Slider>
-            <Label layoutX="209.0" layoutY="172.0" text="Αυτόματη Αποθήκευση" textFill="#fffdfd" />
-            <Label layoutX="209.0" layoutY="216.0" text="Ανά (Μέρες) " textFill="#fffdfd" />
-            <Slider fx:id="onoffBackServ" layoutX="275.0" layoutY="374.0" prefHeight="14.0" prefWidth="31.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Slider>
-            <Slider fx:id="onoffBackKteo" layoutX="404.0" layoutY="374.0" prefHeight="14.0" prefWidth="31.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Slider>
-            <Slider fx:id="onoffBackGas" layoutX="597.0" layoutY="374.0" prefHeight="14.0" prefWidth="31.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Slider>
-            <Slider fx:id="SliderNot" layoutX="410.0" layoutY="423.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Slider>
-            <Label fx:id="Day11" layoutX="398.0" layoutY="437.0" text="1 Μέρα" textFill="WHITE">
+            <Label fx:id="Day1" layoutX="399.0" layoutY="202.0" text="1 Μέρα" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day71" layoutX="471.0" layoutY="437.0" text="7 Μέρες" textFill="WHITE">
+            <Label fx:id="Day7" layoutX="472.0" layoutY="202.0" text="7 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day141" layoutX="543.0" layoutY="438.0" text="14 Μέρες" textFill="WHITE">
+            <Label fx:id="Day14" layoutX="544.0" layoutY="203.0" text="14 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day301" layoutX="617.0" layoutY="439.0" text="30 Μέρες" textFill="WHITE">
+            <Label fx:id="Day30" layoutX="618.0" layoutY="204.0" text="30 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label layoutX="209.0" layoutY="422.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Service πριν από :" textFill="#fffdfd" />
-            <Label layoutX="208.0" layoutY="372.0" text="Service" textFill="#fffdfd" />
-            <Label layoutX="354.0" layoutY="373.0" text="ΚΤΕΟ" textFill="#fffdfd" />
-            <Label layoutX="475.0" layoutY="373.0" text="Κάρτα Καυσαερίων" textFill="#fffdfd" />
-            <Button fx:id="Save_Button" layoutX="400.0" layoutY="566.0" mnemonicParsing="false" onAction="#Save_Button_Pr" text="Αποθήκευση">
+            <Label layoutX="389.0" layoutY="266.0" text="Υπενθημήσεις" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Slider fx:id="onoffBack" layoutX="409.0" layoutY="145.0" prefHeight="14.0" prefWidth="31.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Label layoutX="209.0" layoutY="143.0" text="Αυτόματη Αποθήκευση" textFill="#fffdfd" />
+            <Label layoutX="209.0" layoutY="187.0" text="Ανά (Μέρες) " textFill="#fffdfd" />
+            <Slider fx:id="onoffBackServ" layoutX="277.0" layoutY="299.0" prefHeight="14.0" prefWidth="31.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Slider fx:id="onoffBackKteo" layoutX="406.0" layoutY="299.0" prefHeight="14.0" prefWidth="31.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Slider fx:id="onoffBackGas" layoutX="599.0" layoutY="299.0" prefHeight="14.0" prefWidth="31.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Slider fx:id="SliderNot" layoutX="412.0" layoutY="348.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Slider>
+            <Label fx:id="Day11" layoutX="400.0" layoutY="362.0" text="1 Μέρα" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day71" layoutX="473.0" layoutY="362.0" text="7 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day141" layoutX="545.0" layoutY="363.0" text="14 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Day301" layoutX="619.0" layoutY="364.0" text="30 Μέρες" textFill="WHITE">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label layoutX="211.0" layoutY="347.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Service πριν από :" textFill="#fffdfd" />
+            <Label layoutX="210.0" layoutY="297.0" text="Service" textFill="#fffdfd" />
+            <Label layoutX="356.0" layoutY="298.0" text="ΚΤΕΟ" textFill="#fffdfd" />
+            <Label layoutX="477.0" layoutY="298.0" text="Κάρτα Καυσαερίων" textFill="#fffdfd" />
+            <Button fx:id="Save_Button" layoutX="387.0" layoutY="580.0" mnemonicParsing="false" onAction="#Save_Button_Pr" text="Αποθήκευση">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Slider fx:id="SliderNot1" layoutX="411.0" layoutY="464.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
+            <Slider fx:id="SliderNot1" layoutX="413.0" layoutY="389.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Slider>
-            <Label fx:id="Day111" layoutX="399.0" layoutY="478.0" text="1 Μέρα" textFill="WHITE">
+            <Label fx:id="Day111" layoutX="401.0" layoutY="403.0" text="1 Μέρα" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day711" layoutX="472.0" layoutY="478.0" text="7 Μέρες" textFill="WHITE">
+            <Label fx:id="Day711" layoutX="474.0" layoutY="403.0" text="7 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day1411" layoutX="544.0" layoutY="479.0" text="14 Μέρες" textFill="WHITE">
+            <Label fx:id="Day1411" layoutX="546.0" layoutY="404.0" text="14 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day3011" layoutX="618.0" layoutY="480.0" text="30 Μέρες" textFill="WHITE">
+            <Label fx:id="Day3011" layoutX="620.0" layoutY="405.0" text="30 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label layoutX="209.0" layoutY="463.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση ΚΤΕΟ πριν από :" textFill="#fffdfd" />
-            <Slider fx:id="SliderNot2" layoutX="409.0" layoutY="505.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
+            <Label layoutX="211.0" layoutY="388.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση ΚΤΕΟ πριν από :" textFill="#fffdfd" />
+            <Slider fx:id="SliderNot2" layoutX="411.0" layoutY="430.0" majorTickUnit="33.3" prefHeight="14.0" prefWidth="233.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Slider>
-            <Label fx:id="Day112" layoutX="397.0" layoutY="519.0" text="1 Μέρα" textFill="WHITE">
+            <Label fx:id="Day112" layoutX="399.0" layoutY="444.0" text="1 Μέρα" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day712" layoutX="470.0" layoutY="519.0" text="7 Μέρες" textFill="WHITE">
+            <Label fx:id="Day712" layoutX="472.0" layoutY="444.0" text="7 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day1412" layoutX="542.0" layoutY="520.0" text="14 Μέρες" textFill="WHITE">
+            <Label fx:id="Day1412" layoutX="544.0" layoutY="445.0" text="14 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="Day3012" layoutX="616.0" layoutY="521.0" text="30 Μέρες" textFill="WHITE">
+            <Label fx:id="Day3012" layoutX="618.0" layoutY="446.0" text="30 Μέρες" textFill="WHITE">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label layoutX="209.0" layoutY="504.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Κάρτας πριν από :" textFill="#fffdfd" />
+            <Label layoutX="211.0" layoutY="429.0" prefHeight="17.0" prefWidth="184.0" text="Προηδοποίηση Κάρτας πριν από :" textFill="#fffdfd" />
+            <Label layoutX="362.0" layoutY="480.0" text="Αλλαγή Τιμής Πετραιλάιου" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="229.0" layoutY="523.0" text="Παλία Τιμή:" textFill="WHITE" />
+            <TextField fx:id="OldPrice" editable="false" layoutX="317.0" layoutY="519.0" prefHeight="24.0" prefWidth="53.0" />
+            <Label layoutX="439.0" layoutY="523.0" text="Nέα Τιμή" textFill="WHITE" />
+            <TextField fx:id="NewPrice" layoutX="527.0" layoutY="520.0" prefHeight="24.0" prefWidth="126.0" promptText="Γράψε εδώ" />
+            <Label fx:id="Pr_Label" layoutX="523.0" layoutY="506.0" prefHeight="17.0" prefWidth="138.0" text="H τιμή δεν αριθμος" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

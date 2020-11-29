@@ -42,7 +42,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    @Override
+   /* @Override
     public void init() throws Exception{
         Sql sql = new Sql();
         double count=0;
@@ -129,11 +129,11 @@ public class Main extends Application {
                    Thread.sleep(500);
                }
        }
-    }
+    }*/
 
     public static void main(String[] args) {
-       LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
-        //launch(args);
+       //LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
+        launch(args);
     }
 
     public void Tray(ResultSet rs, String Type) {
