@@ -2,46 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FuelPrice.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/PrTrucks.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Backup.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Backup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/FileManagment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/FileManagment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main_Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ModelRefill.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ModelRefill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/RefillList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/RefillList.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Backup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Backup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/FileManagment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/FileManagment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main_Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelRefill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelRefill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/PreLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/PreLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/RefillList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/RefillList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/DrawerTopComp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/DrawerTopComp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/RefillList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/RefillList.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/AddsTotals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/AddsTotals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +180,8 @@
       <workItem from="1606548975551" duration="140000" />
       <workItem from="1606550671815" duration="1349000" />
       <workItem from="1606573074215" duration="22485000" />
-      <workItem from="1606596893595" duration="11752000" />
+      <workItem from="1606596893595" duration="12031000" />
+      <workItem from="1606667610946" duration="5484000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -291,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606593851612</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Only new Totals and Testing Left">
+      <created>1606610266587</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1606610266587</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +279,8 @@
     <MESSAGE value="Edits Completed in Service and Repair" />
     <MESSAGE value="Edits Completed in Service and Repair plus Warning in null values for AddService and AddRepair" />
     <MESSAGE value="Edit Transport Companinies and External Trucks" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit Transport Companinies and External Trucks" />
+    <MESSAGE value="Only new Totals and Testing Left" />
+    <option name="LAST_COMMIT_MESSAGE" value="Only new Totals and Testing Left" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1606471104497">
@@ -314,34 +291,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606606557104" />
-    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606593850243">
+    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606610264564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606593850243" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606610182862">
+    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606610264564" />
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606672904325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606610182862" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606610182862">
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606672904325" />
+    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606672904325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606610182862" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606610182861">
+    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606672904325" />
+    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606672904325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606610182861" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606610182862">
+    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606672904325" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606672904325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606610182862" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606593855051">
+    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606672904325" />
+    <state width="1877" height="326" key="GridCell.Tab.1.bottom" timestamp="1606671375401">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606593855051" />
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1606596951938">
+    <state width="1877" height="326" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606671375401" />
+    <state width="1877" height="326" key="GridCell.Tab.1.center" timestamp="1606671375401">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606596951938" />
+    <state width="1877" height="326" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606671375401" />
+    <state width="1877" height="326" key="GridCell.Tab.1.left" timestamp="1606671375401">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="326" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606671375401" />
+    <state width="1877" height="326" key="GridCell.Tab.1.right" timestamp="1606671375401">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="326" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606671375401" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606610270182">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606610270182" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1606667669393">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606667669393" />
+    <state x="690" y="276" key="extract.method.dialog" timestamp="1606672214221">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="276" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606672214221" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606668994745">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606668994745" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

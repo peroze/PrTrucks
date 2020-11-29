@@ -42,7 +42,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-   /* @Override
+    @Override
     public void init() throws Exception{
         Sql sql = new Sql();
         double count=0;
@@ -80,17 +80,18 @@ public class Main extends Application {
         Thread.sleep(500);
         if (chks[4].equals("true")) {
             rs = sql.Query_General_KTEO();
-            Tray(rs, "KTEO");
+            Tray(rs, "KTEO",sql);
         }
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.20));
         Thread.sleep(500);
-        if (chks[2].equals("true")) {
-            rs = sql.Query_Group_Service();
-            Tray(rs, "Service");
-        }
         if (chks[6].equals("true")) {
             rs = sql.Query_General_EmmisionCard();
-            Tray(rs, "Emmision");
+            Tray(rs, "Emmision",sql);
+        }
+        if (chks[2].equals("true")) {
+            rs = sql.Query_Group_Service();
+            Tray(rs, "Service",sql);
+            sql.Disconnect();
         }
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.25));
         Thread.sleep(500);
@@ -129,19 +130,20 @@ public class Main extends Application {
                    Thread.sleep(500);
                }
        }
-    }*/
-
-    public static void main(String[] args) {
-       //LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
-        launch(args);
     }
 
-    public void Tray(ResultSet rs, String Type) {
+    public static void main(String[] args) {
+       LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
+        //launch(args);
+    }
+
+    public void Tray(ResultSet rs, String Type,Sql db) {
         ArrayList<String> LiscsToDo = new ArrayList<>();
         ArrayList<String> LiscsExp = new ArrayList<>();
-
+        ArrayList<String> LiscKmToDo= new ArrayList<>();
+        ArrayList<String> LiscKmExp=new ArrayList<>();
+        int corDays=-1;
         try {
-            int corDays;
             while (rs.next()) {
                 String next = "";
                 rs.getString("id");
@@ -173,14 +175,33 @@ public class Main extends Application {
                 if (multi == -1) {
                     LiscsExp.add(sql.GetLisxxFromId(Lisc));
                 }
+                if(Type.equals("Service")){
+                    ResultSet rs1=db.Query_Specific_NextServiceKmCurrentKm(Lisc);
+                    int CurrKm=rs1.getInt("Kilometers");
+                    int ServKm=rs1.getInt("MAX(Next_Kilometers)");
+                    if(ServKm-CurrKm<2000&&!(ServKm<CurrKm)){
+                        System.out.println(Lisc);
+                        LiscKmToDo.add(sql.GetLisxxFromId(Lisc));
+                    }
+                    else if(ServKm<CurrKm){
+                        LiscKmExp.add(sql.GetLisxxFromId(Lisc));
+                    }
+                }
             }
+
             if (SystemTray.isSupported()) {
                 try {
                     if (!(LiscsToDo.isEmpty() || LiscsToDo == null)) {
-                        this.displayTray(LiscsToDo, Type, 1);
+                        this.displayTray(LiscsToDo, Type, 1,corDays);
                     }
                     if (!(LiscsExp.isEmpty() || LiscsExp == null)) {
-                        this.displayTray(LiscsExp, Type, -1);
+                        this.displayTray(LiscsExp, Type, -1,-1);
+                    }
+                    if (!(LiscKmToDo.isEmpty() || LiscKmToDo == null)) {
+                        this.displayTray(LiscKmToDo, Type+"Km", 1,corDays);
+                    }
+                    if (!(LiscKmExp.isEmpty() || LiscKmExp == null)) {
+                        this.displayTray(LiscsExp, Type+"Km", -1,-1);
                     }
                 } catch (AWTException ex) {
 
@@ -195,7 +216,7 @@ public class Main extends Application {
         }
     }
 
-    public void displayTray(ArrayList<String> Liscs, String Type, int error) throws AWTException, MalformedURLException {
+    public void displayTray(ArrayList<String> Liscs, String Type, int error,int Days) throws AWTException, MalformedURLException {
 
         SystemTray tray = SystemTray.getSystemTray();
 
@@ -217,10 +238,21 @@ public class Main extends Application {
         if (Type.equals("Emmision")) {
             Type = "Κάρτα Ελέγχου Καυσαεριών";
         }
+        String text1;
+        String text2;
+        if(Type.equals("ServiceKm")){
+             text1="σε λιγότερες από "+Days+"μέρες:\n";
+             text2="Προσοχή εχεί περάσθει το όριο Χιλιομέτρων για ";
+             Type="Service";
+        }
+        else{
+            text1=" σε λιγότερες από "+Days+" μέρες:\n";
+            text2="Πρόσοχη εχεί περάσει η ημερομινία για ";
+        }
         if (error == 1) {
-            trayIcon.displayMessage("Ειδοποίηση " + Type, "Τα Ακόλουθα οχήματα πρέπει να κάνουν " + Type + " σε λιγότερες από 15 μέρες:\n" + Cars, TrayIcon.MessageType.INFO);
+            trayIcon.displayMessage("Ειδοποίηση " + Type, "Τα Ακόλουθα οχήματα πρέπει να κάνουν " + Type + text1 + Cars, TrayIcon.MessageType.INFO);
         } else {
-            trayIcon.displayMessage("Ειδοποίηση " + Type, "Πρόσοχη εχεί περάσει η ημερομινία για " + Type + " στα ακόλουθα οχήματα:\n" + Cars, TrayIcon.MessageType.ERROR);
+            trayIcon.displayMessage("Ειδοποίηση " + Type, text2 + Type + " στα ακόλουθα οχήματα:\n" + Cars, TrayIcon.MessageType.ERROR);
         }
     }
 }

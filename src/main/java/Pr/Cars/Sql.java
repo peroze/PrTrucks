@@ -512,6 +512,7 @@ public class Sql {
         return rs;
     }
 
+
     public ResultSet Query_Specific_NextServiceKm(String lisc){
 
         ResultSet rs = null;
@@ -526,6 +527,23 @@ public class Sql {
             e.printStackTrace();
         }
         return rs;
+    }
+
+
+    public ResultSet Query_Specific_NextServiceKmCurrentKm(String id){
+        ResultSet rs = null;
+       try {
+
+
+           String sql = "SELECT  MAX(Next_Kilometers),Trucks.Kilometers FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=" + id;
+           Statement stmt = conn.createStatement();
+           rs=stmt.executeQuery(sql);
+           return rs;
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+       return null;
+
     }
 
 
@@ -576,8 +594,8 @@ public class Sql {
             pstmt.setString(8, car.get(6));
             pstmt.setString(9, car.get(7));
             pstmt.setString(10,car.get(8));
-            pstmt.setString(11,car.get(9));
-            pstmt.setString(12,car.get(10));
+            pstmt.setString(11,car.get(10));
+            pstmt.setString(12,car.get(9));
             pstmt.setInt(13,Integer.valueOf(car.get(11)));
 
 

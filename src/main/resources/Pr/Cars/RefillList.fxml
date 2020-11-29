@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.RefillList">
+<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.RefillList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="149.0">
          <children>

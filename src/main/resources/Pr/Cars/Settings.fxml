@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Settings">
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.Settings">
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
