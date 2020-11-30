@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -156,10 +157,17 @@ public class AddRefill implements Initializable {
                 int km_old = rs2.getInt("Kilometers");
                 int km_new = Integer.valueOf(Kilometers.getText());
                 if (km_old > km_new) {
-                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
-                    Km_Label.setVisible(true);
-                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-                    return;
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Επιβαιβέωση");
+                    alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                    alert.setContentText("Τα χιλιόμετρα είναι λιγοτέρα από αυτά του προηγούμενου ανεφοδιασμού. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (!(result.get() == ButtonType.OK)) {
+                        Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
+                        Km_Label.setVisible(true);
+                        Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                        return;
+                    }
                 }
                 Double cons = Double.valueOf(Amount.getText()) / Double.valueOf(km_new - km_old) * 100.0;
                 FileManagment Fs = new FileManagment();

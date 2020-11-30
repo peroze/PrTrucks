@@ -99,7 +99,7 @@ public class ServiceList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("MAX(Next_Date)"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -377,7 +377,7 @@ public class ServiceList implements Initializable {
         try {
             while (rs.next()) {
                 if (rs1 == null) {
-                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("MAX(Next_Date)"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
                 } else {
                     Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
                 }

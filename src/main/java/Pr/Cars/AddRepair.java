@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -104,7 +105,7 @@ public class AddRepair implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        toEdit=null;
+        toEdit = null;
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -133,8 +134,8 @@ public class AddRepair implements Initializable {
             });
             return row;
         }));
-        ContextMenu Cont=new ContextMenu();
-        MenuItem Del=new MenuItem("Διαγραφή");
+        ContextMenu Cont = new ContextMenu();
+        MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
         Cont.getItems().add(Del);
         Table.setContextMenu(Cont);
@@ -142,7 +143,7 @@ public class AddRepair implements Initializable {
     }
 
 
-    public void Del(ActionEvent e){
+    public void Del(ActionEvent e) {
         DoubleClickTable();
     }
 
@@ -182,51 +183,57 @@ public class AddRepair implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
+        boolean flag = false;
+        Lisc_Plate.setStyle(null);
+        Workshop.setStyle(null);
+        Kilometers.setStyle(null);
+        Date.setStyle(null);
+        Price.setStyle(null);
+        Discreption.setStyle(null);
+        Price_Label.setVisible(false);
+        Workshop_Label.setVisible(false);
+        Lisc_Label.setVisible(false);
+        Disc_Label.setVisible(false);
+        Date_Label.setVisible(false);
+        if (Lisc_Plate.getValue() == null) {
+            Lisc_Label.setVisible(true);
+            flag = true;
+            Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if (Date.getValue() == null) {
+            Date_Label.setVisible(true);
+            flag = true;
+        }
+        if (Discreption.getText().equals("")) {
+            Disc_Label.setVisible(true);
+            Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if (Workshop.getText().equals("")) {
+            Workshop_Label.setVisible(true);
+            Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if (Price.getText().equals("")) {
+            Price_Label.setText("H τιμή είναι κενή");
+            Price_Label.setVisible(true);
+            flag = true;
+            Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
         try {
-            boolean flag = false;
-            Lisc_Plate.setStyle(null);
-            Workshop.setStyle(null);
-            Kilometers.setStyle(null);
-            Date.setStyle(null);
-            Price.setStyle(null);
-            Discreption.setStyle(null);
-            Price_Label.setVisible(false);
-            Workshop_Label.setVisible(false);
-            Lisc_Label.setVisible(false);
-            Disc_Label.setVisible(false);
-            Date_Label.setVisible(false);
-            if (Lisc_Plate.getValue() == null) {
-                Lisc_Label.setVisible(true);
-                flag = true;
-                Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
-            if (Date.getValue() == null) {
-                Date_Label.setVisible(true);
-                flag = true;
-            }
-            if (Discreption.getText().equals("")) {
-                Disc_Label.setVisible(true);
-                Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
-            if (Workshop.getText().equals("")) {
-                Workshop_Label.setVisible(true);
-                Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            }
-            if (Price.getText().equals("")) {
-                Price_Label.setText("H τιμή είναι κενή");
-                Price_Label.setVisible(true);
-                flag = true;
-                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            } else {
-                Integer.valueOf(Kilometers.getText());
-            }
-            if (flag == true) {
-                return;
-            }
-        } catch (NumberFormatException e){
+            Integer.valueOf(Price.getText());
+        } catch (NumberFormatException e) {
             Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
             Price_Label.setVisible(true);
             Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            flag = true;
+        }
+        try {
+            Integer.valueOf(Kilometers.getText());
+        } catch (NumberFormatException e) {
+            //ToDO Add Kilometers Label
+            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if (flag == true) {
+            return;
         }
         Sql sql = new Sql();
         String Changes;
@@ -234,12 +241,29 @@ public class AddRepair implements Initializable {
         for (int i = 1; i < Oblist.size(); i++) {
             Changes = Changes + "|" + Oblist.get(i).getString();
         }
-        int i;
-        if(edit==false) {
-            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
-            i = sql.InsertRepair(toAdd,false);
+        try {
+            int prKm = sql.Query_Specific_LastRepairKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
+            if (Integer.valueOf(Lisc_Plate.getValue().toString()) - prKm > 100000) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι πολύ μεγαλύτερα  από αυτά τής προηγούμενης Επισκευής. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    //ToDo Add Kilometers label
+                    return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
         }
-        else{
+        int i;
+        if (edit == false) {
+            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
+            i = sql.InsertRepair(toAdd, false);
+        } else {
             toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
             toEdit.setDate(Date.getValue().toString());
             toEdit.setPrice(Price.getText());
@@ -247,16 +271,16 @@ public class AddRepair implements Initializable {
             toEdit.setKilometers(Kilometers.getText());
             toEdit.setDiscreption(Discreption.getText());
             toEdit.setChanges(Changes);
-            i=sql.InsertRepair(toEdit,true);
+            i = sql.InsertRepair(toEdit, true);
         }
         if (i == 1) {
 
             try {
-                ResultSet rs=sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
+                ResultSet rs = sql.Query_Specific_Trucks(Lisc_Plate.getValue().toString());
                 int km = rs.getInt("Kilometers");
-                if(km<Integer.valueOf(Kilometers.getText())){
-                    ModelTruck repl=new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
-                    sql.InsertCar(repl,5,true);
+                if (km < Integer.valueOf(Kilometers.getText())) {
+                    ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), Kilometers.getText(), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                    sql.InsertCar(repl, 5, true);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -284,6 +308,7 @@ public class AddRepair implements Initializable {
             Table.setItems(Oblist);
         }
     }
+
 
     public void edit(ModelRepair s) {
         edit = true;

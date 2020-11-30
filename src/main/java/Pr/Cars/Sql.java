@@ -391,7 +391,7 @@ public class Sql {
      * @return The Latest Service of each car
      */
     public ResultSet Query_Group_Service() {
-        String sql = "Select id, MAX(Next_Date),Kilometers,Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
+        String sql = "Select id, MAX(Date),Kilometers,NextDate,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -494,6 +494,54 @@ public class Sql {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public ResultSet Query_Specific_LastKteoKM(String lisc){
+        String sql="Select MAX(Date),Kilometers FROM KTEO WHERE id="+GetIdFromLisx(lisc);
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet Query_Specific_LastEmmisionKM(String lisc){
+        String sql="Select MAX(Date),Kilometers FROM EmmisionCard WHERE id="+GetIdFromLisx(lisc);
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet Query_Specific_LastServiceKM(String lisc){
+        String sql="Select MAX(Date),Kilometers FROM Service WHERE id="+GetIdFromLisx(lisc);
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet Query_Specific_LastRepairKM(String lisc){
+        String sql="Select MAX(Date),Kilometers FROM Repairs WHERE Car_id="+GetIdFromLisx(lisc);
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public ResultSet Query_Specific_NextGas(String lisc){

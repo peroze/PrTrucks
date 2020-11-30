@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -260,7 +261,35 @@ public class AddService implements Initializable {
             for (int i = 1; i < Oblist.size(); i++) {
                 Changes = Changes + "|" + Oblist.get(i).getString();
             }
-
+            int prKm=sql.Query_Specific_LastServiceKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
+            if ((prKm > Integer.valueOf(Kilometers.getText()))&&edit==false)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι λιγοτέρα από αυτά του προηγούμενου Service. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
+            }
+            else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>100000  )
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι πολύ μεγαλύτερα  από αυτά του προηγούμενου KTEO. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
+            }
             ResultSet rs = sql.Query_Specific_NextServiceKm(Lisc_Plate.getValue().toString());
             int Nextkm = rs.getInt("ServiceInKm");
             int i;

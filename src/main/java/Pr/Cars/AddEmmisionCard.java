@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -148,6 +149,35 @@ public class AddEmmisionCard implements Initializable {
                 toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusMonths(nextG).toString());
             } else {
                 toAdd = new ModelEmmisionCard(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), "FALSE", Date.getValue().plusYears(nextG).toString());
+            }
+            int prKm=sql.Query_Specific_LastEmmisionKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
+            if ((prKm > Integer.valueOf(Kilometers.getText())))
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι λιγοτέρα από αυτά της προηγούμενής Κάρτας. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
+            }
+            else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>100000  )
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι πολύ μεγαλύτερα  από αυτά του προηγούμενου KTEO. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
             }
             int i = sql.InstertEmmisionCard(toAdd);
             if (i == 1) {

@@ -18,6 +18,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -93,7 +94,7 @@ public class AddKTEO implements Initializable {
 
     private ObservableList<StringsForTables> Oblist;
 
-    private int flag2 ;// This is used to know which field threw an excpetion
+    private int flag2;// This is used to know which field threw an excpetion
 
 
     @Override
@@ -125,8 +126,8 @@ public class AddKTEO implements Initializable {
             });
             return row;
         }));
-        ContextMenu Cont=new ContextMenu();
-        MenuItem Del=new MenuItem("Διαγραφή");
+        ContextMenu Cont = new ContextMenu();
+        MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
         Cont.getItems().add(Del);
         Table.setContextMenu(Cont);
@@ -134,7 +135,7 @@ public class AddKTEO implements Initializable {
 
     }
 
-    public void Del(ActionEvent e){
+    public void Del(ActionEvent e) {
         DoubleClickTable();
     }
 
@@ -175,7 +176,7 @@ public class AddKTEO implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
-            flag2=-1;
+            flag2 = -1;
             boolean flag = false;
             Lisc_Plate.setStyle(null);
             Lisc_Label.setVisible(false);
@@ -208,11 +209,10 @@ public class AddKTEO implements Initializable {
             } else {
                 try {
                     Integer.valueOf(Kilometers.getText());
-                }
-                catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Km_Label.setVisible(true);
-                    flag=true;
+                    flag = true;
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 }
             }
@@ -224,11 +224,10 @@ public class AddKTEO implements Initializable {
             } else {
                 try {
                     Integer.valueOf(Kilometers.getText());
-                }
-                catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Model_Label.setVisible(true);
-                    flag=true;
+                    flag = true;
                     Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 }
             }
@@ -269,6 +268,35 @@ public class AddKTEO implements Initializable {
                     break;
                 case "Οχι Κάρτα":
                     return;
+            }
+            int prKm=sql.Query_Specific_LastKteoKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
+            if (prKm > Integer.valueOf(Kilometers.getText()))
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι λιγοτέρα από αυτά του προηγούμενου KTEO. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
+            }
+             else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>200000  )
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι πολύ μεγαλύτερα  από αυτά του προηγούμενου KTEO. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
+                    Km_Label.setVisible(true);
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    return;
+                }
             }
             ModelKTEO toAdd = new ModelKTEO(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Warnings, Date.getValue().plusYears(nextK).toString(), Workshop.getText());
             int i;
