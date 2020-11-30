@@ -165,6 +165,7 @@ public class AddRefill implements Initializable {
                     if (!(result.get() == ButtonType.OK)) {
                         Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
                         Km_Label.setVisible(true);
+                        sql.Disconnect();
                         Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                         return;
                     }

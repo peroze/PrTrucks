@@ -281,10 +281,11 @@ public class AddKTEO implements Initializable {
                     Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    sql.Disconnect();
                     return;
                 }
             }
-             else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>200000  )
+             else if (Integer.valueOf(Kilometers.getText())-prKm>200000  )
             {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Επιβαιβέωση");
@@ -295,6 +296,7 @@ public class AddKTEO implements Initializable {
                     Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    sql.Disconnect();
                     return;
                 }
             }

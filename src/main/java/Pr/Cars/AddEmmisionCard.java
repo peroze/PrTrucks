@@ -116,7 +116,6 @@ public class AddEmmisionCard implements Initializable {
             if (Date.getValue() == null) {
                 Date_Label.setVisible(true); //Change Style
                 flag = true;
-
             }
             if (Kilometers.getText().equals("")) {
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
@@ -124,7 +123,13 @@ public class AddEmmisionCard implements Initializable {
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                } catch (NumberFormatException e) {
+                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    Km_Label.setVisible(true);
+                }
             }
             if (flag == true) {
                 return;
@@ -162,10 +167,11 @@ public class AddEmmisionCard implements Initializable {
                     Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    sql.Disconnect();
                     return;
                 }
             }
-            else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>100000  )
+            else if (Integer.valueOf(Kilometers.getText())-prKm>100000  )
             {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Επιβαιβέωση");
@@ -176,6 +182,7 @@ public class AddEmmisionCard implements Initializable {
                     Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    sql.Disconnect();
                     return;
                 }
             }
@@ -194,21 +201,16 @@ public class AddEmmisionCard implements Initializable {
                 alert.setContentText("Η Κάρτα εισήχθει με επιτυχία στην Βαση");
                 alert.showAndWait();
                 Stage stage = (Stage) Ok_Button.getScene().getWindow();
-                sql.Disconnect();
                 stage.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Απέτυχε");
                 alert.setContentText("Η κάρτα δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
-                Sql s = new Sql();
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-            Km_Label.setVisible(true);
         }
     }
 

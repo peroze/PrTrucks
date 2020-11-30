@@ -42,7 +42,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    @Override
+    /*@Override
     public void init() throws Exception{
         Sql sql = new Sql();
         double count=0;
@@ -130,11 +130,11 @@ public class Main extends Application {
                    Thread.sleep(500);
                }
        }
-    }
+    }*/
 
     public static void main(String[] args) {
-       LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
-        //launch(args);
+      // LauncherImpl.launchApplication(Main.class,PreLoader.class,args);
+        launch(args);
     }
 
     public void Tray(ResultSet rs, String Type,Sql db) {
@@ -149,7 +149,7 @@ public class Main extends Application {
                 rs.getString("id");
                 if (Type.equals("Service")) {
                     corDays=days[0];
-                    next = rs.getString("MAX(Next_Date)"); // The collumn of service is different because each car have many services stored but we only need the latest
+                    next = rs.getString("Next_Date"); // The collumn of service is different because each car have many services stored but we only need the latest
                 } else if (Type.equals("KTEO")) {
                     corDays=days[1];
                     next = rs.getString("DateNext");

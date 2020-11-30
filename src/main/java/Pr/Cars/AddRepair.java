@@ -243,7 +243,7 @@ public class AddRepair implements Initializable {
         }
         try {
             int prKm = sql.Query_Specific_LastRepairKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
-            if (Integer.valueOf(Lisc_Plate.getValue().toString()) - prKm > 100000) {
+            if (Integer.valueOf(Kilometers.getText()) - prKm > 100000) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Επιβαιβέωση");
                 alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
@@ -252,6 +252,7 @@ public class AddRepair implements Initializable {
                 if (!(result.get() == ButtonType.OK)) {
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     //ToDo Add Kilometers label
+                    sql.Disconnect();
                     return;
                 }
             }

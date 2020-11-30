@@ -391,7 +391,7 @@ public class Sql {
      * @return The Latest Service of each car
      */
     public ResultSet Query_Group_Service() {
-        String sql = "Select id, MAX(Date),Kilometers,NextDate,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
+        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -533,7 +533,7 @@ public class Sql {
     }
 
     public ResultSet Query_Specific_LastRepairKM(String lisc){
-        String sql="Select MAX(Date),Kilometers FROM Repairs WHERE Car_id="+GetIdFromLisx(lisc);
+        String sql="Select MAX(Date),Kilometers FROM Repairs WHERE id="+GetIdFromLisx(lisc);
         try{
             Statement stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
@@ -594,7 +594,16 @@ public class Sql {
 
     }
 
-
+    public ResultSet Query_Specific_MaxKmAllMinusTrucks(String id){
+        String sql="SELECT MAX(KM) FROM (SELECT MAX(Service.Kilometers) AS KM FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(KTEO.Kilometers) AS KM FROM KTEO,Trucks WHERE KTEO.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(Repairs.Kilometers) AS KM FROM Repairs,Trucks WHERE Repairs.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(EmmisionCard.Kilometers) AS KM1 FROM EmmisionCard,Trucks WHERE EmmisionCard.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(Refill.Kilometers) AS KM1 FROM Refill,Trucks WHERE Refill.Car_id=Trucks.id AND Trucks.id="+id+")";
+        try{
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 

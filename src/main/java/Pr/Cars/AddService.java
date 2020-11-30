@@ -272,11 +272,12 @@ public class AddService implements Initializable {
                 if (!(result.get() == ButtonType.OK)) {
                     Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
+                    sql.Disconnect();
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     return;
                 }
             }
-            else if (Integer.valueOf(Lisc_Plate.getValue().toString())-prKm>100000  )
+            else if (Integer.valueOf(Kilometers.getText())-prKm>100000  )
             {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Επιβαιβέωση");
@@ -286,6 +287,7 @@ public class AddService implements Initializable {
                 if (!(result.get() == ButtonType.OK)) {
                     Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
                     Km_Label.setVisible(true);
+                    sql.Disconnect();
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     return;
                 }
