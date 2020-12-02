@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main extends Application {
     private int[] days;
+    int kmBs;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -81,6 +82,22 @@ public class Main extends Application {
         } else {
             daysBc = 30;
         }
+
+        switch (chks[8]){
+            case "0.0":
+                kmBs=1000;
+                break;
+            case "33.3":
+                kmBs=2000;
+                break;
+            case "66.6":
+                kmBs=4000;
+                break;
+            case "100.0":
+                kmBs=8000;
+                break;
+        }
+        System.out.println(chks[8]);
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.15));
         Thread.sleep(500);
         if (chks[4].equals("true")) {
@@ -102,7 +119,7 @@ public class Main extends Application {
         Thread.sleep(500);
         if (chks[0].equals("true")) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(chks[8]);
+            Date date = sdf.parse(chks[9]);
             Date date2 = new Date();
             long tempDiffInMillies = date.getTime() - date2.getTime(); //This Variable is used in order to find out which date is later of the two (if > 0 date > date1)
             long diffInMillies = Math.abs(date.getTime() - date2.getTime());
@@ -122,7 +139,7 @@ public class Main extends Application {
                 LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.45));
                 Thread.sleep(500);
                 bc.CreateBackupRepair();
-                FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+chks[6]+"~"+chks[7]+"~"+sdf.format(date2));
+                FS.Write(chks[0]+"~"+chks[1]+"~"+chks[2]+"~"+chks[3]+"~"+chks[4]+"~"+chks[5]+"~"+chks[6]+"~"+chks[7]+"~"+chks[8]+"~"+sdf.format(date2));
                 LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.50));
             }
         }
@@ -184,7 +201,7 @@ public class Main extends Application {
                     ResultSet rs1=db.Query_Specific_NextServiceKmCurrentKm(Lisc);
                     int CurrKm=rs1.getInt("Kilometers");
                     int ServKm=rs1.getInt("MAX(Next_Kilometers)");
-                    if(ServKm-CurrKm<2000&&!(ServKm<CurrKm)){
+                    if(ServKm-CurrKm<kmBs&&!(ServKm<CurrKm)){
                         System.out.println(Lisc);
                         LiscKmToDo.add(sql.GetLisxxFromId(Lisc));
                     }

@@ -61,6 +61,9 @@ public class Settings implements Initializable {
     private Slider SliderNot2;
 
     @FXML
+    private Slider SliderNot3;
+
+    @FXML
     private Label Day11;
 
     @FXML
@@ -113,6 +116,19 @@ public class Settings implements Initializable {
 
     @FXML
     private Label BackupLabel;
+
+    @FXML
+    private Label Day113;
+
+    @FXML
+    private Label Day713;
+
+    @FXML
+    private Label Day1413;
+
+    @FXML
+    private Label Day3013;
+
 
 
     boolean changes;
@@ -167,6 +183,7 @@ public class Settings implements Initializable {
         SliderNot.valueProperty().addListener(numberChangeListenerSlN);
         SliderNot1.valueProperty().addListener(numberChangeListenerSlN1);
         SliderNot2.valueProperty().addListener(numberChangeListenerSlN2);
+        SliderNot3.valueProperty().addListener(numberChangeListenerSlN3);
     }
 
     final ChangeListener<Number> numberChangeListenerSl = (obs, old, val) -> {
@@ -210,6 +227,17 @@ public class Settings implements Initializable {
         }
         labelColour(roundedValue, 3);
         SliderNot2.valueProperty().set(roundedValue);
+
+    };
+
+    final ChangeListener<Number> numberChangeListenerSlN3 = (obs, old, val) -> {
+        changes=true;
+        double roundedValue = Math.round(val.doubleValue() / 33.3) * 33.3;
+        if (roundedValue > 99) {
+            roundedValue = 100;
+        }
+        labelColour(roundedValue, 4);
+        SliderNot3.valueProperty().set(roundedValue);
 
     };
 
@@ -298,6 +326,22 @@ public class Settings implements Initializable {
                 Day1412.setStyle("-fx-text-fill: #FA8072");
             }
         }
+        else if(sl==4){
+
+             Day113.setStyle(null);
+             Day713.setStyle(null);
+             Day1413.setStyle(null);
+             Day3013.setStyle(null);
+            if (i == 0) {
+                Day113.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 33.3) {
+                Day713.setStyle("-fx-text-fill: #FA8072");
+            } else if (i == 100) {
+                Day3013.setStyle("-fx-text-fill: #FA8072");
+            } else {
+                Day1413.setStyle("-fx-text-fill: #FA8072");
+            }
+        }
     }
 
     @FXML
@@ -331,6 +375,7 @@ public class Settings implements Initializable {
                 ForFile = ForFile + "~" + "false";
             }
             ForFile = ForFile + "~" + SliderNot2.getValue();
+            ForFile = ForFile + "~" + SliderNot3.getValue();
             ForFile = ForFile + "~" + SaveDate;
 
             FS.Write(ForFile);

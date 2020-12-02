@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.AddRefill">
+<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddRefill">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
@@ -53,22 +53,32 @@
       <TextField fx:id="Amount" layoutX="369.0" layoutY="188.0" prefHeight="25.0" prefWidth="138.0" promptText="Ποσότητα" />
       <TextField fx:id="Driver" layoutX="93.0" layoutY="244.0" prefHeight="25.0" prefWidth="138.0" promptText="Οδηγός" />
       <TextField fx:id="Location" layoutX="369.0" layoutY="244.0" prefHeight="25.0" prefWidth="138.0" promptText="Δρομολόγιο" />
-      <Label fx:id="Amount_Label" layoutX="369.0" layoutY="173.0" prefHeight="17.0" prefWidth="138.0" text="Η Ποσότητα είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Amount_Label" layoutX="369.0" layoutY="178.0" prefHeight="17.0" prefWidth="138.0" text="Ποσότητα" textFill="RED" visible="false">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Km_Label" layoutX="96.0" layoutY="173.0" prefHeight="17.0" prefWidth="167.0" text="Τα Χίλιομετρα είναι κενά" textFill="RED" visible="false">
+      <Label fx:id="Km_Label" layoutX="94.0" layoutY="178.0" prefHeight="17.0" prefWidth="167.0" text="Χίλιομετρα" textFill="RED" visible="false">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lisc_Label" layoutX="93.0" layoutY="113.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+      <Label fx:id="Lisc_Label" layoutX="93.0" layoutY="118.0" prefHeight="17.0" prefWidth="138.0" text="Πινακίδα" textFill="RED" visible="false">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Date_Label" layoutX="369.0" layoutY="113.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Date_Label" layoutX="369.0" layoutY="118.0" prefHeight="17.0" prefWidth="138.0" text="Ημερομήνια" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Route_Label" layoutX="369.0" layoutY="233.0" prefHeight="17.0" prefWidth="138.0" text="Δρομολόγιο" textFill="RED" visible="false">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Driver_Label" layoutX="94.0" layoutY="233.0" prefHeight="17.0" prefWidth="167.0" text="Οδηγός" textFill="RED" visible="false">
          <font>
             <Font size="9.0" />
          </font>

@@ -16,9 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * This Class is the Corntoller for AddRefill.fxml which adds a new Refill in the db
@@ -78,9 +76,27 @@ public class AddRefill implements Initializable {
     @FXML
     private Label Date_Label;
 
+    @FXML
+    private Label Route_Label;
+
+    @FXML
+    private Label Driver_Label;
+
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Texts = new ArrayList<>();
+        TFields = new ArrayList<>();
+        Labels = new ArrayList<>();
+        dict = new Hashtable();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -99,7 +115,66 @@ public class AddRefill implements Initializable {
         }
         Lisc_Plate.setItems(Cars);
         sql.Disconnect();
+        Labels.add(Lisc_Label);
+        dict.put(Lisc_Plate, Lisc_Label);
+        Labels.add(Date_Label);
+        dict.put(Date, Date_Label);
+        Labels.add(Km_Label);
+        TFields.add(Kilometers);
+        dict.put(Kilometers, Km_Label);
+        Labels.add(Amount_Label);
+        TFields.add(Amount);
+        dict.put(Amount, Amount_Label);
+        Labels.add(Driver_Label);
+        TFields.add(Driver);
+        dict.put(Driver, Driver_Label);
+        Labels.add(Route_Label);
+        TFields.add(Location);
+        dict.put(Location, Route_Label);
+        for (int i = 0; i < Labels.size(); i++) {
+            Texts.add(Labels.get(i).getText());
+        }
+        for (int i = 0; i < TFields.size(); i++) {
+            TFields.get(i).setOnMouseClicked(this::setFocusTFIelds);
+        }
+        Lisc_Plate.setOnMouseClicked(this::setFocusTFIelds);
+        Date.setOnMouseClicked(this::setFocusTFIelds);
 
+    }
+
+    public void setFocusTFIelds(MouseEvent e) {
+        ResetHideLabels();
+        ((Label) dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label) dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels() {
+        for (int i = 0; i < Labels.size(); i++) {
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if (i == 0 && Lisc_Plate.getValue() == null) {
+                Labels.get(i).setVisible(false);
+            } else if (i == 1 && Date.getValue() == null) {
+                Labels.get(i).setVisible(false);
+            } else if (i != 0 && i != 1) {
+                if (TFields.get(i - 2).getText().equals("")) {
+                    Labels.get(i).setVisible(false);
+                } else {
+                    Labels.get(i).setVisible(true);
+                }
+            } else {
+                Labels.get(i).setVisible(true);
+            }
+
+        }
+    }
+
+    public void ResetCssTFields() {
+        for (int i = 0; i < TFields.size(); i++) {
+            TFields.get(i).setStyle(null);
+        }
+        Date.setStyle(null);
+        Lisc_Plate.setStyle(null);
     }
 
 
@@ -113,39 +188,53 @@ public class AddRefill implements Initializable {
         try {
             int flag2 = 1;// This is used to know which field threw an excpetion
             boolean flag = false;
-            Lisc_Plate.setStyle(null);
-            Lisc_Label.setVisible(false);
-            Kilometers.setStyle(null);
-            Km_Label.setVisible(false);
-            Date.setStyle(null);
-            Date_Label.setVisible(false);
-            Amount_Label.setStyle(null);
-            Amount_Label.setVisible(false);
+            ResetCssTFields();
+            ResetHideLabels();
             if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setText("H Πινακίδα είναι κενή");
+                Lisc_Label.setStyle("-fx-text-fill: RED");
                 Lisc_Label.setVisible(true);
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Date.getValue() == null) {
+                Date_Label.setText("H Ημερομηνία είναι κενή");
+                Date_Label.setStyle("-fx-text-fill: RED");
                 Date_Label.setVisible(true); //Change Style
                 flag = true;
 
             }
             if (Kilometers.getText().equals("")) {
+                Km_Label.setStyle("-fx-text-fill: RED");
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
                 Km_Label.setVisible(true);
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                } catch (NumberFormatException e) {
+                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Km_Label.setVisible(true);
+                    Km_Label.setStyle("-fx-text-fill: RED");
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (Amount.getText().equals("")) {
+                Amount_Label.setStyle("-fx-text-fill: RED");
                 Amount_Label.setText("Η ποσότητα είναι κενή");
                 Amount_Label.setVisible(true);
                 flag = true;
                 Amount.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
-                Integer.valueOf(Kilometers.getText());
+                try {
+                    Integer.valueOf(Kilometers.getText());
+                } catch (NumberFormatException e) {
+                    Amount_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Amount_Label.setVisible(true);
+                    Amount_Label.setStyle("-fx-text-fill: RED");
+                    Amount.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                }
             }
             if (flag == true) {
                 return;
@@ -177,8 +266,7 @@ public class AddRefill implements Initializable {
                 if (pr != -5) {
                     double cost = Double.valueOf(Amount.getText()) * pr;
                     toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText(), String.valueOf(cons), String.valueOf(cost));
-                }
-                else{
+                } else {
                     toAdd = new ModelRefill(Lisc_Plate.getValue().toString(), Kilometers.getText(), Date.getValue().toString(), Amount.getText(), Driver.getText(), Location.getText());
                 }
             } else {
@@ -207,14 +295,14 @@ public class AddRefill implements Initializable {
                 alert.setContentText("Ο ανευφοδίασμος δεν ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
             }
-        } catch (NumberFormatException e) {
-            Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-            Km_Label.setVisible(true);
-            Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    } catch(
+    SQLException e)
+
+    {
+        e.printStackTrace();
     }
+
+}
 
     /**
      * This Closes the program
