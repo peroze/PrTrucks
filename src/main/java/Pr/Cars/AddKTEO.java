@@ -13,13 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.apache.poi.ss.formula.functions.T;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 /**
@@ -41,10 +41,10 @@ public class AddKTEO implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
 
     @FXML
@@ -92,6 +92,14 @@ public class AddKTEO implements Initializable {
     @FXML
     private Label Locat_Label;
 
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
     private ObservableList<StringsForTables> Oblist;
 
     private int flag2;// This is used to know which field threw an excpetion
@@ -99,6 +107,10 @@ public class AddKTEO implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        TFields=new ArrayList<>();
+        Labels=new ArrayList<>();
+        Texts=new ArrayList<>();
+        dict=new Hashtable();
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
             @Override
@@ -132,7 +144,68 @@ public class AddKTEO implements Initializable {
         Cont.getItems().add(Del);
         Table.setContextMenu(Cont);
         sql.Disconnect();
+        Labels.add(Lisc_Label);
+        Texts.add("Πινακίδα");
+        dict.put(Lisc_Plate,Lisc_Label);
+        Lisc_Plate.setOnMouseClicked(this::setFocusTFIelds);
+        Labels.add(Date_Label);
+        Texts.add("Ημερομηνία");
+        dict.put(Date,Date_Label);
+        Date.setOnMouseClicked(this::setFocusTFIelds);
+        Labels.add(Km_Label);
+        TFields.add(Kilometers);
+        Texts.add("Χιλιόμετρα");
+        dict.put(Kilometers,Km_Label);
+        Kilometers.setOnMouseClicked(this::setFocusTFIelds);
+        Labels.add(Locat_Label);
+        TFields.add(Workshop);
+        Texts.add("Εταιρία");
+        dict.put(Workshop,Locat_Label);
+        Workshop.setOnMouseClicked(this::setFocusTFIelds);
+        Labels.add(Model_Label);
+        TFields.add(Price);
+        Texts.add("Τιμή");
+        dict.put(Price,Model_Label);
+        Price.setOnMouseClicked(this::setFocusTFIelds);
+        ResetHideLabels();
+    }
 
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if(i==0&&Lisc_Plate.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==1&&Date.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i!=0&&i!=1){
+                if (TFields.get(i-2).getText().equals("")) {
+                    Labels.get(i).setVisible(false);
+                } else{
+                    Labels.get(i).setVisible(true);
+                }
+            }
+            else{
+                Labels.get(i).setVisible(true);
+            }
+
+        }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+        Date.setStyle(null);
+        Lisc_Plate.setStyle(null);
     }
 
     public void Del(ActionEvent e) {
@@ -178,31 +251,32 @@ public class AddKTEO implements Initializable {
         try {
             flag2 = -1;
             boolean flag = false;
-            Lisc_Plate.setStyle(null);
-            Lisc_Label.setVisible(false);
-            Kilometers.setStyle(null);
-            Km_Label.setVisible(false);
-            Date.setStyle(null);
-            Date_Label.setVisible(false);
-            Model_Label.setStyle(null);
-            Locat_Label.setVisible(false);
+            ResetCssTFields();
+            ResetHideLabels();
             if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setText("Η Πινακίδα είναι κενή");
+                Lisc_Label.setStyle("-fx-text-fill: RED");
                 Lisc_Label.setVisible(true);
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Workshop.getText().equals("")) {
+                Locat_Label.setText("Η Εταιρία είναι κενή");
+                Locat_Label.setStyle("-fx-text-fill: RED");
                 Locat_Label.setVisible(true);
                 flag = true;
                 Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Date.getValue() == null) {
+                Date_Label.setText("Η Ημερομηνία είναι κενή");
+                Date_Label.setStyle("-fx-text-fill: RED");
                 Date_Label.setVisible(true); //Change Style
                 flag = true;
 
             }
             if (Kilometers.getText().equals("")) {
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setStyle("-fx-text-fill: RED");
                 Km_Label.setVisible(true);
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -211,6 +285,7 @@ public class AddKTEO implements Initializable {
                     Integer.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
                     Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Km_Label.setStyle("-fx-text-fill: RED");
                     Km_Label.setVisible(true);
                     flag = true;
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -218,6 +293,7 @@ public class AddKTEO implements Initializable {
             }
             if (Price.getText().equals("")) {
                 Model_Label.setText("Η τιμή είναι κενή");
+                Model_Label.setStyle("-fx-text-fill: RED");
                 Model_Label.setVisible(true);
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -226,6 +302,7 @@ public class AddKTEO implements Initializable {
                     Integer.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
                     Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Model_Label.setStyle("-fx-text-fill: RED");
                     Model_Label.setVisible(true);
                     flag = true;
                     Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -350,7 +427,7 @@ public class AddKTEO implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -386,7 +463,7 @@ public class AddKTEO implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

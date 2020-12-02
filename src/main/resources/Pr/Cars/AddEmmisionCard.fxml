@@ -7,38 +7,31 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.AddEmmisionCard">
+<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddEmmisionCard">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="Kilometers" layoutX="95.0" layoutY="222.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
@@ -50,17 +43,17 @@
          </font>
       </Label>
       <ComboBox fx:id="Lisc_Plate" layoutX="95.0" layoutY="154.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
-      <Label fx:id="Km_Label" layoutX="95.0" layoutY="205.0" prefHeight="17.0" prefWidth="167.0" text="Τα Χίλιομετρα είναι κενά" textFill="RED" visible="false">
+      <Label fx:id="Km_Label" layoutX="95.0" layoutY="212.0" prefHeight="17.0" prefWidth="167.0" text="Χίλιομετρα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lisc_Label" layoutX="95.0" layoutY="137.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+      <Label fx:id="Lisc_Label" layoutX="95.0" layoutY="144.0" prefHeight="17.0" prefWidth="138.0" text="Πινακίδα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Date_Label" layoutX="371.0" layoutY="137.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Date_Label" layoutX="370.0" layoutY="142.0" prefHeight="17.0" prefWidth="138.0" text="Ημερομήνια" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>

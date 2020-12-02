@@ -35,10 +35,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
+        Parent root  = (Parent) fxmlloader.load();
+        fxmlloader.<Drawer>getController().setActive("Kteo");
+        fxmlloader.<Drawer>getController().changeBg();
+        fxmlloader.<Drawer>getController().Trucks_Button_Pressed(null);
         primaryStage.setTitle("PrTrucks");
-        primaryStage.setScene(new Scene(root, 1007, 675));
+        primaryStage.setScene(new Scene(root, 1054, 675));
         primaryStage.initStyle(StageStyle.UNDECORATED);
+
         primaryStage.show();
     }
 

@@ -7,8 +7,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.Settings">
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Settings">
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
@@ -176,6 +177,16 @@
                <font>
                   <Font size="9.0" />
                </font>
+            </Label>
+            <Label fx:id="SaveLabel" layoutX="491.0" layoutY="585.0" prefHeight="17.0" prefWidth="149.0" text="Επιτυχής Αποθήκευση" textFill="#008600" visible="false">
+               <graphic>
+                  <FontIcon iconColor="#008600" iconLiteral="fas-check-circle" iconSize="15" />
+               </graphic>
+            </Label>
+            <Label fx:id="BackupLabel" layoutX="394.0" layoutY="231.0" prefHeight="17.0" prefWidth="195.0" text="Επιτυχής Αντίγραφο Ασφαλείας" textFill="#008600">
+               <graphic>
+                  <FontIcon iconColor="#008600" iconLiteral="fas-check-circle" iconSize="15" />
+               </graphic>
             </Label>
          </children>
       </AnchorPane>

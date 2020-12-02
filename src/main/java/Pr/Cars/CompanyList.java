@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -81,7 +83,7 @@ public class CompanyList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelCompany( rs.getString("id"),rs.getString("Name"), rs.getString("Phone")));
+                Oblist.add(new ModelCompany( rs.getString("id"),rs.getString("Name"), rs.getString("Phone"),rs.getString("Prices")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,6 +112,15 @@ public class CompanyList implements Initializable {
         SortedList<ModelCompany> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        Truck_Table.setRowFactory((tv -> {
+            TableRow<ModelCompany> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
         MenuItem Del = new MenuItem();
         Del.setText("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
@@ -117,9 +128,34 @@ public class CompanyList implements Initializable {
         MenuItem Edits = new MenuItem();
         Edits.setText("Επεξεργασία");
         Edits.setOnAction(this::Ed);
+        Cont.getItems().get(0).setOnAction(this::View);
         Cont.getItems().add(Edits);
         Cont.getItems().add(Del);
         db.Disconnect();
+    }
+
+    @FXML
+    void View(ActionEvent event) {
+        DoubleClickTable();
+    }
+
+    /**
+     * This method is used to open the all the details of the selected Service when the user double clicks on it
+     */
+    void DoubleClickTable() {
+        ModelCompany temp = Truck_Table.getSelectionModel().getSelectedItem();
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewCompany.fxml"));
+        try {
+            Parent root = fxmlloader.load();
+            fxmlloader.<ViewCompany>getController().setCompany(temp);
+            primaryStage.setTitle("PrTrucks");
+            primaryStage.setScene(new Scene(root, 596, 646));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -128,6 +164,8 @@ public class CompanyList implements Initializable {
         edit = true;
         Import_Button_Pressed(null);
     }
+
+
 
 
     /**
@@ -160,7 +198,7 @@ public class CompanyList implements Initializable {
                 RenewTable();
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 250));
+            primaryStage.setScene(new Scene(root, 600, 596));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
         } catch (IOException e) {
@@ -249,7 +287,7 @@ public class CompanyList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelCompany( rs.getString("id"),rs.getString("Name"), rs.getString("Phone")));
+                Oblist.add(new ModelCompany( rs.getString("id"),rs.getString("Name"), rs.getString("Phone"),rs.getString("Prices")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -43,6 +45,9 @@ public class ExternalCarsList implements Initializable {
 
     @FXML
     private Button Delete_Button;
+
+    @FXML
+    private Label Filter;
 
     @FXML
     private TableView<ModelExternalCars> Truck_Table;
@@ -184,10 +189,10 @@ public class ExternalCarsList implements Initializable {
             }
             AddExternalCar addcar = fxmlloader.getController();
             primaryStage.setOnHidden(e -> {
-                RenewTable();
+                RenewTable(null);
             });
             primaryStage.setOnCloseRequest(e -> {
-                RenewTable();
+                RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
             primaryStage.setScene(new Scene(root, 600, 741));
@@ -197,6 +202,48 @@ public class ExternalCarsList implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    void Select_Filter_pressed(MouseEvent event){
+        if(Filter.getText().equals("Φιλτρα")) {
+            List<String> choices = new ArrayList<>();
+            Sql sql = new Sql();
+            ResultSet rs = sql.Query_All_Companies();
+
+            try {
+                while (rs.next()) {
+                    choices.add(rs.getString("Name"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            choices.add("Ιδιότης");
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
+            dialog.setTitle("Φιλτράρισμα Πινακίδας");
+            dialog.setHeaderText("Επέλεξε μια Εταιρία ");
+            dialog.setContentText("Εταιρία");
+            Optional<String> result = dialog.showAndWait();
+            String temp = result.toString().replace("[", "");
+            temp = temp.replace("]", "");
+            temp = temp.replace("Optional", "");
+            if(temp.equals(".empty")||temp.equals("Πινακίδα")){
+                return;
+            };
+            SearchByLisc(temp);
+            sql.Disconnect();
+            Filter.setText("Κατάργηση Φίλτρου");
+            return;
+        }
+
+        Filter.setText("Φιλτρα");
+        RenewTable(null);
+    }
+
+    public void SearchByLisc(String Lisc){
+        Sql  sql=new Sql();
+        ResultSet rs=sql.Query_Specific_ExternalByLisc(Lisc);
+        RenewTable(rs);
     }
 
     /**
@@ -224,7 +271,7 @@ public class ExternalCarsList implements Initializable {
                     alert2.showAndWait();
                 }
                 sql.Disconnect();
-                RenewTable();
+                RenewTable(null);
             }
 
         }
@@ -273,10 +320,11 @@ public class ExternalCarsList implements Initializable {
     /**
      * This method renews the visible table (its the same as initialize())
      */
-    public void RenewTable() {
-
+    public void RenewTable(ResultSet rs) {
         Sql db = new Sql();
-        ResultSet rs = db.Query_General_External_Trucks();
+        if(rs==null) {
+            rs = db.Query_General_External_Trucks();
+        }
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {

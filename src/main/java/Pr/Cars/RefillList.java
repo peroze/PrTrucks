@@ -88,7 +88,7 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"),rs.getString("Consumption"),rs.getString("Cost")));
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"), rs.getString("Consumption"), rs.getString("Cost")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,14 +124,13 @@ public class RefillList implements Initializable {
         SortedList<ModelRefill> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
-        ContextMenu Cont=new ContextMenu();
-        MenuItem Del=new MenuItem("Διαγραφή");
+        ContextMenu Cont = new ContextMenu();
+        MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
         Cont.getItems().add(Del);
         Truck_Table.setContextMenu(Cont);
         db.Disconnect();
     }
-
 
 
     /**
@@ -173,27 +172,56 @@ public class RefillList implements Initializable {
     @FXML
     void Delete_Button_Pressed(ActionEvent event) {
         ModelRefill temp = Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp == null)) {
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Επιβαιβέωση");
-            alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις τον ανεφοδιασμό του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Sql sql = new Sql();
-                int k = sql.DeleteRefill(temp.getId());
-                if (k == 0) {
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Αποτυχία");
-                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
-                    alert2.showAndWait();
+        Sql sql = new Sql();
+        try {
+            if (!(temp == null)) {
+                int tempKm = Integer.valueOf(temp.getKilometers());
+                String tempLisc = temp.getLiscPlate();
+                int km = sql.Query_Specific_NextServiceKmCurrentKm(sql.GetIdFromLisx(temp.getLiscPlate())).getInt("Kilometers");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Διαγραφή στοιχείου");
+                alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις τον ανεφοδιασμό του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    boolean fl = false;
+                    if (tempKm == km) {
+                        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert1.setTitle("Επιβαιβέωση");
+                        alert1.setHeaderText("Εγγράφη με τσ περισσότερα Χιλιομέτρα");
+                        alert1.setContentText("Αυτή η εγγράφη  είναι η κατάχώρηση με τα περισότερα χιλίομετρα για το Όχημα.\nΘέλεις να αλλάχθούν και αυτά με τα αμέσως λιγότερα χιλιόμετρα ή να παραμείνουν όπως είναι ");          // Διαγραφή
+                        Optional<ButtonType> result1 = alert1.showAndWait();
+                        if (result1.get() == ButtonType.OK) {
+                            fl = true;
+                        }
+                    }
+                    int k = sql.DeleteRefill(temp.getId());
+                    if (k == 0) {
+                        throw new SQLException();
+                    }
+                    if (k == 1) {
+                        if (fl == true) {
+                            ResultSet rs1 = sql.Query_Specific_MaxKmAllMinusTrucks(sql.GetIdFromLisx(tempLisc));
+                            int newKM = rs1.getInt("MAX(KM)");
+                            ResultSet rs = sql.Query_Specific_Trucks(tempLisc);
+                            ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), String.valueOf(newKM), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                            int i = sql.InsertCar(repl, -1, true);
+                            if (i == 0) {
+                                throw new SQLException();
+                            }
+                        }
+                    }
+                    sql.Disconnect();
+                    RenewTable();
                 }
-                sql.Disconnect();
-                RenewTable();
+
+
             }
-
-
+        } catch (SQLException e) {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Αποτυχία");
+            alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+            alert2.showAndWait();
         }
     }
 
@@ -241,7 +269,7 @@ public class RefillList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"),rs.getString("Consumption"),rs.getString("Cost")));
+                Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"), rs.getString("Consumption"), rs.getString("Cost")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

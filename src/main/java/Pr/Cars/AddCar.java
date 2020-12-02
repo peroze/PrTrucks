@@ -13,10 +13,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -39,10 +43,10 @@ public class AddCar implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
     @FXML
     private TextField manufactor;
@@ -153,57 +157,193 @@ public class AddCar implements Initializable {
 
     private int flag2;
 
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
     private ObservableList<StringsForTables> oblist;
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        toEdit = null;
-        oblist = FXCollections.observableArrayList();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Pane.requestFocus();
-            }
-        });
-        ObservableList<String> Types = FXCollections.observableArrayList();
-        Types.add("ΙΧ");
-        Types.add("ΦΙΧ");
-        Types.add("Μηχάνιματα");
-        Type.setItems(Types);
-        ObservableList<String> Locations = FXCollections.observableArrayList();
-        Locations.add("Θεσσαλονίκη");
-        Locations.add("ΒΙΠΕ");
-        Locations.add("Αθήνα");
-        Locations.add("Λαμία");
-        Location.setItems(Locations);
-        ObservableList<String> Kteo = FXCollections.observableArrayList();
-        Kteo.add("1 Έτος");
-        Kteo.add("2 Έτοι");
-        Kteo.add("Όχι Κτεο");
-        ObservableList<String> Gasc = FXCollections.observableArrayList();
-        Gasc.add("6 Μήνες");
-        Gasc.add("1 Έτος");
-        Gasc.add("Όχι Κάρτα");
-        KTEO.setItems(Kteo);
-        Gas.setItems(Gasc);
-        Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
-        Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
-        Table.setRowFactory((tv -> {
-            TableRow<StringsForTables> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    DoubleClickTable();
+
+        try {
+            int test=0;
+            toEdit = null;
+            dict = new Hashtable();
+            Texts = new ArrayList<>();
+            dict = new Hashtable();
+            oblist = FXCollections.observableArrayList();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Pane.requestFocus();
                 }
             });
-            return row;
-        }));
-        ContextMenu Cont=new ContextMenu();
-        MenuItem Del=new MenuItem("Διαγραφή");
-        Del.setOnAction(this::Del);
-        Cont.getItems().add(Del);
-        Table.setContextMenu(Cont);
+            ObservableList<String> Types = FXCollections.observableArrayList();
+            Types.add("ΙΧ");
+            Types.add("ΦΙΧ");
+            Types.add("Μηχάνιματα");
+            Type.setItems(Types);
+            ObservableList<String> Locations = FXCollections.observableArrayList();
+            Locations.add("Θεσσαλονίκη");
+            Locations.add("ΒΙΠΕ");
+            Locations.add("Αθήνα");
+            Locations.add("Λαμία");
+            Location.setItems(Locations);
+            ObservableList<String> Kteo = FXCollections.observableArrayList();
+            Kteo.add("1 Έτος");
+            Kteo.add("2 Έτοι");
+            Kteo.add("Όχι Κτεο");
+            ObservableList<String> Gasc = FXCollections.observableArrayList();
+            Gasc.add("6 Μήνες");
+            Gasc.add("1 Έτος");
+            Gasc.add("Όχι Κάρτα");
+            KTEO.setItems(Kteo);
+            Gas.setItems(Gasc);
+            Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
+            Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+            Table.setRowFactory((tv -> {
+                TableRow<StringsForTables> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        DoubleClickTable();
+                    }
+                });
+                return row;
+            }));
+            ContextMenu Cont = new ContextMenu();
+            MenuItem Del = new MenuItem("Διαγραφή");
+            Del.setOnAction(this::Del);
+            Cont.getItems().add(Del);
+            Table.setContextMenu(Cont);
+            Labels = new ArrayList<>();
+            Labels.add(Km_Label);
+            Labels.add(Manu_Label);
+            Labels.add(Plais_Label);
+            Labels.add(Model_Label);
+            Labels.add(Date_Label);
+            Labels.add(ServKm_Label);
+            Labels.add(Kteo_Label);
+            Labels.add(Emmis_Label);
+            Labels.add(Categ_Label);
+            Labels.add(Locat_Label);
+            Labels.add(Lisc_Label);
+            int Size=Labels.size();
+            TFields = new ArrayList<>();
+            TFields.add(Kilometers);
+            TFields.add(manufactor);
+            TFields.add(Plaisio);
+            TFields.add(Model);
+            TFields.add(Service);
+            TFields.add(Lisc_Plate);
+            Texts.add("Χιλίομετρα");
+            Texts.add("Κατασκευαστής");
+            Texts.add("Αριθμός Πλαισίου");
+            Texts.add("Μοντέλο");
+            Texts.add("Ημερομηνία 1ης Κυκλοφορίας");
+            Texts.add("Διάρκεια Service(Km)");
+            Texts.add("Διάρκεια ΚΤΕΟ");
+            Texts.add("Διάρκεια Κάρτας Καυσ.");
+            Texts.add("Κατηγόρια");
+            Texts.add("Τοποθεσία");
+            Texts.add("Πινακίδα");
+            for (int i = 0; i < Size; i++) {
+                if (i == 4 ) {
+                    dict.put(Date, Labels.get(i));
+                    Date.setOnMouseClicked(this::setFocusTFIelds);
+                } else if (i == 6 ) {
+                    dict.put(KTEO, Labels.get(i));
+                    KTEO.setOnMouseClicked(this::setFocusTFIelds);
+                } else if (i == 7 ) {
+                    dict.put(Gas, Labels.get(i));
+                    Gas.setOnMouseClicked(this::setFocusTFIelds);
+                } else if (i == 8 ) {
+                    dict.put(Type, Labels.get(i));
+                    Type.setOnMouseClicked(this::setFocusTFIelds);
+                } else if (i == 9) {
+                    dict.put(Location, Labels.get(i));
+                    Location.setOnMouseClicked(this::setFocusTFIelds);
+                } else {
+                    int k=i;
+                    if(i==10){
+                        k=5;
+                    }
+                    else if(i==5){
+                        k=4;
+                    }
+                    dict.put(TFields.get(k), Labels.get(i));
+                    TFields.get(k).setOnMouseClicked(this::setFocusTFIelds);
+                }
+            }
+            ResetHideLabels();
+        }catch (Exception e){
+           return;
+        }
+
+    }
+
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if(i==4&&Date.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==6&&KTEO.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==7&& Gas.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==8&&Type.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==9&&Location.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i!=8&&i!=9&&i!=7&&i!=6&&i!=4) {
+                int k=i;
+                if(i==5){
+                    k=4;
+                }
+                else if(i==10){
+                    k=5;
+                }
+                if (TFields.get(k).getText().equals( "")) {
+                    Labels.get(i).setVisible(false);
+                } else{
+                    Labels.get(i).setVisible(true);
+                }
+            }
+            else{
+                Labels.get(i).setVisible(true);
+            }
+        }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+        Date.setStyle(null);
+        Type.setStyle(null);
+        KTEO.setStyle(null);
+        Location.setStyle(null);
+        Gas.setStyle(null);
     }
 
     public void Del(ActionEvent e){
@@ -250,75 +390,74 @@ public class AddCar implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
             boolean flag = false;
-            Plaisio.setStyle(null);
-            Lisc_Plate.setStyle(null);
-            manufactor.setStyle(null);
-            Model.setStyle(null);
-            Kilometers.setStyle(null);
-            Date.setStyle(null);
-            Type.setStyle(null);
-            Location.setStyle(null);
-            KTEO.setStyle(null);
-            Gas.setStyle(null);
-            Service.setStyle(null);
-            Plais_Label.setVisible(false);
-            Manu_Label.setVisible(false);
-            Lisc_Label.setVisible(false);
-            Model_Label.setVisible(false);
-            Km_Label.setVisible(false);
-            Categ_Label.setVisible(false);
-            Date_Label.setVisible(false);
-            Locat_Label.setVisible(false);
-            Kteo_Label.setVisible(false);
-            Emmis_Label.setVisible(false);
-            ServKm_Label.setVisible(false);
+            ResetCssTFields();
+            ResetHideLabels();
             if (Plaisio.getText().equals("")) {
                 Plais_Label.setVisible(true);
+                Plais_Label.setStyle("-fx-text-fill: RED");
+                Plais_Label.setText("Ο Αριθμός Πλαισίου είναι κενός");
                 flag = true;
                 Plaisio.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Lisc_Plate.getText().equals("")) {
                 Lisc_Label.setVisible(true);
+                Lisc_Label.setStyle("-fx-text-fill: RED");
+                Lisc_Label.setText("Η Πινακίδα είναι κενή");
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (manufactor.getText().equals("")) {
                 Manu_Label.setVisible(true);
+                Manu_Label.setStyle("-fx-text-fill: RED");
+                Manu_Label.setText("Ο Κατασκευαστής είναι κενός");
                 flag = true;
                 manufactor.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Model.getText().equals("")) {
                 Model_Label.setVisible(true);
+                Model_Label.setStyle("-fx-text-fill: RED");
+                Model_Label.setText("Το μοντέλο είναι κενό");
                 flag = true;
                 Model.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Date.getValue() == null) {
                 Date_Label.setVisible(true);
+                Date_Label.setStyle("-fx-text-fill: RED");
+                Date_Label.setText("Η Ημερομήνία είναι κενή");
                 flag = true;
 
             }
             if (Type.getValue() == null) {
                 Categ_Label.setVisible(true);
+                Categ_Label.setStyle("-fx-text-fill: RED");
+                Categ_Label.setText("Η Κατηγορία είναι κενή");
                 flag = true;
                 Type.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Location.getValue() == null) {
                 Locat_Label.setVisible(true);
+                Locat_Label.setStyle("-fx-text-fill: RED");
+                Locat_Label.setText("Η Τοποθεσία είναι κενή");
                 flag = true;
                 Location.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (KTEO.getValue() == null) {
                 Kteo_Label.setVisible(true);
+                Kteo_Label.setStyle("-fx-text-fill: RED");
+                Kteo_Label.setText("Η Διάρκεια Κτέο είναι κενή");
                 flag = true;
                 KTEO.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Gas.getValue() == null) {
                 Emmis_Label.setVisible(true);
+                Emmis_Label.setStyle("-fx-text-fill: RED");
+                Emmis_Label.setText("Η Διάρκ. Κάρτας είναι κενή");
                 flag = true;
                 Gas.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Kilometers.getText().equals("")) {
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
+                Km_Label.setStyle("-fx-text-fill: RED");
                 Km_Label.setVisible(true);
                 flag = true;
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -327,15 +466,17 @@ public class AddCar implements Initializable {
                     Integer.valueOf(Kilometers.getText());
                 }
                 catch (NumberFormatException e){
-                    ServKm_Label.setText("Τα Χιλιόμετρα Service πρέπει να είναι ακέραιος");
-                    ServKm_Label.setVisible(true);
+                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
+                    Km_Label.setVisible(true);
+                    Km_Label.setStyle("-fx-text-fill: RED");
                     flag=true;
                     Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 }
             }
             if (Service.getText().equals("")) {
-                ServKm_Label.setText("Το στοιχείο είναι κενό");
+                ServKm_Label.setText("Τα Χιλιόμετρα επόμενου Service είναι κενα");
                 ServKm_Label.setVisible(true);
+                ServKm_Label.setStyle("-fx-text-fill: RED");
                 flag = true;
                 Service.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
@@ -343,8 +484,9 @@ public class AddCar implements Initializable {
                     Integer.valueOf(Service.getText()); // if the given value contains characters a number format exception will be thrown
                 }
                 catch (NumberFormatException e){
-                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-                    Km_Label.setVisible(true);
+                    ServKm_Label.setText("Τα Χιλιόμετρα Service πρέπει να είναι αριθμός");
+                    ServKm_Label.setVisible(true);
+                    ServKm_Label.setStyle("-fx-text-fill: RED");
                     flag=true;
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 }
@@ -433,6 +575,7 @@ public class AddCar implements Initializable {
             Table.setItems(oblist);
         }
         toEdit = s;
+        ResetHideLabels();
     }
 
     /**
@@ -442,7 +585,7 @@ public class AddCar implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -478,7 +621,7 @@ public class AddCar implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

@@ -462,6 +462,28 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_Specific_ExternalByLisc(String Comp){
+        ResultSet rs = null;
+        try {
+
+            String sql;
+            String id;
+            if(Comp.equals("Ιδιότης")){
+                id="NULL";
+            }
+            else{
+                id=GetIdFromComp(Comp);
+            }
+            sql = "SELECT  * FROM  External_Trucks WHERE Company_id="+id;
+            Statement pstmt = conn.createStatement();
+            rs = pstmt.executeQuery(sql);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
 
 
     /**
@@ -580,8 +602,8 @@ public class Sql {
 
     public ResultSet Query_Specific_NextServiceKmCurrentKm(String id){
         ResultSet rs = null;
-       try {
 
+       try {
 
            String sql = "SELECT  MAX(Next_Kilometers),Trucks.Kilometers FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=" + id;
            Statement stmt = conn.createStatement();
@@ -595,14 +617,23 @@ public class Sql {
     }
 
     public ResultSet Query_Specific_MaxKmAllMinusTrucks(String id){
-        String sql="SELECT MAX(KM) FROM (SELECT MAX(Service.Kilometers) AS KM FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(KTEO.Kilometers) AS KM FROM KTEO,Trucks WHERE KTEO.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(Repairs.Kilometers) AS KM FROM Repairs,Trucks WHERE Repairs.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(EmmisionCard.Kilometers) AS KM1 FROM EmmisionCard,Trucks WHERE EmmisionCard.id=Trucks.id AND Trucks.id="+id+" UNION SELECT MAX(Refill.Kilometers) AS KM1 FROM Refill,Trucks WHERE Refill.Car_id=Trucks.id AND Trucks.id="+id+")";
+
+        String sql="SELECT MAX(KM) FROM (SELECT MAX(Service.Kilometers) AS KM FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(KTEO.Kilometers) AS KM FROM KTEO,Trucks WHERE KTEO.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Repairs.Kilometers) AS KM FROM Repairs,Trucks WHERE Repairs.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(EmmisionCard.Kilometers) AS KM1 FROM EmmisionCard,Trucks WHERE EmmisionCard.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Refill.Kilometers) AS KM1 FROM Refill,Trucks WHERE Refill.Car_id=Trucks.id AND Trucks.id=?)";
         try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+
+            PreparedStatement stmt=conn.prepareStatement(sql);
+            stmt.setInt(1,Integer.valueOf(id));
+            stmt.setInt(2,Integer.valueOf(id));
+            stmt.setInt(3,Integer.valueOf(id));
+            stmt.setInt(4,Integer.valueOf(id));
+            stmt.setInt(5,Integer.valueOf(id));
+            ResultSet rs=stmt.executeQuery();
+            return rs;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
 
@@ -936,18 +967,20 @@ public class Sql {
             ArrayList<String> repair = new ArrayList<>();
             repair.add(a.getName());
             repair.add(a.getPhone());
+            repair.add(a.getPrices());
             String sql;
             if(edit==true){
-                 sql = "INSERT OR REPLACE INTO Companies(Name,Phone,id) VALUES (?,?,?)";
+                 sql = "INSERT OR REPLACE INTO Companies(Name,Phone,Prices,id) VALUES (?,?,?,?)";
             }
             else {
-                 sql = "INSERT INTO Companies(Name,Phone) VALUES (?,?)";
+                 sql = "INSERT INTO Companies(Name,Phone,Prices) VALUES (?,?,?)";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, repair.get(0));
             pstmt.setString(2, repair.get(1));
+            pstmt.setString(3, repair.get(2));
             if(edit==true){
-                pstmt.setInt(3, Integer.valueOf(a.getId()));
+                pstmt.setInt(4, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -1122,7 +1155,7 @@ public class Sql {
      * @return 1 if completed 0 if not
      */
     public int DeleteRepair(int RepairId) {
-        String stmt = "DELETE FROM Service WHERE Service_Id=?;";
+        String stmt = "DELETE FROM Repairs WHERE Repair_Id=?;";
         try {
             PreparedStatement pstmt = conn.prepareStatement(stmt);
             pstmt.setInt(1, RepairId);

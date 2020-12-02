@@ -108,6 +108,12 @@ public class Settings implements Initializable {
     @FXML
     private Label Pr_Label;
 
+    @FXML
+    private Label SaveLabel;
+
+    @FXML
+    private Label BackupLabel;
+
 
     boolean changes;
 
@@ -328,9 +334,12 @@ public class Settings implements Initializable {
             ForFile = ForFile + "~" + SaveDate;
 
             FS.Write(ForFile);
+
         }
         try {
-            Double.valueOf(NewPrice.getText());
+            if(NewPrice.getText()!="") {
+                Double.valueOf(NewPrice.getText());
+            }
         }
         catch(NumberFormatException e){
             Pr_Label.setVisible(true);
@@ -339,7 +348,9 @@ public class Settings implements Initializable {
         if(!NewPrice.equals("")){
             FS.setFile("FuelPrice.txt","Fuel");
             FS.Write(NewPrice.getText());
+            SaveLabel.setVisible(true);
         }
+
     }
 
     @FXML
@@ -362,7 +373,7 @@ public class Settings implements Initializable {
         SaveDate = dateFormat.format(date2);
         pr = pr +"~"+ dateFormat.format(date2);
         FS.Write(pr);
-
+        BackupLabel.setVisible(true);
 
     }
 

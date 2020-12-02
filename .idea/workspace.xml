@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ViewCompany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewCompany.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -12,26 +14,68 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/PrTrucks.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddEmmisionCard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddEmmisionCard$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddEmmisionCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddEmmisionCard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/KTEOList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/KTEOList$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/KTEOList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/KTEOList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ServiceList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ServiceList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main_Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RefillList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RepairList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RepairList$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RepairList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/RepairList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ViewCar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ViewCar$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ViewCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ViewCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddCar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddEmmisionCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddEmmisionCard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddKTEO.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddKTEO.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ViewCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ViewCar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCompany.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddEmmisionCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddEmmisionCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/CompanyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/CompanyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/DrawerTop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/DrawerTop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/EmmisionCardList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/EmmisionCardList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExternalCarsList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExternalCarsList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/KTEOList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/KTEOList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main_Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ModelCompany.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/RefillList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/RefillList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/RepairList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/RepairList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ServiceList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ServiceList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ViewCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ViewCar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddCar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddCompany.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddCompany.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddEmmisionCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddEmmisionCard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddKTEO.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddKTEO.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/CompanyList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/CompanyList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExternalCarsList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExternalCarsList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/AddsTotals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/AddsTotals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewCar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,18 +157,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\konpe\IdeaProjects\PrTrucks" />
-      <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Pr.Cars" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\konpe\IdeaProjects\PrTrucks\src\main\resources\Pr\Cars" />
       <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars\Images" />
       <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
       <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\java\Pr\Cars" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Pr.Cars" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\konpe\IdeaProjects\PrTrucks" />
+      <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.PrTrucks [run]">
@@ -205,7 +249,10 @@
       <workItem from="1606596893595" duration="12031000" />
       <workItem from="1606667610946" duration="6695000" />
       <workItem from="1606679701786" duration="153000" />
-      <workItem from="1606693580261" duration="5398000" />
+      <workItem from="1606693580261" duration="5424000" />
+      <workItem from="1606784952624" duration="8352000" />
+      <workItem from="1606845555144" duration="1121000" />
+      <workItem from="1606846914606" duration="22015000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -305,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606696408834</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added Warnings for Kilometers">
+      <created>1606699613852</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1606699613852</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,30 +380,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1606471104497" />
-    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser" timestamp="1606606557104">
+    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser" timestamp="1606845832346">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606606557104" />
-    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606696406975">
+    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606845832346" />
+    <state x="566" y="29" key="CommitChangelistDialog2" timestamp="1606699612337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606696406975" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606699108338">
+    <state x="566" y="29" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606699612337" />
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1606868585758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606699108338" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606699108337">
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606868585758" />
+    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1606868585758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606699108337" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606699108337">
+    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606868585758" />
+    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1606868585758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606699108337" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606699108337">
+    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606868585758" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1606868585758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606699108337" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606868585758" />
     <state width="1877" height="326" key="GridCell.Tab.1.bottom" timestamp="1606679505493">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -366,22 +420,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="326" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606679505493" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606696412404">
+    <state x="712" y="147" key="RollbackChangesDialog" timestamp="1606787992494">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606696412404" />
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1606693579585">
+    <state x="712" y="147" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606787992494" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1606699616525">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606693579585" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606699616525" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1606846916072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606846916072" />
     <state x="690" y="276" key="extract.method.dialog" timestamp="1606672214221">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="276" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606672214221" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606668994745">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1606864696977">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606668994745" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606864696977" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606864436946">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606864436946" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -4,58 +4,62 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddCompany">
+<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddCompany">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
-      <Button fx:id="Ok_Button" layoutX="207.0" layoutY="229.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
+      <Button fx:id="Ok_Button" layoutX="207.0" layoutY="556.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
       <Label layoutX="188.0" layoutY="39.0" prefHeight="36.0" prefWidth="225.0" text="Εισαγωγή Εταιρίας" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
       <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
-      <Label fx:id="Name_Label" layoutX="109.0" layoutY="141.0" prefHeight="17.0" prefWidth="167.0" text="Τα Όνομα είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Name_Label" layoutX="109.0" layoutY="149.0" prefHeight="17.0" prefWidth="167.0" text="Όνομα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Phone_Label" layoutX="374.0" layoutY="142.0" prefHeight="17.0" prefWidth="138.0" text="Το τηλέφωνο είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Phone_Label" layoutX="374.0" layoutY="147.0" prefHeight="17.0" prefWidth="138.0" text="Τηλέφωνο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
+      <TextField fx:id="Char_Text" layoutX="109.0" layoutY="247.0" prefHeight="25.0" prefWidth="138.0" promptText="Προορισμός" />
+      <TextField fx:id="Code_Text" layoutX="109.0" layoutY="286.0" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
+      <TableView fx:id="Table" layoutX="119.0" layoutY="332.0" prefHeight="200.0" prefWidth="355.0">
+         <columns>
+            <TableColumn fx:id="Data_Col" prefWidth="179.0" text="Προορσιμός" />
+            <TableColumn fx:id="Code_Col" prefWidth="175.0" text="Τιμή" />
+         </columns>
+      </TableView>
+      <Button fx:id="Char_Button" layoutX="374.0" layoutY="272.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="138.0" text="Προσθήκη Χαρακτ." />
    </children>
 </AnchorPane>

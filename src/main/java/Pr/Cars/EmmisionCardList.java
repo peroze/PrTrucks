@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 
 /**
  * This class is the controller for EmmisionCardList.fxml which shows the emmision cards of the cars
+ *
  * @author peroze
  * @version 1.0 Alpha
  */
@@ -72,8 +73,6 @@ public class EmmisionCardList implements Initializable {
     private ObservableList<ModelEmmisionCard> Oblist;
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Sql db = new Sql();
@@ -81,7 +80,7 @@ public class EmmisionCardList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),db.BooleantoGreek(rs.getBoolean("WithKTEO")),rs.getString("NextDate")));
+                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")), rs.getString("Kilometers"), rs.getString("Date"), db.BooleantoGreek(rs.getBoolean("WithKTEO")), rs.getString("NextDate")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,37 +90,33 @@ public class EmmisionCardList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         Next_Column.setCellValueFactory(new PropertyValueFactory<>("Next"));
-        FilteredList<ModelEmmisionCard> Filter =new FilteredList<>(Oblist,b->true);
+        FilteredList<ModelEmmisionCard> Filter = new FilteredList<>(Oblist, b -> true);
 
-        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
-            Filter.setPredicate(ModelEmmisionCard->{
-                if(newValue==null||newValue.isEmpty()){
+        Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            Filter.setPredicate(ModelEmmisionCard -> {
+                if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String LowerCase=newValue.toLowerCase();
-                if (ModelEmmisionCard.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
+                String LowerCase = newValue.toLowerCase();
+                if (ModelEmmisionCard.getLiscPlate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getDate().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getDate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getKilometers().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getNext().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getNext().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getWithKTEO().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getWithKTEO().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
                 }
                 return false;
             });
-        } );
-        SortedList<ModelEmmisionCard> sorted=new SortedList<>(Filter);
+        });
+        SortedList<ModelEmmisionCard> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
-        ContextMenu Cont=new ContextMenu();
-        MenuItem Del=new MenuItem("Διαγραφή");
+        ContextMenu Cont = new ContextMenu();
+        MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
         Cont.getItems().add(Del);
         Truck_Table.setContextMenu(Cont);
@@ -131,6 +126,7 @@ public class EmmisionCardList implements Initializable {
 
     /**
      * This method is called when the import button is pressed and it adds a new Emmision Card in the database
+     *
      * @param event The event
      */
     @FXML
@@ -162,36 +158,66 @@ public class EmmisionCardList implements Initializable {
 
     /**
      * This method is called when the delete button is pressed and it delletes the selected card from the database
+     *
      * @param event The event
      */
     @FXML
     void Delete_Button_Pressed(ActionEvent event) {
-        ModelEmmisionCard temp=Truck_Table.getSelectionModel().getSelectedItem();
-        if (!(temp==null)) {
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Επιβαιβέωση");
-            alert.setHeaderText("Διαγραφή στοιχείου");
-            alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την Κάρτα του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Sql sql = new Sql();
-                int k =sql.DeleteEmissionCard(temp.getLiscPlate());
-                if(k==0){
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Αποτυχία");
-                    alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
-                    alert2.showAndWait();
+        ModelEmmisionCard temp = Truck_Table.getSelectionModel().getSelectedItem();
+        Sql sql = new Sql();
+        try {
+            if (!(temp == null)) {
+                int tempKm = Integer.valueOf(temp.getKilometers());
+                String tempLisc = temp.getLiscPlate();
+                int km = sql.Query_Specific_NextServiceKmCurrentKm(sql.GetIdFromLisx(temp.getLiscPlate())).getInt("Kilometers");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Διαγραφή στοιχείου");
+                alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την Κάρτα του οχήματος με πινακίδα " + temp.getLiscPlate() + ".");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    boolean fl = false;
+                    if (tempKm == km) {
+                        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert1.setTitle("Επιβαιβέωση");
+                        alert1.setHeaderText("Εγγράφη με τσ περισσότερα Χιλιομέτρα");
+                        alert1.setContentText("Αυτή η εγγράφη  είναι η κατάχώρηση με τα περισότερα χιλίομετρα για το Όχημα.\nΘέλεις να αλλάχθούν και αυτά με τα αμέσως λιγότερα χιλιόμετρα ή να παραμείνουν όπως είναι ");          // Διαγραφή
+                        Optional<ButtonType> result1 = alert1.showAndWait();
+                        if (result1.get() == ButtonType.OK) {
+                            fl = true;
+                        }
+                    }
+                    int k = sql.DeleteEmissionCard(temp.getLiscPlate());
+                    if (k == 0) {
+                        throw new SQLException();
+                    }
+                    if (k == 1) {
+                        if (fl == true) {
+                            ResultSet rs1 = sql.Query_Specific_MaxKmAllMinusTrucks(sql.GetIdFromLisx(tempLisc));
+                            int newKM = rs1.getInt("MAX(KM)");
+                            ResultSet rs = sql.Query_Specific_Trucks(tempLisc);
+                            ModelTruck repl = new ModelTruck(rs.getString("id"), rs.getString("LiscPlate"), rs.getString("Manufactor"), rs.getString("Model"), rs.getString("First_Date"), rs.getString("Plaisio"), rs.getString("Type"), rs.getString("Location"), String.valueOf(newKM), rs.getString("Data"), rs.getString("ServiceInKm"), rs.getString("KTEOIn"), rs.getString("GasIn"));
+                            int i = sql.InsertCar(repl, -1, true);
+                            if (i == 0) {
+                                throw new SQLException();
+                            }
+                        }
+                    }
+                    RenewTable();
                 }
-                RenewTable();
+
             }
-
+        } catch (SQLException e) {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Αποτυχία");
+            alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
+            alert2.showAndWait();
         }
-
     }
 
     /**
      * This method is used to activate the animation of the add button when the user hovers over it
+     *
      * @param event The event
      */
     @FXML
@@ -225,13 +251,13 @@ public class EmmisionCardList implements Initializable {
     /**
      * This method renews the table
      */
-    public void RenewTable(){
+    public void RenewTable() {
         Sql db = new Sql();
         ResultSet rs = db.Query_General_EmmisionCard();
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")),rs.getString("Kilometers"), rs.getString("Date"),db.BooleantoGreek(rs.getBoolean("WithKTEO")),rs.getString("NextDate")));
+                Oblist.add(new ModelEmmisionCard(db.GetLisxxFromId(rs.getString("id")), rs.getString("Kilometers"), rs.getString("Date"), db.BooleantoGreek(rs.getBoolean("WithKTEO")), rs.getString("NextDate")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -241,33 +267,29 @@ public class EmmisionCardList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         Kilometers_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         Next_Column.setCellValueFactory(new PropertyValueFactory<>("Next"));
-        FilteredList<ModelEmmisionCard> Filter =new FilteredList<>(Oblist,b->true);
+        FilteredList<ModelEmmisionCard> Filter = new FilteredList<>(Oblist, b -> true);
 
-        Search_Bar.textProperty().addListener((observable,oldValue,newValue) ->{
-            Filter.setPredicate(ModelEmmisionCard->{
-                if(newValue==null||newValue.isEmpty()){
+        Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            Filter.setPredicate(ModelEmmisionCard -> {
+                if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String LowerCase=newValue.toLowerCase();
-                if (ModelEmmisionCard.getLiscPlate().toLowerCase().indexOf(LowerCase)!=-1){
+                String LowerCase = newValue.toLowerCase();
+                if (ModelEmmisionCard.getLiscPlate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getDate().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getDate().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getKilometers().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getKilometers().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getNext().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getNext().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
-                }
-                else if (ModelEmmisionCard.getWithKTEO().toLowerCase().indexOf(LowerCase)!=-1){
+                } else if (ModelEmmisionCard.getWithKTEO().toLowerCase().indexOf(LowerCase) != -1) {
                     return true;
                 }
                 return false;
             });
-        } );
-        SortedList<ModelEmmisionCard> sorted=new SortedList<>(Filter);
+        });
+        SortedList<ModelEmmisionCard> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
         db.Disconnect();

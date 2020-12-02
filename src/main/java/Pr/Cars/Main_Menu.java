@@ -91,7 +91,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Trucks");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+           // fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -118,7 +118,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("EmmisionCard");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+            //fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -143,7 +143,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Kteo");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+            //fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -166,7 +166,7 @@ public class Main_Menu implements Initializable {
         Parent root2 = (Parent) fxmlloader.load();
         fxmlloader.<Drawer>getController().setActive("More");
         fxmlloader.<Drawer>getController().changeBg();
-        fxmlloader.<Drawer>getController().setParent(this);
+        //fxmlloader.<Drawer>getController().setParent(this);
         Border_Pane.setCenter(root);
         Border_Pane.setLeft(root2);
         new FadeIn(root).play();
@@ -190,7 +190,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Service");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+           // fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -214,7 +214,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Repair");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+            //fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -238,7 +238,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Gas");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+           // fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             new FadeIn(root).play();
@@ -329,7 +329,7 @@ public class Main_Menu implements Initializable {
             Parent root2 = (Parent) fxmlloader.load();
             fxmlloader.<Drawer>getController().setActive("Trucks");
             fxmlloader.<Drawer>getController().changeBg();
-            fxmlloader.<Drawer>getController().setParent(this);
+            //fxmlloader.<Drawer>getController().setParent(this);
             Border_Pane.setCenter(root);
             Border_Pane.setLeft(root2);
             FadeIn a=new FadeIn(root);

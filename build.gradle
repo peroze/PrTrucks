@@ -18,6 +18,12 @@ dependencies {
     compile 'org.xerial:sqlite-jdbc:3.32.3.2'
     compile 'org.apache.poi:poi-ooxml:4.1.2'
     compile group: 'io.github.typhon0', name: 'AnimateFX', version: '1.2.0'
+    implementation 'org.kordamp.ikonli:ikonli-javafx:11.5.0'
+    implementation 'org.kordamp.ikonli:ikonli-core:11.5.0'
+    implementation 'org.kordamp.ikonli:ikonli-fontawesome-pack:11.5.0'
+    implementation 'org.kordamp.ikonli:ikonli-materialdesign-pack:11.5.0'
+    implementation 'org.kordamp.ikonli:ikonli-fontawesome5-pack:11.5.0'
+    compile 'com.jfoenix:jfoenix:9.0.10'
 }
 javafx {
     version = "15.0.1"

@@ -7,13 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 
 public class Drawer {
     private String Active;
-    Main_Menu Parent;
+    private double x_Offset = 0;
+    private double y_Offset = 0;
 
 
     @FXML
@@ -43,6 +49,9 @@ public class Drawer {
     @FXML
     private Button More_Button;
 
+    @FXML
+    private BorderPane  Panel;
+
     /**
      * This method is pressed when the Gas Button is pressed and it opens the gas Table in the main scene
      *
@@ -56,7 +65,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -76,7 +85,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("KTEOList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -96,7 +105,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("ServiceList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,7 +126,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("RepairList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -132,7 +141,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("RefillList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -152,7 +161,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -168,7 +177,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("DrawerTopComp.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -184,7 +193,7 @@ public class Drawer {
             try {
 
                 Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
-                Parent.getBorder_Pane().setCenter(root);
+                Panel.setCenter(root);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -266,11 +275,59 @@ public class Drawer {
         }
     }
 
+
+
     /**
-     * This method adds the parent window (Main Menu)
-     * @param parent The parent Window
+     * This Closes the program
+     *
+     * @param event The event when an action id made
      */
-    public void setParent(Main_Menu parent) {
-        Parent = parent;
+    @FXML
+    void X_Button_Pressed(MouseEvent event) {
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
+        stage.close();
+        System.exit(0);
+    }
+
+
+    @FXML
+    void All_Hover(MouseEvent event) {
+
+    }
+
+
+    /**
+     * This is used to make the window draggable
+     *
+     * @param event This it the given event
+     */
+    @FXML
+    void Top_Bar_Dragged(MouseEvent event) {
+        Panel.getScene().getWindow().setX(event.getScreenX() - x_Offset);
+        Panel.getScene().getWindow().setY(event.getScreenY() - y_Offset);
+    }
+
+
+    /**
+     * This is used to make the window draggable
+     *
+     * @param event This it the given event
+     */
+    @FXML
+    void Top_Bar_Pressed(MouseEvent event) {
+        x_Offset = event.getSceneX();
+        y_Offset = event.getSceneY();
+    }
+
+
+    /**
+     * This method is used to minimize the Window
+     *
+     * @param event This it the given event
+     */
+    @FXML
+    void Minimize_Button_Pressed(MouseEvent event) {
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 }

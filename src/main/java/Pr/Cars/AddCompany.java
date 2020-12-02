@@ -13,12 +13,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 /**
@@ -40,10 +44,10 @@ public class AddCompany implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
     @FXML
     private TextField Phone;
@@ -60,8 +64,37 @@ public class AddCompany implements Initializable {
     @FXML
     private Label Name_Label;
 
+    @FXML
+    private TableView<StringsForTables> Table;
+
+
+    @FXML
+    private TableColumn<StringsForTables, String> Data_Col;
+
+
+    @FXML
+    private TableColumn<StringsForTables, String> Code_Col;
+
+    @FXML
+    private TextField Char_Text;
+
+
+    @FXML
+    private TextField Code_Text;
+
+
+    private ObservableList<StringsForTables> oblist;
     private boolean edit;
     private ModelCompany toEdit;
+
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
 
     private int flag2;// This is used to know which field threw an excpetion
@@ -69,6 +102,27 @@ public class AddCompany implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        oblist=FXCollections.observableArrayList();
+        TFields=new ArrayList<>();
+        Labels=new ArrayList<>();
+        Texts=new ArrayList<>();
+        dict=new Hashtable();
+        Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
+        Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+        Table.setRowFactory((tv -> {
+            TableRow<StringsForTables> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    DoubleClickTable();
+                }
+            });
+            return row;
+        }));
+        ContextMenu Cont=new ContextMenu();
+        MenuItem Del=new MenuItem("Διαγραφή");
+        Del.setOnAction(this::Del);
+        Cont.getItems().add(Del);
+        Table.setContextMenu(Cont);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -76,8 +130,72 @@ public class AddCompany implements Initializable {
             }
         });
         edit=false;
+        Labels.add(Name_Label);
+        TFields.add(Name);
+        Texts.add("Όνομα");
+        Labels.add(Phone_Label);
+        Name.setOnMouseClicked(this::setFocusTFIelds);
+        dict.put(Name,Labels.get(0));
+        TFields.add(Phone);
+        Texts.add("Τηλέφωνο");
+        Phone.setOnMouseClicked(this::setFocusTFIelds);
+        dict.put(Phone,Labels.get(1));
+        ResetHideLabels();
     }
 
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if (TFields.get(i).getText().equals("")) {
+                Labels.get(i).setVisible(false);
+            } else{
+                    Labels.get(i).setVisible(true);
+            }
+            }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+    }
+
+
+
+
+    public void Del(ActionEvent e){
+        DoubleClickTable();
+    }
+
+    /**
+     * This methods deletes an entry from the table and it is called when a row is double clicked
+     */
+    private void DoubleClickTable() {
+        try {
+            StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+            int i = 0;
+            boolean check = false;
+            while (i < oblist.size()) {
+                if (temp.equals(oblist.get(i))) {
+                    oblist.remove(i);
+                    check = true;
+                    break;
+                }
+                i++;
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * This button adds the new KTEO in the db
@@ -87,16 +205,19 @@ public class AddCompany implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
             boolean flag = false;
-            Phone.setStyle(null);
-            Phone_Label.setVisible(false);
-            Name_Label.setVisible(false);
-            Name.setStyle(null);
+            ResetHideLabels();
+            ResetCssTFields();
+            String Data=null;
             if (Name.getText().equals("")) {
+                Name_Label.setText("Το Όνομα είναι κενό");
+                Name_Label.setStyle("-fx-text-fill: RED");
                 Name_Label.setVisible(true);
                 flag = true;
                 Name.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Phone.getText().equals("")) {
+                Phone_Label.setStyle("-fx-text-fill: RED");
+                Phone_Label.setText("Το τηλέφωνο είναι κενό");
                 Phone_Label.setVisible(true);
                 flag = true;
                 Phone.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -105,14 +226,19 @@ public class AddCompany implements Initializable {
                 return;
             }
             Sql sql = new Sql();
+             Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
+             for (int i = 1; i < oblist.size(); i++) {
+                    Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
+             }
             int i;
             if(edit==false) {
-                ModelCompany toAdd = new ModelCompany(Name.getText(), Phone.getText());
+                ModelCompany toAdd = new ModelCompany(Name.getText(), Phone.getText(),Data);
                 i = sql.InstertCompany(toAdd, false);
             }
             else{
                 toEdit.setPhone(Phone.getText());
                 toEdit.setName(Name.getText());
+                toEdit.setPrices(Data);
                 i = sql.InstertCompany(toEdit, true);
             }
             if (i == 1) {
@@ -141,6 +267,29 @@ public class AddCompany implements Initializable {
         edit=true;
         Name.setText(a.getName());
         Phone.setText(a.getPhone());
+        if (a.getPrices() != null) {
+            String[] Ch = a.getPrices().split(Pattern.quote("|"));
+            String[][] Dat = new String[Ch.length][2];
+            for (int i = 0; i < Ch.length; i++) {
+                Dat[i] = Ch[i].split(Pattern.quote("~"));
+            }
+            for (int i = 0; i < Ch.length; i++) {
+                oblist.add(new StringsForTables(Dat[i][0], Dat[i][1]));
+            }
+            Table.setItems(oblist);
+        }
+        ResetHideLabels();
+    }
+
+
+    @FXML
+    void Char_Button_Pr(ActionEvent event) {
+        String temp1 = Char_Text.getText();
+        String temp2 = Code_Text.getText();
+        oblist.add(new StringsForTables(temp1, temp2));
+        Char_Text.setText("");
+        Code_Text.setText("");
+        Table.setItems(oblist);
 
     }
 
@@ -151,7 +300,7 @@ public class AddCompany implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -187,7 +336,7 @@ public class AddCompany implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

@@ -12,13 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * This Class is the Corntoller for AddEmmisionCard.fxml which adds a new Emmision Card in the db
@@ -39,10 +38,10 @@ public class AddEmmisionCard implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
 
     @FXML
@@ -70,9 +69,19 @@ public class AddEmmisionCard implements Initializable {
     @FXML
     private Label Date_Label;
 
+    private ArrayList<Label> Labels;
+
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Texts=new ArrayList<>();
+        Labels=new ArrayList<>();
+        dict=new Hashtable();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -91,7 +100,56 @@ public class AddEmmisionCard implements Initializable {
         }
         Lisc_Plate.setItems(Cars);
         sql.Disconnect();
+        Labels.add(Lisc_Label);
+        Texts.add("Πινακίδα");
+        Labels.add(Km_Label);
+        Texts.add("Χιλιόμετρα");
+        Labels.add(Date_Label);
+        Texts.add("Ημερομηνια");
+        dict.put(Lisc_Plate,Lisc_Label);
+        dict.put(Kilometers,Km_Label);
+        dict.put(Date,Date_Label);
+        Lisc_Plate.setOnMouseClicked(this::setFocusTFIelds);
+        Kilometers.setOnMouseClicked(this::setFocusTFIelds);
+        Date.setOnMouseClicked(this::setFocusTFIelds);
+        ResetHideLabels();
+    }
 
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++) {
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+        }
+            if (Kilometers.getText().equals("")) {
+                Labels.get(1).setVisible(false);
+            } else{
+                Labels.get(1).setVisible(true);
+
+            }
+            if(Lisc_Plate.getValue()==null){
+                Labels.get(0).setVisible(false);
+            }
+            else{
+                Labels.get(0).setVisible(true);
+            }
+            if(Date.getValue()==null){
+                Labels.get(2).setVisible(false);
+            }
+            else{
+                Labels.get(2).setVisible(true);
+            }
+    }
+
+    public void ResetCssTFields(){
+        Date.setStyle(null);
+        Lisc_Plate.setStyle(null);
+        Kilometers.setStyle(null);
     }
 
 
@@ -105,19 +163,23 @@ public class AddEmmisionCard implements Initializable {
         try {
             int flag2 = 1;// This is used to know which field threw an excpetion
             boolean flag = false;
-            Lisc_Plate.setStyle(null);
-            Kilometers.setStyle(null);
-            Date.setStyle(null);
+            ResetHideLabels();
+            ResetCssTFields();
             if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setText("Η Πινακίδα είναι κενή");
+                Lisc_Label.setStyle("-fx-text-fill: RED");
                 Lisc_Label.setVisible(true);
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Date.getValue() == null) {
+                Date_Label.setText("Η Ημερομηνία είναι κενή");
+                Date_Label.setStyle("-fx-text-fill: RED");
                 Date_Label.setVisible(true); //Change Style
                 flag = true;
             }
             if (Kilometers.getText().equals("")) {
+                Km_Label.setStyle("-fx-text-fill: RED");
                 Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
                 Km_Label.setVisible(true);
                 flag = true;
@@ -126,6 +188,7 @@ public class AddEmmisionCard implements Initializable {
                 try {
                     Integer.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
+                    Km_Label.setStyle("-fx-text-fill: RED");
                     Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     Km_Label.setVisible(true);
@@ -221,7 +284,7 @@ public class AddEmmisionCard implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -257,7 +320,7 @@ public class AddEmmisionCard implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

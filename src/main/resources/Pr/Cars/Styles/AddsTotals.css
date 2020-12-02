@@ -58,9 +58,9 @@
     -fx-border-width: 2;
 }
 
-.text-field:focused {
+/*.text-field:focused {
     -fx-border-color: #8B74BD;
-}
+}*/
 
 .date-picker:editable {
     -fx-border-width: 0px 0px 1px 0px;

@@ -1,40 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox fx:id="Drawer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="143.0" style="-fx-background-color: #000013;" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.Drawer">
-   <children>
-      <Label prefHeight="50.0" prefWidth="176.0" textAlignment="JUSTIFY" textFill="WHITE">
-         <font>
-            <Font name="Centaur" size="29.0" />
-         </font>
-      </Label>
-      <Button fx:id="Trucks_Button" mnemonicParsing="false" onAction="#Trucks_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Οχήματα">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Button>
-      <Button fx:id="EmmisionCard_Button" mnemonicParsing="false" onAction="#EmmisionCard_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Καρτα Καυσαερίων">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Button>
-      <Button fx:id="Kteo_Button" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="ΚΤΕΟ">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Button>
-      <Button fx:id="Service_Button" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Service">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Button>
-      <Button fx:id="Repair_Button" mnemonicParsing="false" onAction="#Repair_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Επισκευές">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></Button>
-      <Button fx:id="Refill_Button" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Καύσιμα" />
-      <Button fx:id="Transfer_Button" mnemonicParsing="false" onAction="#Transfer_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Μεταφορικές" />
-      <Button fx:id="More_Button" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="143.0" text="Αλλά" />
-   </children>
-</VBox>
+<BorderPane fx:id="Panel" prefHeight="675.0" prefWidth="1054.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Drawer">
+   <left>
+      <VBox fx:id="Drawer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="190.0" style="-fx-background-color: #000013;" stylesheets="@Styles/Drawer.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="50.0" prefWidth="176.0" textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="29.0" />
+               </font>
+            </Label>
+            <Button fx:id="Trucks_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Trucks_Button_Pressed" prefHeight="40.0" prefWidth="190.0" text="Οχήματα">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="EmmisionCard_Button" alignment="CENTER" graphicTextGap="9.0" mnemonicParsing="false" onAction="#EmmisionCard_Button_Pressed" prefHeight="40.0" prefWidth="320.0" text="Καρτα Καυσαερίων">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="Kteo_Button" alignment="CENTER" graphicTextGap="11.0" mnemonicParsing="false" onAction="#Kteo_Button_Pressed" prefHeight="40.0" prefWidth="309.0" text="ΚΤΕΟ">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="Service_Button" alignment="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#Service_Button_Pressed" prefHeight="40.0" prefWidth="300.0" text="Service">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="Repair_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Repair_Button_Pressed" prefHeight="40.0" prefWidth="334.0" text="Επισκευές">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="Refill_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="298.0" text="Καύσιμα" />
+            <Button fx:id="Transfer_Button" alignment="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#Transfer_Button_Pressed" prefHeight="40.0" prefWidth="331.0" text="Μεταφορικές" />
+            <Button fx:id="More_Button" alignment="CENTER" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="340.0" text="Αλλά" textAlignment="CENTER" />
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <HBox alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="200.0" style="-fx-background-color: #FA8072;" BorderPane.alignment="CENTER">
+         <children>
+            <FontIcon iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontIcon>
+            <FontIcon iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
+               <HBox.margin>
+                  <Insets right="9.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontIcon>
+         </children></HBox>
+   </top>
+</BorderPane>

@@ -9,38 +9,31 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.AddCar">
+<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddCar">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="manufactor" layoutX="110.0" layoutY="131.0" prefHeight="25.0" prefWidth="138.0" promptText="Μάρκα" />
@@ -70,57 +63,57 @@
       <ComboBox fx:id="KTEO" layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα ΚΤΕΟ" />
       <ComboBox fx:id="Gas" layoutX="375.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Καρτας" />
       <TextField fx:id="Service" layoutX="112.0" layoutY="310.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Service (KM) " />
-      <Label fx:id="Plais_Label" layoutX="112.0" layoutY="77.0" prefHeight="17.0" prefWidth="138.0" text="Ο αριθμός Πλαισίου είναι κενός" textFill="RED" visible="false">
+      <Label fx:id="Plais_Label" layoutX="110.0" layoutY="76.0" prefHeight="17.0" prefWidth="174.0" style="-fx-text-fill: #FA8072;" text="Aριθμός Πλαισίου" textFill="WHITE">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Manu_Label" layoutX="109.0" layoutY="120.0" prefHeight="17.0" prefWidth="138.0" text="Η Μάρκα είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Manu_Label" layoutX="109.0" layoutY="119.0" prefHeight="17.0" prefWidth="149.0" style="-fx-text-fill: #FA8072;" text="Μάρκα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Km_Label" layoutX="106.0" layoutY="164.0" prefHeight="17.0" prefWidth="167.0" text="Τα Χίλιομετρα είναι κενά" textFill="RED" visible="false">
+      <Label fx:id="Km_Label" layoutX="109.0" layoutY="162.0" prefHeight="17.0" prefWidth="160.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lisc_Label" layoutX="374.0" layoutY="79.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+      <Label fx:id="Lisc_Label" layoutX="371.0" layoutY="76.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Πινακίδα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Model_Label" layoutX="371.0" layoutY="122.0" prefHeight="17.0" prefWidth="138.0" text="Η Μάρκα είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Model_Label" layoutX="370.0" layoutY="120.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Μοντέλο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Date_Label" layoutX="369.0" layoutY="163.0" prefHeight="17.0" prefWidth="138.0" text="Η Ημερομήνια είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Date_Label" layoutX="371.0" layoutY="164.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Ημερομηνία" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Locat_Label" layoutX="376.0" layoutY="204.0" prefHeight="17.0" prefWidth="138.0" text="Η Τοποθεσία είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Locat_Label" layoutX="371.0" layoutY="211.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Τοποθεσία" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Emmis_Label" layoutX="364.0" layoutY="252.0" prefHeight="17.0" prefWidth="138.0" text="Το Διάστημα Κάρτας είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Emmis_Label" layoutX="372.0" layoutY="258.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Διάστ. Κάρτας" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Categ_Label" layoutX="108.0" layoutY="204.0" prefHeight="17.0" prefWidth="107.0" text="H Κατηγορία είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Categ_Label" layoutX="108.0" layoutY="210.0" prefHeight="17.0" prefWidth="107.0" style="-fx-text-fill: #FA8072;" text="Κατηγόρια" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Kteo_Label" layoutX="107.0" layoutY="252.0" prefHeight="17.0" prefWidth="123.0" text="Τό διάστημα Κτέο είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Kteo_Label" layoutX="108.0" layoutY="257.0" prefHeight="17.0" prefWidth="123.0" style="-fx-text-fill: #FA8072;" text="Διάστημα Κτέο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="ServKm_Label" layoutX="109.0" layoutY="296.0" prefHeight="17.0" prefWidth="154.0" text="Τό διάστημα Κτέο είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="ServKm_Label" layoutX="109.0" layoutY="299.0" prefHeight="17.0" prefWidth="154.0" style="-fx-text-fill: #FA8072;" text="Διάστημα Service" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>

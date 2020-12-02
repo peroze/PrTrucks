@@ -7,24 +7,41 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.ViewCar">
+<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ViewCar">
    <children>
       <TextField fx:id="LiscPlate" editable="false" layoutX="127.0" layoutY="88.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@Styles/AddsTotals.css" />
-      <TextField fx:id="Plaisio" editable="false" layoutX="494.0" layoutY="143.0" prefHeight="24.0" prefWidth="185.0" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="42.0" layoutY="93.0" prefHeight="17.0" prefWidth="63.0" text="Πινακίδα" textFill="#fcfcfc" />
-      <Label layoutX="369.0" layoutY="148.0" prefHeight="17.0" prefWidth="103.0" text="Αριθμος Πλαισίου" textFill="#fcfcfc" />
-      <TextField fx:id="Date" editable="false" layoutX="494.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" text="Ημερομινία 1ης Κυκλ." />
+      <TextField fx:id="Plaisio" editable="false" layoutX="494.0" layoutY="143.0" prefHeight="24.0" prefWidth="185.0" promptText="Αριθμός Πλαισίου" stylesheets="@Styles/AddsTotals.css" />
+      <Label fx:id="Label_View" layoutX="126.0" layoutY="78.0" prefHeight="17.0" prefWidth="39.0" style="-fx-text-fill: #FA8072;" text="Πινακίδα" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label layoutX="497.0" layoutY="132.0" prefHeight="17.0" prefWidth="75.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Πλαισίου" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <TextField fx:id="Date" editable="false" layoutX="494.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Kilometers" editable="false" layoutX="127.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="355.0" layoutY="94.0" prefHeight="17.0" prefWidth="117.0" text="Ημερομινία 1ης Κυκλ." textFill="#fcfcfc" />
-      <Label layoutX="42.0" layoutY="147.0" prefHeight="17.0" prefWidth="63.0" text="Χιλιόμετρα" textFill="#fcfcfc" />
+      <Label layoutX="495.0" layoutY="79.0" prefHeight="17.0" prefWidth="120.0" style="-fx-text-fill: #FA8072;" text="Ημερομινία 1ης Κυκλοφορίας" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label fx:id="Label_View" layoutX="124.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="WHITE">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
       <TextField fx:id="Location" editable="false" layoutX="127.0" layoutY="196.0" prefHeight="24.0" prefWidth="185.0" promptText="Τοποθεσία" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="42.0" layoutY="201.0" prefHeight="17.0" prefWidth="63.0" text="Τοποθεσία" textFill="#fcfcfc" />
+      <Label layoutX="125.0" layoutY="185.0" prefHeight="17.0" prefWidth="46.0" style="-fx-text-fill: #FA8072;" text="Τοποθεσία" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font>
+         <padding>
+            <Insets bottom="3.0" />
+         </padding></Label>
       <Label layoutX="312.0" layoutY="37.0" prefHeight="39.0" prefWidth="88.0" text="Όχημα" textFill="WHITE">
          <font>
             <Font size="27.0" />
@@ -42,31 +59,28 @@
       </TableView>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="Type" editable="false" layoutX="494.0" layoutY="198.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος Οχήματος" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="376.0" layoutY="202.0" prefHeight="17.0" prefWidth="96.0" text="Τύπος Οχήματος" textFill="#fcfcfc" />
+      <Label layoutX="496.0" layoutY="186.0" prefHeight="17.0" prefWidth="71.0" style="-fx-text-fill: #FA8072;" text="Τύπος Οχήματος" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
    </children>
 </AnchorPane>
