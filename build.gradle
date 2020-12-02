@@ -25,6 +25,11 @@ dependencies {
     implementation 'org.kordamp.ikonli:ikonli-fontawesome5-pack:11.5.0'
     compile 'com.jfoenix:jfoenix:9.0.10'
 }
+
+compileJava{
+
+}
+
 javafx {
     version = "15.0.1"
     modules = [ 'javafx.controls' ,'javafx.base','javafx.fxml', 'javafx.media' ,'javafx.swing' ]

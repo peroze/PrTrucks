@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="648.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.ServiceList">
+<AnchorPane prefHeight="648.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ServiceList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="158.0">
          <children>
@@ -57,7 +57,7 @@
             <Image url="@Images/iconfinder_icon-111-search_314807%20(1).png" />
          </image>
       </ImageView>
-      <Label fx:id="Filter" alignment="CENTER_RIGHT" layoutX="563.0" layoutY="17.0" onMouseClicked="#Select_Filter_pressed" prefHeight="17.0" prefWidth="85.0" text="Ιστορικό" textFill="WHITE">
+      <Label fx:id="History" alignment="CENTER_RIGHT" layoutX="586.0" layoutY="17.0" onMouseClicked="#Select_History_pressed" prefHeight="17.0" prefWidth="70.0" text="Ιστορικό" textFill="WHITE">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
@@ -69,6 +69,14 @@
          <font>
             <Font size="24.0" />
          </font>
+      </Label>
+      <Label fx:id="Filter" alignment="TOP_RIGHT" layoutX="472.0" layoutY="17.0" onMouseClicked="#Select_Filter_pressed" prefHeight="17.0" prefWidth="114.0" text="Φίλτρα" textFill="WHITE">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
    </children>
 </AnchorPane>

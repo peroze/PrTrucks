@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -188,15 +189,17 @@ public class AddCar implements Initializable {
                 }
             });
             ObservableList<String> Types = FXCollections.observableArrayList();
-            Types.add("ΙΧ");
-            Types.add("ΦΙΧ");
-            Types.add("Μηχάνιματα");
+            Sql sql=new Sql();
+            ResultSet rs=sql.Query_General_Types();
+            while (rs.next()){
+                Types.add(rs.getString("Type"));
+            }
             Type.setItems(Types);
             ObservableList<String> Locations = FXCollections.observableArrayList();
-            Locations.add("Θεσσαλονίκη");
-            Locations.add("ΒΙΠΕ");
-            Locations.add("Αθήνα");
-            Locations.add("Λαμία");
+            rs=sql.Query_General_Locations();
+            while (rs.next()){
+                Locations.add(rs.getString("City"));
+            }
             Location.setItems(Locations);
             ObservableList<String> Kteo = FXCollections.observableArrayList();
             Kteo.add("1 Έτος");

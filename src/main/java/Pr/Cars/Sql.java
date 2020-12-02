@@ -182,6 +182,32 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_General_Locations(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Location  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet Query_General_Types(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM Type  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
 
     /**
      * This question the total cost of a table for a specific car
@@ -614,6 +640,44 @@ public class Sql {
        }
        return null;
 
+    }
+
+    public ResultSet Query_Specific_TableByLocationType(String Table,String Type,String Location){
+        try {
+            String sql;
+            ResultSet rs;
+            PreparedStatement pstm;
+            if (Location == null&& Type!=null) {
+                sql = "SELECT  * FROM"+Table+",Trucks WHERE "+Table+".id=Trucks.id AND Trucks.Type=?";
+                if(Table.equals("Service")){
+                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
+                }
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, Type);
+            } else if (Type == null&& Location!=null) {
+
+                sql = "SELECT  * FROM"+Table+",Trucks WHERE "+Table+".id=Trucks.id AND Location=?";
+                if(Table.equals("Service")){
+                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
+
+                }
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, Location);
+            } else {
+                sql = "SELECT  * FROM "+Table+" ,Trucks WHERE "+Table+".id=Trucks.id AND Location=? AND Trucks.Type=?";
+                if(Table.equals("Service")){
+                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
+                }
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, Location);
+                pstm.setString(2, Type);
+            }
+            rs=pstm.executeQuery();
+            return rs;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public ResultSet Query_Specific_MaxKmAllMinusTrucks(String id){
@@ -1260,6 +1324,7 @@ public class Sql {
         }
         return "Όχι";
     }
+
 
 
 

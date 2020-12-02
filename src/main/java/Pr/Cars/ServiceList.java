@@ -1,5 +1,7 @@
 package Pr.Cars;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
@@ -12,16 +14,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +48,9 @@ public class ServiceList implements Initializable {
 
 
     RotateTransition rotate;
+
+    @FXML
+    private Label History;
 
     @FXML
     private Label Filter;
@@ -243,12 +252,17 @@ public class ServiceList implements Initializable {
      * @param event The event
      */
     @FXML
-    void Select_Filter_pressed(MouseEvent event) {
-        if (Filter.getText().equals("Ιστορικό")) {
-            List<String> choices = new ArrayList<>();
+    void Select_History_pressed(MouseEvent event) {
+        if (History.getText().equals("Ιστορικό")) {
+            Filter.setText("Φίλτρα");
+            Filter.setStyle(null);
+            ObservableList<String> choices = FXCollections.observableArrayList();
+            ObservableList<String> Locations = FXCollections.observableArrayList();
+            ObservableList<String> Types = FXCollections.observableArrayList();
             Sql sql = new Sql();
             ResultSet rs = sql.Query_All_Lisc();
-
+            ResultSet rs1=sql.Query_General_Types();
+            ResultSet rs2=sql.Query_General_Locations();
             try {
                 while (rs.next()) {
                     choices.add(rs.getString("LiscPlate"));
@@ -256,10 +270,24 @@ public class ServiceList implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
-            dialog.setTitle("Φιλτράρισμα Πινακίδας");
-            dialog.setHeaderText("Επέλεξε ένα αυτοκήνιτο");
-            dialog.setContentText("Όχημα");
+            try {
+                while (rs1.next()) {
+                    Types.add(rs1.getString("Type"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                while (rs2.next()) {
+                    Locations.add(rs2.getString("City"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα",choices);
+            dialog.setTitle("Φιλτράρισμα ");
+            dialog.setHeaderText("Επέλεξτε από τις παρακάτω κατηγορίες");
+            dialog.setContentText("Όχημα: ");
             Optional<String> result = dialog.showAndWait();
             String temp = result.toString().replace("[", "");
             temp = temp.replace("]", "");
@@ -268,12 +296,110 @@ public class ServiceList implements Initializable {
                 return;
             }
             SearchByLisc(temp);
-            Filter.setText("Κλείσιμο Ιστορικού");
+            History.setText("Επαναφορά");
+            History.setStyle("-fx-text-fill: RED");
             sql.Disconnect();
             return;
         }
-        Filter.setText("Ιστορικό");
+        History.setText("Ιστορικό");
+        History.setStyle(null);
         RenewTable(null);
+    }
+
+    @FXML
+    public void Select_Filter_pressed(MouseEvent event){
+        if(Filter.getText().equals("Φίλτρα")) {
+            History.setText("Ιστορικό");
+            History.setStyle(null);
+            Dialog<ArrayList<String>> dialog = new ChoiceDialog<>();
+            ObservableList<String> Locations = FXCollections.observableArrayList();
+            ObservableList<String> Types = FXCollections.observableArrayList();
+            Sql sql = new Sql();
+            ResultSet rs = sql.Query_All_Lisc();
+            ResultSet rs1 = sql.Query_General_Types();
+            ResultSet rs2 = sql.Query_General_Locations();
+            try {
+                while (rs1.next()) {
+                    Types.add(rs1.getString("Type"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                while (rs2.next()) {
+                    Locations.add(rs2.getString("City"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            Label labLoc = new Label("Τοποθεσία");
+            ComboBox cb1 = new ComboBox<>();
+            cb1.setPromptText("Τοποθεσία");
+            cb1.setItems(Locations);
+            Label labType = new Label("Τυπος Οχήματος");
+            ComboBox cb2 = new ComboBox<>();
+            cb2.setPromptText("Τύπος Οχήματος");
+            cb2.setItems(Types);
+            grid.add(labLoc, 0, 0);
+            grid.add(cb1, 1, 0);
+            grid.add(labType, 0, 1);
+            grid.add(cb2, 1, 1);
+            dialog.getDialogPane().setContent(grid);
+            dialog.setHeaderText("Επιλογή Φίλτρων");
+            FontIcon ico=new FontIcon();
+            ico.setIconLiteral("fas-bong");
+            ico.setIconSize(30);
+            dialog.setGraphic(ico);
+            Node button = dialog.getDialogPane().lookupButton(ButtonType.OK);
+            Node button1=dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == ButtonType.OK) {
+                    ArrayList<String> reuturns = new ArrayList<>();
+                    String TypeAf;
+                    String LocAf;
+                    int counter = 0;
+                    if (cb1.getValue() == null) {
+                        TypeAf = null;
+                        counter = counter + 1;
+                    } else {
+                        TypeAf = cb1.getValue().toString();
+                    }
+                    if (cb2.getValue() == null) {
+                        LocAf = null;
+                        counter = counter + 1;
+                    } else {
+                        LocAf = cb2.getValue().toString();
+                    }
+                    if (counter == 2) {
+                        return null;
+                    }
+                    reuturns.add(TypeAf);
+                    reuturns.add(LocAf);
+                    return reuturns;
+                }
+                return null;
+            });
+            try {
+                Optional<ArrayList<String>> result = dialog.showAndWait();
+
+                ResultSet rs3 = sql.Query_Specific_TableByLocationType("Service", result.get().get(1), result.get().get(0));
+                RenewTable(rs3);
+                Filter.setText("Κατάργησή Φίλτρων");
+                Filter.setStyle("-fx-text-fill: RED");
+                sql.Disconnect();
+            }catch (java.util.NoSuchElementException e){
+                return;
+            }
+        }
+        else {
+            RenewTable(null);
+            Filter.setText("Φίλτρα");
+            Filter.setStyle(null);
+        }
+
     }
 
 
@@ -395,7 +521,9 @@ public class ServiceList implements Initializable {
     public void RenewTable(ResultSet rs1) {
         ResultSet rs = null;
         Sql db = new Sql();
+
         if (rs1 == null) {
+
             Oblist = FXCollections.observableArrayList();
             rs = db.Query_Group_Service();
         } else {
