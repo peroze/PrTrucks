@@ -379,7 +379,7 @@ public class Settings implements Initializable {
             ForFile = ForFile + "~" + SaveDate;
 
             FS.Write(ForFile);
-
+            SaveLabel.setVisible(true);
         }
         try {
             if(NewPrice.getText()!="") {
@@ -388,12 +388,20 @@ public class Settings implements Initializable {
         }
         catch(NumberFormatException e){
             Pr_Label.setVisible(true);
+            Pr_Label.setText("Η Τιμή πρέπει να είναι αριθμός");
             NewPrice.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            return;
         }
-        if(!NewPrice.equals("")){
+        if(!NewPrice.getText().equals("")){
             FS.setFile("FuelPrice.txt","Fuel");
             FS.Write(NewPrice.getText());
             SaveLabel.setVisible(true);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Η αποθήκευση της τιμής Απέτυχε δοκιμάστε ξανά");
+            alert.setContentText("Το αυτοκίνητο δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+            alert.showAndWait();
         }
 
     }

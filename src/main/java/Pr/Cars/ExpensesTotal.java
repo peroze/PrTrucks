@@ -63,6 +63,24 @@ public class ExpensesTotal implements Initializable {
     private TextField Pyear;
 
 
+
+    @FXML
+    private Label Dist_Label;
+
+    @FXML
+    private Label Type_Label;
+
+    @FXML
+    private Label Year_Label;
+
+    @FXML
+    private Label To_Label;
+
+    @FXML
+    private Label From_Label;
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> oblist = FXCollections.observableArrayList();
@@ -95,6 +113,53 @@ public class ExpensesTotal implements Initializable {
     @FXML
     void Show_Button_Pr(ActionEvent event) {
         try {
+
+                boolean flag1=false;
+                Type.setStyle(null);
+                Type_Label.setVisible(false);
+                Distance.setStyle(null);
+                Dist_Label.setVisible(false);
+                From.setStyle(null);
+                From_Label.setVisible(false);
+                To.setStyle(null);
+                To_Label.setVisible(false);
+                Pyear.setStyle(null);
+                Year_Label.setVisible(false);
+                if (Type.getValue() == null) {
+                    Type_Label.setVisible(true);
+                    Type.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                if (Distance.getValue() == null) {
+                    Dist_Label.setVisible(true);
+                    Distance.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }else{
+                    if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος") && Pyear.getText().equals("")) {
+                        Year_Label.setText("Το έτος είναι κενό");
+                        Year_Label.setVisible(true);
+                        Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                        flag1=true;
+                    }else if(Distance.getValue().toString().equals("Συγκεκριμένο Έτος")){
+                        Integer.valueOf(Pyear.getText());
+                    }
+                    if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (From.getValue() == null)) {
+                        From_Label.setVisible(true);
+                        From.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                        flag1=true;
+                    }
+
+                    if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (To.getValue() == null)) {
+                        To_Label.setVisible(true);
+                        To.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                        flag1=true;
+                    }
+                }
+                if(flag1){
+
+                    return;
+                }
+
             ArrayList<ResultSet> rs = new ArrayList<>();
             Sql db = new Sql();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -278,8 +343,8 @@ public class ExpensesTotal implements Initializable {
                             Table.add("Refill");
                             break;
                     }
-                    String date6 = Year+"-" + (Month - 1)+ "-01";
-                    String date7 = Year+"-" + (Month - 1) + "-31";
+                    String date6 = Year + "-" + (Month - 1) + "-01";
+                    String date7 = Year + "-" + (Month - 1) + "-31";
                     for (int k = 0; k < Table.size(); k++) {
                         rs.add(db.Query_All_Price_Date(Table.get(k), date6, date7));
                     }
@@ -415,23 +480,29 @@ public class ExpensesTotal implements Initializable {
                 model = new ModelTotal(dist, String.valueOf(total));
                 Data.add(model);
                 Table1.setItems(Data);
+            }
+            db.Disconnect();
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            Year_Label.setText("Το έτος πρέπει να είναι ακέραιος");
+            Year_Label.setVisible(true);
+            Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
-        db.Disconnect();
-    } catch(
-    SQLException e)
 
-    {
-        e.printStackTrace();
     }
 
-}
 
     void Show_Rest() {
         if (Distance.getValue().toString().equals("Άλλο Διάστημα")) {
             To.setVisible(true);
             From.setVisible(true);
+            Pyear.setVisible(false);
         } else if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος")) {
             Pyear.setVisible(true);
+            To.setVisible(false);
+            From.setVisible(false);
         } else {
             To.setVisible(false);
             From.setVisible(false);

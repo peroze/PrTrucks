@@ -178,12 +178,12 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="SaveLabel" layoutX="490.0" layoutY="583.0" prefHeight="17.0" prefWidth="149.0" text="Επιτυχής Αποθήκευση" textFill="#008600">
+            <Label fx:id="SaveLabel" layoutX="490.0" layoutY="583.0" prefHeight="17.0" prefWidth="149.0" text="Επιτυχής Αποθήκευση" textFill="#008600" visible="false">
                <graphic>
                   <FontIcon iconColor="#008600" iconLiteral="fas-check-circle" iconSize="15" />
                </graphic>
             </Label>
-            <Label fx:id="BackupLabel" layoutX="391.0" layoutY="207.0" prefHeight="17.0" prefWidth="195.0" text="Επιτυχής Αντίγραφο Ασφαλείας" textFill="#008600">
+            <Label fx:id="BackupLabel" layoutX="391.0" layoutY="207.0" prefHeight="17.0" prefWidth="195.0" text="Επιτυχής Αντίγραφο Ασφαλείας" textFill="#008600" visible="false">
                <graphic>
                   <FontIcon iconColor="#008600" iconLiteral="fas-check-circle" iconSize="15" />
                </graphic>

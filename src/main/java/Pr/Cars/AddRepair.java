@@ -219,7 +219,7 @@ public class AddRepair implements Initializable {
             Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         try {
-            Integer.valueOf(Price.getText());
+            Double.valueOf(Price.getText());
         } catch (NumberFormatException e) {
             Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
             Price_Label.setVisible(true);

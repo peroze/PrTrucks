@@ -282,7 +282,7 @@ public class AddKTEO implements Initializable {
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             } else {
                 try {
-                    Integer.valueOf(Kilometers.getText());
+                    Double.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
                     Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Km_Label.setStyle("-fx-text-fill: RED");

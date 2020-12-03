@@ -58,6 +58,20 @@ public class LitersTotal implements Initializable {
     private TextField Pyear;
 
 
+    @FXML
+    private Label Dist_Label;
+
+
+    @FXML
+    private Label Year_Label;
+
+    @FXML
+    private Label To_Label;
+
+    @FXML
+    private Label From_Label;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +98,44 @@ public class LitersTotal implements Initializable {
     @FXML
     void Show_Button_Pr(ActionEvent event) {
         try {
+
+            boolean flag1=false;
+            Distance.setStyle(null);
+            Dist_Label.setVisible(false);
+            From.setStyle(null);
+            From_Label.setVisible(false);
+            To.setStyle(null);
+            To_Label.setVisible(false);
+            Pyear.setStyle(null);
+            Year_Label.setVisible(false);
+            if (Distance.getValue() == null) {
+                Dist_Label.setVisible(true);
+                Distance.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                flag1=true;
+            }else {
+                if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος") && Pyear.getText().equals("")) {
+                    Year_Label.setText("Το έτος είναι κενό");
+                    Year_Label.setVisible(true);
+                    Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                else if(Distance.getValue().toString().equals("Συγκεκριμένο Έτος")){
+                    Integer.valueOf(Pyear.getText());
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (From.getValue() == null)) {
+                    From_Label.setVisible(true);
+                    From.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (To.getValue() == null)) {
+                    To_Label.setVisible(true);
+                    To.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+            }
+            if(flag1){
+                return;
+            }
             ResultSet rs = null;
             Sql db = new Sql();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -234,14 +286,22 @@ public class LitersTotal implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        catch (NumberFormatException e){
+            Year_Label.setText("Το έτος πρέπει να είναι ακέραιος");
+            Year_Label.setVisible(true);
+            Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
     }
 
     void Show_Rest() {
         if (Distance.getValue().toString().equals("Άλλο Διάστημα")) {
             To.setVisible(true);
             From.setVisible(true);
+            Pyear.setVisible(false);
         } else if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος")) {
             Pyear.setVisible(true);
+            To.setVisible(false);
+            From.setVisible(false);
         } else {
             To.setVisible(false);
             From.setVisible(false);

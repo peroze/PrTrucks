@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.ExpensesTotal">
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ExpensesTotal">
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
@@ -22,7 +22,7 @@
                </columns>
             </TableView>
             <DatePicker fx:id="From" layoutX="364.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Από" visible="false" />
-            <DatePicker fx:id="To" layoutX="530.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" />
+            <DatePicker fx:id="To" layoutX="530.0" layoutY="160.0" prefHeight="23.0" prefWidth="150.0" promptText="Έως" visible="false" />
             <Label layoutX="349.0" layoutY="53.0" text="Συνολική  Έξοδα" textFill="WHITE">
                <font>
                   <Font size="25.0" />
@@ -31,6 +31,31 @@
             <Button fx:id="Show_Button" layoutX="705.0" layoutY="159.0" mnemonicParsing="false" onAction="#Show_Button_Pr" text="Προβολή" />
             <TextField fx:id="Pyear" layoutX="369.0" layoutY="160.0" promptText="Έτος" />
             <ComboBox fx:id="Type" layoutX="218.0" layoutY="160.0" prefHeight="23.0" prefWidth="131.0" promptText="Είδος" />
+            <Label fx:id="Dist_Label" layoutX="79.0" layoutY="146.0" text="Το διάστημα είναι κενό" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Type_Label" layoutX="218.0" layoutY="146.0" text="Το είδος είναι κενό" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="Year_Label" layoutX="373.0" layoutY="146.0" text="Το έτος είναι κενό" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="To_Label" layoutX="530.0" layoutY="146.0" text="Κενό Πεδίο" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="From_Label" layoutX="364.0" layoutY="146.0" text="Κενό Πεδίο" textFill="RED" visible="false">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

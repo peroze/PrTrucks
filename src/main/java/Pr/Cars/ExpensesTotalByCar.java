@@ -65,9 +65,28 @@ public class ExpensesTotalByCar implements Initializable {
     @FXML
     private ComboBox Lisc;
 
+    @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Dist_Label;
+
+    @FXML
+    private Label Type_Label;
+
+    @FXML
+    private Label Year_Label;
+
+    @FXML
+    private Label To_Label;
+
+    @FXML
+    private Label From_Label;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Sql db=new Sql();
+        Sql db = new Sql();
         ObservableList<String> oblist = FXCollections.observableArrayList();
         Date.setCellValueFactory(new PropertyValueFactory<>("Period"));
         Amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
@@ -86,14 +105,13 @@ public class ExpensesTotalByCar implements Initializable {
         oblist2.add("Καύσιμα");
         oblist2.add("Όλα");
         Type.setItems(oblist2);
-        ResultSet rs=db.Query_All_Lisc();
-        ObservableList<String> oblist3=FXCollections.observableArrayList();
+        ResultSet rs = db.Query_All_Lisc();
+        ObservableList<String> oblist3 = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
                 oblist3.add(rs.getString("LiscPlate"));
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         Lisc.setItems(oblist3);
@@ -108,8 +126,61 @@ public class ExpensesTotalByCar implements Initializable {
 
     @FXML
     void Show_Button_Pr(ActionEvent event) {
+
         try {
-            String LiscPlate=Lisc.getValue().toString();
+            boolean flag1=false;
+            Type.setStyle(null);
+            Type_Label.setVisible(false);
+            Lisc.setStyle(null);
+            Lisc_Label.setVisible(false);
+            Distance.setStyle(null);
+            Dist_Label.setVisible(false);
+            From.setStyle(null);
+            From_Label.setVisible(false);
+            To.setStyle(null);
+            To_Label.setVisible(false);
+            Pyear.setStyle(null);
+            Year_Label.setVisible(false);
+            if (Type.getValue() == null) {
+                Type_Label.setVisible(true);
+                Type.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                flag1=true;
+            }
+            if (Lisc.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                Lisc.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+
+                flag1=true;
+            }
+            if (Distance.getValue() == null) {
+                Dist_Label.setVisible(true);
+                Distance.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                flag1=true;
+            }else{
+                if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος") && Pyear.getText().equals("")) {
+                    Year_Label.setText("Το Έτος είναι κενό");
+                    Year_Label.setVisible(true);
+                    Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                else if(Distance.getValue().toString().equals("Συγκεκριμένο Έτος")){
+                    Integer.valueOf(Pyear.getText());
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (From.getValue() == null)) {
+                    From_Label.setVisible(true);
+                    From.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (To.getValue() == null)) {
+                    To_Label.setVisible(true);
+                    To.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+            }
+            if(flag1){
+                return;
+            }
+            String LiscPlate = Lisc.getValue().toString();
             ArrayList<ResultSet> rs = new ArrayList<>();
             Sql db = new Sql();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -148,7 +219,7 @@ public class ExpensesTotalByCar implements Initializable {
                         String temp2 = Year - i + "-12-31";
                         dist = String.valueOf(Year - i);
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         double total = 0;
@@ -165,7 +236,7 @@ public class ExpensesTotalByCar implements Initializable {
                     }
                     String date2 = Year - 5 + "-01-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date2, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, date2, Today));
                     }
                     break;
                 case "Πρωηγούμενο Έτος":
@@ -199,7 +270,7 @@ public class ExpensesTotalByCar implements Initializable {
                         }
                         dist = String.valueOf(i) + "ος";
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         double total = 0;
@@ -217,7 +288,7 @@ public class ExpensesTotalByCar implements Initializable {
                     String date3 = Year - 1 + "-01-01";
                     String date4 = Year - 1 + "-12-31";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date3, date4));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, date3, date4));
                     }
                     break;
                 case "Τρέχων Έτος":
@@ -252,7 +323,7 @@ public class ExpensesTotalByCar implements Initializable {
 
                         dist = String.valueOf(i) + "ος";
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         double total = 0;
@@ -269,7 +340,7 @@ public class ExpensesTotalByCar implements Initializable {
                     }
                     String date5 = Year + "-01-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date5, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, date5, Today));
                     }
                     break;
 
@@ -293,10 +364,10 @@ public class ExpensesTotalByCar implements Initializable {
                             Table.add("Refill");
                             break;
                     }
-                    String date6 = Year+"-" + (Month - 1)+ "-01";
-                    String date7 = Year+"-" + (Month - 1) + "-31";
+                    String date6 = Year + "-" + (Month - 1) + "-01";
+                    String date7 = Year + "-" + (Month - 1) + "-31";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date6, date7));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, date6, date7));
                     }
                     break;
                 case "Τρέχων Μήνας":
@@ -321,7 +392,7 @@ public class ExpensesTotalByCar implements Initializable {
                     }
                     String date8 = Year + "-" + Month + "-01";
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, date8, Today));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, date8, Today));
                     }
                     break;
                 case "Συγκεκριμένο Έτος":
@@ -361,7 +432,7 @@ public class ExpensesTotalByCar implements Initializable {
                         }
                         dist = String.valueOf(i);
                         for (int k = 0; k < Table.size(); k++) {
-                            rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, temp, temp2));
+                            rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, temp, temp2));
                         }
                         ModelTotal model;
                         double total = 0;
@@ -377,7 +448,7 @@ public class ExpensesTotalByCar implements Initializable {
                         Data.add(model);
                     }
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, top, end));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, top, end));
                     }
                     break;
                 case "Άλλο Διάστημα":
@@ -403,7 +474,7 @@ public class ExpensesTotalByCar implements Initializable {
                     String from = From.getValue().toString();
                     String to = To.getValue().toString();
                     for (int k = 0; k < Table.size(); k++) {
-                        rs.add(db.Query_Car_Price_Date(Table.get(k),LiscPlate, from, to));
+                        rs.add(db.Query_Car_Price_Date(Table.get(k), LiscPlate, from, to));
                     }
                     break;
             }
@@ -430,23 +501,29 @@ public class ExpensesTotalByCar implements Initializable {
                 model = new ModelTotal(dist, String.valueOf(total));
                 Data.add(model);
                 Table1.setItems(Data);
+            }
+            db.Disconnect();
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            Year_Label.setText("Το έτος πρέπει να είναι ακέραιος");
+            Year_Label.setVisible(true);
+            Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+
         }
-        db.Disconnect();
-    } catch(
-    SQLException e)
 
-    {
-        e.printStackTrace();
     }
-
-}
 
     void Show_Rest() {
         if (Distance.getValue().toString().equals("Άλλο Διάστημα")) {
             To.setVisible(true);
             From.setVisible(true);
+            Pyear.setVisible(false);
         } else if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος")) {
             Pyear.setVisible(true);
+            To.setVisible(false);
+            From.setVisible(false);
         } else {
             To.setVisible(false);
             From.setVisible(false);

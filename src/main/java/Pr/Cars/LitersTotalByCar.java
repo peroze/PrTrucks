@@ -54,6 +54,22 @@ public class LitersTotalByCar implements Initializable {
     private TextField Pyear;
 
     @FXML
+    private Label Lisc_Label;
+
+    @FXML
+    private Label Dist_Label;
+
+
+    @FXML
+    private Label Year_Label;
+
+    @FXML
+    private Label To_Label;
+
+    @FXML
+    private Label From_Label;
+
+    @FXML
     private TableColumn<ModelTotal, StringsForTables> Consumption;
 
     @Override
@@ -92,7 +108,55 @@ public class LitersTotalByCar implements Initializable {
 
     @FXML
     void Show_Button_Pr(ActionEvent event) {
+
         try {
+            boolean flag1=false;
+            Lisc.setStyle(null);
+            Lisc_Label.setVisible(false);
+            Distance.setStyle(null);
+            Dist_Label.setVisible(false);
+            From.setStyle(null);
+            From_Label.setVisible(false);
+            To.setStyle(null);
+            To_Label.setVisible(false);
+            Pyear.setStyle(null);
+            Year_Label.setVisible(false);
+            if (Lisc.getValue() == null) {
+                Lisc_Label.setVisible(true);
+                Lisc.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+
+                flag1=true;
+            }
+            if (Distance.getValue() == null) {
+                Dist_Label.setVisible(true);
+                Distance.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                flag1=true;
+            }else {
+                if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος") && Pyear.getText().equals("")) {
+                    Year_Label.setText("Το Έτος είναι κενό");
+                    Year_Label.setVisible(true);
+                    Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                else if(Distance.getValue().toString().equals("Συγκεκριμένο Έτος")){
+                    Integer.valueOf(Pyear.getText());
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (From.getValue() == null)) {
+                    From_Label.setVisible(true);
+                    From.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+                if (Distance.getValue().toString().equals("Άλλο Διάστημα") && (To.getValue() == null)) {
+                    To_Label.setVisible(true);
+                    To.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    flag1=true;
+                }
+            }
+            if(flag1){
+
+                return;
+            }
+
             ResultSet rs = null;
             ResultSet rs2 = null;
             String LiscPlate = Lisc.getValue().toString();
@@ -303,6 +367,11 @@ public class LitersTotalByCar implements Initializable {
                 SQLException e) {
             e.printStackTrace();
         }
+        catch (NumberFormatException e){
+            Year_Label.setText("Το έτος πρέπει να είναι ακέραιος");
+            Year_Label.setVisible(true);
+            Pyear.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
 
     }
 
@@ -310,8 +379,11 @@ public class LitersTotalByCar implements Initializable {
         if (Distance.getValue().toString().equals("Άλλο Διάστημα")) {
             To.setVisible(true);
             From.setVisible(true);
+            Pyear.setVisible(false);
         } else if (Distance.getValue().toString().equals("Συγκεκριμένο Έτος")) {
             Pyear.setVisible(true);
+            To.setVisible(false);
+            From.setVisible(false);
         } else {
             To.setVisible(false);
             From.setVisible(false);
