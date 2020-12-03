@@ -80,6 +80,7 @@ public class ExpensesTotal implements Initializable {
         oblist2.add("Service");
         oblist2.add("Eπισκευές");
         oblist2.add("ΚΤΕΟ");
+        oblist2.add("Καύσιμα");
         oblist2.add("Όλα");
         Type.setItems(oblist2);
         To.setVisible(false);
@@ -117,10 +118,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     for (int i = 0; i < 6; i++) {
@@ -131,13 +136,13 @@ public class ExpensesTotal implements Initializable {
                             rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
                         }
                         ModelTotal model;
-                        int total = 0;
+                        double total = 0;
                         for (int l = 0; l < rs.size(); l++) {
                             String temps = rs.get(l).getString(("Total"));
                             if (temps == null) {
                                 continue;
                             }
-                            total = Integer.valueOf(temps) + total;
+                            total = Double.valueOf(temps) + total;
                         }
                         rs = new ArrayList<>();
                         model = new ModelTotal(dist, String.valueOf(total));
@@ -158,10 +163,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     for (int i = 1; i < 13; i++) {
@@ -178,13 +187,13 @@ public class ExpensesTotal implements Initializable {
                             rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
                         }
                         ModelTotal model;
-                        int total = 0;
+                        double total = 0;
                         for (int l = 0; l < rs.size(); l++) {
                             String temps = rs.get(l).getString(("Total"));
                             if (temps == null) {
                                 continue;
                             }
-                            total = Integer.valueOf(temps) + total;
+                            total = Double.valueOf(temps) + total;
                         }
                         rs = new ArrayList<>();
                         model = new ModelTotal(dist, String.valueOf(total));
@@ -206,10 +215,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     for (int i = 1; i < Month + 1; i++) {
@@ -227,13 +240,13 @@ public class ExpensesTotal implements Initializable {
                             rs.add(db.Query_All_Price_Date(Table.get(k), temp, temp2));
                         }
                         ModelTotal model;
-                        int total = 0;
+                        double total = 0;
                         for (int l = 0; l < rs.size(); l++) {
                             String temps = rs.get(l).getString(("Total"));
                             if (temps == null) {
                                 continue;
                             }
-                            total = Integer.valueOf(temps) + total;
+                            total = Double.valueOf(temps) + total;
                         }
                         rs = new ArrayList<>();
                         model = new ModelTotal(dist, String.valueOf(total));
@@ -255,10 +268,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     String date6 = Year+"-" + (Month - 1)+ "-01";
@@ -277,10 +294,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     String date8 = Year + "-" + Month + "-01";
@@ -298,10 +319,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     String tempor = Pyear.getText();
@@ -350,10 +375,14 @@ public class ExpensesTotal implements Initializable {
                         case "ΚΤΕΟ":
                             Table.add("KTEO");
                             break;
+                        case "Καύσιμα":
+                            Table.add("Refill");
+                            break;
                         case ("Όλα"):
                             Table.add("Service");
                             Table.add("Repairs");
                             Table.add("KTEO");
+                            Table.add("Refill");
                             break;
                     }
                     String from = From.getValue().toString();
@@ -364,14 +393,14 @@ public class ExpensesTotal implements Initializable {
                     break;
             }
             for (int m = 0; m < rs.size(); m++) {
-                int total = 0;
+                double total = 0;
                 for (int l = 0; l < rs.size(); l++) {
 
                     String temps = rs.get(l).getString(("Total"));
                     if (temps == null) {
                         continue;
                     }
-                    total = Integer.valueOf(temps) + total;
+                    total = Double.valueOf(temps) + total;
                 }
                 if (Distance.getValue().toString().equals("Άλλο Διάστημα")) {
                     dist = From.getValue().toString() + " έως " + To.getValue().toString();

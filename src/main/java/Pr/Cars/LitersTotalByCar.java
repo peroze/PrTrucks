@@ -53,11 +53,15 @@ public class LitersTotalByCar implements Initializable {
     @FXML
     private TextField Pyear;
 
+    @FXML
+    private TableColumn<ModelTotal, StringsForTables> Consumption;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> oblist = FXCollections.observableArrayList();
         Date.setCellValueFactory(new PropertyValueFactory<>("Period"));
         Amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        Consumption.setCellValueFactory(new PropertyValueFactory<>("Consumption"));
         oblist.add("Τελευταία 5 Έτοι");
         oblist.add("Πρωηγούμενο Έτος");
         oblist.add("Τρέχων Έτος");
@@ -65,15 +69,14 @@ public class LitersTotalByCar implements Initializable {
         oblist.add("Πρωηγούμενος Μήνας");
         oblist.add("Τρέχων Μήνας");
         oblist.add("Άλλο Διάστημα");
-        ObservableList<String> oblist2=FXCollections.observableArrayList();
-        Sql db=new Sql();
-        ResultSet rs=db.Query_All_Lisc();
+        ObservableList<String> oblist2 = FXCollections.observableArrayList();
+        Sql db = new Sql();
+        ResultSet rs = db.Query_All_Lisc();
         try {
             while (rs.next()) {
                 oblist2.add(rs.getString("LiscPlate"));
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         Lisc.setItems(oblist2);
@@ -91,7 +94,8 @@ public class LitersTotalByCar implements Initializable {
     void Show_Button_Pr(ActionEvent event) {
         try {
             ResultSet rs = null;
-            String LiscPlate=Lisc.getValue().toString();
+            ResultSet rs2 = null;
+            String LiscPlate = Lisc.getValue().toString();
             Sql db = new Sql();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date today = new Date();
@@ -107,19 +111,32 @@ public class LitersTotalByCar implements Initializable {
                     for (int i = 0; i < 6; i++) {
                         String temp = Year - i + "-01-01";
                         String temp2 = Year - i + "-12-31";
-                        dist = String.valueOf(Year - i);
-                        rs = db.Query_Car_Refill_Date(LiscPlate,temp, temp2);
-                        ModelTotal model;
-                        if(rs.getString("Total")==null){
-                            model = new ModelTotal(dist, "0");
+                        if(i==0) {
+                             temp2 = Today;
                         }
-                        else {
-                            model = new ModelTotal(dist, rs.getString("Total"));
+                        dist = String.valueOf(Year - i);
+                        rs = db.Query_Car_Refill_Date(LiscPlate, temp, temp2);
+                        rs2 = db.Query_Car_Refill_Cons(LiscPlate, temp, temp2);
+                        ModelTotal model;
+                        if (rs.getString("Total") == null) {
+                            if (rs2.getString("Cons") == null) {
+                                model = new ModelTotal(dist, "0", "0");
+                            } else {
+                                model = new ModelTotal(dist, "0", rs2.getString("Cons"));
+                            }
+                        } else {
+                            if (rs2.getString("Cons") == null) {
+                                model = new ModelTotal(dist, rs.getString("Total"), "0");
+                            } else {
+                                model = new ModelTotal(dist, rs.getString("Total"), rs2.getString("Cons"));
+                            }
                         }
                         Data.add(model);
                     }
                     String date2 = Year - 5 + "-01-01";
-                    rs = db.Query_Car_Refill_Date(LiscPlate,date2, Today);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, date2, Today);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, date2, Today);
+
                     break;
                 case "Πρωηγούμενο Έτος":
                     for (int i = 1; i < 13; i++) {
@@ -131,23 +148,34 @@ public class LitersTotalByCar implements Initializable {
                             temp = Year - 1 + "-" + i + "-01";
                             temp2 = Year - 1 + "-" + i + "-31";
                         }
-                        dist = String.valueOf(i)+"ος";
-                        rs = db.Query_Car_Refill_Date(LiscPlate,temp, temp2);
+                        dist = String.valueOf(i) + "ος";
+                        rs = db.Query_Car_Refill_Date(LiscPlate, temp, temp2);
+                        rs2 = db.Query_Car_Refill_Cons(LiscPlate, temp, temp2);
                         ModelTotal model;
-                        if(rs.getString("Total")==null){
-                            model = new ModelTotal(dist, "0");
-                        }
-                        else {
-                            model = new ModelTotal(dist, rs.getString("Total"));
+                        if (rs.getString("Total") == null) {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, "0", "0");
+                            }
+                            else {
+                                model = new ModelTotal(dist, "0", rs2.getString("Cons"));
+                            }
+                        } else {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, rs.getString("Total"),"0");
+                            }
+                            else {
+                                model = new ModelTotal(dist, rs.getString("Total"),rs2.getString("Cons"));
+                            }
                         }
                         Data.add(model);
                     }
                     String date3 = Year - 1 + "-01-01";
                     String date4 = Year - 1 + "-12-31";
-                    rs = db.Query_Car_Refill_Date(LiscPlate,date3, date4);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, date3, date4);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, date3, date4);
                     break;
                 case "Τρέχων Έτος":
-                    for (int i = 1; i < Month+1; i++) {
+                    for (int i = 1; i < Month + 1; i++) {
                         String temp, temp2;
                         if (i < 10) {
                             temp = Year + "-" + "0" + i + "-01";
@@ -157,63 +185,89 @@ public class LitersTotalByCar implements Initializable {
                             temp2 = Year + "-" + i + "-31";
                         }
 
-                        dist = String.valueOf(i)+"ος";
-                        rs = db.Query_Car_Refill_Date(LiscPlate,temp, temp2);
+                        dist = String.valueOf(i) + "ος";
+                        rs = db.Query_Car_Refill_Date(LiscPlate, temp, temp2);
+                        rs2 = db.Query_Car_Refill_Cons(LiscPlate, temp, temp2);
                         ModelTotal model;
-                        if(rs.getString("Total")==null){
-                            model = new ModelTotal(dist, "0");
-                        }
-                        else {
-                            model = new ModelTotal(dist, rs.getString("Total"));
+                        if (rs.getString("Total") == null) {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, "0","0");
+                            }
+                            else{
+                               model =  new ModelTotal(dist, "0",rs2.getString("Cons"));
+                            }
+                        } else {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, rs.getString("Total"),"0");
+                            }
+                            else{
+                                model = new ModelTotal(dist, rs.getString("Total"),rs2.getString("Cons"));
+                            }
                         }
                         Data.add(model);
                     }
                     String date5 = Year + "-01-01";
-                    rs = db.Query_Car_Refill_Date(LiscPlate,date5, Today);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, date5, Today);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, date5, Today);
                     break;
 
                 case "Πρωηγούμενος Μήνας":
-                    String date6 = Year + Month - 1 + "-01";
-                    String date7 = Year + Month - 1 + "-31";
-                    rs = db.Query_Car_Refill_Date(LiscPlate,date6, date7);
+                    String date6 = String.valueOf(Year)+"-"  + String.valueOf(Month - 1) + "-01";
+                    String date7 =String.valueOf(Year)+"-"  + String.valueOf(Month - 1)+ "-31";
+                    System.out.println(Year);
+                    System.out.println(Month);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, date6, date7);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, date6, date7);
                     break;
                 case "Τρέχων Μήνας":
-                    String date8 = Year + "-" + Month + "-01";
-                    rs = db.Query_Car_Refill_Date(LiscPlate,date8, Today);
+                    String date8 = String.valueOf(Year)+"-"  + String.valueOf(Month) + "-01";
+                    rs = db.Query_Car_Refill_Date(LiscPlate, date8, Today);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, date8, Today);
                     break;
                 case "Συγκεκριμένο Έτος":
-                    String tempor =Pyear.getText();
-                    String[] Array=tempor.split("-");
-                    String top=Array[0]+"-01-01";
-                    String end=Array[0]+"-12-31";
-                    int flag=13;
-                    if(Array[0].equals(String.valueOf(Year))) flag=Month+1;
+                    String tempor = Pyear.getText();
+                    String[] Array = tempor.split("-");
+                    String top = Array[0] + "-01-01";
+                    String end = Array[0] + "-12-31";
+                    int flag = 13;
+                    if (Array[0].equals(String.valueOf(Year))) flag = Month + 1;
                     for (int i = 1; i < flag; i++) {
                         String temp, temp2;
                         if (i < 10) {
-                            temp = Integer.valueOf(Array[0])  + "-" + "0" + i + "-01";
+                            temp = Integer.valueOf(Array[0]) + "-" + "0" + i + "-01";
                             temp2 = Integer.valueOf(Array[0]) + "-" + "0" + i + "-31";
                         } else {
-                            temp = Integer.valueOf(Array[0])  + "-" + i + "-01";
+                            temp = Integer.valueOf(Array[0]) + "-" + i + "-01";
                             temp2 = Integer.valueOf(Array[0]) + "-" + i + "-31";
                         }
                         dist = String.valueOf(i);
-                        rs = db.Query_Car_Refill_Date(LiscPlate,temp, temp2);
+                        rs = db.Query_Car_Refill_Date(LiscPlate, temp, temp2);
+                        rs2 = db.Query_Car_Refill_Cons(LiscPlate, temp, temp2);
                         ModelTotal model;
-                        if(rs.getString("Total")==null){
-                            model = new ModelTotal(dist, "0");
-                        }
-                        else {
-                            model = new ModelTotal(dist, rs.getString("Total"));
+                        if (rs.getString("Total") == null) {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, "0","0");
+                            }
+                            else{
+                                model = new ModelTotal(dist, "0",rs2.getString("Cons"));
+                            }
+                        } else {
+                            if(rs2.getString("Cons")==null) {
+                                model = new ModelTotal(dist, rs.getString("Total"), "0");
+                            }
+                            else{
+                                model = new ModelTotal(dist, rs.getString("Total"), rs2.getString("Cons"));
+                            }
                         }
                         Data.add(model);
                     }
-                    rs = db.Query_Car_Refill_Date(LiscPlate,top,end);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, top, end);
+                    rs2 = db.Query_Car_Refill_Cons(LiscPlate, top, end);
                     break;
                 case "Άλλο Διάστημα":
                     String from = From.getValue().toString();
                     String to = To.getValue().toString();
-                    rs = db.Query_Car_Refill_Date(LiscPlate,from, to);
+                    rs = db.Query_Car_Refill_Date(LiscPlate, from, to);
                     break;
             }
             while (rs.next()) {
@@ -228,19 +282,28 @@ public class LitersTotalByCar implements Initializable {
                     dist = "Σύνολο";
                 }
                 ModelTotal model;
-                if(rs.getString("Total")==null){
-                    model = new ModelTotal(dist, "0");
-                }
-                else {
-                    model = new ModelTotal(dist, rs.getString("Total"));
+                if (rs.getString("Total") == null) {
+                    if (rs2.getString("Cons") == null) {
+                        model = new ModelTotal(dist, "0", "0");
+                    } else {
+                        model = new ModelTotal(dist, "0", rs2.getString("Cons"));
+                    }
+                } else {
+                    if (rs2.getString("Cons") == null) {
+                        model = new ModelTotal(dist, rs.getString("Total"), "0");
+                    } else {
+                        model = new ModelTotal(dist, rs.getString("Total"), rs2.getString("Cons"));
+                    }
                 }
                 Data.add(model);
                 TableBC.setItems(Data);
             }
             db.Disconnect();
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     void Show_Rest() {

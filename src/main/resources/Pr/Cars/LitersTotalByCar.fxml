@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.LitersTotalByCar">
+<AnchorPane stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.LitersTotalByCar">
    <children>
       <AnchorPane fx:id="ByCar_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
@@ -19,6 +19,7 @@
                <columns>
                   <TableColumn fx:id="Date" prefWidth="122.0" text="Διάστιμα" />
                   <TableColumn fx:id="Amount" prefWidth="110.0" text="Ποσότητα" />
+                  <TableColumn fx:id="Consumption" prefWidth="91.0" text="Κατανάλωση" />
                </columns>
             </TableView>
             <DatePicker fx:id="From" layoutX="362.0" layoutY="145.0" prefHeight="23.0" prefWidth="111.0" promptText="Από" visible="false" />
