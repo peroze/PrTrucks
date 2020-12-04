@@ -6,38 +6,31 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddExternalCar">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="manufactor" layoutX="111.0" layoutY="173.0" prefHeight="25.0" prefWidth="138.0" promptText="Μάρκα" />
@@ -53,44 +46,49 @@
       <TextField fx:id="Phone" layoutX="364.0" layoutY="221.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο Οδηγού" />
       <TextField fx:id="Width" layoutX="111.0" layoutY="270.0" prefHeight="25.0" prefWidth="138.0" promptText="Πλάτος" />
       <TextField fx:id="Driver" layoutX="111.0" layoutY="221.0" prefHeight="26.0" prefWidth="138.0" promptText="Οδηγός" />
-      <Label fx:id="Manu_Label" layoutX="112.0" layoutY="159.0" prefHeight="17.0" prefWidth="138.0" text="Η Μάρκα είναι κενή" textFill="RED" visible="false">
+      <Label fx:id="Manu_Label" layoutX="108.0" layoutY="160.0" prefHeight="17.0" prefWidth="138.0" text="Μάρκα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lisc_Label" layoutX="113.0" layoutY="113.0" prefHeight="17.0" prefWidth="138.0" text="Η Πινακίδα είναι κένη" textFill="RED" visible="false">
+      <Label fx:id="Lisc_Label" layoutX="110.0" layoutY="113.0" prefHeight="17.0" prefWidth="138.0" text="Πινακίδα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Model_Label" layoutX="361.0" layoutY="160.0" prefHeight="17.0" prefWidth="138.0" text="To Μοντέλο είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Model_Label" layoutX="361.0" layoutY="160.0" prefHeight="17.0" prefWidth="138.0" text="Μοντέλο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Driver_Label" layoutX="111.0" layoutY="210.0" prefHeight="17.0" prefWidth="154.0" text="Ο οδηγός  είναι κενός" textFill="RED" visible="false">
+      <Label fx:id="Driver_Label" layoutX="108.0" layoutY="212.0" prefHeight="17.0" prefWidth="154.0" text="Όδηγός" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Phone_Label1" layoutX="362.0" layoutY="210.0" prefHeight="17.0" prefWidth="154.0" text="Το τηλέφωνο είναι κενό" textFill="RED" visible="false">
+      <Label fx:id="Phone_Label1" layoutX="362.0" layoutY="210.0" prefHeight="17.0" prefWidth="154.0" text="Τηλέφωνο Οδηγού " textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
       <TextField fx:id="Height" layoutX="364.0" layoutY="270.0" prefHeight="25.0" prefWidth="138.0" promptText="Ύψος" />
       <TextField fx:id="Lenght" layoutX="111.0" layoutY="318.0" prefHeight="25.0" prefWidth="138.0" promptText="Μήκος" />
-      <Label fx:id="Width_label" layoutX="112.0" layoutY="258.0" prefHeight="17.0" prefWidth="154.0" text="Το Πλάτος πρέπει να είναι ακέραιος" textFill="RED" visible="false">
+      <Label fx:id="Width_label" layoutX="109.0" layoutY="257.0" prefHeight="17.0" prefWidth="154.0" text="Πλάτος" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Height_Label" layoutX="361.0" layoutY="258.0" prefHeight="17.0" prefWidth="154.0" text="Το Ύψος πρέπει να είναι ακέραιος" textFill="RED" visible="false">
+      <Label fx:id="Height_Label" layoutX="361.0" layoutY="258.0" prefHeight="17.0" prefWidth="154.0" text="Ύψος" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lenght_Label" layoutX="115.0" layoutY="307.0" prefHeight="17.0" prefWidth="154.0" text="Το Μήκος πρέπει να είναι ακέραιος" textFill="RED" visible="false">
+      <Label fx:id="Lenght_Label" layoutX="109.0" layoutY="306.0" prefHeight="17.0" prefWidth="154.0" text="Μήκος" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Comp_Label" layoutX="360.0" layoutY="114.0" prefHeight="17.0" prefWidth="138.0" text="Εταιρία" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>

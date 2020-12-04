@@ -11,39 +11,24 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/PrTrucks.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddKTEO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRefill.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddRepair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/AddService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ExpensesTotal.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ExpensesTotal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ExpensesTotalByCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ExpensesTotalByCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/LitersTotal.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/LitersTotal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/LitersTotalByCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/LitersTotalByCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ModelTotal.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/ModelTotal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddRepair.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/AddRepair.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ExpensesTotal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ExpensesTotal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ExpensesTotalByCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/ExpensesTotalByCar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/LitersTotal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/LitersTotal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/LitersTotalByCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/LitersTotalByCar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddKTEO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddExternalCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddExternalCar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRefill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/AddService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExpensesTotal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExpensesTotal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExpensesTotalByCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/ExpensesTotalByCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/LitersTotal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/LitersTotal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/LitersTotalByCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/LitersTotalByCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExpensesTotal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExpensesTotal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExpensesTotalByCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ExpensesTotalByCar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/LitersTotal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/LitersTotal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/LitersTotalByCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/LitersTotalByCar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddExternalCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddExternalCar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddRefill.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddRefill.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddRepair.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddRepair.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddService.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/AddService.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewRepair.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewRepair.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewService.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/ViewService.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +207,8 @@
       <workItem from="1606845555144" duration="1121000" />
       <workItem from="1606846914606" duration="22267000" />
       <workItem from="1606931888854" duration="15010000" />
-      <workItem from="1607025565661" duration="12889000" />
+      <workItem from="1607025565661" duration="13346000" />
+      <workItem from="1607110540090" duration="5245000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -357,7 +343,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607035125264</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added Filter with location at Service">
+      <created>1607039606401</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1607039606401</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,26 +377,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607026887141" />
-    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607035123200">
+    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607039604722">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607035123200" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1607039383686">
+    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607039604722" />
+    <state width="1877" height="214" key="GridCell.Tab.0.bottom" timestamp="1607115758534">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607039383686" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1607039383686">
+    <state width="1877" height="214" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607115758534" />
+    <state width="1877" height="214" key="GridCell.Tab.0.center" timestamp="1607115758534">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607039383686" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1607039383686">
+    <state width="1877" height="214" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607115758534" />
+    <state width="1877" height="214" key="GridCell.Tab.0.left" timestamp="1607115758533">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607039383686" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1607039383686">
+    <state width="1877" height="214" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607115758533" />
+    <state width="1877" height="214" key="GridCell.Tab.0.right" timestamp="1607115758534">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607039383686" />
+    <state width="1877" height="214" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607115758534" />
     <state width="1877" height="326" key="GridCell.Tab.1.bottom" timestamp="1606679505493">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -424,14 +417,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="712" y="147" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606787992494" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607035127527">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607039611120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607035127527" />
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607025566155">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607039611120" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607110539567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607025566155" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607110539567" />
     <state x="690" y="276" key="extract.method.dialog" timestamp="1606672214221">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -440,25 +433,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606864696977" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606864436946">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607111403800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606864436946" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java</url>
-          <line>231</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Pr/Cars/AddRepair.java</url>
-          <line>253</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607111403800" />
   </component>
 </project>

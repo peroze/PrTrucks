@@ -7,38 +7,31 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddRefill">
    <children>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
          <children>
-            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-26.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
-               <image>
-                  <Image url="@Images/windows-minimize-icon-25.jpg" />
-               </image>
                <HBox.margin>
-                  <Insets right="3.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
       <TextField fx:id="Kilometers" layoutX="93.0" layoutY="188.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />

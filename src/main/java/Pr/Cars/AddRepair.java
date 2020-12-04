@@ -7,20 +7,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -43,10 +47,10 @@ public class AddRepair implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
     @FXML
     private TextField Discreption;
@@ -96,50 +100,140 @@ public class AddRepair implements Initializable {
     @FXML
     private Label Date_Label;
 
+    @FXML
+    private Label KM_Label;
+
     private ObservableList<StringsForTables> Oblist;
 
     private boolean edit = false;
 
     private ModelRepair toEdit;
 
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        toEdit = null;
-        Oblist = FXCollections.observableArrayList();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Pane.requestFocus();
-            }
-        });
-        ObservableList<String> Cars = FXCollections.observableArrayList();
-        Sql sql = new Sql();
-        ResultSet rs = sql.Query_All_Lisc();
         try {
-            while (rs.next()) {
-                Cars.add(rs.getString("LiscPlate"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        Lisc_Plate.setItems(Cars);
-        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
-        Table.setRowFactory((tv -> {
-            TableRow<StringsForTables> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    DoubleClickTable();
+            Texts=new ArrayList<>();
+            TFields=new ArrayList<>();
+            dict=new Hashtable();
+            Labels=new ArrayList<>();
+            toEdit = null;
+            Oblist = FXCollections.observableArrayList();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Pane.requestFocus();
                 }
             });
-            return row;
-        }));
-        ContextMenu Cont = new ContextMenu();
-        MenuItem Del = new MenuItem("Διαγραφή");
-        Del.setOnAction(this::Del);
-        Cont.getItems().add(Del);
-        Table.setContextMenu(Cont);
-        sql.Disconnect();
+            ObservableList<String> Cars = FXCollections.observableArrayList();
+            Sql sql = new Sql();
+            ResultSet rs = sql.Query_All_Lisc();
+            try {
+                while (rs.next()) {
+                    Cars.add(rs.getString("LiscPlate"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Lisc_Plate.setItems(Cars);
+            Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+            Table.setRowFactory((tv -> {
+                TableRow<StringsForTables> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        DoubleClickTable();
+                    }
+                });
+                return row;
+            }));
+            ContextMenu Cont = new ContextMenu();
+            MenuItem Del = new MenuItem("Διαγραφή");
+            Del.setOnAction(this::Del);
+            Cont.getItems().add(Del);
+            Table.setContextMenu(Cont);
+            sql.Disconnect();
+            Labels = new ArrayList<>();// TO DOOOOOOOO
+            Labels.add(Lisc_Label);
+            Labels.add(Date_Label);
+            Labels.add(Disc_Label);
+            Labels.add(KM_Label);
+            Labels.add(Workshop_Label);
+            Labels.add(Price_Label);
+            int Size = Labels.size();
+            TFields = new ArrayList<>();
+            TFields.add(Discreption);
+            TFields.add(Kilometers);
+            TFields.add(Workshop);
+            TFields.add(Price);
+            for (int i = 0; i < Labels.size(); i++) {
+                Texts.add(Labels.get(i).getText());
+            }
+            for (int i = 0; i < Size; i++) {
+                if (i == 1) {
+                    dict.put(Date, Labels.get(i));
+                    Date.setOnMouseClicked(this::setFocusTFIelds);
+                } else if (i == 0) {
+                    dict.put(Lisc_Plate, Labels.get(i));
+                    Lisc_Plate.setOnMouseClicked(this::setFocusTFIelds);
+                } else {
+                    dict.put(TFields.get(i - 2), Labels.get(i));
+                    TFields.get(i - 2).setOnMouseClicked(this::setFocusTFIelds);
+                }
+            }
+            sql.Disconnect();
+            ResetHideLabels();
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+
+
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if(i==1&&Date.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==0&&Lisc_Plate.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i!=0&&i!=1) {
+
+                if (TFields.get(i-2).getText().equals( "")) {
+                    Labels.get(i).setVisible(false);
+                }
+                else{
+                    Labels.get(i).setVisible(true);
+                }
+            }
+            else{
+                Labels.get(i).setVisible(true);
+            }
+        }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+        Date.setStyle(null);
+        Lisc_Plate.setStyle(null);
     }
 
 
@@ -184,36 +278,36 @@ public class AddRepair implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         boolean flag = false;
-        Lisc_Plate.setStyle(null);
-        Workshop.setStyle(null);
-        Kilometers.setStyle(null);
-        Date.setStyle(null);
-        Price.setStyle(null);
-        Discreption.setStyle(null);
-        Price_Label.setVisible(false);
-        Workshop_Label.setVisible(false);
-        Lisc_Label.setVisible(false);
-        Disc_Label.setVisible(false);
-        Date_Label.setVisible(false);
+        ResetCssTFields();
+        ResetHideLabels();
         if (Lisc_Plate.getValue() == null) {
+            Lisc_Label.setStyle("-fx-text-fill: RED");
+            Lisc_Label.setText("Η Πινακίδα είναι κενή");
             Lisc_Label.setVisible(true);
             flag = true;
             Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (Date.getValue() == null) {
+            Date_Label.setStyle("-fx-text-fill: RED");
+            Date_Label.setText("Η Ημερομηνία είναι κενή");
             Date_Label.setVisible(true);
             flag = true;
         }
         if (Discreption.getText().equals("")) {
+            Disc_Label.setStyle("-fx-text-fill: RED");
+            Disc_Label.setText("Η Περιγραφή είναι κενή");
             Disc_Label.setVisible(true);
             Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (Workshop.getText().equals("")) {
+            Workshop_Label.setStyle("-fx-text-fill: RED");
+            Workshop_Label.setText("Η Περιγραφή είναι κενή");
             Workshop_Label.setVisible(true);
             Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (Price.getText().equals("")) {
-            Price_Label.setText("H τιμή είναι κενή");
+            Price_Label.setStyle("-fx-text-fill: RED");
+            Price_Label.setText("Η Περιγραφή είναι κενή");
             Price_Label.setVisible(true);
             flag = true;
             Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -221,6 +315,7 @@ public class AddRepair implements Initializable {
         try {
             Double.valueOf(Price.getText());
         } catch (NumberFormatException e) {
+            Price_Label.setStyle("-fx-text-fill: RED");
             Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
             Price_Label.setVisible(true);
             Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -229,7 +324,9 @@ public class AddRepair implements Initializable {
         try {
             Integer.valueOf(Kilometers.getText());
         } catch (NumberFormatException e) {
-            //ToDO Add Kilometers Label
+            KM_Label.setStyle("-fx-text-fill: RED");
+            KM_Label.setText("Τα χιλίομετρα πρέπει να είναι αριθμός");
+            KM_Label.setVisible(true);
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (flag == true) {
@@ -251,7 +348,24 @@ public class AddRepair implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (!(result.get() == ButtonType.OK)) {
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-                    //ToDo Add Kilometers label
+                    KM_Label.setStyle("-fx-text-fill: RED");
+                    KM_Label.setText("Λάθος στα χιλίομετρα");
+                    KM_Label.setVisible(true);
+                    sql.Disconnect();
+                    return;
+                }
+            }
+            else if (Integer.valueOf(Kilometers.getText()) < prKm ) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Επιβαιβέωση");
+                alert.setHeaderText("Προηδοποιηση Χιλιομέτρων");
+                alert.setContentText("Τα χιλιόμετρα είναι μικρότερα από αυτά τής προηγούμενης Επισκευής. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (!(result.get() == ButtonType.OK)) {
+                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                    KM_Label.setStyle("-fx-text-fill: RED");
+                    KM_Label.setText("Λάθος στα χιλίομετρα");
+                    KM_Label.setVisible(true);
                     sql.Disconnect();
                     return;
                 }
@@ -329,6 +443,7 @@ public class AddRepair implements Initializable {
             Table.setItems(Oblist);
         }
         toEdit = s;
+        ResetHideLabels();
     }
 
 
@@ -339,7 +454,7 @@ public class AddRepair implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -381,7 +496,7 @@ public class AddRepair implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

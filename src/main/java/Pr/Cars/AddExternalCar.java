@@ -13,12 +13,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -41,10 +44,10 @@ public class AddExternalCar implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
     @FXML
     private TextField manufactor;
@@ -93,6 +96,9 @@ public class AddExternalCar implements Initializable {
     private Label Driver_Label;
 
     @FXML
+    private Label Comp_Label;
+
+    @FXML
     private Label Phone_Label1;
 
     @FXML
@@ -106,6 +112,13 @@ public class AddExternalCar implements Initializable {
 
     private ModelExternalCars toEdit;
 
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
 
 
 
@@ -115,6 +128,11 @@ public class AddExternalCar implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        try {
+           int test=0;
+           toEdit = null;
+           dict = new Hashtable();
+           Texts = new ArrayList<>();
+           dict = new Hashtable();
            toEdit = null;
            Sql db = new Sql();
            Platform.runLater(new Runnable() {
@@ -129,9 +147,89 @@ public class AddExternalCar implements Initializable {
                Types.add(rs.getString("Name"));
            }
            Company.setItems(Types);
+           Labels = new ArrayList<>();
+           Labels.add(Lisc_Label);
+           Labels.add(Manu_Label);
+           Labels.add(Model_Label);
+           Labels.add(Comp_Label);
+           Labels.add(Driver_Label);
+           Labels.add(Phone_Label1);
+           Labels.add(Lenght_Label);
+           Labels.add(Height_Label);
+           Labels.add(Width_label);
+           int Size=Labels.size();
+           TFields = new ArrayList<>();
+           TFields.add(Lisc_Plate);
+           TFields.add(manufactor);
+           TFields.add(Model);
+           TFields.add(Driver);
+           TFields.add(Phone);
+           TFields.add(Lenght);
+           TFields.add(Height);
+           TFields.add(Width);
+           for(int i=0;i<Labels.size();i++){
+               Texts.add(Labels.get(i).getText());
+           }
+           for (int i = 0; i < Size; i++) {
+
+               if (i == 3) {
+                   dict.put(Company, Labels.get(i));
+                   Company.setOnMouseClicked(this::setFocusTFIelds);
+               } else {
+                   if(i==0||i==1||i==2){
+                       dict.put(TFields.get(i), Labels.get(i));
+                       TFields.get(i).setOnMouseClicked(this::setFocusTFIelds);
+                   }
+                   else {
+                       dict.put(TFields.get(i-1), Labels.get(i));
+                        TFields.get(i-1).setOnMouseClicked(this::setFocusTFIelds);}
+               }
+           }
+           ResetHideLabels();
+           db.Disconnect();
        } catch (SQLException e) {
            e.printStackTrace();
        }
+       catch (Exception e){
+           return;
+       }
+    }
+
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if(i==3&&Company.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            if(i==0&&TFields.get(0).getText().equals("")||i==1&&TFields.get(1).getText().equals("")||i==2&&TFields.get(2).getText().equals("")){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i!=0&&i!=1) {
+
+                if (TFields.get(i-1).getText().equals( "")) {
+                    Labels.get(i).setVisible(false);
+                } else{
+                    Labels.get(i).setVisible(true);
+                }
+            }
+            else{
+                Labels.get(i).setVisible(true);
+            }
+        }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+        Company.setStyle(null);
     }
 
 
@@ -144,43 +242,39 @@ public class AddExternalCar implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
             boolean flag = false;
-            Driver.setStyle(null);
-            Lisc_Plate.setStyle(null);
-            manufactor.setStyle(null);
-            Model.setStyle(null);
-            Phone.setStyle(null);
-            Width.setStyle(null);
-            Lenght.setStyle(null);
-            Height.setStyle(null);
-            Manu_Label.setVisible(false);
-            Lisc_Label.setVisible(false);
-            Model_Label.setVisible(false);
-            Driver_Label.setVisible(false);
-            Phone_Label1.setVisible(false);
-            Height_Label.setVisible(false);
-            Width_label.setVisible(false);
-            Lenght_Label.setVisible(false);
+            ResetCssTFields();
+            ResetHideLabels();
             if (Lisc_Plate.getText().equals("")) {
+                Lisc_Label.setStyle("-fx-text-fill: RED");
+                Lisc_Label.setText("Η Πινακίδα είναι κενή");
                 Lisc_Label.setVisible(true);
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (manufactor.getText().equals("")) {
+                Manu_Label.setStyle("-fx-text-fill: RED");
+                Manu_Label.setText("Ο Κατασκευαστής είναι κενός");
                 Manu_Label.setVisible(true);
                 flag = true;
                 manufactor.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Model.getText().equals("")) {
-                Model_Label.setVisible(true);
+                Lisc_Label.setStyle("-fx-text-fill: RED");
+                Lisc_Label.setText("Το Μοντέλο είναι κενό");
+                Lisc_Label.setVisible(true);
                 flag = true;
                 Model.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Driver.getText().equals("")) {
+                Driver_Label.setStyle("-fx-text-fill: RED");
+                Driver_Label.setText("Ο Οδηγός είναι κενός");
                 Driver_Label.setVisible(true);
                 flag = true;
                 Driver.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Phone.getText().equals("")) {
+                Phone_Label1.setStyle("-fx-text-fill: RED");
+                Phone_Label1.setText("Το Τηλέφωνο του Οδηγού είναι κενή");
                 Phone_Label1.setVisible(true);
                 flag = true;
                 Phone.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
@@ -193,6 +287,8 @@ public class AddExternalCar implements Initializable {
 
             }
             catch (NumberFormatException e){
+                Width_label.setStyle("-fx-text-fill: RED");
+                Width_label.setText("Το πλάτος πρέπει να είναι ακέραιος");
                 Width_label.setVisible(true);
                 Width.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 flag = true;
@@ -201,7 +297,9 @@ public class AddExternalCar implements Initializable {
                 Integer.valueOf(Height.getText());
             }
             catch (NumberFormatException e){
-                Width_label.setVisible(true);
+                Height_Label.setStyle("-fx-text-fill: RED");
+                Height_Label.setText("Το Ύψος πρέπει να είναι ακέραιος");
+                Height_Label.setVisible(true);
                 Height.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 flag = true;
             }
@@ -209,7 +307,9 @@ public class AddExternalCar implements Initializable {
                 Integer.valueOf(Lenght.getText());
             }
             catch (NumberFormatException e){
-                Width_label.setVisible(true);
+                Lenght_Label.setStyle("-fx-text-fill: RED");
+                Lenght_Label.setText("Το Μήκος πρέπει να είναι ακέραιος");
+                Lenght_Label.setVisible(true);
                 Lenght.setStyle(" -fx-background-color: transparent;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 flag = true;
             }
@@ -261,6 +361,7 @@ public class AddExternalCar implements Initializable {
         Height.setText(s.getHeight());
         Lenght.setText(s.getLenght());
         toEdit = s;
+        ResetHideLabels();
     }
 
     /**
@@ -270,7 +371,7 @@ public class AddExternalCar implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -306,7 +407,7 @@ public class AddExternalCar implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -37,10 +38,10 @@ public class AddRefill implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
 
     @FXML
@@ -311,7 +312,7 @@ public class AddRefill implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -347,7 +348,7 @@ public class AddRefill implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 

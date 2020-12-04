@@ -13,15 +13,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -44,10 +43,10 @@ public class AddService implements Initializable {
     private HBox Top_Bar;
 
     @FXML
-    private ImageView Minimize_Button;
+    private FontIcon Minimize_Button;
 
     @FXML
-    private ImageView X_Button;
+    private FontIcon X_Button;
 
     @FXML
     private TextField Discreption;
@@ -98,7 +97,7 @@ public class AddService implements Initializable {
     private Label Date_Label;
 
     @FXML
-    private Label Km_Label;
+    private Label KM_Label;
 
     private ObservableList<StringsForTables> Oblist;
 
@@ -108,9 +107,21 @@ public class AddService implements Initializable {
 
     private int flag2;
 
+    private ArrayList<Label> Labels;
+
+    private ArrayList<TextField> TFields;
+
+    ArrayList<String> Texts;
+
+    Dictionary dict;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Texts=new ArrayList<>();
+        TFields=new ArrayList<>();
+        dict=new Hashtable();
+        Labels=new ArrayList<>();
         toEdit = null;
         Oblist = FXCollections.observableArrayList();
         Platform.runLater(new Runnable() {
@@ -146,8 +157,79 @@ public class AddService implements Initializable {
         Cont.getItems().add(Del);
         Table.setContextMenu(Cont);
         sql.Disconnect();
+        Labels.add(Lisc_Label);
+        Labels.add(Date_Label);
+        Labels.add(Disc_Label);
+        Labels.add(KM_Label);
+        Labels.add(Workshop_Label);
+
+        Labels.add(Price_Label);
+        int Size = Labels.size();
+        TFields = new ArrayList<>();
+        TFields.add(Discreption);
+        TFields.add(Kilometers);
+        TFields.add(Workshop);
+        TFields.add(Price);
+        for (int i = 0; i < Labels.size(); i++) {
+            Texts.add(Labels.get(i).getText());
+        }
+        for (int i = 0; i < Size; i++) {
+            if (i == 1) {
+                dict.put(Date, Labels.get(i));
+                Date.setOnMouseClicked(this::setFocusTFIelds);
+            } else if (i == 0) {
+                dict.put(Lisc_Plate, Labels.get(i));
+                Lisc_Plate.setOnMouseClicked(this::setFocusTFIelds);
+            } else {
+                dict.put(TFields.get(i - 2), Labels.get(i));
+                TFields.get(i - 2).setOnMouseClicked(this::setFocusTFIelds);
+            }
+        }
+        sql.Disconnect();
+        ResetHideLabels();
 
     }
+
+    public void setFocusTFIelds(MouseEvent e){
+        ResetHideLabels();
+        ((Label)dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
+        ((Label)dict.get(e.getSource())).setVisible(true);
+    }
+
+    public void ResetHideLabels(){
+        for(int i=0;i<Labels.size();i++){
+            Labels.get(i).setText(Texts.get(i));
+            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            if(i==1&&Date.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i==0&&Lisc_Plate.getValue()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if(i!=0&&i!=1) {
+
+                if (TFields.get(i-2).getText().equals( "")) {
+                    Labels.get(i).setVisible(false);
+                }
+                else{
+                    Labels.get(i).setVisible(true);
+                }
+            }
+            else{
+                Labels.get(i).setVisible(true);
+            }
+        }
+    }
+
+    public void ResetCssTFields(){
+        for(int i=0;i<TFields.size();i++){
+            TFields.get(i).setStyle(null);
+        }
+        Date.setStyle(null);
+        Lisc_Plate.setStyle(null);
+    }
+
+
 
     public void Del(ActionEvent e){
         DoubleClickTable();
@@ -192,65 +274,56 @@ public class AddService implements Initializable {
         try {
             flag2 = -1;
             boolean flag = false;
-            Lisc_Plate.setStyle(null);
-            Workshop.setStyle(null);
-            Kilometers.setStyle(null);
-            Date.setStyle(null);
-            Price.setStyle(null);
-            Discreption.setStyle(null);
-            Price_Label.setVisible(false);
-            Workshop_Label.setVisible(false);
-            Lisc_Label.setVisible(false);
-            Disc_Label.setVisible(false);
-            Date_Label.setVisible(false);
+            ResetCssTFields();
+            ResetHideLabels();
             if (Lisc_Plate.getValue() == null) {
+                Lisc_Label.setStyle("-fx-text-fill: RED");
+                Lisc_Label.setText("Η Πινακίδα είναι κενή");
                 Lisc_Label.setVisible(true);
                 flag = true;
                 Lisc_Plate.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Date.getValue() == null) {
+                Date_Label.setStyle("-fx-text-fill: RED");
+                Date_Label.setText("Η Ημερομηνία είναι κενή");
                 Date_Label.setVisible(true);
                 flag = true;
             }
             if (Discreption.getText().equals("")) {
+                Disc_Label.setStyle("-fx-text-fill: RED");
+                Disc_Label.setText("Η Περιγραφή είναι κενή");
                 Disc_Label.setVisible(true);
                 Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Workshop.getText().equals("")) {
+                Workshop_Label.setStyle("-fx-text-fill: RED");
+                Workshop_Label.setText("Η Περιγραφή είναι κενή");
                 Workshop_Label.setVisible(true);
                 Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Price.getText().equals("")) {
-                Price_Label.setText("H τιμή είναι κενή");
+                Price_Label.setStyle("-fx-text-fill: RED");
+                Price_Label.setText("Η Περιγραφή είναι κενή");
                 Price_Label.setVisible(true);
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            } else {
-                try {
-                    Double.valueOf(Price.getText());
-                }
-                catch (NumberFormatException e){
-                    Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
-                    Price_Label.setVisible(true);
-                    flag=true;
-                    Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-                }
             }
-            if (Kilometers.getText().equals("")) {
-                Km_Label.setText("Τα Χιλιόμετρα είναι κενά");
-                Km_Label.setVisible(true);
+            try {
+                Double.valueOf(Price.getText());
+            } catch (NumberFormatException e) {
+                Price_Label.setStyle("-fx-text-fill: RED");
+                Price_Label.setText("Η τιμή πρέπει να είναι αριθμός");
+                Price_Label.setVisible(true);
+                Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                 flag = true;
+            }
+            try {
+                Integer.valueOf(Kilometers.getText());
+            } catch (NumberFormatException e) {
+                KM_Label.setStyle("-fx-text-fill: RED");
+                KM_Label.setText("Τα χιλίομετρα πρέπει να είναι αριθμός");
+                KM_Label.setVisible(true);
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-            } else {
-                try {
-                    Integer.valueOf(Kilometers.getText());
-                }
-                catch (NumberFormatException e){
-                    Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-                    Km_Label.setVisible(true);
-                    flag=true;
-                    Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
-                }
             }
             if (flag == true) {
                 return;
@@ -270,8 +343,9 @@ public class AddService implements Initializable {
                 alert.setContentText("Τα χιλιόμετρα είναι λιγοτέρα από αυτά του προηγούμενου Service. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (!(result.get() == ButtonType.OK)) {
-                    Km_Label.setText("Τα χιλίομετρα είναι λιγότερα από τα προήγουμενα");
-                    Km_Label.setVisible(true);
+                    KM_Label.setStyle("-fx-text-fill: RED");
+                    KM_Label.setText("Τα χιλίομετρα πρέπει να είναι αριθμός");
+                    KM_Label.setVisible(true);
                     sql.Disconnect();
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     return;
@@ -285,8 +359,9 @@ public class AddService implements Initializable {
                 alert.setContentText("Τα χιλιόμετρα είναι πολύ μεγαλύτερα  από αυτά του προηγούμενου KTEO. Είσαι σίγουρος ότι θέλεις να προχωρήσεις?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (!(result.get() == ButtonType.OK)) {
-                    Km_Label.setText("Τα χιλίομετρα είναι πολυ μεγαλύτερα από τα προήγουμενα");
-                    Km_Label.setVisible(true);
+                    KM_Label.setStyle("-fx-text-fill: RED");
+                    KM_Label.setText("Τα χιλίομετρα πρέπει να είναι αριθμός");
+                    KM_Label.setVisible(true);
                     sql.Disconnect();
                     Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
                     return;
@@ -367,6 +442,7 @@ public class AddService implements Initializable {
             Table.setItems(Oblist);
         }
         toEdit = s;
+        ResetHideLabels();
     }
 
     /**
@@ -376,7 +452,7 @@ public class AddService implements Initializable {
      */
     @FXML
     void X_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -412,7 +488,7 @@ public class AddService implements Initializable {
      */
     @FXML
     void Minimize_Button_Pressed(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
