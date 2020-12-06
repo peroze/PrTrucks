@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefWidth="864.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.SettingsAdds">
+   <children>
+      <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
+         <children>
+            <Label layoutX="308.0" layoutY="21.0" text="Δευτερεύουσες Βάσεις" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TableView fx:id="Location_Table" layoutX="332.0" layoutY="103.0" prefHeight="168.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="Location_Column" prefWidth="199.0" text="Τοποθεσίες" />
+              </columns>
+            </TableView>
+            <TableView fx:id="Type_Table" layoutX="332.0" layoutY="369.0" prefHeight="168.0" prefWidth="200.0">
+               <columns>
+                  <TableColumn fx:id="Type_Column" prefWidth="199.0" text="Tύποι Οχημάτων" />
+               </columns>
+            </TableView>
+            <TextField fx:id="Location_Text" layoutX="258.0" layoutY="298.0" promptText="Τοποθεσία" />
+            <Button fx:id="Location_button" layoutX="485.0" layoutY="298.0" mnemonicParsing="false" onAction="#Loc_Add" text="Εισαγωγή Τοποθεσίας" />
+            <TextField fx:id="Type_Text" layoutX="247.0" layoutY="552.0" promptText="Τύπος Οχήματος" />
+            <Button fx:id="Type_button" layoutX="474.0" layoutY="552.0" mnemonicParsing="false" onAction="#Type_Add" text="Εισαγωγή Τύπου Οχημ." />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

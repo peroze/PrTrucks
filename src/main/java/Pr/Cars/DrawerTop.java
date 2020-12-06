@@ -1,4 +1,5 @@
 package Pr.Cars;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,13 +44,14 @@ public class DrawerTop implements Initializable {
     @FXML
     private BorderPane OutPane;
 
-
+    @FXML
+    private MenuButton Secondary_Button;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Active = "Expenses";
-        Active2="Total";
+        Active2 = "Total";
         changeBg();
         try {
             Parent root = FXMLLoader.load(getClass().getResource("ExpensesTotal.fxml"));
@@ -88,10 +90,31 @@ public class DrawerTop implements Initializable {
     }
 
     @FXML
-    void ByCarExp_Button_Pr(ActionEvent event) {
-        if (!(Active.equals("Expenses")&&Active2.equals("ByCar"))) {
+    void Secondary_Button_Pr(MouseEvent event) {
+        if (!(Active.equals("Secondary"))) {
             resetBg();
-            Active2="ByCar";
+            Active = "Secondary";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("SettingsAdds.fxml"));
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        OutPane.requestFocus();
+                    }
+                });
+                OutPane.setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void ByCarExp_Button_Pr(ActionEvent event) {
+        if (!(Active.equals("Expenses") && Active2.equals("ByCar"))) {
+            resetBg();
+            Active2 = "ByCar";
             Active = "Expenses";
             changeBg();
             try {
@@ -111,9 +134,9 @@ public class DrawerTop implements Initializable {
 
     @FXML
     void ByCarFuel_Button_Pr(ActionEvent event) {
-        if (!(Active.equals("Fuel")&&Active2.equals("ByCar"))) {
+        if (!(Active.equals("Fuel") && Active2.equals("ByCar"))) {
             resetBg();
-            Active2="ByCar";
+            Active2 = "ByCar";
             Active = "Fuel";
             changeBg();
             try {
@@ -133,9 +156,9 @@ public class DrawerTop implements Initializable {
 
     @FXML
     void TotalExpenses_Button_Pr(ActionEvent event) {
-        if (!(Active.equals("Expenses")&&Active2.equals("Total"))) {
+        if (!(Active.equals("Expenses") && Active2.equals("Total"))) {
             resetBg();
-            Active2="Total";
+            Active2 = "Total";
             Active = "Expenses";
             changeBg();
             try {
@@ -156,9 +179,9 @@ public class DrawerTop implements Initializable {
 
     @FXML
     void TotalFuel_Button_Pr(ActionEvent event) {
-        if (!(Active.equals("Fuel")&&Active2.equals("Total"))) {
+        if (!(Active.equals("Fuel") && Active2.equals("Total"))) {
             resetBg();
-            Active2="Total";
+            Active2 = "Total";
             Active = "Fuel";
             changeBg();
             try {
@@ -177,12 +200,9 @@ public class DrawerTop implements Initializable {
     }
 
 
-
-    
-
-
     /**
      * This method changes the Active variable which indicates which page is currently on the main frame
+     *
      * @param active The active page
      */
     public void setActive(String active) {
@@ -200,8 +220,11 @@ public class DrawerTop implements Initializable {
             case "Fuel":
                 Fuel_Button.setStyle(null);
                 break;
-            case"Settings":
+            case "Settings":
                 Backup_Button.setStyle(null);
+            case "Secondary":
+                Secondary_Button.setStyle(null);
+                break;
         }
     }
 
@@ -218,6 +241,9 @@ public class DrawerTop implements Initializable {
                 break;
             case "Settings":
                 Backup_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case "Secondary":
+                Secondary_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

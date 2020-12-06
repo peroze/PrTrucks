@@ -1047,6 +1047,24 @@ public class Sql {
         }
     }
 
+    public int InsertSecondary (String Data,String Table){
+        try {
+            String sql;
+            if (Table.equals("Locations")) {
+                sql = "INSERT INTO Location(City) VALUES (?)";
+            } else {
+                sql = "INSERT INTO Type(Type) VALUES (?)";
+            }
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, Data);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     /**
      * This method inserts a new Company
      * @param a The new Company
@@ -1072,6 +1090,24 @@ public class Sql {
             if(edit==true){
                 pstmt.setInt(4, Integer.valueOf(a.getId()));
             }
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int DeleteSecondary (String Data,String Table){
+        try {
+            String sql;
+            if (Table.equals("Locations")) {
+                sql = "DELETE FROM Location WHERE City=?";
+            } else {
+                sql = "DELETE FROM Type WHERE Type=?";
+            }
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, Data);
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {

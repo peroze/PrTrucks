@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="OutPane" prefHeight="648.0" prefWidth="864.0" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.DrawerTop">
+<BorderPane fx:id="OutPane" prefHeight="648.0" prefWidth="864.0" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.DrawerTop">
    <top>
       <HBox prefHeight="36.0" prefWidth="864.0" style="-fx-background-color: #000013;" BorderPane.alignment="CENTER">
          <children>
@@ -21,6 +21,7 @@
                   <MenuItem fx:id="ByCarFuel_Button" mnemonicParsing="false" onAction="#ByCarFuel_Button_Pr" text="Καύσιμα Ανά Όχημα" />
                </items>
             </MenuButton>
+            <MenuButton fx:id="Secondary_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Secondary_Button_Pr" prefHeight="36.0" prefWidth="138.0" text="Δευτερέυουσες Βάσεις" textFill="#fcf7f7" />
             <MenuButton fx:id="Backup_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Backup_Button_Pr" prefHeight="36.0" prefWidth="78.0" text="Ρυθμίσεις" textFill="#fcf7f7" />
          </children>
       </HBox>
