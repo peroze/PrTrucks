@@ -14,7 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Drawer {
     private String Active;
@@ -51,6 +54,15 @@ public class Drawer {
 
     @FXML
     private BorderPane  Panel;
+
+    @FXML
+    private FontIcon github;
+
+    @FXML
+    private FontIcon facebook;
+
+    @FXML
+    private FontIcon instagram;
 
     /**
      * This method is pressed when the Gas Button is pressed and it opens the gas Table in the main scene
@@ -329,5 +341,28 @@ public class Drawer {
     void Minimize_Button_Pressed(MouseEvent event) {
         Stage stage = (Stage) ((FontIcon) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    @FXML
+    void Social(MouseEvent event) {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                switch (((FontIcon)event.getSource()).getId()){
+                    case "github":
+                        Desktop.getDesktop().browse(new URI("https://github.com/peroze"));
+                        break;
+                    case "facebook":
+                        Desktop.getDesktop().browse(new URI("https://www.facebook.com/nperoze"));
+                        break;
+                    case "instagram":
+                        Desktop.getDesktop().browse(new URI("https://www.instagram.com/nperoze"));
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -42,7 +42,7 @@ public class Main extends Application {
         fxmlloader.<Drawer>getController().changeBg();
         fxmlloader.<Drawer>getController().Trucks_Button_Pressed(null);
         primaryStage.setTitle("PrTrucks");
-        primaryStage.setScene(new Scene(root, 1054, 675));
+        primaryStage.setScene(new Scene(root, 1064, 675));
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.show();

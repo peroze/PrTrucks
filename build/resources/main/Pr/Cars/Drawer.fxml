@@ -4,6 +4,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -18,6 +20,13 @@
                <font>
                   <Font name="Centaur" size="29.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="127.0" fitWidth="269.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/PrTrucks%20Final.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Label>
             <Button fx:id="Trucks_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Trucks_Button_Pressed" prefHeight="40.0" prefWidth="190.0" text="Οχήματα">
                <VBox.margin>
@@ -47,12 +56,56 @@
             <Button fx:id="Refill_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="298.0" text="Καύσιμα" />
             <Button fx:id="Transfer_Button" alignment="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#Transfer_Button_Pressed" prefHeight="40.0" prefWidth="331.0" text="Μεταφορικές" />
             <Button fx:id="More_Button" alignment="CENTER" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="340.0" text="Αλλά" textAlignment="CENTER" />
+            <HBox alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="190.0">
+               <children>
+                  <Label text="Peroze 2020" textFill="WHITE">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <FontIcon fx:id="facebook" iconColor="WHITE" iconLiteral="fab-facebook" iconSize="15" onMouseClicked="#Social">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="5.0" />
+                     </HBox.margin>
+                  </FontIcon>
+                  <FontIcon fx:id="github" iconColor="WHITE" iconLiteral="fab-github" iconSize="15" onMouseClicked="#Social">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="5.0" />
+                     </HBox.margin>
+                  </FontIcon>
+                  <FontIcon fx:id="instagram" iconColor="WHITE" iconLiteral="fab-instagram" iconSize="15" onMouseClicked="#Social">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </FontIcon>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>
    <top>
       <HBox alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="200.0" style="-fx-background-color: #FA8072;" BorderPane.alignment="CENTER">
          <children>
+            <Label text="PrTrucks">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="430.0" />
+               </HBox.margin>
+            </Label>
             <FontIcon iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <HBox.margin>
                   <Insets right="10.0" />
