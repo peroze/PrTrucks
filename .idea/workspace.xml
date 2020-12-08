@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/RepairList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/RepairList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/Lists.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Styles/Lists.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +19,20 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -90,13 +107,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\konpe\IdeaProjects\PrTrucks" />
-      <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Pr.Cars" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\konpe\IdeaProjects\PrTrucks\build\libs" />
       <recent name="C:\Users\konpe\IdeaProjects\PrTrucks\src\main\resources\Pr\Cars\Images" />
@@ -104,8 +114,15 @@
       <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars\Images" />
       <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Pr.Cars" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\konpe\IdeaProjects\PrTrucks" />
+      <recent name="C:\Users\konpe\Desktop\PrTrucks\src\main\resources\Pr\Cars" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.PrTrucks [shadowJar]">
+  <component name="RunManager" selected="Gradle.PrTrucks [run]">
     <configuration name="PrTrucks [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -165,8 +182,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PrTrucks [shadowJar]" />
         <item itemvalue="Gradle.PrTrucks [run]" />
+        <item itemvalue="Gradle.PrTrucks [shadowJar]" />
         <item itemvalue="Gradle.PrTrucks [jar]" />
       </list>
     </recent_temporary>
@@ -215,7 +232,8 @@
       <workItem from="1607372131613" duration="4323000" />
       <workItem from="1607379901470" duration="512000" />
       <workItem from="1607398572983" duration="1796000" />
-      <workItem from="1607400798122" duration="3154000" />
+      <workItem from="1607400798122" duration="3744000" />
+      <workItem from="1607420446994" duration="4026000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -406,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607403860521</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Added logo, social media icons">
+      <created>1607404069647</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1607404069647</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,26 +461,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607026887141" />
-    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607403854370">
+    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607404068747">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607403854370" />
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1607403701742">
+    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607404068747" />
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1607424940994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607403701742" />
-    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1607403701742">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607424940994" />
+    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1607424940994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607403701742" />
-    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1607403701742">
+    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607424940994" />
+    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1607424940994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607403701742" />
-    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1607403701742">
+    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607424940994" />
+    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1607424940994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607403701742" />
+    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607424940994" />
     <state width="1877" height="326" key="GridCell.Tab.1.bottom" timestamp="1606679505493">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -476,14 +501,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="712" y="147" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606787992494" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607403866104">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607404071990">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607403866104" />
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607400876619">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607404071990" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607420448929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607400876619" />
+    <state x="636" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607420448929" />
     <state x="690" y="276" key="extract.method.dialog" timestamp="1606672214221">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
