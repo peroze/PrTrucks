@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup/Service.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Backup/Service.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup/Επισκευές.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Backup/Επισκευές.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup/ΚΤΕΟ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Backup/ΚΤΕΟ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup/Κάρτα_Καυσαερίων.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Backup/Κάρτα_Καυσαερίων.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup/Κάυσιμα.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Backup/Κάυσιμα.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Drawer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/PrTrucks-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/PrTrucks-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/PrTrucks.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/Settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Drawer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Drawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/PreLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/PreLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/SplashScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Drawer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Images/PrTrucks Final.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/Images/PrTrucks_Final.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/SplashScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/SplashScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +215,7 @@
       <workItem from="1607372131613" duration="4323000" />
       <workItem from="1607379901470" duration="512000" />
       <workItem from="1607398572983" duration="1796000" />
-      <workItem from="1607400798122" duration="2904000" />
+      <workItem from="1607400798122" duration="3154000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -428,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607375927801</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Added logo, social media icons">
+      <created>1607403860521</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1607403860521</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,10 +436,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607026887141" />
-    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607375924478">
+    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607403854370">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607375924478" />
+    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607403854370" />
     <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1607403701742">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -498,10 +476,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="712" y="147" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606787992494" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607375931228">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607403866104">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607375931228" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607403866104" />
     <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607400876619">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
