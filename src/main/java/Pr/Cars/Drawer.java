@@ -55,15 +55,6 @@ public class Drawer {
     @FXML
     private BorderPane  Panel;
 
-    @FXML
-    private FontIcon github;
-
-    @FXML
-    private FontIcon facebook;
-
-    @FXML
-    private FontIcon instagram;
-
     /**
      * This method is pressed when the Gas Button is pressed and it opens the gas Table in the main scene
      *
@@ -343,26 +334,5 @@ public class Drawer {
         stage.setIconified(true);
     }
 
-    @FXML
-    void Social(MouseEvent event) {
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                switch (((FontIcon)event.getSource()).getId()){
-                    case "github":
-                        Desktop.getDesktop().browse(new URI("https://github.com/peroze"));
-                        break;
-                    case "facebook":
-                        Desktop.getDesktop().browse(new URI("https://www.facebook.com/nperoze"));
-                        break;
-                    case "instagram":
-                        Desktop.getDesktop().browse(new URI("https://www.instagram.com/nperoze"));
-                        break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 }

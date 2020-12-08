@@ -31,6 +31,7 @@ public class PreLoader extends Preloader {
         Stage=primaryStage;
         Stage.setScene(scene);
         Stage.initStyle(StageStyle.UNDECORATED);
+        Stage.setTitle("PrTrucks");
         FadeIn a=new FadeIn(Stage.getScene().getRoot());
         a.setSpeed(0.4);
         a.play();

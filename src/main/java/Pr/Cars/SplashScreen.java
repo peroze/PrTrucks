@@ -28,14 +28,6 @@ public class SplashScreen implements Initializable {
     @FXML
     private ProgressBar PrBr;
 
-    @FXML
-    private FontIcon github;
-
-    @FXML
-    private FontIcon facebook;
-
-    @FXML
-    private FontIcon instagram;
 
     public static ProgressBar PgBr;
 
@@ -46,27 +38,6 @@ public class SplashScreen implements Initializable {
     }
 
 
-    @FXML
-    void Social(MouseEvent event) {
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                switch (((FontIcon)event.getSource()).getId()){
-                    case "github":
-                        Desktop.getDesktop().browse(new URI("https://github.com/peroze"));
-                        break;
-                    case "facebook":
-                        Desktop.getDesktop().browse(new URI("https://www.facebook.com/nperoze"));
-                        break;
-                    case "instagram":
-                        Desktop.getDesktop().browse(new URI("https://www.instagram.com/nperoze"));
-                        break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 }
 

@@ -23,7 +23,7 @@
                <graphic>
                   <ImageView fitHeight="127.0" fitWidth="269.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Images/PrTrucks%20Final.png" />
+                        <Image url="@Images/PrTrucks_Final.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -66,30 +66,6 @@
                         <Insets bottom="20.0" />
                      </HBox.margin>
                   </Label>
-                  <FontIcon fx:id="facebook" iconColor="WHITE" iconLiteral="fab-facebook" iconSize="15" onMouseClicked="#Social">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets bottom="20.0" right="5.0" />
-                     </HBox.margin>
-                  </FontIcon>
-                  <FontIcon fx:id="github" iconColor="WHITE" iconLiteral="fab-github" iconSize="15" onMouseClicked="#Social">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets bottom="20.0" right="5.0" />
-                     </HBox.margin>
-                  </FontIcon>
-                  <FontIcon fx:id="instagram" iconColor="WHITE" iconLiteral="fab-instagram" iconSize="15" onMouseClicked="#Social">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets bottom="20.0" />
-                     </HBox.margin>
-                  </FontIcon>
                </children>
             </HBox>
          </children>

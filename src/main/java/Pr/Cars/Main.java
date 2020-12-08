@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +34,8 @@ import java.util.concurrent.TimeUnit;
 public class Main extends Application {
     private int[] days;
     int kmBs;
+    SystemTray tray;
+    TrayIcon trayIcon;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -50,6 +54,25 @@ public class Main extends Application {
 
     @Override
     public void init() throws Exception{
+        if(SystemTray.isSupported()){
+             tray = SystemTray.getSystemTray();
+
+            //If the icon is a file
+           // Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
+            //Alternative (if the icon is on the classpath):
+            BufferedImage image = ImageIO.read(getClass().getResource("Images/PrTrucks_Final2.png"));
+            int trayIconWidth=new TrayIcon(image).getSize().width;
+
+
+             trayIcon = new TrayIcon(image.getScaledInstance(trayIconWidth,-1,Image.SCALE_SMOOTH), "PrTrucks App");
+            //Let the system resize the image if needed
+            trayIcon.setImageAutoSize(true);
+            //Set tooltip text for the tray icon
+            trayIcon.setImageAutoSize(true);
+            trayIcon.setToolTip("PrTrucks App");
+            tray.add(trayIcon);
+        }
+
         Sql sql = new Sql();
         double count=0;
         double pr=0.5;
@@ -97,7 +120,6 @@ public class Main extends Application {
                 kmBs=8000;
                 break;
         }
-        System.out.println(chks[8]);
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(0.15));
         Thread.sleep(500);
         if (chks[4].equals("true")) {
@@ -240,19 +262,7 @@ public class Main extends Application {
 
     public void displayTray(ArrayList<String> Liscs, String Type, int error,int Days) throws AWTException, MalformedURLException {
 
-        SystemTray tray = SystemTray.getSystemTray();
 
-        //If the icon is a file
-        Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
-        //Alternative (if the icon is on the classpath):
-        //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
-
-        TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
-        //Let the system resize the image if needed
-        trayIcon.setImageAutoSize(true);
-        //Set tooltip text for the tray icon
-        trayIcon.setToolTip("System tray icon demo");
-        tray.add(trayIcon);
         String Cars = "";
         for (int i = 0; i < Liscs.size(); i++) {
             Cars = Cars.concat(Liscs.get(i) + "\n");
@@ -272,6 +282,7 @@ public class Main extends Application {
             text2="Πρόσοχη εχεί περάσει η ημερομινία για ";
         }
         if (error == 1) {
+
             trayIcon.displayMessage("Ειδοποίηση " + Type, "Τα Ακόλουθα οχήματα πρέπει να κάνουν " + Type + text1 + Cars, TrayIcon.MessageType.INFO);
         } else {
             trayIcon.displayMessage("Ειδοποίηση " + Type, text2 + Type + " στα ακόλουθα οχήματα:\n" + Cars, TrayIcon.MessageType.ERROR);
