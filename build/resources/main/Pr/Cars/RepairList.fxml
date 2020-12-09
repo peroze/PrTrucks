@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane prefHeight="648.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.RepairList">
    <children>
@@ -49,11 +50,6 @@
       </ImageView>
       <TextField fx:id="Search_Bar" layoutX="677.0" layoutY="13.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
       <Label fx:id="Search_icon" layoutX="662.0" layoutY="13.0" prefHeight="25.0" prefWidth="21.0" />
-      <ImageView fitHeight="14.0" fitWidth="18.0" layoutX="667.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/iconfinder_icon-111-search_314807%20(1).png" />
-         </image>
-      </ImageView>
       <Label fx:id="Filter" alignment="CENTER_RIGHT" layoutX="556.0" layoutY="17.0" onMouseClicked="#Select_Filter_pressed" prefHeight="17.0" prefWidth="87.0" text="Φιλτρα" textFill="WHITE">
          <font>
             <Font name="System Italic" size="12.0" />
@@ -67,5 +63,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <FontIcon iconColor="#979797" iconLiteral="fas-search" iconSize="11" layoutX="669.0" layoutY="30.0" text="" />
    </children>
 </AnchorPane>

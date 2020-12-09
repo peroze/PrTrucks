@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="Panel" prefHeight="675.0" prefWidth="1054.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Drawer">
+<BorderPane fx:id="Panel" prefHeight="625.0" prefWidth="1054.0" style="-fx-background-color: #383838;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.Drawer">
    <left>
       <VBox fx:id="Drawer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="190.0" style="-fx-background-color: #000013;" stylesheets="@Styles/Drawer.css" BorderPane.alignment="CENTER">
          <children>
@@ -56,16 +56,24 @@
             <Button fx:id="Refill_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="298.0" text="Καύσιμα" />
             <Button fx:id="Transfer_Button" alignment="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#Transfer_Button_Pressed" prefHeight="40.0" prefWidth="331.0" text="Μεταφορικές" />
             <Button fx:id="More_Button" alignment="CENTER" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="340.0" text="Αλλά" textAlignment="CENTER" />
-            <HBox alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="190.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="194.0" prefWidth="190.0">
                <children>
-                  <Label text="Peroze 2020" textFill="WHITE">
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
+                  <Label text="Peroze 2020" textFill="WHITE" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fab-instagram" iconSize="15">
                      <HBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
-                  </Label>
+                  </FontIcon>
+                  <FontIcon iconColor="WHITE" iconLiteral="fab-facebook" iconSize="15">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </FontIcon>
+                  <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="15">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </FontIcon>
                </children>
             </HBox>
          </children>
