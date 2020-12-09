@@ -29,7 +29,6 @@
       </HBox>
       <TableView fx:id="Truck_Table" layoutY="52.0" prefHeight="599.0" prefWidth="864.0">
         <columns>
-            <TableColumn fx:id="Service_Id_Column" prefWidth="37.0" text="Id" />
           <TableColumn fx:id="LisancePlate_Column" prefWidth="109.0" text="Πινακίδα" />
             <TableColumn fx:id="Type_Column" prefWidth="113.0" text="Τύπος" />
             <TableColumn fx:id="Date_Column" prefWidth="103.0" text="Ημερομηνία" />
@@ -42,7 +41,7 @@
             <Insets left="3.0" />
          </padding>
       </TableView>
-      <ImageView fx:id="Import_Button" fitHeight="62.0" fitWidth="87.0" layoutX="730.0" layoutY="553.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Import_Button" fitHeight="62.0" fitWidth="87.0" layoutX="754.0" layoutY="543.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/52892491537356032-64.png" />
          </image>

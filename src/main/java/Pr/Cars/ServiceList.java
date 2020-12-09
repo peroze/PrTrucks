@@ -67,9 +67,6 @@ public class ServiceList implements Initializable {
     private TableColumn<ModelService, String> Type_Column;
 
     @FXML
-    private TableColumn<ModelService, String> Service_Id_Column;
-
-    @FXML
     private TableColumn<ModelService, String> Date_Column;
 
     @FXML
@@ -122,7 +119,6 @@ public class ServiceList implements Initializable {
             });
             return row;
         }));
-        Service_Id_Column.setCellValueFactory(new PropertyValueFactory<>("id"));
         LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
         Type_Column.setCellValueFactory(new PropertyValueFactory<>("Type"));
         Workshop_Column.setCellValueFactory(new PropertyValueFactory<>("Workshop"));

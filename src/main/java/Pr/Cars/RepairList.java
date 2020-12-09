@@ -53,9 +53,6 @@ public class RepairList implements Initializable {
     private TableColumn<ModelRepair, String> Type_Column;
 
     @FXML
-    private TableColumn<ModelRepair, String> Service_Id_Column;
-
-    @FXML
     private TableColumn<ModelRepair, String> Date_Column;
 
     @FXML
@@ -230,7 +227,6 @@ public class RepairList implements Initializable {
             });
             return row;
         }));
-        Service_Id_Column.setCellValueFactory(new PropertyValueFactory<>("id"));
         LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
         Type_Column.setCellValueFactory(new PropertyValueFactory<>("Discreption"));
         Workshop_Column.setCellValueFactory(new PropertyValueFactory<>("Workshop"));
@@ -375,7 +371,6 @@ public class RepairList implements Initializable {
             });
             return row;
         }));
-        Service_Id_Column.setCellValueFactory(new PropertyValueFactory<>("id"));
         LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
         Type_Column.setCellValueFactory(new PropertyValueFactory<>("Discreption"));
         Workshop_Column.setCellValueFactory(new PropertyValueFactory<>("Workshop"));

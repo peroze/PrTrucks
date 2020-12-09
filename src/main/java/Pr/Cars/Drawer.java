@@ -194,9 +194,13 @@ public class Drawer {
             Active = "More";
             changeBg();
             try {
-
                 Parent root = FXMLLoader.load(getClass().getResource("DrawerTop.fxml"));
+               // new FadeIn(root).play();
+               // new BounceIn(root).play();
+               // new BounceInDown(root).play();
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
+
 
             } catch (IOException e) {
                 e.printStackTrace();

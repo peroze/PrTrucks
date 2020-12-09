@@ -29,7 +29,7 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="599.0" prefWidth="864.0">
+      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="572.0" prefWidth="864.0">
         <columns>
             <TableColumn fx:id="Id_Column" prefWidth="55.0" text="id" />
             <TableColumn fx:id="Company_Col" prefWidth="216.0" text="Όνομα" />
@@ -46,7 +46,7 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <ImageView fx:id="Import_Button" fitHeight="63.0" fitWidth="63.0" layoutX="754.0" layoutY="543.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Import_Button" fitHeight="63.0" fitWidth="63.0" layoutX="754.0" layoutY="507.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/52892491537356032-64.png" />
          </image>

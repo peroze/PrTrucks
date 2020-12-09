@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ExternalCarsList">
+<AnchorPane prefHeight="599.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ExternalCarsList">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="162.0">
          <children>
@@ -29,7 +29,7 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="599.0" prefWidth="864.0">
+      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="572.0" prefWidth="864.0">
         <columns>
           <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
             <TableColumn fx:id="Manufactor_Column" prefWidth="84.0" text="Μάρκα" />
@@ -52,7 +52,7 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <ImageView fx:id="Import_Button" fitHeight="63.0" fitWidth="63.0" layoutX="754.0" layoutY="543.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Import_Button" fitHeight="63.0" fitWidth="63.0" layoutX="754.0" layoutY="507.0" onMouseEntered="#Import_Button_Hover" onMousePressed="#Import_Button_Pressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/52892491537356032-64.png" />
          </image>
