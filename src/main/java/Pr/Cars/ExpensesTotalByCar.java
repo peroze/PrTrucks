@@ -121,6 +121,9 @@ public class ExpensesTotalByCar implements Initializable {
         Distance.setOnAction(e -> {
             Show_Rest();
         });
+        ObservableList<ModelTotal> tempPlaceboo=FXCollections.observableArrayList();
+        tempPlaceboo.add(new ModelTotal("","",""));
+        Table1.setItems(tempPlaceboo);
     }
 
 

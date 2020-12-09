@@ -85,6 +85,7 @@ public class TrucksList implements Initializable {
     private ObservableList<ModelTruck> Oblist;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Sql db = new Sql();

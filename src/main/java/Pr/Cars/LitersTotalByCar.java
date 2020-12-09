@@ -103,6 +103,9 @@ public class LitersTotalByCar implements Initializable {
         Distance.setOnAction(e -> {
             Show_Rest();
         });
+        ObservableList<ModelTotal> tempPlaceboo=FXCollections.observableArrayList();
+        tempPlaceboo.add(new ModelTotal("","",""));
+        TableBC.setItems(tempPlaceboo);
     }
 
 
