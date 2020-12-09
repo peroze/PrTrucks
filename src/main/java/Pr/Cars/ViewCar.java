@@ -96,7 +96,6 @@ public class ViewCar implements Initializable {
             }
         });
 
-
     }
 
     /**
@@ -128,6 +127,10 @@ public class ViewCar implements Initializable {
         }
         for(int i=0;i<Ch.length;i++){
             ObList.add(new StringsForTables(Dat[i][0],Dat[i][1]));
+        }
+        if(ObList.isEmpty()){
+            ObList.add(new StringsForTables("",""));
+            Table.setSelectionModel(null);
         }
         Table.setItems(ObList);
     }

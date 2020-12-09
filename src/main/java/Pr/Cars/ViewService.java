@@ -122,6 +122,10 @@ public class ViewService implements Initializable {
             ObList.add(new StringsForTables(Ch[i]));
         }
         Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
+        if(ObList.isEmpty()){
+            ObList.add(new StringsForTables("",""));
+            Table.setSelectionModel(null);
+        }
         Table.setItems(ObList);
 
     }
