@@ -115,7 +115,10 @@ public class AddRepair implements Initializable {
 
     ArrayList<String> Texts;
 
+    boolean placeboo;
+
     Dictionary dict;
+
 
 
     @Override
@@ -143,17 +146,23 @@ public class AddRepair implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            Oblist.add(new StringsForTables(""));
+            placeboo=true;
             Lisc_Plate.setItems(Cars);
             Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
             Table.setRowFactory((tv -> {
                 TableRow<StringsForTables> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    if(placeboo==true){
+                        Table.getSelectionModel().clearSelection();
+                    }
+                    else if (event.getClickCount() == 2 && (!row.isEmpty())&&placeboo==false) {
                         DoubleClickTable();
                     }
                 });
                 return row;
             }));
+            Table.setItems(Oblist);
             ContextMenu Cont = new ContextMenu();
             MenuItem Del = new MenuItem("Διαγραφή");
             Del.setOnAction(this::Del);
@@ -255,6 +264,10 @@ public class AddRepair implements Initializable {
                 break;
             }
         }
+        if(Oblist.isEmpty()){
+            placeboo=true;
+            Oblist.add(new StringsForTables(""));
+        }
     }
 
     /**
@@ -264,6 +277,10 @@ public class AddRepair implements Initializable {
      */
     @FXML
     void AddPart_Btn_Pr(ActionEvent event) {
+        if(placeboo==true){
+            Oblist.remove(0);
+            placeboo=false;
+        }
         Oblist.add(new StringsForTables(AddPart.getText()));
         Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
         AddPart.clear();
@@ -280,6 +297,9 @@ public class AddRepair implements Initializable {
         boolean flag = false;
         ResetCssTFields();
         ResetHideLabels();
+        if(placeboo==true){
+            Oblist.remove(0);
+        }
         if (Lisc_Plate.getValue() == null) {
             Lisc_Label.setStyle("-fx-text-fill: RED");
             Lisc_Label.setText("Η Πινακίδα είναι κενή");
@@ -330,6 +350,9 @@ public class AddRepair implements Initializable {
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (flag == true) {
+            if(placeboo==true){
+                Oblist.add(new StringsForTables(""));
+            }
             return;
         }
         Sql sql = new Sql();
@@ -414,18 +437,13 @@ public class AddRepair implements Initializable {
             alert.setTitle("Εισαγωγή Απέτυχε");
             alert.setContentText("Η επισκευή δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
             alert.showAndWait();
-            Kilometers.clear();
-            Lisc_Plate.setValue(null);
-            Discreption.clear();
-            AddPart.clear();
-            Price.clear();
-            Oblist = FXCollections.observableArrayList();
-            Table.setItems(Oblist);
         }
+
     }
 
 
     public void edit(ModelRepair s) {
+        Oblist=FXCollections.observableArrayList();
         edit = true;
         Workshop.setText(s.getWorkshop());
         Price.setText(s.getPrice());
@@ -444,6 +462,11 @@ public class AddRepair implements Initializable {
         }
         toEdit = s;
         ResetHideLabels();
+        placeboo=false;
+        if(Oblist.isEmpty()){
+            Oblist.add(new StringsForTables(""));
+            placeboo=true;
+        }
     }
 
 

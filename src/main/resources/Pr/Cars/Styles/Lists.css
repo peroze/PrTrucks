@@ -48,7 +48,6 @@
 .table-view .cell{
     -fx-cell-size: 35;
     -fx-alignment: center-left;
-  //*  -fx-background-color: #29292D;*/
     -fx-alignment: CENTER;
 
 }

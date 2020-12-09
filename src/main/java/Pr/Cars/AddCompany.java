@@ -95,6 +95,7 @@ public class AddCompany implements Initializable {
 
     Dictionary dict;
 
+    Boolean placeboo;
 
 
     private int flag2;// This is used to know which field threw an excpetion
@@ -102,6 +103,7 @@ public class AddCompany implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        placeboo=true;
         oblist=FXCollections.observableArrayList();
         TFields=new ArrayList<>();
         Labels=new ArrayList<>();
@@ -112,12 +114,17 @@ public class AddCompany implements Initializable {
         Table.setRowFactory((tv -> {
             TableRow<StringsForTables> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                if(placeboo==true){
+                    Table.getSelectionModel().clearSelection();
+                }
+                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     DoubleClickTable();
                 }
             });
             return row;
         }));
+        oblist.add(new StringsForTables("",""));
+        Table.setItems(oblist);
         ContextMenu Cont=new ContextMenu();
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
@@ -190,6 +197,10 @@ public class AddCompany implements Initializable {
                 }
                 i++;
             }
+            if(oblist.isEmpty()){
+                placeboo=true;
+                oblist.add(new StringsForTables("",""));
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -204,6 +215,9 @@ public class AddCompany implements Initializable {
      */
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
+            if(placeboo==true){
+                oblist.remove(0);
+            }
             boolean flag = false;
             ResetHideLabels();
             ResetCssTFields();
@@ -223,6 +237,9 @@ public class AddCompany implements Initializable {
                 Phone.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (flag == true) {
+                if (placeboo==true) {
+                    oblist.add(new StringsForTables(""));
+                }
                 return;
             }
             Sql sql = new Sql();
@@ -256,6 +273,10 @@ public class AddCompany implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Απέτυχε");
                 alert.setContentText("Η Εταιρία δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                if(oblist.isEmpty()){
+                    placeboo=true;
+                    oblist.add(new StringsForTables("",""));
+                }
                 alert.showAndWait();
                 Phone.clear();
                 Name.clear();
@@ -267,6 +288,7 @@ public class AddCompany implements Initializable {
         edit=true;
         Name.setText(a.getName());
         Phone.setText(a.getPhone());
+        oblist.remove(0);
         if (a.getPrices() != null) {
             String[] Ch = a.getPrices().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];
@@ -279,11 +301,21 @@ public class AddCompany implements Initializable {
             Table.setItems(oblist);
         }
         ResetHideLabels();
+        placeboo=false;
+        if(oblist.isEmpty()){
+            placeboo=true;
+            oblist.add(new StringsForTables("",""));
+        }
+
     }
 
 
     @FXML
     void Char_Button_Pr(ActionEvent event) {
+        if(placeboo==true){
+            oblist.remove(0);
+            placeboo=false;
+        }
         String temp1 = Char_Text.getText();
         String temp2 = Code_Text.getText();
         oblist.add(new StringsForTables(temp1, temp2));

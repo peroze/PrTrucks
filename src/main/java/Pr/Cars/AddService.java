@@ -115,15 +115,20 @@ public class AddService implements Initializable {
 
     Dictionary dict;
 
+    Boolean placeboo;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        placeboo=true;
+
         Texts=new ArrayList<>();
         TFields=new ArrayList<>();
         dict=new Hashtable();
         Labels=new ArrayList<>();
         toEdit = null;
         Oblist = FXCollections.observableArrayList();
+        Oblist.add(new StringsForTables(""));
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -145,12 +150,16 @@ public class AddService implements Initializable {
         Table.setRowFactory((tv -> {
             TableRow<StringsForTables> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                if(placeboo==true){
+                    Table.getSelectionModel().clearSelection();
+                }
+                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     DoubleClickTable();
                 }
             });
             return row;
         }));
+        Table.setItems(Oblist);
         ContextMenu Cont=new ContextMenu();
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
@@ -249,6 +258,10 @@ public class AddService implements Initializable {
                 break;
             }
         }
+        if(Oblist.isEmpty()){
+            Oblist.add(new StringsForTables(""));
+            placeboo=true;
+        }
     }
 
     /**
@@ -258,6 +271,10 @@ public class AddService implements Initializable {
      */
     @FXML
     void AddPart_Btn_Pr(ActionEvent event) {
+        if(placeboo==true){
+            Oblist.remove(0);
+            placeboo=false;
+        }
         Oblist.add(new StringsForTables(AddPart.getText()));
         Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
         AddPart.clear();
@@ -272,6 +289,9 @@ public class AddService implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
+            if(placeboo==true){
+                Oblist.remove(0);
+            }
             flag2 = -1;
             boolean flag = false;
             ResetCssTFields();
@@ -326,6 +346,9 @@ public class AddService implements Initializable {
                 Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (flag == true) {
+                if(placeboo==true){
+                    Oblist.add(new StringsForTables(""));
+                }
                 return;
             }
             Sql sql = new Sql();
@@ -443,6 +466,11 @@ public class AddService implements Initializable {
         }
         toEdit = s;
         ResetHideLabels();
+        placeboo=false;
+        if(Oblist.isEmpty()){
+            Oblist.add(new StringsForTables(""));
+            placeboo=true;
+        }
     }
 
     /**

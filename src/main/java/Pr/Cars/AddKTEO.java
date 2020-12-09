@@ -102,11 +102,14 @@ public class AddKTEO implements Initializable {
 
     private ObservableList<StringsForTables> Oblist;
 
+    boolean placeboo;
+
     private int flag2;// This is used to know which field threw an excpetion
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        placeboo=true;
         TFields=new ArrayList<>();
         Labels=new ArrayList<>();
         Texts=new ArrayList<>();
@@ -132,12 +135,17 @@ public class AddKTEO implements Initializable {
         Table.setRowFactory((tv -> {
             TableRow<StringsForTables> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                if(placeboo==true){
+                    Table.getSelectionModel().clearSelection();
+                }
+                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     DoubleClickTable();
                 }
             });
             return row;
         }));
+        Oblist.add(new StringsForTables(""));
+        Table.setItems(Oblist);
         ContextMenu Cont = new ContextMenu();
         MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
@@ -226,6 +234,10 @@ public class AddKTEO implements Initializable {
                 break;
             }
         }
+        if(Oblist.isEmpty()){
+            placeboo=true;
+            Oblist.add(new StringsForTables(""));
+        }
     }
 
     /**
@@ -235,6 +247,10 @@ public class AddKTEO implements Initializable {
      */
     @FXML
     void AddWarn_Btn_Pr(ActionEvent event) {
+        if(placeboo==true){
+            Oblist.remove(0);
+            placeboo=false;
+        }
         Oblist.add(new StringsForTables(AddWarn.getText()));
         Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
         AddWarn.clear();
@@ -249,6 +265,9 @@ public class AddKTEO implements Initializable {
     @FXML
     void Ok_Button_Pr(ActionEvent event) {
         try {
+            if(placeboo==true){
+                Oblist.remove(0);
+            }
             flag2 = -1;
             boolean flag = false;
             ResetCssTFields();
@@ -284,6 +303,8 @@ public class AddKTEO implements Initializable {
                 try {
                     Double.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
+                    placeboo=true;
+                    Oblist.add(new StringsForTables(""));
                     Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Km_Label.setStyle("-fx-text-fill: RED");
                     Km_Label.setVisible(true);
@@ -301,6 +322,8 @@ public class AddKTEO implements Initializable {
                 try {
                     Integer.valueOf(Kilometers.getText());
                 } catch (NumberFormatException e) {
+                    placeboo=true;
+                    Oblist.add(new StringsForTables(""));
                     Model_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
                     Model_Label.setStyle("-fx-text-fill: RED");
                     Model_Label.setVisible(true);
@@ -309,6 +332,10 @@ public class AddKTEO implements Initializable {
                 }
             }
             if (flag == true) {
+
+                if(placeboo==true) {
+                    Oblist.add(new StringsForTables(""));
+                }
                 return;
             }
             Sql sql = new Sql();
@@ -407,6 +434,7 @@ public class AddKTEO implements Initializable {
                 alert.setContentText("Το KTEO δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
                 Kilometers.clear();
+                Oblist.add(new StringsForTables(""));
                 Lisc_Plate.setValue(new Object());
                 AddWarn.clear();
                 Price.clear();
