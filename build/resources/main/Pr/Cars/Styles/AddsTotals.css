@@ -49,13 +49,26 @@
     -fx-background-color: #FA8072;
 }
 
-.button {
+/*.button {
 
     -fx-background-color: #FA8072;
     -fx-background-radius: 5em;
     -fx-border-color: black;
     -fx-border-radius: 5em;
     -fx-border-width: 2;
+}
+*/
+
+.button{
+    -fx-border-color:  #FA8072;
+    -fx-background-color:  transparent;
+    -fx-border-width: 2px;
+    -fx-background-radius: 5em;
+    -fx-border-radius: 5em;
+}
+
+.button:hover{
+    -fx-background-color:  #FA8072;
 }
 
 /*.text-field:focused {

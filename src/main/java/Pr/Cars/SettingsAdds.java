@@ -50,14 +50,29 @@ public class SettingsAdds implements Initializable {
     @FXML
     private Button Type_button;
 
+    @FXML
+    private TableView<StringsForTables> PosistionTable;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Pos_Column;
+
+    @FXML
+    private Button Posistion_button;
+
+    @FXML
+    private TextField Posistion_Text;
+
+
     ObservableList<StringsForTables> oblist;
     ObservableList<StringsForTables> oblist2;
+    ObservableList<StringsForTables> oblist3;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Location_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
             Type_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
+            Pos_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
             Sql db = new Sql();
             ResultSet locs = db.Query_General_Locations();
             oblist = FXCollections.observableArrayList();
@@ -81,10 +96,42 @@ public class SettingsAdds implements Initializable {
             Del.setOnAction(this::Del_Type);
             Cont.getItems().add(Del);
             Type_Table.setContextMenu(Cont);
+            oblist3 = FXCollections.observableArrayList();
+            ResultSet poss = db.Query_General_Posistion();
+            while (poss.next()) {
+                oblist3.add(new StringsForTables(poss.getString("Posistion")));
+            }
+            PosistionTable.setItems(oblist3);
+            ContextMenu Cont2 = new ContextMenu();
+            MenuItem Del2 = new MenuItem("Διαγραφή");
+            Del2.setOnAction(this::Del_Pos);
+            Cont2.getItems().add(Del2);
+            PosistionTable.setContextMenu(Cont2);
             db.Disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void Del_Pos(ActionEvent e){
+        StringsForTables del = PosistionTable.getSelectionModel().getSelectedItem();
+        Sql db = new Sql();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Επιβαιβέωση");
+        alert.setHeaderText("Διαγραφή στοιχείου");
+        alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την θέση εργασίας:  " + del.getString() + "? \nΠΡΟΣΟΧΗ!!!  Όσοι εγραζόμενοι είναι καταχωρημένα με αυτόν την θέση θα διαγράφουν");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            int i = db.DeleteSecondary(del.getString(), "Posistion");
+            if (i != 1) {
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Διαγραφή Απέτυχε");
+                alert1.setContentText("Ο τύπος οχήματος δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
+                alert1.showAndWait();
+            }
+        }
+        RenewTables();
+        db.Disconnect();
     }
 
     public void Del_Type(ActionEvent e) {
@@ -109,7 +156,6 @@ public class SettingsAdds implements Initializable {
     }
 
     public void Del_Loc(ActionEvent e) {
-        System.out.println("Mpike");
         StringsForTables del = Location_Table.getSelectionModel().getSelectedItem();
         Sql db = new Sql();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -139,6 +185,7 @@ public class SettingsAdds implements Initializable {
                 alert.setContentText("Η τοποθεσία δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
             }
+            Location_button.setText("");
             RenewTables();
             db.Disconnect();
         }
@@ -156,7 +203,25 @@ public class SettingsAdds implements Initializable {
                 alert.setContentText("Ο τύπος οχήματος δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
                 alert.showAndWait();
             }
+            Type_button.setText("");
             RenewTables();
+            db.Disconnect();
+        }
+    }
+
+    @FXML
+    void Pos_Add(ActionEvent e){
+        if (!Posistion_Text.getText().equals("")) {
+            Sql db = new Sql();
+            int i = db.InsertSecondary(Posistion_Text.getText(), "Posistion");
+            if (i != 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Η θέση εργασίας δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+            }
+            RenewTables();
+            Posistion_button.setText("");
             db.Disconnect();
         }
     }
@@ -176,6 +241,12 @@ public class SettingsAdds implements Initializable {
                 oblist2.add(new StringsForTables(typs.getString("Type")));
             }
             Type_Table.setItems(oblist2);
+            oblist3 = FXCollections.observableArrayList();
+            ResultSet poss = db.Query_General_Posistion();
+            while (poss.next()) {
+                oblist3.add(new StringsForTables(poss.getString("Posistion")));
+            }
+            PosistionTable.setItems(oblist3);
             db.Disconnect();
         } catch (SQLException e) {
             e.printStackTrace();

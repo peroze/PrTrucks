@@ -208,6 +208,19 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_General_Posistion(){
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM CompanyPosistions  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
 
     /**
      * This question the total cost of a table for a specific car
@@ -1052,7 +1065,10 @@ public class Sql {
             String sql;
             if (Table.equals("Locations")) {
                 sql = "INSERT INTO Location(City) VALUES (?)";
-            } else {
+            }else if( Table.equals("Posistion")){
+                sql="INSERT INTO CompanyPosistions(Posistion) VALUES (?)";
+            }
+            else {
                 sql = "INSERT INTO Type(Type) VALUES (?)";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -1103,7 +1119,11 @@ public class Sql {
             String sql;
             if (Table.equals("Locations")) {
                 sql = "DELETE FROM Location WHERE City=?";
-            } else {
+            }
+            else if(Table.equals("Posistion")){
+                sql = "DELETE FROM CompanyPosistions WHERE Posistion=?";
+            }
+            else {
                 sql = "DELETE FROM Type WHERE Type=?";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);

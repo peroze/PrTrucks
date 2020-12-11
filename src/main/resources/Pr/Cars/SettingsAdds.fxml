@@ -12,25 +12,32 @@
    <children>
       <AnchorPane fx:id="Totals_Pane" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="864.0" style="-fx-background-color: #383838;">
          <children>
-            <Label layoutX="308.0" layoutY="21.0" text="Δευτερεύουσες Βάσεις" textFill="WHITE">
+            <Label layoutX="309.0" layoutY="21.0" text="Δευτερεύουσες Βάσεις" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <TableView fx:id="Location_Table" layoutX="332.0" layoutY="103.0" prefHeight="168.0" prefWidth="200.0">
+            <TableView fx:id="Location_Table" layoutX="111.0" layoutY="104.0" prefHeight="168.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="Location_Column" prefWidth="199.0" text="Τοποθεσίες" />
               </columns>
             </TableView>
-            <TableView fx:id="Type_Table" layoutX="332.0" layoutY="369.0" prefHeight="168.0" prefWidth="200.0">
+            <TableView fx:id="Type_Table" layoutX="111.0" layoutY="370.0" prefHeight="168.0" prefWidth="200.0">
                <columns>
                   <TableColumn fx:id="Type_Column" prefWidth="199.0" text="Tύποι Οχημάτων" />
                </columns>
             </TableView>
-            <TextField fx:id="Location_Text" layoutX="258.0" layoutY="298.0" promptText="Τοποθεσία" />
-            <Button fx:id="Location_button" layoutX="485.0" layoutY="298.0" mnemonicParsing="false" onAction="#Loc_Add" text="Εισαγωγή Τοποθεσίας" />
-            <TextField fx:id="Type_Text" layoutX="247.0" layoutY="552.0" promptText="Τύπος Οχήματος" />
-            <Button fx:id="Type_button" layoutX="474.0" layoutY="552.0" mnemonicParsing="false" onAction="#Type_Add" text="Εισαγωγή Τύπου Οχημ." />
+            <TextField fx:id="Location_Text" layoutX="37.0" layoutY="299.0" promptText="Τοποθεσία" />
+            <Button fx:id="Location_button" layoutX="264.0" layoutY="299.0" mnemonicParsing="false" onAction="#Loc_Add" text="Εισαγωγή Τοποθεσίας" />
+            <TextField fx:id="Type_Text" layoutX="26.0" layoutY="553.0" promptText="Τύπος Οχήματος" />
+            <Button fx:id="Type_button" layoutX="253.0" layoutY="553.0" mnemonicParsing="false" onAction="#Type_Add" text="Εισαγωγή Τύπου Οχημ." />
+            <TableView fx:id="PosistionTable" layoutX="570.0" layoutY="104.0" prefHeight="168.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="Pos_Column" prefWidth="199.0" text="Θέσεις Εταιρίας" />
+              </columns>
+            </TableView>
+            <Button fx:id="Posistion_button" layoutX="713.0" layoutY="299.0" mnemonicParsing="false" onAction="#Pos_Add" text="Εισαγωγή Θέσης" />
+            <TextField fx:id="Posistion_Text" layoutX="498.0" layoutY="298.0" promptText="Θέση Εργασίας" />
          </children>
       </AnchorPane>
    </children>
