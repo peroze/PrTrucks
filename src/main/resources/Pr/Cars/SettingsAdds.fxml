@@ -38,6 +38,13 @@
             </TableView>
             <Button fx:id="Posistion_button" layoutX="713.0" layoutY="299.0" mnemonicParsing="false" onAction="#Pos_Add" text="Εισαγωγή Θέσης" />
             <TextField fx:id="Posistion_Text" layoutX="498.0" layoutY="298.0" promptText="Θέση Εργασίας" />
+            <Button fx:id="Typ_button" layoutX="713.0" layoutY="553.0" mnemonicParsing="false" onAction="#Typ_Add" text="Εισαγωγή Τύπου " />
+            <TextField fx:id="Typ_Text" layoutX="498.0" layoutY="552.0" promptText="Τύπος Εξωτ. Συνεργ." />
+            <TableView fx:id="Typ_Table" layoutX="570.0" layoutY="370.0" prefHeight="168.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="Typ_Column" prefWidth="199.0" text="Τύπος Εξωτ. Συνεργάτη" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

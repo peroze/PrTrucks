@@ -62,10 +62,25 @@ public class SettingsAdds implements Initializable {
     @FXML
     private TextField Posistion_Text;
 
+    @FXML
+    private Button Typ_button;
+
+    @FXML
+    private TextField Typ_Text;
+
+    @FXML
+    private TableView<StringsForTables> Typ_Table;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Typ_Column;
+
+
 
     ObservableList<StringsForTables> oblist;
     ObservableList<StringsForTables> oblist2;
     ObservableList<StringsForTables> oblist3;
+    ObservableList<StringsForTables> oblist4;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +88,7 @@ public class SettingsAdds implements Initializable {
             Location_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
             Type_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
             Pos_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
+            Typ_Column.setCellValueFactory(new PropertyValueFactory<>("string"));
             Sql db = new Sql();
             ResultSet locs = db.Query_General_Locations();
             oblist = FXCollections.observableArrayList();
@@ -107,6 +123,17 @@ public class SettingsAdds implements Initializable {
             Del2.setOnAction(this::Del_Pos);
             Cont2.getItems().add(Del2);
             PosistionTable.setContextMenu(Cont2);
+            oblist4 = FXCollections.observableArrayList();
+            ResultSet typ = db.Query_General_Partners_Type();
+            while (typ.next()) {
+                oblist4.add(new StringsForTables(typ.getString("Type")));
+            }
+            Typ_Table.setItems(oblist4);
+            ContextMenu Cont3 = new ContextMenu();
+            MenuItem Del3 = new MenuItem("Διαγραφή");
+            Del3.setOnAction(this::Del_Typ);
+            Cont3.getItems().add(Del3);
+            Typ_Table.setContextMenu(Cont3);
             db.Disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,14 +146,35 @@ public class SettingsAdds implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Επιβαιβέωση");
         alert.setHeaderText("Διαγραφή στοιχείου");
-        alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την θέση εργασίας:  " + del.getString() + "? \nΠΡΟΣΟΧΗ!!!  Όσοι εγραζόμενοι είναι καταχωρημένα με αυτόν την θέση θα διαγράφουν");
+        alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την θέση εργασίας:  " + del.getString() + "? \nΠΡΟΣΟΧΗ!!!  Όσοι εγραζόμενοι είναι καταχωρημένπι σε αυτήν την θέση θα διαγράφουν");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             int i = db.DeleteSecondary(del.getString(), "Posistion");
             if (i != 1) {
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Διαγραφή Απέτυχε");
-                alert1.setContentText("Ο τύπος οχήματος δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
+                alert1.setContentText("Η θέση εργασίας δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
+                alert1.showAndWait();
+            }
+        }
+        RenewTables();
+        db.Disconnect();
+    }
+
+    public void Del_Typ(ActionEvent e){
+        StringsForTables del = Typ_Table.getSelectionModel().getSelectedItem();
+        Sql db = new Sql();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Επιβαιβέωση");
+        alert.setHeaderText("Διαγραφή στοιχείου");
+        alert.setContentText("Είσαι σύγουρος ότι θέλεις να διαγράψεις την κατηγορία εξωτερικού συνεργάτη:  " + del.getString() + "? \nΠΡΟΣΟΧΗ!!!  Όσοι εξωτερικοί συνεργτάτες είναι καταχωρημένοι με αυτήν την κατηγορία θα διαγράφουν");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            int i = db.DeleteSecondary(del.getString(), "Partners");
+            if (i != 1) {
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Διαγραφή Απέτυχε");
+                alert1.setContentText("Η  κατηγορία εξωτερικού συνεργάτη δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
                 alert1.showAndWait();
             }
         }
@@ -167,7 +215,7 @@ public class SettingsAdds implements Initializable {
         if (i != 1) {
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Διαγραφή Απέτυχε");
-            alert1.setContentText("Ο τύπος οχήματος δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
+            alert1.setContentText("Η Τοποθεσία δεν κατατάφερε να διαγραφεί, δοκιμάστε ξανά");
             alert1.showAndWait();
         }
         RenewTables();
@@ -221,7 +269,24 @@ public class SettingsAdds implements Initializable {
                 alert.showAndWait();
             }
             RenewTables();
-            Posistion_button.setText("");
+            Posistion_Text.setText("");
+            db.Disconnect();
+        }
+    }
+
+    @FXML
+    void Typ_Add(ActionEvent e){
+        if (!Typ_Text.getText().equals("")) {
+            Sql db = new Sql();
+            int i = db.InsertSecondary(Typ_Text.getText(), "Partners");
+            if (i != 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Εισαγωγή Απέτυχε");
+                alert.setContentText("Η κατηγορία εξωτερικού συνεργάτη δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.showAndWait();
+            }
+            RenewTables();
+            Typ_Text.setText("");
             db.Disconnect();
         }
     }
@@ -247,6 +312,12 @@ public class SettingsAdds implements Initializable {
                 oblist3.add(new StringsForTables(poss.getString("Posistion")));
             }
             PosistionTable.setItems(oblist3);
+            oblist4 = FXCollections.observableArrayList();
+            ResultSet typ = db.Query_General_Partners_Type();
+            while (typ.next()) {
+                oblist4.add(new StringsForTables(typ.getString("Type")));
+            }
+            Typ_Table.setItems(oblist4);
             db.Disconnect();
         } catch (SQLException e) {
             e.printStackTrace();

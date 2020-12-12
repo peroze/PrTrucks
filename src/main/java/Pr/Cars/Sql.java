@@ -1194,7 +1194,10 @@ public class Sql {
                 sql = "INSERT INTO Location(City) VALUES (?)";
             } else if (Table.equals("Posistion")) {
                 sql = "INSERT INTO CompanyPosistions(Posistion) VALUES (?)";
-            } else {
+            }else if(Table.equals("Partners")){
+                sql = "INSERT INTO PartersType(Type) VALUES (?)";
+            }
+            else {
                 sql = "INSERT INTO Type(Type) VALUES (?)";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -1247,7 +1250,10 @@ public class Sql {
                 sql = "DELETE FROM Location WHERE City=?";
             } else if (Table.equals("Posistion")) {
                 sql = "DELETE FROM CompanyPosistions WHERE Posistion=?";
-            } else {
+            } else if(Table.equals("Partners")){
+                sql = "DELETE FROM PartersType WHERE Type=?";
+            }
+            else {
                 sql = "DELETE FROM Type WHERE Type=?";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
