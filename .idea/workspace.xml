@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473d31f6-1d4c-421f-aa34-a0c2ce92ca15" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrTrucks.db" beforeDir="false" afterPath="$PROJECT_DIR$/PrTrucks.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/EmmisionCardList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Pr/Cars/Sql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/AddsTotals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/Drawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/Drawer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/Lists.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Pr/Cars/Styles/Lists.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/SettingsAdds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/SettingsAdds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pr/Cars/Sql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Pr/Cars/SettingsAdds.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Pr/Cars/SettingsAdds.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +236,7 @@
       <workItem from="1607650426226" duration="2874000" />
       <workItem from="1607653357209" duration="504000" />
       <workItem from="1607683173957" duration="608000" />
-      <workItem from="1607728179829" duration="11678000" />
+      <workItem from="1607728179829" duration="12085000" />
     </task>
     <task id="LOCAL-00001" summary="Backup is Working">
       <created>1606490123747</created>
@@ -514,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607738306710</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Only Adds for PhoneLists left">
+      <created>1607740160082</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1607740160082</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,10 +540,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607728559248" />
-    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607738305077">
+    <state x="566" y="16" key="CommitChangelistDialog2" timestamp="1607740158345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607738305077" />
+    <state x="566" y="16" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607740158345" />
     <state width="1877" height="250" key="GridCell.Tab.0.bottom" timestamp="1607740112198">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -590,10 +580,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="712" y="147" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606787992494" />
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607738310311">
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2" timestamp="1607740163051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607738310311" />
+    <state x="552" y="250" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607740163051" />
     <state x="636" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1607728226513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
