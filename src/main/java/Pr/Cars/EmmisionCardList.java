@@ -203,6 +203,7 @@ public class EmmisionCardList implements Initializable {
                             }
                         }
                     }
+                    sql.Disconnect();
                     RenewTable();
                 }
 

@@ -63,7 +63,7 @@
       </ImageView>
       <TextField fx:id="Search_Bar" layoutX="677.0" layoutY="13.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
       <Label fx:id="Search_icon" layoutX="662.0" layoutY="13.0" prefHeight="25.0" prefWidth="21.0" />
-      <Label layoutX="323.0" layoutY="8.0" text="Εξωτερικά Οχήματα" textFill="WHITE">
+      <Label layoutX="213.0" layoutY="9.0" text="Εξωτερικά Οχήματα" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

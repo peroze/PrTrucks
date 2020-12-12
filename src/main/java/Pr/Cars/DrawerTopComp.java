@@ -1,11 +1,13 @@
 package Pr.Cars;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -20,10 +22,19 @@ public class DrawerTopComp implements Initializable {
     private BorderPane OutPane;
 
     @FXML
-    private MenuButton Totals_Button;
+    private MenuItem Totals_Button;
 
     @FXML
-    private MenuButton Cars_Button;
+    private MenuItem Cars_Button;
+
+    @FXML
+    private MenuButton Transfer;
+
+    @FXML
+    private MenuButton Partners;
+
+    @FXML
+    private MenuButton Employers;
 
 
 
@@ -32,10 +43,10 @@ public class DrawerTopComp implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Active = "Companies";
+        Active = "Partners";
         changeBg();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CompanyList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ExternalPhoneList.fxml"));
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -49,7 +60,7 @@ public class DrawerTopComp implements Initializable {
     }
 
     @FXML
-    void Cars_Button_Pressed(MouseEvent event) {
+    void Cars_Button_Pressed(ActionEvent event) {
         if (!(Active.equals("Cars"))) {
             resetBg();
             Active = "Cars";
@@ -70,7 +81,7 @@ public class DrawerTopComp implements Initializable {
     }
 
     @FXML
-    void Totals_Button_Pressed(MouseEvent event) {
+    void Totals_Button_Pressed(ActionEvent event) {
         if (!(Active.equals("Companies"))) {
             resetBg();
             Active = "Companies";
@@ -90,6 +101,50 @@ public class DrawerTopComp implements Initializable {
         }
     }
 
+    @FXML
+    void Partners_Button_Pressed(MouseEvent event)  {
+        if (!(Active.equals("Partners"))) {
+            resetBg();
+            Active = "Partners";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("ExternalPhoneList.fxml"));
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        OutPane.requestFocus();
+                    }
+                });
+                OutPane.setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void Employers_Button_Pressed(MouseEvent event) {
+        if (!(Active.equals("Employers"))) {
+            resetBg();
+            Active = "Employers";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("InternalPhoneList.fxml"));
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        OutPane.requestFocus();
+                    }
+                });
+                OutPane.setCenter(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     /**
      * This method changes the Active variable which indicates which page is currently on the main frame
      *
@@ -105,10 +160,16 @@ public class DrawerTopComp implements Initializable {
     public void resetBg() {
         switch (Active) {
             case "Companies":
-                Totals_Button.setStyle(null);
+                Transfer.setStyle(null);
                 break;
             case "Cars":
-                Cars_Button.setStyle(null);
+                Transfer.setStyle(null);
+                break;
+            case "Partners":
+                Partners.setStyle(null);
+                break;
+            case "Employers":
+                Employers.setStyle(null);
                 break;
         }
     }
@@ -119,10 +180,16 @@ public class DrawerTopComp implements Initializable {
     public void changeBg() {
         switch (Active) {
             case "Companies":
-                Totals_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Cars":
-                Cars_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case "Partners":
+                Partners.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case "Employers":
+                Employers.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

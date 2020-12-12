@@ -47,7 +47,7 @@ public class Drawer {
     private Button Refill_Button;
 
     @FXML
-    private Button Transfer_Button;
+    private Button Partners_Button;
 
     @FXML
     private Button More_Button;
@@ -172,20 +172,6 @@ public class Drawer {
         }
     }
 
-    @FXML
-    void Transfer_Button_Pressed(ActionEvent event) {
-        if (!Active.equals("Transfer")) {
-            resetBg();
-            Active = "Transfer";
-            changeBg();
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("DrawerTopComp.fxml"));
-                Panel.setCenter(root);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     @FXML
     void More_Button_Pressed(ActionEvent event) {
@@ -208,6 +194,27 @@ public class Drawer {
         }
     }
 
+
+    @FXML
+    void Partners_Button_Pressed(ActionEvent event) {
+        if (!Active.equals("Partners")) {
+            resetBg();
+            Active = "Partners";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("DrawerTopComp.fxml"));
+                // new FadeIn(root).play();
+                // new BounceIn(root).play();
+                // new BounceInDown(root).play();
+                new BounceInLeft(root).play();
+                Panel.setCenter(root);
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     /**
@@ -244,8 +251,8 @@ public class Drawer {
             case "More":
                 More_Button.setStyle(null);
                 break;
-            case "Transfer":
-                Transfer_Button.setStyle(null);
+            case"Partners":
+                Partners_Button.setStyle(null);
                 break;
         }
     }
@@ -276,8 +283,8 @@ public class Drawer {
             case "More":
                 More_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
-            case "Transfer":
-                Transfer_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+            case "Partners":
+                Partners_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

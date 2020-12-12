@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Sql {
 
-
     private Connection conn;
 
     /**
@@ -19,6 +18,7 @@ public class Sql {
      */
     public Sql() {
         try {
+            System.out.println("Open");
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
 
@@ -87,7 +87,33 @@ public class Sql {
 
     }
 
+    public ResultSet Query_General_External_Phone_List() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM ExternalPhoneList ORDER BY Name";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+    public ResultSet Query_General_Internal_Phone_List() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM InternalPhoneList ORDER BY Name";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
 
 
     /**
@@ -132,6 +158,7 @@ public class Sql {
 
     /**
      * This method return the list with all KTEO
+     *
      * @return All KTEOs
      */
     public ResultSet Query_General_KTEO() {
@@ -150,6 +177,7 @@ public class Sql {
 
     /**
      * This method returns the list with all Emmision Cards
+     *
      * @return The set with all Emmision cards
      */
     public ResultSet Query_General_EmmisionCard() {
@@ -167,6 +195,7 @@ public class Sql {
 
     /**
      * This method returns the list with all Refills
+     *
      * @return The set with all refills
      */
     public ResultSet Query_General_Refill() {
@@ -182,7 +211,7 @@ public class Sql {
         return rs;
     }
 
-    public ResultSet Query_General_Locations(){
+    public ResultSet Query_General_Locations() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM Location  ";
@@ -195,7 +224,7 @@ public class Sql {
         return rs;
     }
 
-    public ResultSet Query_General_Types(){
+    public ResultSet Query_General_Types() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM Type  ";
@@ -208,7 +237,7 @@ public class Sql {
         return rs;
     }
 
-    public ResultSet Query_General_Posistion(){
+    public ResultSet Query_General_Posistion() {
         ResultSet rs = null;
         try {
             String sql = "SELECT  * FROM CompanyPosistions  ";
@@ -221,24 +250,39 @@ public class Sql {
         return rs;
     }
 
+    public ResultSet Query_General_Partners_Type() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM PartersType  ";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+
+
 
     /**
      * This question the total cost of a table for a specific car
+     *
      * @param Table The table that we need to sum
-     * @param Lisc The car
+     * @param Lisc  The car
      * @return The total cost
      */
-    public ResultSet Query_Car_Price(String Table,String Lisc){
+    public ResultSet Query_Car_Price(String Table, String Lisc) {
         ResultSet rs;
-        try{
-            String Query="Select SUM(Price) as Total From ? WHERE id=?";
-            PreparedStatement pstm=conn.prepareStatement(Query);
-            pstm.setInt(2,Integer.valueOf(GetIdFromLisx(Lisc)));
-            pstm.setString(1,Table);
-            rs=pstm.executeQuery();
+        try {
+            String Query = "Select SUM(Price) as Total From ? WHERE id=?";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setInt(2, Integer.valueOf(GetIdFromLisx(Lisc)));
+            pstm.setString(1, Table);
+            rs = pstm.executeQuery();
             return rs;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
 
@@ -247,22 +291,22 @@ public class Sql {
 
     /**
      * This method returns the total coast of all cars
+     *
      * @param Table
      * @return
      */
-    public ResultSet Querry_All_Price(String Table){
+    public ResultSet Querry_All_Price(String Table) {
         ResultSet rs;
-        try{
-            String Query="Select SUM(Price) as Total From ? Where Price is not null";
-            if(Table=="Refill"){
-                Query="Select SUM(Cost) as Total From ? WHERE Cost is not null";
+        try {
+            String Query = "Select SUM(Price) as Total From ? Where Price is not null";
+            if (Table == "Refill") {
+                Query = "Select SUM(Cost) as Total From ? WHERE Cost is not null";
             }
-            PreparedStatement pstm=conn.prepareStatement(Query);
-            pstm.setString(1,Table);
-            rs=pstm.executeQuery();
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setString(1, Table);
+            rs = pstm.executeQuery();
             return rs;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -270,25 +314,25 @@ public class Sql {
 
     /**
      * This question the total cost of a table for a specific car between a specific date
+     *
      * @param Table The table that we need to sum
-     * @param Lisc The car
+     * @param Lisc  The car
      * @return The total cost
      */
-    public ResultSet Query_Car_Price_Date(String Table,String Lisc,String From, String To){
+    public ResultSet Query_Car_Price_Date(String Table, String Lisc, String From, String To) {
         ResultSet rs;
-        try{
-            String Query="Select SUM(Price) as Total From "+Table+" WHERE id=? AND Date BETWEEN ? AND ? and Price AND Price is not null";
-            if(Table.equals("Refill")){
-                Query="Select SUM(Cost) as Total From "+Table+" WHERE id=? AND Date BETWEEN ? AND ? AND Cost is not null";
+        try {
+            String Query = "Select SUM(Price) as Total From " + Table + " WHERE id=? AND Date BETWEEN ? AND ? and Price AND Price is not null";
+            if (Table.equals("Refill")) {
+                Query = "Select SUM(Cost) as Total From " + Table + " WHERE id=? AND Date BETWEEN ? AND ? AND Cost is not null";
             }
-            PreparedStatement pstm=conn.prepareStatement(Query);
-            pstm.setInt(1,Integer.valueOf(GetIdFromLisx(Lisc)));
-            pstm.setString(2,From);
-            pstm.setString(3,To);
-            rs=pstm.executeQuery();
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setInt(1, Integer.valueOf(GetIdFromLisx(Lisc)));
+            pstm.setString(2, From);
+            pstm.setString(3, To);
+            rs = pstm.executeQuery();
             return rs;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
 
@@ -297,33 +341,34 @@ public class Sql {
 
     /**
      * This method return the cost of all cars between two Dates
+     *
      * @param Table The table of the SQL DB
-     * @param From The 1st Date
-     * @param To The Second Date
+     * @param From  The 1st Date
+     * @param To    The Second Date
      * @return The total cost
      */
-    public ResultSet Query_All_Price_Date(String Table,String From, String To){
+    public ResultSet Query_All_Price_Date(String Table, String From, String To) {
         ResultSet rs;
-        try{
-            String Query="Select SUM(Price) as Total From "+Table+"  WHERE Date BETWEEN ? AND ? AND Price is not null";
-            if(Table.equals("Refill")){
-                Query="Select SUM(Cost) as Total From "+Table+"  WHERE Date BETWEEN ? AND ? AND Cost is not null ";
+        try {
+            String Query = "Select SUM(Price) as Total From " + Table + "  WHERE Date BETWEEN ? AND ? AND Price is not null";
+            if (Table.equals("Refill")) {
+                Query = "Select SUM(Cost) as Total From " + Table + "  WHERE Date BETWEEN ? AND ? AND Cost is not null ";
             }
 
-            PreparedStatement pstm=conn.prepareStatement(Query);
-           // pstm.setString(1,Table);
-            pstm.setString(1,From);
-            pstm.setString(2,To);
-            rs=pstm.executeQuery();
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            // pstm.setString(1,Table);
+            pstm.setString(1, From);
+            pstm.setString(2, To);
+            rs = pstm.executeQuery();
             return rs;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
     }
 
     /**
      * This method returns the total amount of fuel
+     *
      * @return The total Fuel and KM
      */
     public ResultSet Query_All_Refill() {
@@ -341,6 +386,7 @@ public class Sql {
 
     /**
      * This method returns the total amount of fuel of a specific car
+     *
      * @param lisc The car
      * @return The total Fuel and KM of the car
      */
@@ -349,7 +395,7 @@ public class Sql {
         try {
             String Query = "Select SUM(Amount) as Total From Refill WHERE Car_id=? AND Amount is not null";
             PreparedStatement pstm = conn.prepareStatement(Query);
-            pstm.setString(1,GetLisxxFromId(lisc));
+            pstm.setString(1, GetLisxxFromId(lisc));
             rs = pstm.executeQuery();
             return rs;
         } catch (SQLException e) {
@@ -360,8 +406,9 @@ public class Sql {
 
     /**
      * This method returns the total amount of fuel between a specific Date
+     *
      * @param From The 1st Date
-     * @param To The 2nd Date
+     * @param To   The 2nd Date
      * @return The total Fuel and KM
      */
     public ResultSet Query_All_Refill_Date(String From, String To) {
@@ -369,28 +416,8 @@ public class Sql {
         try {
             String Query = "Select SUM(Amount) as Total From Refill WHERE Date BETWEEN ? AND ? AND Amount is not null";
             PreparedStatement pstm = conn.prepareStatement(Query);
-            pstm.setString(1,From);
-            pstm.setString(2,To);
-            rs = pstm.executeQuery();
-            return rs;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    /**
-     * This method returns the total amount of fuel between a specific Date of a specific car
-     * @param From The 1st Date
-     * @param To The 2nd Date
-     * @return The total Fuel and KM
-     */
-    public ResultSet Query_Car_Refill_Date(String lisc,String From, String To) {
-        ResultSet rs;
-        try {
-            String Query = "Select SUM(Amount) as Total From Refill WHERE Car_id=? AND Date BETWEEN ? AND ?";
-            PreparedStatement pstm = conn.prepareStatement(Query);
-            pstm.setString(1,GetIdFromLisx(lisc));
-            pstm.setString(2,From);
-            pstm.setString(3,To);
+            pstm.setString(1, From);
+            pstm.setString(2, To);
             rs = pstm.executeQuery();
             return rs;
         } catch (SQLException e) {
@@ -398,15 +425,37 @@ public class Sql {
         }
     }
 
-    public ResultSet Query_Car_Refill_Cons(String lisc,String From,String To){
+    /**
+     * This method returns the total amount of fuel between a specific Date of a specific car
+     *
+     * @param From The 1st Date
+     * @param To   The 2nd Date
+     * @return The total Fuel and KM
+     */
+    public ResultSet Query_Car_Refill_Date(String lisc, String From, String To) {
+        ResultSet rs;
+        try {
+            String Query = "Select SUM(Amount) as Total From Refill WHERE Car_id=? AND Date BETWEEN ? AND ?";
+            PreparedStatement pstm = conn.prepareStatement(Query);
+            pstm.setString(1, GetIdFromLisx(lisc));
+            pstm.setString(2, From);
+            pstm.setString(3, To);
+            rs = pstm.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public ResultSet Query_Car_Refill_Cons(String lisc, String From, String To) {
 
         ResultSet rs;
         try {
             String Query = "Select AVG(Consumption) as Cons From Refill WHERE Car_id=? AND Date BETWEEN ? AND ? AND Consumption is not null";
             PreparedStatement pstm = conn.prepareStatement(Query);
-            pstm.setString(1,GetIdFromLisx(lisc));
-            pstm.setString(2,From);
-            pstm.setString(3,To);
+            pstm.setString(1, GetIdFromLisx(lisc));
+            pstm.setString(2, From);
+            pstm.setString(3, To);
             rs = pstm.executeQuery();
             return rs;
         } catch (SQLException e) {
@@ -490,10 +539,39 @@ public class Sql {
 
     }
 
+    public ResultSet Query_Specific_External_Phone_List(String Disc) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM ExternalPhoneList WHERE Discreption=? ORDER BY Name";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,Disc);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+    public ResultSet Query_Specific_Internal_Phone_List(String Disc) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT  * FROM InternalPhoneList WHERE Posistion=? ORDER BY Name";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,Disc);
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
     /**
      * This method returns all entries of a specific car from Refill table
      *
-     * @param lisc  The liscence plate of the car
+     * @param lisc The liscence plate of the car
      * @return the dataset with the right data
      */
     public ResultSet Query_Specific_Refill(String lisc) {
@@ -511,48 +589,45 @@ public class Sql {
     }
 
 
-    public ResultSet Query_Specific_NextKteo(String lisc){
+    public ResultSet Query_Specific_NextKteo(String lisc) {
 
         ResultSet rs = null;
         try {
-        String sql = "SELECT  KTEOIn FROM  Trucks WHERE id=? ";
-        String id=GetIdFromLisx(lisc);
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, id);
-        rs = pstmt.executeQuery();
-        }
-        catch (SQLException e){
+            String sql = "SELECT  KTEOIn FROM  Trucks WHERE id=? ";
+            String id = GetIdFromLisx(lisc);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
 
-    public ResultSet Query_Specific_ExternalByLisc(String Comp){
+    public ResultSet Query_Specific_ExternalByLisc(String Comp) {
         ResultSet rs = null;
         try {
 
             String sql;
             String id;
-            if(Comp.equals("Ιδιότης")){
-                id="NULL";
+            if (Comp.equals("Ιδιότης")) {
+                id = "NULL";
+            } else {
+                id = GetIdFromComp(Comp);
             }
-            else{
-                id=GetIdFromComp(Comp);
-            }
-            sql = "SELECT  * FROM  External_Trucks WHERE Company_id="+id;
+            sql = "SELECT  * FROM  External_Trucks WHERE Company_id=" + id;
             Statement pstmt = conn.createStatement();
             rs = pstmt.executeQuery(sql);
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
 
 
-
     /**
      * This Method Returns the car with the given lisc. Plate
+     *
      * @param lisc The liscence plate
      * @return The Car
      */
@@ -561,8 +636,8 @@ public class Sql {
         try {
             String sql = "SELECT  * FROM Trucks WHERE LiscPlate=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,lisc);
-            rs=pstmt.executeQuery();
+            pstmt.setString(1, lisc);
+            rs = pstmt.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -571,11 +646,11 @@ public class Sql {
 
     }
 
-    public ResultSet Query_Specific_LastRefill(String lisc){
-        String sql="SELECT  MAX(Date),Amount,Kilometers FROM Refill WHERE Car_id="+GetIdFromLisx(lisc);
-        try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+    public ResultSet Query_Specific_LastRefill(String lisc) {
+        String sql = "SELECT  MAX(Date),Amount,Kilometers FROM Refill WHERE Car_id=" + GetIdFromLisx(lisc);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -583,11 +658,11 @@ public class Sql {
         }
     }
 
-    public ResultSet Query_Specific_LastKteoKM(String lisc){
-        String sql="Select MAX(Date),Kilometers FROM KTEO WHERE id="+GetIdFromLisx(lisc);
-        try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+    public ResultSet Query_Specific_LastKteoKM(String lisc) {
+        String sql = "Select MAX(Date),Kilometers FROM KTEO WHERE id=" + GetIdFromLisx(lisc);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -595,11 +670,11 @@ public class Sql {
         return null;
     }
 
-    public ResultSet Query_Specific_LastEmmisionKM(String lisc){
-        String sql="Select MAX(Date),Kilometers FROM EmmisionCard WHERE id="+GetIdFromLisx(lisc);
-        try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+    public ResultSet Query_Specific_LastEmmisionKM(String lisc) {
+        String sql = "Select MAX(Date),Kilometers FROM EmmisionCard WHERE id=" + GetIdFromLisx(lisc);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -607,11 +682,11 @@ public class Sql {
         return null;
     }
 
-    public ResultSet Query_Specific_LastServiceKM(String lisc){
-        String sql="Select MAX(Date),Kilometers FROM Service WHERE id="+GetIdFromLisx(lisc);
-        try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+    public ResultSet Query_Specific_LastServiceKM(String lisc) {
+        String sql = "Select MAX(Date),Kilometers FROM Service WHERE id=" + GetIdFromLisx(lisc);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -619,11 +694,11 @@ public class Sql {
         return null;
     }
 
-    public ResultSet Query_Specific_LastRepairKM(String lisc){
-        String sql="Select MAX(Date),Kilometers FROM Repairs WHERE id="+GetIdFromLisx(lisc);
-        try{
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
+    public ResultSet Query_Specific_LastRepairKM(String lisc) {
+        String sql = "Select MAX(Date),Kilometers FROM Repairs WHERE id=" + GetIdFromLisx(lisc);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -631,106 +706,104 @@ public class Sql {
         return null;
     }
 
-    public ResultSet Query_Specific_NextGas(String lisc){
+    public ResultSet Query_Specific_NextGas(String lisc) {
 
         ResultSet rs = null;
         try {
             String sql = "SELECT  GasIn FROM  Trucks WHERE id=? ";
-            String id=GetIdFromLisx(lisc);
+            String id = GetIdFromLisx(lisc);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
 
 
-    public ResultSet Query_Specific_NextServiceKm(String lisc){
+    public ResultSet Query_Specific_NextServiceKm(String lisc) {
 
         ResultSet rs = null;
         try {
-            String id=GetIdFromLisx(lisc);
+            String id = GetIdFromLisx(lisc);
             String sql = "SELECT  ServiceInKm FROM  Trucks WHERE id=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
 
 
-    public ResultSet Query_Specific_NextServiceKmCurrentKm(String id){
+    public ResultSet Query_Specific_NextServiceKmCurrentKm(String id) {
         ResultSet rs = null;
 
-       try {
+        try {
 
-           String sql = "SELECT  MAX(Next_Kilometers),Trucks.Kilometers FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=" + id;
-           Statement stmt = conn.createStatement();
-           rs=stmt.executeQuery(sql);
-           return rs;
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
-       return null;
+            String sql = "SELECT  MAX(Next_Kilometers),Trucks.Kilometers FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=" + id;
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
-    public ResultSet Query_Specific_TableByLocationType(String Table,String Type,String Location){
+    public ResultSet Query_Specific_TableByLocationType(String Table, String Type, String Location) {
         try {
             String sql;
             ResultSet rs;
             PreparedStatement pstm;
-            if (Location == null&& Type!=null) {
-                sql = "SELECT  * FROM"+Table+",Trucks WHERE "+Table+".id=Trucks.id AND Trucks.Type=?";
-                if(Table.equals("Service")){
-                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
+            if (Location == null && Type != null) {
+                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Trucks.Type=?";
+                if (Table.equals("Service")) {
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Type);
-            } else if (Type == null&& Location!=null) {
+            } else if (Type == null && Location != null) {
 
-                sql = "SELECT  * FROM"+Table+",Trucks WHERE "+Table+".id=Trucks.id AND Location=?";
-                if(Table.equals("Service")){
-                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
+                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Location=?";
+                if (Table.equals("Service")) {
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
 
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);
             } else {
-                sql = "SELECT  * FROM "+Table+" ,Trucks WHERE "+Table+".id=Trucks.id AND Location=? AND Trucks.Type=?";
-                if(Table.equals("Service")){
-                    sql="Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
+                sql = "SELECT  * FROM " + Table + " ,Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Type=?";
+                if (Table.equals("Service")) {
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);
                 pstm.setString(2, Type);
             }
-            rs=pstm.executeQuery();
+            rs = pstm.executeQuery();
             return rs;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public ResultSet Query_Specific_MaxKmAllMinusTrucks(String id){
+    public ResultSet Query_Specific_MaxKmAllMinusTrucks(String id) {
 
-        String sql="SELECT MAX(KM) FROM (SELECT MAX(Service.Kilometers) AS KM FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(KTEO.Kilometers) AS KM FROM KTEO,Trucks WHERE KTEO.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Repairs.Kilometers) AS KM FROM Repairs,Trucks WHERE Repairs.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(EmmisionCard.Kilometers) AS KM1 FROM EmmisionCard,Trucks WHERE EmmisionCard.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Refill.Kilometers) AS KM1 FROM Refill,Trucks WHERE Refill.Car_id=Trucks.id AND Trucks.id=?)";
-        try{
+        String sql = "SELECT MAX(KM) FROM (SELECT MAX(Service.Kilometers) AS KM FROM Service,Trucks WHERE Service.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(KTEO.Kilometers) AS KM FROM KTEO,Trucks WHERE KTEO.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Repairs.Kilometers) AS KM FROM Repairs,Trucks WHERE Repairs.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(EmmisionCard.Kilometers) AS KM1 FROM EmmisionCard,Trucks WHERE EmmisionCard.id=Trucks.id AND Trucks.id=? UNION SELECT MAX(Refill.Kilometers) AS KM1 FROM Refill,Trucks WHERE Refill.Car_id=Trucks.id AND Trucks.id=?)";
+        try {
 
-            PreparedStatement stmt=conn.prepareStatement(sql);
-            stmt.setInt(1,Integer.valueOf(id));
-            stmt.setInt(2,Integer.valueOf(id));
-            stmt.setInt(3,Integer.valueOf(id));
-            stmt.setInt(4,Integer.valueOf(id));
-            stmt.setInt(5,Integer.valueOf(id));
-            ResultSet rs=stmt.executeQuery();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, Integer.valueOf(id));
+            stmt.setInt(2, Integer.valueOf(id));
+            stmt.setInt(3, Integer.valueOf(id));
+            stmt.setInt(4, Integer.valueOf(id));
+            stmt.setInt(5, Integer.valueOf(id));
+            ResultSet rs = stmt.executeQuery();
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -738,9 +811,6 @@ public class Sql {
         }
 
     }
-
-
-
 
 
     /**
@@ -770,10 +840,9 @@ public class Sql {
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            if (edit==false) {
+            if (edit == false) {
                 pstmt.setInt(1, max_i + 1);
-            }
-            else{
+            } else {
                 pstmt.setInt(1, Integer.valueOf(a.getId()));
             }
             pstmt.setString(2, car.get(0));
@@ -784,10 +853,10 @@ public class Sql {
             pstmt.setString(7, car.get(5));
             pstmt.setString(8, car.get(6));
             pstmt.setString(9, car.get(7));
-            pstmt.setString(10,car.get(8));
-            pstmt.setString(11,car.get(10));
-            pstmt.setString(12,car.get(9));
-            pstmt.setInt(13,Integer.valueOf(car.get(11)));
+            pstmt.setString(10, car.get(8));
+            pstmt.setString(11, car.get(10));
+            pstmt.setString(12, car.get(9));
+            pstmt.setInt(13, Integer.valueOf(car.get(11)));
 
 
             pstmt.executeUpdate();
@@ -806,7 +875,7 @@ public class Sql {
      * @param a the new Repair
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertRepair(ModelRepair a,boolean edit) {
+    public int InsertRepair(ModelRepair a, boolean edit) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -816,10 +885,9 @@ public class Sql {
         repair.add(a.getChanges());
         repair.add(a.getPrice());
         String sql;
-        if (edit==false) {
+        if (edit == false) {
             sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price) VALUES (?,?,?,?,?,?,?)";
-        }
-        else{
+        } else {
             sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Repair_Id) VALUES (?,?,?,?,?,?,?,?)";
         }
         try {
@@ -831,8 +899,8 @@ public class Sql {
             pstmt.setString(5, repair.get(4));
             pstmt.setString(6, repair.get(2));
             pstmt.setInt(7, Integer.valueOf(repair.get(5)));
-            if(edit==true){
-                pstmt.setInt(8,Integer.valueOf(a.getId()));
+            if (edit == true) {
+                pstmt.setInt(8, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -849,7 +917,7 @@ public class Sql {
      * @param a the new Repair
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertExternalCars(ModelExternalCars a,boolean edit) {
+    public int InsertExternalCars(ModelExternalCars a, boolean edit) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getLiscPlate());
@@ -862,11 +930,10 @@ public class Sql {
         repair.add(a.getLenght());
         repair.add(a.getHeight());
         String sql;
-        if (edit==false) {
+        if (edit == false) {
 
             sql = "INSERT INTO External_Trucks(LiscPlate,Company_id,Model,Manufactor,Driver,Phone,Width,Lenght,Height) VALUES (?,?,?,?,?,?,?,?,?)";
-        }
-        else{
+        } else {
             sql = "INSERT OR REPLACE INTO External_Trucks(LiscPlate,Company_id,Model,Manufactor,Driver,Phone,Width,Lenght,Height,id) VALUES (?,?,?,?,?,?,?,?,?,?)";
         }
         try {
@@ -880,8 +947,8 @@ public class Sql {
             pstmt.setInt(7, Integer.valueOf(repair.get(6)));
             pstmt.setInt(8, Integer.valueOf(repair.get(7)));
             pstmt.setInt(9, Integer.valueOf(repair.get(8)));
-            if(edit==true){
-                pstmt.setInt(10,Integer.valueOf(a.getId()));
+            if (edit == true) {
+                pstmt.setInt(10, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -894,7 +961,68 @@ public class Sql {
     }
 
 
+    public int InsertExternalPhone(ModelExternalPhoneList a, boolean edit) {
+        ArrayList<String> list = new ArrayList<>();
 
+        list.add(a.getName());
+        list.add(a.getPhone());
+        list.add(a.getAddress());
+        list.add(a.getDiscreption());
+        list.add(a.getNotes());
+        String sql;
+        sql = "INSERT OR REPLACE INTO ExternalPhoneList(Name,Phone,Address,Discription,Notes) VALUES(?,,??,?,?)";
+        if (edit == true) {
+            sql = "INSERT OR REPLACE INTO ExternalPhoneList(id,Name,Phone,Address,Discription,Notes) VALUES(?,?,?,?,?,?)";
+        }
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            int l = 0;
+            if (edit == true) {
+                l = 1;
+                pstmt.setInt(1, Integer.valueOf(a.getId()));
+            }
+            for (int i = l; i < list.size(); i++) {
+                pstmt.setString(i + 1, list.get(i));
+            }
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    public int InsertInternalPhone(ModelInternalPhoneList a, boolean edit) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add(a.getName());
+        list.add(a.getPhone());
+        list.add(a.getEmail());
+        list.add(a.getPosistion());
+        String sql;
+        sql = "INSERT OR REPLACE INTO InternalPhoneList(Name,Phone,Email,Posistion) VALUES(?,?,?,?)";
+        if (edit == true) {
+            sql = "INSERT OR REPLACE INTO PhonePhoneList(id,Name,Phone,Email,Posistion) VALUES(?,?,?,?,?)";
+        }
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            int l = 0;
+            if (edit == true) {
+                l = 1;
+                pstmt.setInt(1, Integer.valueOf(a.getId()));
+            }
+            for (int i = l; i < list.size(); i++) {
+                pstmt.setString(i + 1, list.get(i));
+            }
+            pstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
 
 
     /**
@@ -903,7 +1031,7 @@ public class Sql {
      * @param a the new service
      * @return 1 if the insertion is complete or 0 if there is an error
      */
-    public int InsertService(ModelService a,boolean edit) {
+    public int InsertService(ModelService a, boolean edit) {
         ArrayList<String> repair = new ArrayList<>();
 
         repair.add(a.getKilometers());
@@ -915,10 +1043,9 @@ public class Sql {
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
         String sql;
-        if(edit==false) {
-             sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
-        }
-        else {
+        if (edit == false) {
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+        } else {
             sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         }
@@ -933,8 +1060,8 @@ public class Sql {
             pstmt.setString(7, repair.get(5));
             pstmt.setString(8, repair.get(6));
             pstmt.setInt(9, Integer.valueOf(repair.get(7)));
-            if(edit==true){
-                pstmt.setInt(10,Integer.valueOf(a.getId()));
+            if (edit == true) {
+                pstmt.setInt(10, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -951,13 +1078,13 @@ public class Sql {
      * This method inserts a new KTEO on the db. It also add the included emmisions card in the corresponding Table
      * If EmmisionDate variable is null it means that its not a clean insert but a reinsert of a previous so we just add the new one without Deleteing the previous or adding emission card
      *
-     * @param a  the new KTEO
+     * @param a            the new KTEO
      * @param EmmisionDate The Expiration of the Emmision Card coming with KTEO
      * @return 1 if the insertion is complete or 0 if there is an error
      */
     public int InsertKTEO(ModelKTEO a, String EmmisionDate) {
         try {
-            int i=InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(),a.getKilometers(),a.getDate(),"TRUE",EmmisionDate));
+            int i = InstertEmmisionCard(new ModelEmmisionCard(a.getLiscPlate(), a.getKilometers(), a.getDate(), "TRUE", EmmisionDate));
             if (i == 0) {
                 return 0;
             }
@@ -989,18 +1116,18 @@ public class Sql {
 
     /**
      * This method inserts a new Emmision card
+     *
      * @param a The new emmision card
      * @return 1 if comleted 0 if not
      */
     public int InstertEmmisionCard(ModelEmmisionCard a) {
         try {
-            int i ;
+            int i;
             boolean bool;
-            if(a.getWithKTEO().equals("TRUE")){
-                bool=true;
-            }
-            else{
-                bool=false;
+            if (a.getWithKTEO().equals("TRUE")) {
+                bool = true;
+            } else {
+                bool = false;
             }
             ArrayList<String> repair = new ArrayList<>();
             repair.add(a.getKilometers());
@@ -1024,6 +1151,7 @@ public class Sql {
 
     /**
      * This method inserts a new Refill card
+     *
      * @param a The new Refill
      * @return 1 if comleted 0 if not
      */
@@ -1034,21 +1162,20 @@ public class Sql {
             repair.add(a.getKilometers());
             repair.add(a.getDate());
             repair.add(a.getAmount());
-        if(a.getConsumption()!=null&&a.getCost()!=null) {
-            repair.add(a.getConsumption());
-            repair.add(a.getCost());
-            sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount,Consumption,Cost) VALUES (?,?,?,?,?,?)";
-        }
-         else{
-            sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount) VALUES (?,?,?,?)";
-        }
+            if (a.getConsumption() != null && a.getCost() != null) {
+                repair.add(a.getConsumption());
+                repair.add(a.getCost());
+                sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount,Consumption,Cost) VALUES (?,?,?,?,?,?)";
+            } else {
+                sql = "INSERT INTO Refill(Car_id,Kilometers,Date,Amount) VALUES (?,?,?,?)";
+            }
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.valueOf(GetIdFromLisx(a.getLiscPlate())));
             pstmt.setInt(2, Integer.valueOf(repair.get(0)));
             pstmt.setString(3, repair.get(1));
             pstmt.setString(4, repair.get(2));
-            if(a.getConsumption()!=null&&a.getCost()!=null){
+            if (a.getConsumption() != null && a.getCost() != null) {
                 pstmt.setString(5, repair.get(3));
                 pstmt.setString(6, repair.get(4));
             }
@@ -1060,15 +1187,14 @@ public class Sql {
         }
     }
 
-    public int InsertSecondary (String Data,String Table){
+    public int InsertSecondary(String Data, String Table) {
         try {
             String sql;
             if (Table.equals("Locations")) {
                 sql = "INSERT INTO Location(City) VALUES (?)";
-            }else if( Table.equals("Posistion")){
-                sql="INSERT INTO CompanyPosistions(Posistion) VALUES (?)";
-            }
-            else {
+            } else if (Table.equals("Posistion")) {
+                sql = "INSERT INTO CompanyPosistions(Posistion) VALUES (?)";
+            } else {
                 sql = "INSERT INTO Type(Type) VALUES (?)";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -1083,27 +1209,27 @@ public class Sql {
 
     /**
      * This method inserts a new Company
+     *
      * @param a The new Company
      * @return 1 if comleted 0 if not
      */
-    public int InstertCompany(ModelCompany a,boolean edit) {
+    public int InstertCompany(ModelCompany a, boolean edit) {
         try {
             ArrayList<String> repair = new ArrayList<>();
             repair.add(a.getName());
             repair.add(a.getPhone());
             repair.add(a.getPrices());
             String sql;
-            if(edit==true){
-                 sql = "INSERT OR REPLACE INTO Companies(Name,Phone,Prices,id) VALUES (?,?,?,?)";
-            }
-            else {
-                 sql = "INSERT INTO Companies(Name,Phone,Prices) VALUES (?,?,?)";
+            if (edit == true) {
+                sql = "INSERT OR REPLACE INTO Companies(Name,Phone,Prices,id) VALUES (?,?,?,?)";
+            } else {
+                sql = "INSERT INTO Companies(Name,Phone,Prices) VALUES (?,?,?)";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, repair.get(0));
             pstmt.setString(2, repair.get(1));
             pstmt.setString(3, repair.get(2));
-            if(edit==true){
+            if (edit == true) {
                 pstmt.setInt(4, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
@@ -1114,16 +1240,14 @@ public class Sql {
         }
     }
 
-    public int DeleteSecondary (String Data,String Table){
+    public int DeleteSecondary(String Data, String Table) {
         try {
             String sql;
             if (Table.equals("Locations")) {
                 sql = "DELETE FROM Location WHERE City=?";
-            }
-            else if(Table.equals("Posistion")){
+            } else if (Table.equals("Posistion")) {
                 sql = "DELETE FROM CompanyPosistions WHERE Posistion=?";
-            }
-            else {
+            } else {
                 sql = "DELETE FROM Type WHERE Type=?";
             }
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -1154,6 +1278,7 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -1175,9 +1300,43 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
+
+    public int DeleteExternalPhone(int id) {
+        String stmt = "DELETE FROM ExternalPhoneList WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
+            return 1;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int DeleteInternalPhone(int id) {
+        String stmt = "DELETE FROM InternalPhoneList WHERE id=?;";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(stmt);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            conn.close();
+            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
+            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
+            return 1;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 
     /**
      * This method deletes a car from the database
@@ -1196,11 +1355,10 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
-
-
 
 
     /**
@@ -1221,6 +1379,7 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -1267,6 +1426,7 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -1289,6 +1449,7 @@ public class Sql {
             conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -1308,6 +1469,7 @@ public class Sql {
             pstmt.executeUpdate();
             return 1;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -1382,7 +1544,7 @@ public class Sql {
     public String GetIdFromComp(String Names) {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  id FROM Companies  WHERE Name=" +"\""+ Names+"\"";
+            String sql = "SELECT  id FROM Companies  WHERE Name=" + "\"" + Names + "\"";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -1408,18 +1570,15 @@ public class Sql {
     }
 
 
-
-
-
-    public void Disconnect(){
+    public void Disconnect() {
         try {
+
             conn.close();
+            System.out.println("Close");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

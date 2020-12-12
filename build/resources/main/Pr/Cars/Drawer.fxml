@@ -54,7 +54,7 @@
                </VBox.margin>
             </Button>
             <Button fx:id="Refill_Button" alignment="CENTER" mnemonicParsing="false" onAction="#Refill_Button_Pressed" prefHeight="40.0" prefWidth="298.0" text="Καύσιμα" />
-            <Button fx:id="Transfer_Button" alignment="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#Transfer_Button_Pressed" prefHeight="40.0" prefWidth="331.0" text="Μεταφορικές" />
+            <Button fx:id="Partners_Button" mnemonicParsing="false" onAction="#Partners_Button_Pressed" prefHeight="40.0" prefWidth="331.0" text="Συνεργάτες" />
             <Button fx:id="More_Button" alignment="CENTER" mnemonicParsing="false" onAction="#More_Button_Pressed" prefHeight="40.0" prefWidth="340.0" text="Αλλά" textAlignment="CENTER" />
             <HBox alignment="BOTTOM_CENTER" prefHeight="194.0" prefWidth="190.0">
                <children>

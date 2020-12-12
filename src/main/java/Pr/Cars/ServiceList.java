@@ -505,6 +505,7 @@ public class ServiceList implements Initializable {
     public void SearchByLisc(String Lisc) {
         Sql sql = new Sql();
         ResultSet rs = sql.Query_Specific_With_Lisc(Lisc, "Service");
+        sql.Disconnect();
         RenewTable(rs);
     }
 

@@ -153,8 +153,8 @@ public class RepairList implements Initializable {
                     }
                 }
             }
-            RenewTable(null);
             sql.Disconnect();
+            RenewTable(null);
         }
 
         }catch (SQLException e){
@@ -342,6 +342,7 @@ public class RepairList implements Initializable {
     public void SearchByLisc(String Lisc){
         Sql  sql=new Sql();
         ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Repairs");
+        sql.Disconnect();
         RenewTable(rs);
     }
 

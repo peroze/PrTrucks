@@ -29,6 +29,11 @@
     -fx-text-fill: white;
 }
 
+.menu-button:hover{
+    -fx-background-color:  #FA8072;
+}
+
+
 .menu-button .label{
     -fx-background-color: transparent;
     -fx-text-fill: white;

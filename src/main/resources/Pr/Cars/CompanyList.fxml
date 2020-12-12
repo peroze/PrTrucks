@@ -57,7 +57,7 @@
       </ImageView>
       <TextField fx:id="Search_Bar" layoutX="677.0" layoutY="13.0" prefHeight="25.0" prefWidth="173.0" promptText="Αναζήτηση..." />
       <Label fx:id="Search_icon" layoutX="662.0" layoutY="13.0" prefHeight="25.0" prefWidth="21.0" />
-      <Label layoutX="354.0" layoutY="8.0" text="Μεταφορκικές" textFill="WHITE">
+      <Label layoutX="275.0" layoutY="8.0" text="Μεταφορκικές" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="OutPane" prefHeight="648.0" prefWidth="864.0" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Pr.Cars.DrawerTopComp">
+<BorderPane fx:id="OutPane" prefHeight="648.0" prefWidth="864.0" stylesheets="@Styles/Drawer.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.DrawerTopComp">
    <top>
       <HBox prefHeight="36.0" prefWidth="864.0" style="-fx-background-color: #000013;" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton fx:id="Totals_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Totals_Button_Pressed" prefHeight="36.0" prefWidth="71.0" text="Εταίριες" textFill="#fcf7f7" />
-            <MenuButton fx:id="Cars_Button" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Cars_Button_Pressed" prefHeight="36.0" prefWidth="90.0" text="Αυτοκίνητα" textFill="#fcf7f7" />
+            <MenuButton fx:id="Partners" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Partners_Button_Pressed" prefHeight="36.0" prefWidth="147.0" text="Εξωτερικοί Συνεργάτες" textFill="#fcf7f7" />
+            <MenuButton fx:id="Employers" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Employers_Button_Pressed" prefHeight="36.0" prefWidth="82.0" text="Υπάλληλοι" textFill="#fcf7f7" />
+            <MenuButton fx:id="Transfer" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="90.0" text="Μεταφορικές" textFill="#fcf7f7">
+               <items>
+                  <MenuItem fx:id="Totals_Button" mnemonicParsing="false" onAction="#Totals_Button_Pressed" text="Εταιρίες Μεταφοράς" />
+                  <MenuItem fx:id="Cars_Button" mnemonicParsing="false" onAction="#Cars_Button_Pressed" text="Εξωτερικά Φόρτηγα" />
+               </items>
+            </MenuButton>
          </children>
       </HBox>
    </top>

@@ -231,6 +231,7 @@ public class Main extends Application {
                         LiscKmExp.add(sql.GetLisxxFromId(Lisc));
                     }
                 }
+                sql.Disconnect();
             }
 
             if (SystemTray.isSupported()) {
@@ -252,6 +253,7 @@ public class Main extends Application {
                 } catch (MalformedURLException ex) {
 
                 }
+
             } else {
                 System.err.println("System tray not supported!");
             }
