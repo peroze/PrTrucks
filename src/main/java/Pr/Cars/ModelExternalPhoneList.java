@@ -2,23 +2,25 @@ package Pr.Cars;
 
 public class ModelExternalPhoneList {
 
-    public String Id,Name,Phone,Address,Discreption,Notes;
+    public String Id,Name,Phone,Address,Discreption,Notes,Email;
 
-    public ModelExternalPhoneList(String id, String name, String phone, String address, String discreption, String notes) {
+    public ModelExternalPhoneList(String id, String name, String phone, String address,String email, String discreption, String notes) {
         Id = id;
         Name = name;
         Phone = phone;
         Address = address;
         Discreption = discreption;
         Notes = notes;
+        Email=email;
     }
 
-    public ModelExternalPhoneList(String name, String phone, String address, String discreption, String notes) {
+    public ModelExternalPhoneList(String name, String phone, String address,String email, String discreption, String notes) {
         Name = name;
         Phone = phone;
         Address = address;
         Discreption = discreption;
         Notes = notes;
+        Email=email;
     }
 
     public String getId() {
@@ -67,5 +69,13 @@ public class ModelExternalPhoneList {
 
     public void setNotes(String notes) {
         Notes = notes;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 }

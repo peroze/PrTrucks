@@ -514,6 +514,7 @@ public class AddService implements Initializable {
         edit = true;
         if(placeboo==true){
             Oblist.remove(0);
+            placeboo=false;
         }
         Workshop.setText(s.getWorkshop());
         Price.setText(s.getPrice());
@@ -526,10 +527,8 @@ public class AddService implements Initializable {
         Receipt_Number.setText(s.getReceiptNum());
         if (s.getChanges() != null) {
             String[] Ch = s.getChanges().split(Pattern.quote("|"));
-            System.out.println(Ch[0]);
             for (int i = 0; i < Ch.length; i++) {
                 String[] Ch1=Ch[i].split(Pattern.quote("~"));
-                System.out.println(Ch1);
                 Oblist.add(new StringsForTables(Ch1[0],Ch1[1],Ch1[2],Ch1[3],Ch1[4],Ch1[5]));
             }
             Table.setItems(Oblist);

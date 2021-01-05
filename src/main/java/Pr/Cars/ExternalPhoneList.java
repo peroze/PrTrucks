@@ -75,15 +75,17 @@ public class ExternalPhoneList implements Initializable {
     private boolean edit;
 
 
+
+
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
-       /* Stage primaryStage = new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddRepair.fxml"));
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddExternalPhoneList.fxml"));
         try {
             Parent root = fxmlloader.load();
             if (edit == true) {
                 edit = false;
-              //  fxmlloader.<AddRepair>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
+               fxmlloader.<AddExternalPhoneList>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
             }
             primaryStage.setOnHidden(e -> {
                 RenewTable(null);
@@ -92,7 +94,7 @@ public class ExternalPhoneList implements Initializable {
                 RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 580));
+            primaryStage.setScene(new Scene(root, 600, 700));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -102,7 +104,7 @@ public class ExternalPhoneList implements Initializable {
             //new FadeIn(root2).play();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
 
@@ -183,7 +185,7 @@ public class ExternalPhoneList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelExternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Address"),rs.getString("Discreption"),rs.getString("Notes")));
+                Oblist.add(new ModelExternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Address"),rs.getString("Email"),rs.getString("Discreption"),rs.getString("Notes")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -203,7 +205,6 @@ public class ExternalPhoneList implements Initializable {
         Address_Column.setCellValueFactory(new PropertyValueFactory<>("Address"));
         Discreption_Column.setCellValueFactory(new PropertyValueFactory<>("Discreption"));
         FilteredList<ModelExternalPhoneList> Filter = new FilteredList<>(Oblist, b -> true);
-
         Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
             Filter.setPredicate(ModelExternalPhoneList -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -330,7 +331,7 @@ public class ExternalPhoneList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelExternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Address"),rs.getString("Discreption"),rs.getString("Notes")));
+                Oblist.add(new ModelExternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Address"),rs.getString("Email"),rs.getString("Discreption"),rs.getString("Notes")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

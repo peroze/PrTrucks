@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddExternalPhoneList">
+   <children>
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
+         <children>
+            <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
+            <FontIcon fx:id="X_Button" iconLiteral="fa-times" iconSize="20" onMouseClicked="#X_Button_Pressed" wrappingWidth="14.285714149475098">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </FontIcon>
+         </children>
+      </HBox>
+      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
+      <Button fx:id="Ok_Button" layoutX="208.0" layoutY="660.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
+      <Label layoutX="114.0" layoutY="42.0" prefHeight="36.0" prefWidth="374.0" text="Εισαγωγή Εξωτερικού Συνεργάτη" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
+      <Label fx:id="Name_Label" layoutX="109.0" layoutY="149.0" prefHeight="17.0" prefWidth="167.0" text="Όνομα" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="Phone_Label" layoutX="374.0" layoutY="147.0" prefHeight="17.0" prefWidth="138.0" text="Τηλέφωνο" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Address" layoutX="109.0" layoutY="231.0" prefHeight="25.0" prefWidth="138.0" promptText="Διεύθυνση" />
+      <Label fx:id="Address_Label" layoutX="109.0" layoutY="221.0" prefHeight="17.0" prefWidth="167.0" text="Διευθυνση" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="Posistion" layoutX="374.0" layoutY="233.0" prefHeight="22.0" prefWidth="138.0" promptText="Τύπος Συνεργάτη" />
+      <Label fx:id="Posistion_Label" layoutX="374.0" layoutY="221.0" prefHeight="17.0" prefWidth="167.0" text="Τύπος Συνεργάτη" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Email" layoutX="109.0" layoutY="291.0" promptText="Email" />
+      <Label fx:id="Email_Label1" layoutX="110.0" layoutY="279.0" prefHeight="17.0" prefWidth="167.0" text="Email" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Note_Text" layoutX="109.0" layoutY="369.0" prefHeight="25.0" prefWidth="138.0" promptText="Σημείωση" />
+      <Button fx:id="Note_Button" layoutX="374.0" layoutY="369.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="145.0" text="Προσθήκη Σημείωσης" />
+      <TableView fx:id="Notes_table" layoutX="128.0" layoutY="429.0" prefHeight="200.0" prefWidth="348.0">
+        <columns>
+          <TableColumn fx:id="Notes_Col" prefWidth="345.0" text="Σημείωση" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

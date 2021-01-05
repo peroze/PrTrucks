@@ -183,7 +183,7 @@ public class AddRepair implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Oblist.add(new StringsForTables(""));
+            Oblist.add(new StringsForTables("","","","","",""));
             placeboo=true;
             Lisc_Plate.setItems(Cars);
             Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
@@ -310,7 +310,7 @@ public class AddRepair implements Initializable {
         }
         if(Oblist.isEmpty()){
             placeboo=true;
-            Oblist.add(new StringsForTables(""));
+            Oblist.add(new StringsForTables("","","","","",""));
         }
     }
 
@@ -414,9 +414,6 @@ public class AddRepair implements Initializable {
             Kilometers.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         if (flag == true) {
-            if(placeboo==true){
-                Oblist.add(new StringsForTables(""));
-            }
             return;
         }
         Sql sql = new Sql();

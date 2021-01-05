@@ -106,6 +106,12 @@ public class AddInternalPhoneList implements Initializable {
         catch (SQLException e) {
             e.printStackTrace();
         }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Pane.requestFocus();
+            }
+        });
         Posistion.setItems(Posistions);
         TFields = new ArrayList<>();
         Labels = new ArrayList<>();

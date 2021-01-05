@@ -967,24 +967,24 @@ public class Sql {
         ArrayList<String> list = new ArrayList<>();
 
         list.add(a.getName());
+
         list.add(a.getPhone());
         list.add(a.getAddress());
         list.add(a.getDiscreption());
         list.add(a.getNotes());
+        list.add(a.getEmail());
         String sql;
-        sql = "INSERT OR REPLACE INTO ExternalPhoneList(Name,Phone,Address,Discription,Notes) VALUES(?,,??,?,?)";
+        sql = "INSERT OR REPLACE INTO ExternalPhoneList(Name,Phone,Address,Discreption,Notes,Email) VALUES(?,?,?,?,?,?)";
         if (edit == true) {
-            sql = "INSERT OR REPLACE INTO ExternalPhoneList(id,Name,Phone,Address,Discription,Notes) VALUES(?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO ExternalPhoneList(Name,Phone,Address,Discreption,Notes,Email,id) VALUES(?,?,?,?,?,?,?)";
         }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            int l = 0;
-            if (edit == true) {
-                l = 1;
-                pstmt.setInt(1, Integer.valueOf(a.getId()));
+            for (int i = 0; i < list.size(); i++) {
+                pstmt.setString(i+1, list.get(i));
             }
-            for (int i = l; i < list.size(); i++) {
-                pstmt.setString(i + 1, list.get(i));
+            if (edit == true) {
+                pstmt.setInt(7, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;

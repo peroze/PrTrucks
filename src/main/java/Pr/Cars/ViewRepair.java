@@ -137,7 +137,7 @@ public class ViewRepair implements Initializable {
             }
         }
         else{
-            ObList.add(new StringsForTables("",""));
+            ObList.add(new StringsForTables("","","","","",""));
             Table.setSelectionModel(null);
         }
         Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
