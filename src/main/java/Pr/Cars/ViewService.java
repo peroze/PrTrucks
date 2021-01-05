@@ -67,7 +67,25 @@ public class ViewService implements Initializable {
     private TableColumn<StringsForTables, String> Changes;
 
     @FXML
+    private TableColumn<StringsForTables, String> ParCode_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> PartSupl_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Price_Column;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParRec_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParDat_Col;
+
+    @FXML
     private HBox Top_Bar;
+
+    @FXML
+    private TextField Receipt_Number;
 
     @FXML
     private ImageView Minimize_Button;
@@ -117,17 +135,29 @@ public class ViewService implements Initializable {
         Kilometers.setText(service.getKilometers());
         NextD.setText(service.getNextDate());
         Price.setText(service.getPrice()+" €");
-        String[] Ch=service.getChanges().split(Pattern.quote("|"));
-        for(int i=0;i<Ch.length;i++){
-            ObList.add(new StringsForTables(Ch[i]));
+        Receipt_Number.setText(service.getReceiptNum());
+        if (service.getChanges() != null) {
+            String[] Ch = service.getChanges().split(Pattern.quote("|"));
+            for (int i = 0; i < Ch.length; i++) {
+                String[] Ch1=Ch[i].split(Pattern.quote("~"));
+                ObList.add(new StringsForTables(Ch1[0],Ch1[1],Ch1[2],Ch1[3],Ch1[4],Ch1[5]));
+            }
         }
-        Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
-        if(ObList.isEmpty()){
+        else{
             ObList.add(new StringsForTables("",""));
             Table.setSelectionModel(null);
         }
+       /* String[] Ch=service.getChanges().split(Pattern.quote("|"));
+        for(int i=0;i<Ch.length;i++){
+            ObList.add(new StringsForTables(Ch[i]));
+        }*/
+        Changes.setCellValueFactory(new PropertyValueFactory<>("string"));
+        ParCode_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+        PartSupl_Col.setCellValueFactory(new PropertyValueFactory<>("string3"));
+        Price_Column.setCellValueFactory(new PropertyValueFactory<>("string4"));
+        ParRec_Col.setCellValueFactory(new PropertyValueFactory<>("string5"));
+        ParDat_Col.setCellValueFactory(new PropertyValueFactory<>("string6"));
         Table.setItems(ObList);
-
     }
 
     /**

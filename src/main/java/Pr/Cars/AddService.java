@@ -99,6 +99,42 @@ public class AddService implements Initializable {
     @FXML
     private Label KM_Label;
 
+    @FXML
+    private TextField Supplier_Text;
+
+    @FXML
+    private TextField Serial_Text;
+
+    @FXML
+    private TextField RepPrice_Text;
+
+    @FXML
+    private TextField RecNum_Text;
+
+    @FXML
+    private DatePicker DatePart;
+
+    @FXML
+    private TextField Receipt_Number;
+
+    @FXML
+    private Label Receipt_Number_Label;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParCode_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> PartSupl_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Price_Column;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParRec_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParDat_Col;
+
     private ObservableList<StringsForTables> Oblist;
 
     private boolean edit = false;
@@ -128,7 +164,7 @@ public class AddService implements Initializable {
         Labels=new ArrayList<>();
         toEdit = null;
         Oblist = FXCollections.observableArrayList();
-        Oblist.add(new StringsForTables(""));
+        Oblist.add(new StringsForTables("","","","","",""));
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -146,6 +182,11 @@ public class AddService implements Initializable {
             e.printStackTrace();
         }
         Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+        ParCode_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+        PartSupl_Col.setCellValueFactory(new PropertyValueFactory<>("string3"));
+        Price_Column.setCellValueFactory(new PropertyValueFactory<>("string4"));
+        ParRec_Col.setCellValueFactory(new PropertyValueFactory<>("string5"));
+        ParDat_Col.setCellValueFactory(new PropertyValueFactory<>("string6"));
         Lisc_Plate.setItems(Cars);
         Table.setRowFactory((tv -> {
             TableRow<StringsForTables> row = new TableRow<>();
@@ -171,14 +212,15 @@ public class AddService implements Initializable {
         Labels.add(Disc_Label);
         Labels.add(KM_Label);
         Labels.add(Workshop_Label);
-
         Labels.add(Price_Label);
+        Labels.add(Receipt_Number_Label);
         int Size = Labels.size();
         TFields = new ArrayList<>();
         TFields.add(Discreption);
         TFields.add(Kilometers);
         TFields.add(Workshop);
         TFields.add(Price);
+        TFields.add(Receipt_Number);
         for (int i = 0; i < Labels.size(); i++) {
             Texts.add(Labels.get(i).getText());
         }
@@ -196,7 +238,6 @@ public class AddService implements Initializable {
         }
         sql.Disconnect();
         ResetHideLabels();
-
     }
 
     public void setFocusTFIelds(MouseEvent e){
@@ -216,7 +257,6 @@ public class AddService implements Initializable {
                 Labels.get(i).setVisible(false);
             }
             else if(i!=0&&i!=1) {
-
                 if (TFields.get(i-2).getText().equals( "")) {
                     Labels.get(i).setVisible(false);
                 }
@@ -259,7 +299,7 @@ public class AddService implements Initializable {
             }
         }
         if(Oblist.isEmpty()){
-            Oblist.add(new StringsForTables(""));
+            Oblist.add(new StringsForTables("","","","","",""));
             placeboo=true;
         }
     }
@@ -275,9 +315,22 @@ public class AddService implements Initializable {
             Oblist.remove(0);
             placeboo=false;
         }
-        Oblist.add(new StringsForTables(AddPart.getText()));
-        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+        if(AddPart.getText().equals(null)){
+            return;
+        }
+        String DateTemp;
+        if(DatePart.getValue()==null){
+            DateTemp="";
+        }
+        else{
+            DateTemp=DatePart.getValue().toString();
+        }
+        Oblist.add(new StringsForTables(AddPart.getText(),Serial_Text.getText(),Supplier_Text.getText(),RepPrice_Text.getText(),RecNum_Text.getText(),DateTemp));
         AddPart.clear();
+        Serial_Text.clear();
+        Supplier_Text.clear();
+        RepPrice_Text.clear();
+        RecNum_Text.clear();
         Table.setItems(Oblist);
     }
 
@@ -313,13 +366,22 @@ public class AddService implements Initializable {
                 Disc_Label.setStyle("-fx-text-fill: RED");
                 Disc_Label.setText("Η Περιγραφή είναι κενή");
                 Disc_Label.setVisible(true);
+                flag=true;
                 Discreption.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Workshop.getText().equals("")) {
                 Workshop_Label.setStyle("-fx-text-fill: RED");
                 Workshop_Label.setText("Η Περιγραφή είναι κενή");
                 Workshop_Label.setVisible(true);
+                flag=true;
                 Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+            }
+            if(Receipt_Number.getText().equals("")){
+                Receipt_Number_Label.setStyle("-fx-text-fill: RED");
+                Receipt_Number_Label.setText("Η Περιγραφή είναι κενή");
+                Receipt_Number_Label.setVisible(true);
+                flag=true;
+                Receipt_Number_Label.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Price.getText().equals("")) {
                 Price_Label.setStyle("-fx-text-fill: RED");
@@ -347,15 +409,15 @@ public class AddService implements Initializable {
             }
             if (flag == true) {
                 if(placeboo==true){
-                    Oblist.add(new StringsForTables(""));
+                    Oblist.add(new StringsForTables("","","","","",""));
                 }
                 return;
             }
             Sql sql = new Sql();
             String Changes;
-            Changes = Oblist.get(0).getString();
+            Changes = Oblist.get(0).getString()+"~"+Oblist.get(0).getString2()+"~"+Oblist.get(0).getString3()+"~"+Oblist.get(0).getString4()+"~"+Oblist.get(0).getString5()+"~"+Oblist.get(0).getString6();
             for (int i = 1; i < Oblist.size(); i++) {
-                Changes = Changes + "|" + Oblist.get(i).getString();
+                Changes = Changes + "|" + Oblist.get(i).getString()+"~"+Oblist.get(i).getString2()+"~"+Oblist.get(i).getString3()+"~"+Oblist.get(i).getString4()+"~"+Oblist.get(i).getString5()+"~"+Oblist.get(i).getString6();
             }
             int prKm=sql.Query_Specific_LastServiceKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
             if ((prKm > Integer.valueOf(Kilometers.getText()))&&edit==false)
@@ -394,7 +456,7 @@ public class AddService implements Initializable {
             int Nextkm = rs.getInt("ServiceInKm");
             int i;
             if (edit == false) {
-                ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText());
+                ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText(),Receipt_Number.getText());
                 i = sql.InsertService(toAdd, false);
             } else {
                 toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
@@ -406,6 +468,7 @@ public class AddService implements Initializable {
                 toEdit.setChanges(Changes);
                 toEdit.setNextKilometers(String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm));
                 toEdit.setNextDate(Date.getValue().plusYears(1).toString());
+                toEdit.setReceiptNum(Receipt_Number.getText());
                 i = sql.InsertService(toEdit, true);
             }
             if (i == 1) {
@@ -449,6 +512,9 @@ public class AddService implements Initializable {
 
     public void edit(ModelService s) {
         edit = true;
+        if(placeboo==true){
+            Oblist.remove(0);
+        }
         Workshop.setText(s.getWorkshop());
         Price.setText(s.getPrice());
         Discreption.setText(s.getType());
@@ -457,10 +523,14 @@ public class AddService implements Initializable {
         Date.setValue(dat);
         Lisc_Plate.setValue(s.getLiscPlate());
         Kilometers.setText(s.getKilometers());
+        Receipt_Number.setText(s.getReceiptNum());
         if (s.getChanges() != null) {
             String[] Ch = s.getChanges().split(Pattern.quote("|"));
+            System.out.println(Ch[0]);
             for (int i = 0; i < Ch.length; i++) {
-                Oblist.add(new StringsForTables(Ch[i]));
+                String[] Ch1=Ch[i].split(Pattern.quote("~"));
+                System.out.println(Ch1);
+                Oblist.add(new StringsForTables(Ch1[0],Ch1[1],Ch1[2],Ch1[3],Ch1[4],Ch1[5]));
             }
             Table.setItems(Oblist);
         }

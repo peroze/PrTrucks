@@ -8,7 +8,7 @@ package Pr.Cars;
  */
 public class ModelService {
 
-    private String LiscPlate,Date,Kilometers,Type,Changes,Workshop,NextDate,NextKilometers,Price,id;
+    private String LiscPlate,Date,Kilometers,Type,Changes,Workshop,NextDate,NextKilometers,Price,id,ReceiptNum;
 
     /**
      * The constractor of the Service with ID
@@ -22,7 +22,7 @@ public class ModelService {
      * @param nextKilometers The total kilometers
      * @param price The total price of the Service
      */
-    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price) {
+    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String receiptNum) {
         LiscPlate = liscPlate;
         Date = date;
         Kilometers = kilometers;
@@ -32,6 +32,7 @@ public class ModelService {
         NextDate = nextDate;
         NextKilometers = nextKilometers;
         Price = price;
+        ReceiptNum=receiptNum;
     }
 
     /**
@@ -47,7 +48,7 @@ public class ModelService {
      * @param price
      * @param id
      */
-    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String id) {
+    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String id,String receiptNum) {
         LiscPlate = liscPlate;
         Date = date;
         Kilometers = kilometers;
@@ -58,6 +59,15 @@ public class ModelService {
         NextKilometers = nextKilometers;
         Price = price;
         this.id = id;
+        ReceiptNum=receiptNum;
+    }
+
+    public String getReceiptNum() {
+        return ReceiptNum;
+    }
+
+    public void setReceiptNum(String receiptNum) {
+        ReceiptNum = receiptNum;
     }
 
     /**

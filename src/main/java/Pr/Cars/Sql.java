@@ -505,7 +505,7 @@ public class Sql {
      * @return The Latest Service of each car
      */
     public ResultSet Query_Group_Service() {
-        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id From Service Group BY id";
+        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id,Receipt_Number From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -1042,11 +1042,12 @@ public class Sql {
         repair.add(a.getNextDate());
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
+        repair.add(a.getReceiptNum());
         String sql;
         if (edit == false) {
-            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price) VALUES (?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number) VALUES (?,?,?,?,?,?,?,?,?,?)";
         } else {
-            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         }
         try {
@@ -1060,8 +1061,9 @@ public class Sql {
             pstmt.setString(7, repair.get(5));
             pstmt.setString(8, repair.get(6));
             pstmt.setInt(9, Integer.valueOf(repair.get(7)));
+            pstmt.setString(10,repair.get(8));
             if (edit == true) {
-                pstmt.setInt(10, Integer.valueOf(a.getId()));
+                pstmt.setInt(11, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;

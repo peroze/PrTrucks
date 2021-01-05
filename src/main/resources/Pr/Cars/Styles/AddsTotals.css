@@ -65,6 +65,7 @@
     -fx-border-width: 2px;
     -fx-background-radius: 5em;
     -fx-border-radius: 5em;
+    -fx-text-fill: white;
 }
 
 .button:hover{
@@ -80,7 +81,16 @@
     -fx-background-color:  #383838;
 }
 
+.radio-button .radio{
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 360;
+}
 
+
+.radio-button:selected .radio .dot{
+    -fx-background-color: #FA8072;
+}
 
 .combo-box {
     -fx-background-color: transparent;

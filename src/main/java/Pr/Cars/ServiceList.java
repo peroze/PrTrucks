@@ -105,7 +105,7 @@ public class ServiceList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -228,7 +228,7 @@ public class ServiceList implements Initializable {
                 RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 580));
+            primaryStage.setScene(new Scene(root, 600, 741));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -530,9 +530,9 @@ public class ServiceList implements Initializable {
         try {
             while (rs.next()) {
                 if (rs1 == null) {
-                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
                 } else {
-                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id")));
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
                 }
             }
         } catch (SQLException e) {

@@ -30,23 +30,23 @@
          <font>
             <Font size="9.0" />
          </font></Label>
-      <TextField fx:id="Date" editable="false" layoutX="495.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
-      <TextField fx:id="Kilometers" editable="false" layoutX="495.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
-      <TextField fx:id="NextD" editable="false" layoutX="495.0" layoutY="194.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (ΗΜ)" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="497.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Ημερομινία" textFill="#fcfcfc">
+      <TextField fx:id="Date" editable="false" layoutX="423.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Kilometers" editable="false" layoutX="423.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="NextD" editable="false" layoutX="423.0" layoutY="197.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (ΗΜ)" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Ημερομινία" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="497.0" layoutY="125.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="497.0" layoutY="180.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Επόμενο (ΗΜ)" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="183.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Επόμενο (ΗΜ)" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <TextField fx:id="Price" editable="false" layoutX="495.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="497.0" layoutY="229.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή" textFill="#fcfcfc">
+      <TextField fx:id="Price" editable="false" layoutX="423.0" layoutY="246.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="425.0" layoutY="232.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
@@ -60,13 +60,18 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Button fx:id="Ok" layoutX="307.0" layoutY="603.0" mnemonicParsing="false" onAction="#Ok_Button_Pressed" prefHeight="29.0" prefWidth="96.0" text="Επιστροφή">
+      <Button fx:id="Ok" layoutX="307.0" layoutY="603.0" mnemonicParsing="false" onAction="#Ok_Button_Pressed" prefHeight="29.0" prefWidth="96.0" text="Επιστροφή" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <TableView fx:id="Table" layoutX="218.0" layoutY="326.0" prefHeight="255.0" prefWidth="272.0">
+      <TableView fx:id="Table" layoutX="88.0" layoutY="336.0" prefHeight="255.0" prefWidth="535.0">
         <columns>
-          <TableColumn fx:id="Changes" prefWidth="271.0" text="Αλλάγες" />
+          <TableColumn fx:id="Changes" prefWidth="99.0" text="Αλλάγες" />
+            <TableColumn fx:id="ParCode_Col" prefWidth="100.0" text="Κωδικός" />
+            <TableColumn fx:id="PartSupl_Col" prefWidth="132.0" text="Προμυθευτής" />
+            <TableColumn fx:id="Price_Column" prefWidth="54.0" text="Τιμή" />
+            <TableColumn fx:id="ParRec_Col" prefWidth="66.0" text="Αρ. Αποδ" />
+            <TableColumn fx:id="ParDat_Col" prefWidth="81.0" text="Ημερομηνία" />
         </columns>
       </TableView>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
@@ -95,5 +100,11 @@
             </ImageView>
          </children>
       </HBox>
+      <TextField fx:id="Receipt_Number" editable="false" layoutX="113.0" layoutY="298.0" prefHeight="25.0" prefWidth="185.0" promptText="Αριθμός Απόδειξης" />
+      <Label layoutX="114.0" layoutY="284.0" prefHeight="17.0" prefWidth="89.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Απόδειξης" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

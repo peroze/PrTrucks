@@ -68,6 +68,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("EmmisionCardList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -88,6 +89,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("KTEOList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -108,6 +110,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("ServiceList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -129,6 +132,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("RepairList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -144,6 +148,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("RefillList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -164,6 +169,7 @@ public class Drawer {
             changeBg();
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("TrucksList.fxml"));
+                new BounceInLeft(root).play();
                 Panel.setCenter(root);
 
             } catch (IOException e) {
