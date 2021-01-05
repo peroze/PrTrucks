@@ -12,14 +12,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,13 +77,13 @@ public class InternalPhoneList implements Initializable {
 
     @FXML
     void Import_Button_Pressed(MouseEvent event) {
-       /* Stage primaryStage = new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddRepair.fxml"));
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("AddInternalPhoneList.fxml"));
         try {
             Parent root = fxmlloader.load();
             if (edit == true) {
                 edit = false;
-              //  fxmlloader.<AddRepair>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
+                fxmlloader.<AddInternalPhoneList>getController().edit(Truck_Table.getSelectionModel().getSelectedItem());
             }
             primaryStage.setOnHidden(e -> {
                 RenewTable(null);
@@ -88,7 +92,7 @@ public class InternalPhoneList implements Initializable {
                 RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 580));
+            primaryStage.setScene(new Scene(root, 600, 375));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -98,7 +102,7 @@ public class InternalPhoneList implements Initializable {
             //new FadeIn(root2).play();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
 
@@ -305,8 +309,8 @@ public class InternalPhoneList implements Initializable {
     public void SearchByLisc(String Disc){
         Sql  sql=new Sql();
         ResultSet rs=sql.Query_Specific_Internal_Phone_List(Disc);
-        sql.Disconnect();
         RenewTable(rs);
+        sql.Disconnect();
     }
 
     public void RenewTable(ResultSet rs1) {

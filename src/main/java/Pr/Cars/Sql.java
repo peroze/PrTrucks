@@ -762,7 +762,7 @@ public class Sql {
             if (Location == null && Type != null) {
                 sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Trucks.Type=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Type);
@@ -770,7 +770,7 @@ public class Sql {
 
                 sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Location=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
 
                 }
                 pstm = conn.prepareStatement(sql);
@@ -778,7 +778,7 @@ public class Sql {
             } else {
                 sql = "SELECT  * FROM " + Table + " ,Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Type=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);

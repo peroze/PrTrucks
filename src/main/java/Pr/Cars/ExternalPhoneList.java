@@ -314,8 +314,8 @@ public class ExternalPhoneList implements Initializable {
     public void SearchByLisc(String Disc){
         Sql  sql=new Sql();
         ResultSet rs=sql.Query_Specific_External_Phone_List(Disc);
-        sql.Disconnect();
         RenewTable(rs);
+        sql.Disconnect();
     }
 
     public void RenewTable(ResultSet rs1) {

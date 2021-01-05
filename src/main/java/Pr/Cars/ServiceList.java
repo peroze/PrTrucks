@@ -505,8 +505,8 @@ public class ServiceList implements Initializable {
     public void SearchByLisc(String Lisc) {
         Sql sql = new Sql();
         ResultSet rs = sql.Query_Specific_With_Lisc(Lisc, "Service");
-        sql.Disconnect();
         RenewTable(rs);
+        sql.Disconnect();
     }
 
 
@@ -518,9 +518,7 @@ public class ServiceList implements Initializable {
     public void RenewTable(ResultSet rs1) {
         ResultSet rs = null;
         Sql db = new Sql();
-
         if (rs1 == null) {
-
             Oblist = FXCollections.observableArrayList();
             rs = db.Query_Group_Service();
         } else {

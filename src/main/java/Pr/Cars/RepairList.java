@@ -342,8 +342,8 @@ public class RepairList implements Initializable {
     public void SearchByLisc(String Lisc){
         Sql  sql=new Sql();
         ResultSet rs=sql.Query_Specific_With_Lisc(Lisc,"Repairs");
-        sql.Disconnect();
         RenewTable(rs);
+        sql.Disconnect();
     }
 
     public void RenewTable(ResultSet rs1) {

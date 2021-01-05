@@ -244,6 +244,7 @@ public class ExternalCarsList implements Initializable {
         Sql  sql=new Sql();
         ResultSet rs=sql.Query_Specific_ExternalByLisc(Lisc);
         RenewTable(rs);
+        sql.Disconnect();
     }
 
     /**
