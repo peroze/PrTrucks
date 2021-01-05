@@ -378,14 +378,14 @@ public class AddService implements Initializable {
             }
             if(Receipt_Number.getText().equals("")){
                 Receipt_Number_Label.setStyle("-fx-text-fill: RED");
-                Receipt_Number_Label.setText("Η Περιγραφή είναι κενή");
+                Receipt_Number_Label.setText("Ο Αριθμός Απόδηξεις είναι κενή");
                 Receipt_Number_Label.setVisible(true);
                 flag=true;
-                Receipt_Number_Label.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+                Receipt_Number.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
             }
             if (Price.getText().equals("")) {
                 Price_Label.setStyle("-fx-text-fill: RED");
-                Price_Label.setText("Η Περιγραφή είναι κενή");
+                Price_Label.setText("Η Τιμή είναι κενή");
                 Price_Label.setVisible(true);
                 flag = true;
                 Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");

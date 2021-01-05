@@ -884,11 +884,12 @@ public class Sql {
         repair.add(a.getDate());
         repair.add(a.getChanges());
         repair.add(a.getPrice());
+        repair.add(a.getReceipt_Number());
         String sql;
         if (edit == false) {
-            sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price) VALUES (?,?,?,?,?,?,?)";
+            sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number) VALUES (?,?,?,?,?,?,?,?)";
         } else {
-            sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Repair_Id) VALUES (?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number,Repair_Id) VALUES (?,?,?,?,?,?,?,?,?)";
         }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -899,8 +900,9 @@ public class Sql {
             pstmt.setString(5, repair.get(4));
             pstmt.setString(6, repair.get(2));
             pstmt.setInt(7, Integer.valueOf(repair.get(5)));
+            pstmt.setString(8,repair.get(6));
             if (edit == true) {
-                pstmt.setInt(8, Integer.valueOf(a.getId()));
+                pstmt.setInt(9, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;

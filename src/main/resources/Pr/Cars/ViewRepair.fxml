@@ -49,9 +49,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <TableView fx:id="Table" layoutX="218.0" layoutY="289.0" prefHeight="255.0" prefWidth="272.0">
+      <TableView fx:id="Table" layoutX="87.0" layoutY="289.0" prefHeight="255.0" prefWidth="535.0">
         <columns>
-          <TableColumn fx:id="Changes" prefWidth="271.0" text="Αλλάγες" />
+          <TableColumn fx:id="Changes" prefWidth="94.0" text="Περιγραφή" />
+            <TableColumn fx:id="ParCode_Col" prefWidth="103.0" text="Κωδικός" />
+            <TableColumn fx:id="PartSupl_Col" prefWidth="130.0" text="Προμυθευτής" />
+            <TableColumn fx:id="Price_Column" prefWidth="56.0" text="Τιμή" />
+            <TableColumn fx:id="ParRec_Col" prefWidth="68.0" text="Αρ. Αποδ" />
+            <TableColumn fx:id="ParDat_Col" text="Ημερομηνία" />
         </columns>
       </TableView>
       <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
@@ -80,5 +85,11 @@
             </ImageView>
          </children>
       </HBox>
+      <TextField fx:id="Receipt_Number" editable="false" layoutX="490.0" layoutY="194.0" prefHeight="25.0" prefWidth="185.0" promptText="Αριθμός Απόδειξης" />
+      <Label layoutX="491.0" layoutY="184.0" prefHeight="17.0" prefWidth="89.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Απόδειξης" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

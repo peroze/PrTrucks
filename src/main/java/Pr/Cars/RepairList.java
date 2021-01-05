@@ -61,10 +61,6 @@ public class RepairList implements Initializable {
     @FXML
     private TableColumn<ModelRepair, String> KM_Column;
 
-
-
-
-
     @FXML
     private ImageView Import_Button;
 
@@ -73,6 +69,8 @@ public class RepairList implements Initializable {
 
     @FXML
     private Label Search_icon;
+
+
 
     private ObservableList<ModelRepair> Oblist;
 
@@ -96,7 +94,7 @@ public class RepairList implements Initializable {
                 RenewTable(null);
             });
             primaryStage.setTitle("PrTrucks");
-            primaryStage.setScene(new Scene(root, 600, 580));
+            primaryStage.setScene(new Scene(root, 600, 741));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
             //fxmlloader.<Drawer>getController().setParent(this);
@@ -213,7 +211,7 @@ public class RepairList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id")) );
+                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id"),rs.getString("Receipt_Number")) );
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -358,7 +356,7 @@ public class RepairList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id")) );
+                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id"),rs.getString("Receipt_Number")) );
             }
         } catch (SQLException e) {
             e.printStackTrace();

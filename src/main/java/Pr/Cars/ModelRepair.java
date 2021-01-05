@@ -12,6 +12,7 @@ public class ModelRepair {
     private String Workshop;
     private String Changes;
     private String id;
+    private String Receipt_Number;
 
     /**
      * This is the constructor without id
@@ -23,7 +24,7 @@ public class ModelRepair {
      * @param workshop The Workshop that the repair took place
      * @param changes The changes that have been made
      */
-    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes) {
+    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number) {
         LiscPlate = liscPlate;
         Price = price;
         Kilometers = kilometers;
@@ -31,6 +32,7 @@ public class ModelRepair {
         Discreption = discreption;
         Workshop = workshop;
         Changes = changes;
+        Receipt_Number=receipt_Number;
     }
 
     /**
@@ -44,7 +46,7 @@ public class ModelRepair {
      * @param changes The changes that have been made
      * @param Id The unique ID of the repair
      */
-    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes, String Id) {
+    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number, String Id) {
         LiscPlate = liscPlate;
         Price = price;
         Kilometers = kilometers;
@@ -53,6 +55,7 @@ public class ModelRepair {
         Workshop = workshop;
         Changes = changes;
         id = Id;
+        Receipt_Number=receipt_Number;
     }
 
     /**
@@ -187,5 +190,13 @@ public class ModelRepair {
      */
     public void setChanges(String changes) {
         Changes = changes;
+    }
+
+    public String getReceipt_Number() {
+        return Receipt_Number;
+    }
+
+    public void setReceipt_Number(String receipt_Number) {
+        Receipt_Number = receipt_Number;
     }
 }

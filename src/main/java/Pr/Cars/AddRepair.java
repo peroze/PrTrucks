@@ -103,6 +103,43 @@ public class AddRepair implements Initializable {
     @FXML
     private Label KM_Label;
 
+    @FXML
+    private TextField Receipt_Number;
+
+    @FXML
+    private Label Receipt_Number_Label;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParCode_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> PartSupl_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> Price_Column;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParRec_Col;
+
+    @FXML
+    private TableColumn<StringsForTables, String> ParDat_Col;
+
+    @FXML
+    private TextField Supplier_Text;
+
+    @FXML
+    private TextField Serial_Text;
+
+    @FXML
+    private TextField RepPrice_Text;
+
+    @FXML
+    private TextField RecNum_Text;
+
+    @FXML
+    private DatePicker DatePart;
+
+
     private ObservableList<StringsForTables> Oblist;
 
     private boolean edit = false;
@@ -150,6 +187,11 @@ public class AddRepair implements Initializable {
             placeboo=true;
             Lisc_Plate.setItems(Cars);
             Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+            ParCode_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+            PartSupl_Col.setCellValueFactory(new PropertyValueFactory<>("string3"));
+            Price_Column.setCellValueFactory(new PropertyValueFactory<>("string4"));
+            ParRec_Col.setCellValueFactory(new PropertyValueFactory<>("string5"));
+            ParDat_Col.setCellValueFactory(new PropertyValueFactory<>("string6"));
             Table.setRowFactory((tv -> {
                 TableRow<StringsForTables> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
@@ -176,12 +218,14 @@ public class AddRepair implements Initializable {
             Labels.add(KM_Label);
             Labels.add(Workshop_Label);
             Labels.add(Price_Label);
+            Labels.add(Receipt_Number_Label);
             int Size = Labels.size();
             TFields = new ArrayList<>();
             TFields.add(Discreption);
             TFields.add(Kilometers);
             TFields.add(Workshop);
             TFields.add(Price);
+            TFields.add(Receipt_Number);
             for (int i = 0; i < Labels.size(); i++) {
                 Texts.add(Labels.get(i).getText());
             }
@@ -281,9 +325,22 @@ public class AddRepair implements Initializable {
             Oblist.remove(0);
             placeboo=false;
         }
-        Oblist.add(new StringsForTables(AddPart.getText()));
-        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+        if(AddPart.getText().equals(null)){
+            return;
+        }
+        String DateTemp;
+        if(DatePart.getValue()==null){
+            DateTemp="";
+        }
+        else{
+            DateTemp=DatePart.getValue().toString();
+        }
+        Oblist.add(new StringsForTables(AddPart.getText(),Serial_Text.getText(),Supplier_Text.getText(),RepPrice_Text.getText(),RecNum_Text.getText(),DateTemp));
         AddPart.clear();
+        Serial_Text.clear();
+        Supplier_Text.clear();
+        RepPrice_Text.clear();
+        RecNum_Text.clear();
         Table.setItems(Oblist);
     }
 
@@ -327,10 +384,17 @@ public class AddRepair implements Initializable {
         }
         if (Price.getText().equals("")) {
             Price_Label.setStyle("-fx-text-fill: RED");
-            Price_Label.setText("Η Περιγραφή είναι κενή");
+            Price_Label.setText("Η τιμή είναι κενή");
             Price_Label.setVisible(true);
             flag = true;
             Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        if(Receipt_Number.getText().equals("")){
+            Receipt_Number_Label.setStyle("-fx-text-fill: RED");
+            Receipt_Number_Label.setText("Ο Αριθμός Απόδηξεις είναι κενή");
+            Receipt_Number_Label.setVisible(true);
+            flag=true;
+            Receipt_Number.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
         try {
             Double.valueOf(Price.getText());
@@ -357,9 +421,9 @@ public class AddRepair implements Initializable {
         }
         Sql sql = new Sql();
         String Changes;
-        Changes = Oblist.get(0).getString();
+        Changes = Oblist.get(0).getString()+"~"+Oblist.get(0).getString2()+"~"+Oblist.get(0).getString3()+"~"+Oblist.get(0).getString4()+"~"+Oblist.get(0).getString5()+"~"+Oblist.get(0).getString6();
         for (int i = 1; i < Oblist.size(); i++) {
-            Changes = Changes + "|" + Oblist.get(i).getString();
+            Changes = Changes + "|" + Oblist.get(i).getString()+"~"+Oblist.get(i).getString2()+"~"+Oblist.get(i).getString3()+"~"+Oblist.get(i).getString4()+"~"+Oblist.get(i).getString5()+"~"+Oblist.get(i).getString6();
         }
         try {
             int prKm = sql.Query_Specific_LastRepairKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
@@ -399,7 +463,7 @@ public class AddRepair implements Initializable {
         }
         int i;
         if (edit == false) {
-            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes);
+            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes,Receipt_Number.getText());
             i = sql.InsertRepair(toAdd, false);
         } else {
             toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
@@ -409,6 +473,7 @@ public class AddRepair implements Initializable {
             toEdit.setKilometers(Kilometers.getText());
             toEdit.setDiscreption(Discreption.getText());
             toEdit.setChanges(Changes);
+            toEdit.setReceipt_Number(Receipt_Number.getText());
             i = sql.InsertRepair(toEdit, true);
         }
         if (i == 1) {
@@ -453,10 +518,14 @@ public class AddRepair implements Initializable {
         Date.setValue(dat);
         Lisc_Plate.setValue(s.getLiscPlate());
         Kilometers.setText(s.getKilometers());
+        Receipt_Number.setText(s.getReceipt_Number());
         if (s.getChanges() != null) {
             String[] Ch = s.getChanges().split(Pattern.quote("|"));
+            System.out.println(Ch[0]);
             for (int i = 0; i < Ch.length; i++) {
-                Oblist.add(new StringsForTables(Ch[i]));
+                String[] Ch1=Ch[i].split(Pattern.quote("~"));
+                System.out.println(Ch1);
+                Oblist.add(new StringsForTables(Ch1[0],Ch1[1],Ch1[2],Ch1[3],Ch1[4],Ch1[5]));
             }
             Table.setItems(Oblist);
         }
