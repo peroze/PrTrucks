@@ -9,8 +9,8 @@
    <top>
       <HBox prefHeight="36.0" prefWidth="864.0" style="-fx-background-color: #000013;" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton fx:id="Partners" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Partners_Button_Pressed" prefHeight="36.0" prefWidth="147.0" text="Εξωτερικοί Συνεργάτες" textFill="#fcf7f7" />
             <MenuButton fx:id="Employers" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Employers_Button_Pressed" prefHeight="36.0" prefWidth="82.0" text="Υπάλληλοι" textFill="#fcf7f7" />
+            <MenuButton fx:id="Partners" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#Partners_Button_Pressed" prefHeight="36.0" prefWidth="147.0" text="Εξωτερικοί Συνεργάτες" textFill="#fcf7f7" />
             <MenuButton fx:id="Transfer" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="90.0" text="Μεταφορικές" textFill="#fcf7f7">
                <items>
                   <MenuItem fx:id="Totals_Button" mnemonicParsing="false" onAction="#Totals_Button_Pressed" text="Εταιρίες Μεταφοράς" />
