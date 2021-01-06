@@ -182,7 +182,10 @@ public class AddCompany implements Initializable {
         for(int i=0;i<Labels.size();i++){
             Labels.get(i).setText(Texts.get(i));
             Labels.get(i).setStyle("-fx-text-fill:#FA8072");
-            if (TFields.get(i).getText().equals("")) {
+            if(TFields.get(i).getText()==null){
+                Labels.get(i).setVisible(false);
+            }
+            else if (TFields.get(i).getText().equals("")) {
                 Labels.get(i).setVisible(false);
             } else{
                     Labels.get(i).setVisible(true);

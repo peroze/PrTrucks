@@ -158,7 +158,10 @@ public class AddRefill implements Initializable {
             } else if (i == 1 && Date.getValue() == null) {
                 Labels.get(i).setVisible(false);
             } else if (i != 0 && i != 1) {
-                if (TFields.get(i - 2).getText().equals("")) {
+                if(TFields.get(i-2).getText()==null){
+                    Labels.get(i).setVisible(false);
+                }
+                else if (TFields.get(i - 2).getText().equals("")) {
                     Labels.get(i).setVisible(false);
                 } else {
                     Labels.get(i).setVisible(true);

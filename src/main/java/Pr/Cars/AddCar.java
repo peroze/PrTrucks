@@ -345,7 +345,10 @@ public class AddCar implements Initializable {
                 } else if (i == 10) {
                     k = 5;
                 }
-                if (TFields.get(k).getText().equals("")) {
+                if(TFields.get(k).getText()==null){
+                    Labels.get(i).setVisible(false);
+                }
+                else if (TFields.get(k).getText().equals("")) {
                     Labels.get(i).setVisible(false);
                 } else {
                     Labels.get(i).setVisible(true);

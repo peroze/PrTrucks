@@ -126,6 +126,7 @@ public class AddEmmisionCard implements Initializable {
             Labels.get(i).setText(Texts.get(i));
             Labels.get(i).setStyle("-fx-text-fill:#FA8072");
         }
+
             if (Kilometers.getText().equals("")) {
                 Labels.get(1).setVisible(false);
             } else{
