@@ -254,17 +254,17 @@ public class ExternalPhoneList implements Initializable {
     void DoubleClickTable() {
         ModelExternalPhoneList temp = Truck_Table.getSelectionModel().getSelectedItem();
         Stage primaryStage = new Stage();
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewRepair.fxml"));
-       /* try {
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewExternalPhone.fxml"));
+        try {
             Parent root = fxmlloader.load();
-            fxmlloader.<ViewRepair>getController().setService(temp);
+            fxmlloader.<ViewExternalPhone>getController().setService(temp);
             primaryStage.setTitle("PrTrucks");
             primaryStage.setScene(new Scene(root, 708, 646));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML

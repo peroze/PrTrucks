@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="708.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.ViewExternalPhone">
+   <children>
+      <TextField fx:id="Name" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Όνομα" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Phone" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Τηλέφωνο" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Type" editable="false" layoutX="113.0" layoutY="193.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος Συνεργάτη" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="115.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Όνομα" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label layoutX="115.0" layoutY="129.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τηλέφωνο" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label layoutX="115.0" layoutY="179.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Τύπος Συνεργάτη" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <TextField fx:id="Address" editable="false" layoutX="423.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Διεύθυνση" stylesheets="@Styles/AddsTotals.css" />
+      <TextField fx:id="Email" editable="false" layoutX="423.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Email" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Διεύθυνση" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Email" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label layoutX="208.0" layoutY="36.0" prefHeight="39.0" prefWidth="295.0" text="Εξωτερικός Συνεργάτης" textFill="WHITE">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="Ok" layoutX="307.0" layoutY="603.0" mnemonicParsing="false" onAction="#Ok_Button_Pressed" prefHeight="29.0" prefWidth="96.0" text="Επιστροφή" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TableView fx:id="Table" layoutX="88.0" layoutY="255.0" prefHeight="255.0" prefWidth="535.0">
+        <columns>
+          <TableColumn fx:id="Note" prefWidth="534.0" text="Σημείωση" />
+        </columns>
+      </TableView>
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
+         <children>
+            <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
+               <image>
+                  <Image url="@Images/windows-minimize-icon-26.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets right="3.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="X_Button" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#X_Button_Pressed">
+               <image>
+                  <Image url="@Images/windows-minimize-icon-25.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets right="3.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
