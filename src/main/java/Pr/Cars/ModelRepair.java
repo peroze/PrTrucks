@@ -13,6 +13,7 @@ public class ModelRepair {
     private String Changes;
     private String id;
     private String Receipt_Number;
+    private String WorkPrice;
 
     /**
      * This is the constructor without id
@@ -24,7 +25,7 @@ public class ModelRepair {
      * @param workshop The Workshop that the repair took place
      * @param changes The changes that have been made
      */
-    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number) {
+    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number,String workPrice) {
         LiscPlate = liscPlate;
         Price = price;
         Kilometers = kilometers;
@@ -33,6 +34,7 @@ public class ModelRepair {
         Workshop = workshop;
         Changes = changes;
         Receipt_Number=receipt_Number;
+        WorkPrice=workPrice;
     }
 
     /**
@@ -46,7 +48,7 @@ public class ModelRepair {
      * @param changes The changes that have been made
      * @param Id The unique ID of the repair
      */
-    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number, String Id) {
+    public ModelRepair(String liscPlate, String price, String kilometers, String date, String discreption, String workshop, String changes,String receipt_Number,String workPrice,String Id) {
         LiscPlate = liscPlate;
         Price = price;
         Kilometers = kilometers;
@@ -56,6 +58,7 @@ public class ModelRepair {
         Changes = changes;
         id = Id;
         Receipt_Number=receipt_Number;
+        WorkPrice=workPrice;
     }
 
     /**
@@ -198,5 +201,13 @@ public class ModelRepair {
 
     public void setReceipt_Number(String receipt_Number) {
         Receipt_Number = receipt_Number;
+    }
+
+    public String getWorkPrice() {
+        return WorkPrice;
+    }
+
+    public void setWorkPrice(String workPrice) {
+        WorkPrice = workPrice;
     }
 }

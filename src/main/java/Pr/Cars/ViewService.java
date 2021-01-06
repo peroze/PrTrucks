@@ -82,6 +82,9 @@ public class ViewService implements Initializable {
     private TableColumn<StringsForTables, String> ParDat_Col;
 
     @FXML
+    private TextField Price1;
+
+    @FXML
     private HBox Top_Bar;
 
     @FXML
@@ -135,6 +138,7 @@ public class ViewService implements Initializable {
         Kilometers.setText(service.getKilometers());
         NextD.setText(service.getNextDate());
         Price.setText(service.getPrice()+" €");
+        Price1.setText(service.getWorkPrice()+" €");
         Receipt_Number.setText(service.getReceiptNum());
         if (service.getChanges() != null) {
             String[] Ch = service.getChanges().split(Pattern.quote("|"));

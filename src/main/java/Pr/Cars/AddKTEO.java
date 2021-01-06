@@ -238,6 +238,7 @@ public class AddKTEO implements Initializable {
                 check = true;
                 break;
             }
+            i++;
         }
         if(Oblist.isEmpty()){
             placeboo=true;

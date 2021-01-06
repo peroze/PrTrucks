@@ -101,7 +101,6 @@ public class LitersTotal implements Initializable {
     @FXML
     void Show_Button_Pr(ActionEvent event) {
         try {
-
             boolean flag1=false;
             Distance.setStyle(null);
             Dist_Label.setVisible(false);

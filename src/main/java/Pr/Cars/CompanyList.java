@@ -86,6 +86,7 @@ public class CompanyList implements Initializable {
                 Oblist.add(new ModelCompany( rs.getString("id"),rs.getString("Name"), rs.getString("Phone"),rs.getString("Prices")));
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         Id_Column.setCellValueFactory(new PropertyValueFactory<>("id"));

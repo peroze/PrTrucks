@@ -80,6 +80,9 @@ public class ViewRepair implements Initializable {
     private TextField Receipt_Number;
 
     @FXML
+    private TextField Price1;
+
+    @FXML
     private HBox Top_Bar;
 
     @FXML
@@ -128,6 +131,7 @@ public class ViewRepair implements Initializable {
         Date.setText(repair.getDate());
         Kilometers.setText(repair.getKilometers());
         Price.setText(repair.getPrice()+" €");
+        Price1.setText(repair.getWorkPrice()+" €");
         Receipt_Number.setText(repair.getReceipt_Number());
         if (repair.getChanges() != null) {
             String[] Ch = repair.getChanges().split(Pattern.quote("|"));

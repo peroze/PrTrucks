@@ -91,6 +91,7 @@ public class RefillList implements Initializable {
                 Oblist.add(new ModelRefill(db.GetLisxxFromId(rs.getString("Car_id")), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Amount"), String.valueOf(rs.getInt("Id")), rs.getString("Location"), rs.getString("Driver"), rs.getString("Consumption"), rs.getString("Cost")));
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         LisancePlate_Column.setCellValueFactory(new PropertyValueFactory<>("LiscPlate"));
@@ -218,6 +219,7 @@ public class RefillList implements Initializable {
 
             }
         } catch (SQLException e) {
+            sql.Disconnect();
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
             alert2.setTitle("Αποτυχία");
             alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");

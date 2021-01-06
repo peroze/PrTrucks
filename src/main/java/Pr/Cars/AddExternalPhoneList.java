@@ -214,6 +214,7 @@ public class AddExternalPhoneList implements Initializable {
                 check = true;
                 break;
             }
+            i++;
         }
         if(Oblist.isEmpty()){
             Oblist.add(new StringsForTables("","","","","",""));

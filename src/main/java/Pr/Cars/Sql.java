@@ -505,7 +505,7 @@ public class Sql {
      * @return The Latest Service of each car
      */
     public ResultSet Query_Group_Service() {
-        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id,Receipt_Number From Service Group BY id";
+        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id,Receipt_Number,WorkPrice From Service Group BY id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -762,7 +762,7 @@ public class Sql {
             if (Location == null && Type != null) {
                 sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Trucks.Type=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Type);
@@ -770,7 +770,7 @@ public class Sql {
 
                 sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Location=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
 
                 }
                 pstm = conn.prepareStatement(sql);
@@ -778,7 +778,7 @@ public class Sql {
             } else {
                 sql = "SELECT  * FROM " + Table + " ,Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Type=?";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);
@@ -885,11 +885,12 @@ public class Sql {
         repair.add(a.getChanges());
         repair.add(a.getPrice());
         repair.add(a.getReceipt_Number());
+        repair.add(a.getWorkPrice());
         String sql;
         if (edit == false) {
-            sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number) VALUES (?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number,WorkPrice) VALUES (?,?,?,?,?,?,?,?,?)";
         } else {
-            sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number,Repair_Id) VALUES (?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Repairs(id,Discreption,Kilometers,Date,Changes,Workshop,Price,Receipt_Number,WorkPrice,Repair_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
         }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -901,8 +902,9 @@ public class Sql {
             pstmt.setString(6, repair.get(2));
             pstmt.setInt(7, Integer.valueOf(repair.get(5)));
             pstmt.setString(8,repair.get(6));
+            pstmt.setInt(9,Integer.valueOf(repair.get(7)));
             if (edit == true) {
-                pstmt.setInt(9, Integer.valueOf(a.getId()));
+                pstmt.setInt(10, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -1045,11 +1047,12 @@ public class Sql {
         repair.add(a.getNextKilometers());
         repair.add(a.getPrice());
         repair.add(a.getReceiptNum());
+        repair.add(a.getWorkPrice());
         String sql;
         if (edit == false) {
-            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number,WorkPrice) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         } else {
-            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT OR REPLACE INTO Service(id,Type,Kilometers,Date,Changes,Workshop,Next_Date,Next_Kilometers,Price,Receipt_Number,WorkPrice,Service_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         }
         try {
@@ -1064,8 +1067,9 @@ public class Sql {
             pstmt.setString(8, repair.get(6));
             pstmt.setInt(9, Integer.valueOf(repair.get(7)));
             pstmt.setString(10,repair.get(8));
+            pstmt.setInt(11,Integer.valueOf(repair.get(9)));
             if (edit == true) {
-                pstmt.setInt(11, Integer.valueOf(a.getId()));
+                pstmt.setInt(12, Integer.valueOf(a.getId()));
             }
             pstmt.executeUpdate();
             return 1;
@@ -1518,7 +1522,6 @@ public class Sql {
             String sql = "SELECT  LiscPlate FROM Trucks  WHERE id=" + id;
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-
             return rs.getString("LiscPlate");
         } catch (SQLException e) {
             e.printStackTrace();

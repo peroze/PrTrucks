@@ -216,6 +216,7 @@ public class ExternalCarsList implements Initializable {
                     choices.add(rs.getString("Name"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             choices.add("Ιδιότης");
@@ -228,6 +229,7 @@ public class ExternalCarsList implements Initializable {
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
             if(temp.equals(".empty")||temp.equals("Πινακίδα")){
+                sql.Disconnect();
                 return;
             };
             SearchByLisc(temp);

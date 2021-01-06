@@ -8,7 +8,7 @@ package Pr.Cars;
  */
 public class ModelService {
 
-    private String LiscPlate,Date,Kilometers,Type,Changes,Workshop,NextDate,NextKilometers,Price,id,ReceiptNum;
+    private String LiscPlate,Date,Kilometers,Type,Changes,Workshop,NextDate,NextKilometers,Price,id,ReceiptNum,WorkPrice;
 
     /**
      * The constractor of the Service with ID
@@ -22,7 +22,7 @@ public class ModelService {
      * @param nextKilometers The total kilometers
      * @param price The total price of the Service
      */
-    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String receiptNum) {
+    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String receiptNum,String workPrice) {
         LiscPlate = liscPlate;
         Date = date;
         Kilometers = kilometers;
@@ -33,6 +33,7 @@ public class ModelService {
         NextKilometers = nextKilometers;
         Price = price;
         ReceiptNum=receiptNum;
+        WorkPrice=workPrice;
     }
 
     /**
@@ -48,7 +49,7 @@ public class ModelService {
      * @param price
      * @param id
      */
-    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price, String id,String receiptNum) {
+    public ModelService(String liscPlate, String date, String kilometers, String type, String changes, String workshop, String nextDate, String nextKilometers, String price,String receiptNum,String workPrice, String id) {
         LiscPlate = liscPlate;
         Date = date;
         Kilometers = kilometers;
@@ -60,6 +61,7 @@ public class ModelService {
         Price = price;
         this.id = id;
         ReceiptNum=receiptNum;
+        WorkPrice=workPrice;
     }
 
     public String getReceiptNum() {
@@ -231,5 +233,13 @@ public class ModelService {
      */
     public void setPrice(String price) {
         Price = price;
+    }
+
+    public String getWorkPrice() {
+        return WorkPrice;
+    }
+
+    public void setWorkPrice(String workPrice) {
+        WorkPrice = workPrice;
     }
 }

@@ -105,7 +105,7 @@ public class ServiceList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
+                Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"),rs.getString("Receipt_Number"),rs.getString("WorkPrice"), rs.getString("Service_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -264,6 +264,7 @@ public class ServiceList implements Initializable {
                     choices.add(rs.getString("LiscPlate"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             try {
@@ -271,6 +272,7 @@ public class ServiceList implements Initializable {
                     Types.add(rs1.getString("Type"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             try {
@@ -278,6 +280,7 @@ public class ServiceList implements Initializable {
                     Locations.add(rs2.getString("City"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα",choices);
@@ -289,6 +292,7 @@ public class ServiceList implements Initializable {
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
             if (temp.equals(".empty") || temp.equals("Πινακίδα")) {
+                sql.Disconnect();
                 return;
             }
             SearchByLisc(temp);
@@ -370,12 +374,15 @@ public class ServiceList implements Initializable {
                         LocAf = cb2.getValue().toString();
                     }
                     if (counter == 2) {
+                        sql.Disconnect();
                         return null;
                     }
                     reuturns.add(TypeAf);
                     reuturns.add(LocAf);
+                    sql.Disconnect();
                     return reuturns;
                 }
+                sql.Disconnect();
                 return null;
             });
             try {
@@ -387,6 +394,7 @@ public class ServiceList implements Initializable {
                 Filter.setStyle("-fx-text-fill: RED");
                 sql.Disconnect();
             }catch (java.util.NoSuchElementException e){
+                sql.Disconnect();
                 return;
             }
         }
@@ -451,6 +459,7 @@ public class ServiceList implements Initializable {
             }
         }catch (SQLException e){
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            sql.Disconnect();
             alert2.setTitle("Αποτυχία");
             alert2.setContentText("Η διαγραφή απέτυχε, προσπαθύστε ξανά");
             alert2.showAndWait();
@@ -528,12 +537,13 @@ public class ServiceList implements Initializable {
         try {
             while (rs.next()) {
                 if (rs1 == null) {
-                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("MAX(Date)"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Receipt_Number"),rs.getString("WorkPrice"), rs.getString("Service_id")));
                 } else {
-                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Service_id"),rs.getString("Receipt_Number")));
+                    Oblist.add(new ModelService(db.GetLisxxFromId(rs.getString("id")), rs.getString("Date"), rs.getString("Kilometers"), rs.getString("Type"), rs.getString("Changes"), rs.getString("Workshop"), rs.getString("Next_Date"), rs.getString("Next_Kilometers"), rs.getString("Price"), rs.getString("Receipt_Number"),rs.getString("WorkPrice"), rs.getString("Service_id")));
                 }
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         FilteredList<ModelService> Filter = new FilteredList<>(Oblist, b -> true);

@@ -333,8 +333,10 @@ public class AddRepair implements Initializable {
                 Labels.get(i).setVisible(false);
             }
             else if(i!=0&&i!=1) {
-
-                if (TFields.get(i-2).getText().equals( "")) {
+                if(TFields.get(i-2).getText()==null){
+                    Labels.get(i).setVisible(false);
+                }
+                else if (TFields.get(i-2).getText().equals( "")) {
                     Labels.get(i).setVisible(false);
                 }
                 else{
@@ -367,6 +369,7 @@ public class AddRepair implements Initializable {
                 check = true;
                 break;
             }
+            i++;
         }
         if(Oblist.isEmpty()){
             placeboo=true;
@@ -443,7 +446,14 @@ public class AddRepair implements Initializable {
             Workshop_Label.setVisible(true);
             Workshop.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
         }
-        if (Price.getText().equals("")) {
+        if(Price.getText()==null){
+            Price_Label.setStyle("-fx-text-fill: RED");
+            Price_Label.setText("Η τιμή είναι κενή");
+            Price_Label.setVisible(true);
+            flag = true;
+            Price.setStyle(" -fx-background-color: #383838;-fx-border-width: 0px 0px 1px 0px;-fx-border-color:red;-fx-text-fill: white;");
+        }
+        else if (Price.getText().equals("")) {
             Price_Label.setStyle("-fx-text-fill: RED");
             Price_Label.setText("Η τιμή είναι κενή");
             Price_Label.setVisible(true);
@@ -479,10 +489,22 @@ public class AddRepair implements Initializable {
         }
         Sql sql = new Sql();
         String Changes;
+        int TotalPrice=Integer.valueOf(Price.getText());
         Changes = Oblist.get(0).getString()+"~"+Oblist.get(0).getString2()+"~"+Oblist.get(0).getString3()+"~"+Oblist.get(0).getString4()+"~"+Oblist.get(0).getString5()+"~"+Oblist.get(0).getString6();
+        if(Oblist.get(0).getString4()!=null){
+
+            TotalPrice=TotalPrice+Integer.valueOf(Oblist.get(0).getString4());
+        }
         for (int i = 1; i < Oblist.size(); i++) {
+            if(!Oblist.get(i).getString4().equals("")){
+                TotalPrice=TotalPrice+Integer.valueOf(Oblist.get(i).getString4());
+            }
+            else{
+                System.out.println("NULL");
+            }
             Changes = Changes + "|" + Oblist.get(i).getString()+"~"+Oblist.get(i).getString2()+"~"+Oblist.get(i).getString3()+"~"+Oblist.get(i).getString4()+"~"+Oblist.get(i).getString5()+"~"+Oblist.get(i).getString6();
         }
+        System.out.println(TotalPrice);
         try {
             int prKm = sql.Query_Specific_LastRepairKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
             if (Integer.valueOf(Kilometers.getText()) - prKm > 100000) {
@@ -521,17 +543,18 @@ public class AddRepair implements Initializable {
         }
         int i;
         if (edit == false) {
-            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(), Price.getText(), Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes,Receipt_Number.getText());
+            ModelRepair toAdd = new ModelRepair(Lisc_Plate.getValue().toString(),String.valueOf(TotalPrice),  Kilometers.getText(), Date.getValue().toString(), Discreption.getText(), Workshop.getText(), Changes,Receipt_Number.getText(),Price.getText());
             i = sql.InsertRepair(toAdd, false);
         } else {
             toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
             toEdit.setDate(Date.getValue().toString());
-            toEdit.setPrice(Price.getText());
+            toEdit.setPrice(String.valueOf(TotalPrice));
             toEdit.setWorkshop(Workshop.getText());
             toEdit.setKilometers(Kilometers.getText());
             toEdit.setDiscreption(Discreption.getText());
             toEdit.setChanges(Changes);
             toEdit.setReceipt_Number(Receipt_Number.getText());
+            toEdit.setWorkPrice(Price.getText());
             i = sql.InsertRepair(toEdit, true);
         }
         if (i == 1) {
@@ -569,7 +592,7 @@ public class AddRepair implements Initializable {
         Oblist=FXCollections.observableArrayList();
         edit = true;
         Workshop.setText(s.getWorkshop());
-        Price.setText(s.getPrice());
+        Price.setText(s.getWorkPrice());
         Discreption.setText(s.getDiscreption());
         LocalDate dat;
         dat = LocalDate.parse(s.getDate());

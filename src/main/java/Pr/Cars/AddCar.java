@@ -522,9 +522,12 @@ public class AddCar implements Initializable {
         }
         Sql sql = new Sql();
         String Data;
+        Data="";
+        if(!oblist.isEmpty()){
         Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
         for (int i = 1; i < oblist.size(); i++) {
             Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
+        }
         }
         int i;
         if (edit == false) {

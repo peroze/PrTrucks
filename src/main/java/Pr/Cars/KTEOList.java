@@ -328,6 +328,7 @@ public class KTEOList implements Initializable {
         SortedList<ModelKTEO> sorted = new SortedList<>(Filter);
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
+        db.Disconnect();
     }
 
 }

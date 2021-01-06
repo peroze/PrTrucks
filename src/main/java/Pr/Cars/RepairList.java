@@ -154,7 +154,6 @@ public class RepairList implements Initializable {
             sql.Disconnect();
             RenewTable(null);
         }
-
         }catch (SQLException e){
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
             alert2.setTitle("Αποτυχία");
@@ -181,6 +180,7 @@ public class RepairList implements Initializable {
                     choices.add(rs.getString("LiscPlate"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             ChoiceDialog<String> dialog = new ChoiceDialog<>("Πινακίδα", choices);
@@ -192,6 +192,7 @@ public class RepairList implements Initializable {
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
             if(temp.equals(".empty")||temp.equals("Πινακίδα")){
+                sql.Disconnect();
                 return;
             };
             SearchByLisc(temp);
@@ -211,9 +212,10 @@ public class RepairList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id"),rs.getString("Receipt_Number")) );
+                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"),rs.getString("Receipt_Number"),rs.getString("WorkPrice"), rs.getString("Repair_Id") ));
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         Truck_Table.setRowFactory((tv-> {
@@ -231,7 +233,6 @@ public class RepairList implements Initializable {
         Date_Column.setCellValueFactory(new PropertyValueFactory<>("Date"));
         KM_Column.setCellValueFactory(new PropertyValueFactory<>("Kilometers"));
         FilteredList<ModelRepair> Filter = new FilteredList<>(Oblist, b -> true);
-
         Search_Bar.textProperty().addListener((observable, oldValue, newValue) -> {
             Filter.setPredicate(ModelRepair -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -356,9 +357,10 @@ public class RepairList implements Initializable {
         Oblist = FXCollections.observableArrayList();
         try {
             while (rs.next()) {
-                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"), rs.getString("Repair_Id"),rs.getString("Receipt_Number")) );
+                Oblist.add(new ModelRepair(db.GetLisxxFromId(rs.getString("id")),rs.getString("Price"), rs.getString("Kilometers"), rs.getString("Date"), rs.getString("Discreption"), rs.getString("Workshop"), rs.getString("Changes"),rs.getString("Receipt_Number"),rs.getString("WorkPrice"), rs.getString("Repair_Id")) );
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         Truck_Table.setRowFactory((tv-> {

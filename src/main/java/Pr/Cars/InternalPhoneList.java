@@ -153,6 +153,7 @@ public class InternalPhoneList implements Initializable {
                     choices.add(rs.getString("Posistion"));
                 }
             } catch (SQLException e) {
+                sql.Disconnect();
                 e.printStackTrace();
             }
             ChoiceDialog<String> dialog = new ChoiceDialog<>("Θέση", choices);
@@ -164,6 +165,7 @@ public class InternalPhoneList implements Initializable {
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
             if(temp.equals(".empty")||temp.equals("Θέση")){
+                sql.Disconnect();
                 return;
             };
             SearchByLisc(temp);
@@ -186,6 +188,7 @@ public class InternalPhoneList implements Initializable {
                 Oblist.add(new ModelInternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Email"),rs.getString("Posistion")));
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         Truck_Table.setRowFactory((tv-> {
@@ -232,13 +235,10 @@ public class InternalPhoneList implements Initializable {
         sorted.comparatorProperty().bind(Truck_Table.comparatorProperty());
         Truck_Table.setItems(sorted);
         ContextMenu Cont=new ContextMenu();
-        MenuItem view=new MenuItem("Άνοιγμα");
-        view.setOnAction(this::View);
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Delete_Button_Pressed);
         MenuItem Edits = new MenuItem("Επεξεργασία");
         Edits.setOnAction(this::Ed);
-        Cont.getItems().add(view);
         Cont.getItems().add(Del);
         Cont.getItems().add(Edits);
         Truck_Table.setContextMenu(Cont);
@@ -246,10 +246,10 @@ public class InternalPhoneList implements Initializable {
     }
 
     void DoubleClickTable() {
-        ModelInternalPhoneList temp = Truck_Table.getSelectionModel().getSelectedItem();
+       /* ModelInternalPhoneList temp = Truck_Table.getSelectionModel().getSelectedItem();
         Stage primaryStage = new Stage();
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("ViewRepair.fxml"));
-       /* try {
+        try {
             Parent root = fxmlloader.load();
             fxmlloader.<ViewRepair>getController().setService(temp);
             primaryStage.setTitle("PrTrucks");

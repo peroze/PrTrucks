@@ -45,8 +45,8 @@
          <font>
             <Font size="9.0" />
          </font></Label>
-      <TextField fx:id="Price" editable="false" layoutX="423.0" layoutY="246.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="425.0" layoutY="232.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή" textFill="#fcfcfc">
+      <TextField fx:id="Price" editable="false" layoutX="423.0" layoutY="296.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="425.0" layoutY="282.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
@@ -102,6 +102,12 @@
       </HBox>
       <TextField fx:id="Receipt_Number" editable="false" layoutX="113.0" layoutY="298.0" prefHeight="25.0" prefWidth="185.0" promptText="Αριθμός Απόδειξης" />
       <Label layoutX="114.0" layoutY="284.0" prefHeight="17.0" prefWidth="89.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Απόδειξης" textFill="#fcfcfc">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Price1" editable="false" layoutX="423.0" layoutY="241.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή Εργασίας" stylesheets="@Styles/AddsTotals.css" />
+      <Label layoutX="425.0" layoutY="227.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή Εργασίας" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font>

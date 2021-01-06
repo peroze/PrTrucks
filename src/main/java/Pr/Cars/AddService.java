@@ -323,7 +323,10 @@ public class AddService implements Initializable {
                 Labels.get(i).setVisible(false);
             }
             else if(i!=0&&i!=1) {
-                if (TFields.get(i-2).getText().equals( "")) {
+                if(TFields.get(i-2).getText()==null){
+                    Labels.get(i).setVisible(false);
+                }
+                else if (TFields.get(i-2).getText().equals( "")) {
                     Labels.get(i).setVisible(false);
                 }
                 else{
@@ -356,7 +359,9 @@ public class AddService implements Initializable {
                 check = true;
                 break;
             }
+            i++;
         }
+
         if(Oblist.isEmpty()){
             Oblist.add(new StringsForTables("","","","","",""));
             placeboo=true;
@@ -475,10 +480,22 @@ public class AddService implements Initializable {
             }
             Sql sql = new Sql();
             String Changes;
+            int TotalPrice=Integer.valueOf(Price.getText());
             Changes = Oblist.get(0).getString()+"~"+Oblist.get(0).getString2()+"~"+Oblist.get(0).getString3()+"~"+Oblist.get(0).getString4()+"~"+Oblist.get(0).getString5()+"~"+Oblist.get(0).getString6();
-            for (int i = 1; i < Oblist.size(); i++) {
-                Changes = Changes + "|" + Oblist.get(i).getString()+"~"+Oblist.get(i).getString2()+"~"+Oblist.get(i).getString3()+"~"+Oblist.get(i).getString4()+"~"+Oblist.get(i).getString5()+"~"+Oblist.get(i).getString6();
+            if(Oblist.get(0).getString4()!=null){
+                TotalPrice=TotalPrice+Integer.valueOf(Oblist.get(0).getString4());
             }
+            for (int i = 1; i < Oblist.size(); i++) {
+                if(!Oblist.get(i).getString4().equals("")){
+                    TotalPrice=TotalPrice+Integer.valueOf(Oblist.get(i).getString4());
+                }
+                else{
+                    System.out.println("NULL");
+                }
+                Changes = Changes + "|" + Oblist.get(i).getString()+"~"+Oblist.get(i).getString2()+"~"+Oblist.get(i).getString3()+"~"+Oblist.get(i).getString4()+"~"+Oblist.get(i).getString5()+"~"+Oblist.get(i).getString6();
+
+            }
+            System.out.println(TotalPrice);
             int prKm=sql.Query_Specific_LastServiceKM(Lisc_Plate.getValue().toString()).getInt("Kilometers");
             if ((prKm > Integer.valueOf(Kilometers.getText()))&&edit==false)
             {
@@ -516,16 +533,17 @@ public class AddService implements Initializable {
             int Nextkm = rs.getInt("ServiceInKm");
             int i;
             if (edit == false) {
-                ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), Price.getText(),Receipt_Number.getText());
+                ModelService toAdd = new ModelService(Lisc_Plate.getValue().toString(), Date.getValue().toString(), Kilometers.getText(), Discreption.getText(), Changes, Workshop.getText(), Date.getValue().plusYears(1).toString(), String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm), String.valueOf(TotalPrice),Receipt_Number.getText(),Price.getText());
                 i = sql.InsertService(toAdd, false);
             } else {
                 toEdit.setLiscPlate(Lisc_Plate.getValue().toString());
                 toEdit.setDate(Date.getValue().toString());
-                toEdit.setPrice(Price.getText());
+                toEdit.setPrice(String.valueOf(TotalPrice));
                 toEdit.setWorkshop(Workshop.getText());
                 toEdit.setKilometers(Kilometers.getText());
                 toEdit.setType(Discreption.getText());
                 toEdit.setChanges(Changes);
+                toEdit.setWorkPrice(Price.getText());
                 toEdit.setNextKilometers(String.valueOf(Integer.valueOf(Kilometers.getText()) + Nextkm));
                 toEdit.setNextDate(Date.getValue().plusYears(1).toString());
                 toEdit.setReceiptNum(Receipt_Number.getText());
@@ -577,7 +595,7 @@ public class AddService implements Initializable {
             placeboo=false;
         }
         Workshop.setText(s.getWorkshop());
-        Price.setText(s.getPrice());
+        Price.setText(s.getWorkPrice());
         Discreption.setText(s.getType());
         LocalDate dat;
         dat = LocalDate.parse(s.getDate());

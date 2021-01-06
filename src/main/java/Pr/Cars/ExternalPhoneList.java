@@ -166,6 +166,7 @@ public class ExternalPhoneList implements Initializable {
             temp = temp.replace("]", "");
             temp = temp.replace("Optional", "");
             if(temp.equals(".empty")||temp.equals("Κατηγορία")){
+                sql.Disconnect();
                 return;
             };
             SearchByLisc(temp);
@@ -188,6 +189,7 @@ public class ExternalPhoneList implements Initializable {
                 Oblist.add(new ModelExternalPhoneList(rs.getString("id"),rs.getString("Name"),rs.getString("Phone"),rs.getString("Address"),rs.getString("Email"),rs.getString("Discreption"),rs.getString("Notes")));
             }
         } catch (SQLException e) {
+            db.Disconnect();
             e.printStackTrace();
         }
         Truck_Table.setRowFactory((tv-> {
