@@ -248,7 +248,7 @@ public class SettingsAdds implements Initializable {
             if (i != 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Εισαγωγή Απέτυχε");
-                alert.setContentText("Ο τύπος οχήματος δεν κατατάφερε να ενταχθεί, δοκιμάστε ξανά");
+                alert.setContentText("Ο τύπος οχήματος  ενταχθεί, δοκιμάστε ξανά.");
                 alert.showAndWait();
             }
             Type_button.setText("");
