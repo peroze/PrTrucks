@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -186,20 +188,84 @@ public class AddRepair implements Initializable {
             Oblist.add(new StringsForTables("","","","","",""));
             placeboo=true;
             Lisc_Plate.setItems(Cars);
+            Table.setEditable(true);
             Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
             ParCode_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
             PartSupl_Col.setCellValueFactory(new PropertyValueFactory<>("string3"));
             Price_Column.setCellValueFactory(new PropertyValueFactory<>("string4"));
             ParRec_Col.setCellValueFactory(new PropertyValueFactory<>("string5"));
             ParDat_Col.setCellValueFactory(new PropertyValueFactory<>("string6"));
+            Parts.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            Parts.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString(event.getNewValue());
+                        }
+                    }
+            );
+            ParCode_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            ParCode_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString2(event.getNewValue());
+                        }
+                    }
+            );
+            PartSupl_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            PartSupl_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString3(event.getNewValue());
+                        }
+                    }
+            );
+            Price_Column.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            Price_Column.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString4(event.getNewValue());
+                        }
+                    }
+            );
+            ParRec_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            ParRec_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString5(event.getNewValue());
+                        }
+                    }
+            );
+            ParDat_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            ParDat_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString6(event.getNewValue());
+                        }
+                    }
+            );
             Table.setRowFactory((tv -> {
                 TableRow<StringsForTables> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     if(placeboo==true){
                         Table.getSelectionModel().clearSelection();
-                    }
-                    else if (event.getClickCount() == 2 && (!row.isEmpty())&&placeboo==false) {
-                        DoubleClickTable();
                     }
                 });
                 return row;
@@ -291,13 +357,7 @@ public class AddRepair implements Initializable {
 
 
     public void Del(ActionEvent e) {
-        DoubleClickTable();
-    }
 
-    /**
-     * This methods deletes an entry from the table and it is called when a row is double clicked
-     */
-    private void DoubleClickTable() {
         StringsForTables temp = Table.getSelectionModel().getSelectedItem();
         int i = 0;
         boolean check = false;
@@ -313,6 +373,7 @@ public class AddRepair implements Initializable {
             Oblist.add(new StringsForTables("","","","","",""));
         }
     }
+
 
     /**
      * This method is called when the AddPart button is pressed and it adds the part which have been replaced in the car int the changes list

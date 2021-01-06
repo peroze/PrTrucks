@@ -4,10 +4,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -109,16 +111,36 @@ public class AddCompany implements Initializable {
         Labels=new ArrayList<>();
         Texts=new ArrayList<>();
         dict=new Hashtable();
+        Table.setEditable(true);
         Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
         Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+        Data_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+        Data_Col.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                        ((StringsForTables) event.getTableView().getItems().get(
+                                event.getTablePosition().getRow())
+                        ).setString(event.getNewValue());
+                    }
+                }
+        );
+        Code_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+        Code_Col.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                        ((StringsForTables) event.getTableView().getItems().get(
+                                event.getTablePosition().getRow())
+                        ).setString2(event.getNewValue());
+                    }
+                }
+        );
         Table.setRowFactory((tv -> {
             TableRow<StringsForTables> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if(placeboo==true){
                     Table.getSelectionModel().clearSelection();
-                }
-                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    DoubleClickTable();
                 }
             });
             return row;
@@ -178,35 +200,30 @@ public class AddCompany implements Initializable {
 
 
     public void Del(ActionEvent e){
-        DoubleClickTable();
-    }
-
-    /**
-     * This methods deletes an entry from the table and it is called when a row is double clicked
-     */
-    private void DoubleClickTable() {
         try {
-            StringsForTables temp = Table.getSelectionModel().getSelectedItem();
-            int i = 0;
-            boolean check = false;
-            while (i < oblist.size()) {
-                if (temp.equals(oblist.get(i))) {
-                    oblist.remove(i);
-                    check = true;
-                    break;
-                }
-                i++;
+        StringsForTables temp = Table.getSelectionModel().getSelectedItem();
+        int i = 0;
+        boolean check = false;
+        while (i < oblist.size()) {
+            if (temp.equals(oblist.get(i))) {
+                oblist.remove(i);
+                check = true;
+                break;
             }
-            if(oblist.isEmpty()){
-                placeboo=true;
-                oblist.add(new StringsForTables("",""));
-            }
+            i++;
         }
-        catch (Exception e){
-            e.printStackTrace();
+        if(oblist.isEmpty()){
+            placeboo=true;
+            oblist.add(new StringsForTables("",""));
         }
-
     }
+        catch (Exception eχ){
+        eχ.printStackTrace();
+    }
+
+}
+
+
 
     /**
      * This button adds the new KTEO in the db

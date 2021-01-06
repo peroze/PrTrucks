@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -141,6 +143,17 @@ public class AddExternalPhoneList implements Initializable {
             }
         });
         Notes_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
+        Notes_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+        Notes_Col.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                        ((StringsForTables) event.getTableView().getItems().get(
+                                event.getTablePosition().getRow())
+                        ).setString(event.getNewValue());
+                    }
+                }
+        );
         Oblist=FXCollections.observableArrayList();
         placeboo=true;
         Oblist.add(new StringsForTables(""));
@@ -181,9 +194,6 @@ public class AddExternalPhoneList implements Initializable {
                 if(placeboo==true){
                     Notes_table.getSelectionModel().clearSelection();
                 }
-                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    DoubleClickTable();
-                }
             });
             return row;
         }));
@@ -195,13 +205,6 @@ public class AddExternalPhoneList implements Initializable {
     }
 
     public void Del(ActionEvent e){
-        DoubleClickTable();
-    }
-
-    /**
-     * This methods deletes an entry from the table and it is called when a row is double clicked
-     */
-    private void DoubleClickTable() {
         StringsForTables temp = Notes_table.getSelectionModel().getSelectedItem();
         int i = 0;
         boolean check = false;
@@ -217,6 +220,8 @@ public class AddExternalPhoneList implements Initializable {
             placeboo=true;
         }
     }
+
+
 
     public void setFocusTFIelds(MouseEvent e) {
         ResetHideLabels();

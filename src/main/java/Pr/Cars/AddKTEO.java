@@ -4,10 +4,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -138,12 +140,22 @@ public class AddKTEO implements Initializable {
                 if(placeboo==true){
                     Table.getSelectionModel().clearSelection();
                 }
-                else if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    DoubleClickTable();
-                }
             });
             return row;
         }));
+        Table.setEditable(true);
+        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
+        Parts.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+        Parts.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                        ((StringsForTables) event.getTableView().getItems().get(
+                                event.getTablePosition().getRow())
+                        ).setString(event.getNewValue());
+                    }
+                }
+        );
         Oblist.add(new StringsForTables(""));
         Table.setItems(Oblist);
         ContextMenu Cont = new ContextMenu();
@@ -217,13 +229,6 @@ public class AddKTEO implements Initializable {
     }
 
     public void Del(ActionEvent e) {
-        DoubleClickTable();
-    }
-
-    /**
-     * This methods deletes an entry from the table and it is called when a row is double clicked
-     */
-    private void DoubleClickTable() {
         StringsForTables temp = Table.getSelectionModel().getSelectedItem();
         int i = 0;
         boolean check = false;
@@ -240,6 +245,8 @@ public class AddKTEO implements Initializable {
         }
     }
 
+
+
     /**
      * This method is called when the AddWarn button is pressed and it adds a warning which have been given in KTEO
      *
@@ -252,7 +259,6 @@ public class AddKTEO implements Initializable {
             placeboo=false;
         }
         Oblist.add(new StringsForTables(AddWarn.getText()));
-        Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
         AddWarn.clear();
         Table.setItems(Oblist);
     }

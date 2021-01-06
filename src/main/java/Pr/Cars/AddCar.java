@@ -4,10 +4,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -211,16 +213,36 @@ public class AddCar implements Initializable {
             Gasc.add("Όχι Κάρτα");
             KTEO.setItems(Kteo);
             Gas.setItems(Gasc);
+            Table.setEditable(true);
             Data_Col.setCellValueFactory(new PropertyValueFactory<>("string"));
             Code_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
+            Data_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            Data_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString(event.getNewValue());
+                        }
+                    }
+            );
+            Code_Col.setCellFactory(TextFieldTableCell.<StringsForTables>forTableColumn());
+            Code_Col.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<StringsForTables, String>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<StringsForTables, String> event) {
+                            ((StringsForTables) event.getTableView().getItems().get(
+                                    event.getTablePosition().getRow())
+                            ).setString2(event.getNewValue());
+                        }
+                    }
+            );
             Table.setRowFactory((tv -> {
                 TableRow<StringsForTables> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     if(placeboo==true){
                         Table.getSelectionModel().clearSelection();
-                    }
-                    else if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                        DoubleClickTable();
                     }
                 });
                 return row;
@@ -346,13 +368,6 @@ public class AddCar implements Initializable {
     }
 
     public void Del(ActionEvent e) {
-        DoubleClickTable();
-    }
-
-    /**
-     * This methods deletes an entry from the table and it is called when a row is double clicked
-     */
-    private void DoubleClickTable() {
         try {
             StringsForTables temp = Table.getSelectionModel().getSelectedItem();
             int i = 0;
@@ -369,11 +384,12 @@ public class AddCar implements Initializable {
                 placeboo = true;
                 oblist.add(new StringsForTables("", ""));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
+
 
 
     public int getMax_i() {

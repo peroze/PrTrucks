@@ -73,7 +73,7 @@
       </Label>
       <TextField fx:id="Note_Text" layoutX="109.0" layoutY="369.0" prefHeight="25.0" prefWidth="138.0" promptText="Σημείωση" />
       <Button fx:id="Note_Button" layoutX="374.0" layoutY="369.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="145.0" text="Προσθήκη Σημείωσης" />
-      <TableView fx:id="Notes_table" layoutX="128.0" layoutY="429.0" prefHeight="200.0" prefWidth="348.0">
+      <TableView fx:id="Notes_table" editable="true" layoutX="128.0" layoutY="429.0" prefHeight="200.0" prefWidth="348.0">
         <columns>
           <TableColumn fx:id="Notes_Col" prefWidth="345.0" text="Σημείωση" />
         </columns>
