@@ -150,6 +150,18 @@ public class AddCar implements Initializable {
     @FXML
     private Label ServKm_Label;
 
+    @FXML
+    private DatePicker Fire;
+
+    @FXML
+    private Label Fire_Label;
+
+    @FXML
+    private DatePicker Speed;
+
+    @FXML
+    private Label Speed_Label;
+
     private boolean edit = false;
 
     private ModelTruck toEdit;
@@ -241,7 +253,7 @@ public class AddCar implements Initializable {
             Table.setRowFactory((tv -> {
                 TableRow<StringsForTables> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
-                    if(placeboo==true){
+                    if (placeboo == true) {
                         Table.getSelectionModel().clearSelection();
                     }
                 });
@@ -265,6 +277,8 @@ public class AddCar implements Initializable {
             Labels.add(Categ_Label);
             Labels.add(Locat_Label);
             Labels.add(Lisc_Label);
+            Labels.add(Fire_Label);
+            Labels.add(Speed_Label);
             int Size = Labels.size();
             TFields = new ArrayList<>();
             TFields.add(Kilometers);
@@ -284,6 +298,8 @@ public class AddCar implements Initializable {
             Texts.add("Κατηγόρια");
             Texts.add("Τοποθεσία");
             Texts.add("Πινακίδα");
+            Texts.add("Επομ Αναγώμωση Πυροσβ.");
+            Texts.add("Επόμ. άδειασμα Ταχογραφου");
             for (int i = 0; i < Size; i++) {
                 if (i == 4) {
                     dict.put(Date, Labels.get(i));
@@ -300,6 +316,13 @@ public class AddCar implements Initializable {
                 } else if (i == 9) {
                     dict.put(Location, Labels.get(i));
                     Location.setOnMouseClicked(this::setFocusTFIelds);
+
+                } else if(i==11) {
+                    dict.put(Fire, Labels.get(i));
+                    Fire.setOnMouseClicked(this::setFocusTFIelds);
+                }else if(i==12){
+                    dict.put(Speed, Labels.get(i));
+                    Speed.setOnMouseClicked(this::setFocusTFIelds);
                 } else {
                     int k = i;
                     if (i == 10) {
@@ -338,17 +361,20 @@ public class AddCar implements Initializable {
                 Labels.get(i).setVisible(false);
             } else if (i == 9 && Location.getValue() == null) {
                 Labels.get(i).setVisible(false);
-            } else if (i != 8 && i != 9 && i != 7 && i != 6 && i != 4) {
+            }else if(i==11&&Fire.getValue() == null) {
+                Labels.get(i).setVisible(false);
+            }else if(i==12&&Speed.getValue() == null){
+                Labels.get(i).setVisible(false);
+            } else if (i != 8 && i != 9 && i != 7 && i != 6 && i != 4 && i!=11 && i!=12) {
                 int k = i;
                 if (i == 5) {
                     k = 4;
                 } else if (i == 10) {
                     k = 5;
                 }
-                if(TFields.get(k).getText()==null){
+                if (TFields.get(k).getText() == null) {
                     Labels.get(i).setVisible(false);
-                }
-                else if (TFields.get(k).getText().equals("")) {
+                } else if (TFields.get(k).getText().equals("")) {
                     Labels.get(i).setVisible(false);
                 } else {
                     Labels.get(i).setVisible(true);
@@ -368,6 +394,8 @@ public class AddCar implements Initializable {
         KTEO.setStyle(null);
         Location.setStyle(null);
         Gas.setStyle(null);
+        Fire.setStyle(null);
+        Speed.setStyle(null);
     }
 
     public void Del(ActionEvent e) {
@@ -392,7 +420,6 @@ public class AddCar implements Initializable {
         }
 
     }
-
 
 
     public int getMax_i() {
@@ -451,6 +478,25 @@ public class AddCar implements Initializable {
             flag = true;
 
         }
+        if (Speed.getValue() == null) {
+            Speed_Label.setVisible(true);
+            Speed_Label.setStyle("-fx-text-fill: RED");
+            Speed_Label.setText("Η ημερ. ταχογράφου είναι κενή");
+            flag = true;
+        }
+        if (Fire.getValue() == null) {
+            Fire_Label.setVisible(true);
+            Fire_Label.setStyle("-fx-text-fill: RED");
+            Fire_Label.setText("Η ημερ. αναγώμοσης είναι κενή");
+            flag = true;
+        }
+        if (Date.getValue() == null) {
+            Date_Label.setVisible(true);
+            Date_Label.setStyle("-fx-text-fill: RED");
+            Date_Label.setText("Η Ημερομήνία είναι κενή");
+            flag = true;
+
+        }
         if (Type.getValue() == null) {
             Categ_Label.setVisible(true);
             Categ_Label.setStyle("-fx-text-fill: RED");
@@ -490,7 +536,7 @@ public class AddCar implements Initializable {
                 Double.valueOf(Kilometers.getText());
             } catch (NumberFormatException e) {
                 Km_Label.setText("Τα Χιλιόμετρα πρέπει να είναι ακέραιος");
-                placeboo=true;
+                placeboo = true;
                 oblist.add(new StringsForTables(""));
                 Km_Label.setVisible(true);
                 Km_Label.setStyle("-fx-text-fill: RED");
@@ -508,7 +554,7 @@ public class AddCar implements Initializable {
             try {
                 Integer.valueOf(Service.getText()); // if the given value contains characters a number format exception will be thrown
             } catch (NumberFormatException e) {
-                placeboo=true;
+                placeboo = true;
                 oblist.add(new StringsForTables(""));
                 ServKm_Label.setText("Τα Χιλιόμετρα Service πρέπει να είναι αριθμός");
                 ServKm_Label.setVisible(true);
@@ -518,23 +564,23 @@ public class AddCar implements Initializable {
             }
         }
         if (flag == true) {
-            if(placeboo==true) {
+            if (placeboo == true) {
                 oblist.add(new StringsForTables(""));
             }
             return;
         }
         Sql sql = new Sql();
         String Data;
-        Data="";
-        if(!oblist.isEmpty()){
-        Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
-        for (int i = 1; i < oblist.size(); i++) {
-            Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
-        }
+        Data = "";
+        if (!oblist.isEmpty()) {
+            Data = oblist.get(0).getString() + "~" + oblist.get(0).getString2();
+            for (int i = 1; i < oblist.size(); i++) {
+                Data = Data + "|" + oblist.get(i).getString() + "~" + oblist.get(i).getString2();
+            }
         }
         int i;
         if (edit == false) {
-            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data, Service.getText(), Gas.getValue().toString(), KTEO.getValue().toString());
+            ModelTruck toAdd = new ModelTruck("-1", Lisc_Plate.getText(), manufactor.getText(), Model.getText(), Date.getValue().toString(), Plaisio.getText(), Type.getValue().toString(), Location.getValue().toString(), Kilometers.getText(), Data, Service.getText(), Gas.getValue().toString(), KTEO.getValue().toString(),Fire.getValue().toString(),Speed.getValue().toString());
             i = sql.InsertCar(toAdd, max_i, edit);
         } else {
             toEdit.setLiscPlate(Lisc_Plate.getText());
@@ -549,6 +595,8 @@ public class AddCar implements Initializable {
             toEdit.setKteoIn(KTEO.getValue().toString());
             toEdit.setGasIn(Gas.getValue().toString());
             toEdit.setServiceInkm(Service.getText());
+            toEdit.setFireExtinguiser(Fire.getValue().toString());
+            toEdit.setSpeedWriter(Speed.getValue().toString());
             i = sql.InsertCar(toEdit, max_i, edit);
             sql.Disconnect();
         }
@@ -603,6 +651,12 @@ public class AddCar implements Initializable {
         Service.setText(s.getServiceInkm());
         KTEO.setValue(s.getKteoIn());
         Gas.setValue(s.getGasIn());
+        LocalDate dat1;
+        dat1 = LocalDate.parse(s.getSpeedWriter());
+        Speed.setValue(dat1);
+        LocalDate dat2;
+        dat2 = LocalDate.parse(s.getFireExtinguiser());
+        Fire.setValue(dat2);
         oblist.remove(0);
         if (s.getData() != null) {
             String[] Ch = s.getData().split(Pattern.quote("|"));
@@ -617,9 +671,9 @@ public class AddCar implements Initializable {
         }
         toEdit = s;
         placeboo = false;
-        if(oblist.isEmpty()){
+        if (oblist.isEmpty()) {
             oblist.add(new StringsForTables(""));
-            placeboo=true;
+            placeboo = true;
         }
         ResetHideLabels();
     }

@@ -42,7 +42,7 @@
       <TextField fx:id="Kilometers" layoutX="110.0" layoutY="174.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
       <TextField fx:id="Plaisio" layoutX="109.0" layoutY="88.0" prefHeight="25.0" prefWidth="138.0" promptText="Πλάισιο" />
       <DatePicker fx:id="Date" layoutX="375.0" layoutY="174.0" prefHeight="25.0" prefWidth="138.0" promptText="1η Κυκολφορία" />
-      <Button fx:id="Ok_Button" layoutX="209.0" layoutY="672.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή Όχηματος" />
+      <Button fx:id="Ok_Button" layoutX="210.0" layoutY="701.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή Όχηματος" />
       <Label layoutX="163.0" layoutY="37.0" prefHeight="36.0" prefWidth="276.0" text="Προσθήκη Αυτοκινήτου" textFill="WHITE">
          <font>
             <Font size="25.0" />
@@ -50,16 +50,16 @@
       </Label>
       <ComboBox fx:id="Type" layoutX="110.0" layoutY="220.0" prefHeight="25.0" prefWidth="138.0" promptText="Κατηγορία" />
       <ComboBox fx:id="Location" layoutX="375.0" layoutY="220.0" prefHeight="25.0" prefWidth="138.0" promptText="Τοποθεσία" />
-      <TextField fx:id="Char_Text" layoutX="111.0" layoutY="378.0" prefHeight="25.0" prefWidth="138.0" promptText="Χαρακτηρηστικό" />
-      <TextField fx:id="Code_Text" layoutX="112.0" layoutY="417.0" prefHeight="25.0" prefWidth="138.0" promptText="Κωδικός" />
-      <TableView fx:id="Table" layoutX="125.0" layoutY="463.0" prefHeight="200.0" prefWidth="355.0">
+      <TextField fx:id="Char_Text" layoutX="104.0" layoutY="421.0" prefHeight="25.0" prefWidth="138.0" promptText="Χαρακτηρηστικό" />
+      <TextField fx:id="Code_Text" layoutX="105.0" layoutY="460.0" prefHeight="25.0" prefWidth="138.0" promptText="Κωδικός" />
+      <TableView fx:id="Table" layoutX="126.0" layoutY="503.0" prefHeight="186.0" prefWidth="355.0">
         <columns>
           <TableColumn fx:id="Data_Col" prefWidth="179.0" text="Χαρακτιρηστικό" />
           <TableColumn fx:id="Code_Col" prefWidth="175.0" text="Κωδικός" />
         </columns>
       </TableView>
-      <Button fx:id="Char_Button" layoutX="372.0" layoutY="403.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="138.0" text="Προσθήκη Χαρακτ." />
-      <Label layoutX="225.0" layoutY="354.0" prefHeight="17.0" prefWidth="156.0" text="Είσαγωγή Χαρακτηριστικών" textFill="WHITE" />
+      <Button fx:id="Char_Button" layoutX="365.0" layoutY="446.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="138.0" text="Προσθήκη Χαρακτ." />
+      <Label layoutX="218.0" layoutY="397.0" prefHeight="17.0" prefWidth="156.0" text="Είσαγωγή Χαρακτηριστικών" textFill="WHITE" />
       <ComboBox fx:id="KTEO" layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα ΚΤΕΟ" />
       <ComboBox fx:id="Gas" layoutX="375.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Καρτας" />
       <TextField fx:id="Service" layoutX="112.0" layoutY="310.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Service (KM) " />
@@ -114,6 +114,18 @@
          </font>
       </Label>
       <Label fx:id="ServKm_Label" layoutX="109.0" layoutY="299.0" prefHeight="17.0" prefWidth="154.0" style="-fx-text-fill: #FA8072;" text="Διάστημα Service" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="Fire" layoutX="377.0" layoutY="310.0" prefHeight="25.0" prefWidth="138.0" promptText="Αναγωμ. Πυροσβ." />
+      <Label fx:id="Fire_Label" layoutX="373.0" layoutY="299.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Αναγώμωση Πυροσβεστήρα" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="Speed" layoutX="114.0" layoutY="359.0" prefHeight="25.0" prefWidth="138.0" promptText="Ταχογράφος" />
+      <Label fx:id="Speed_Label" layoutX="110.0" layoutY="348.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Ταχογράφος" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>

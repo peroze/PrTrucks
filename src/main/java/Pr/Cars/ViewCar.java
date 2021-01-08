@@ -95,7 +95,6 @@ public class ViewCar implements Initializable {
                 Panel.requestFocus();
             }
         });
-
     }
 
     /**
@@ -120,17 +119,19 @@ public class ViewCar implements Initializable {
         Kilometers.setText(truck.getKilometers());
         Plaisio.setText(truck.getPlaisio());
         Type.setText(truck.getType());
-        String[] Ch=truck.getData().split(Pattern.quote("|"));
-        String[][] Dat= new String[Ch.length][2];
-        for (int i=0;i<Ch.length;i++){
-            Dat[i]=Ch[i].split(Pattern.quote("~"));
+        if(truck.getData()!=null||!truck.getData().isEmpty()||!truck.getData().equals("")) {
+            String[] Ch = truck.getData().split(Pattern.quote("|"));
+            String[][] Dat = new String[Ch.length][2];
+            for (int i = 0; i < Ch.length; i++) {
+                Dat[i] = Ch[i].split(Pattern.quote("~"));
+            }
+            for (int i = 0; i < Ch.length; i++) {
+                ObList.add(new StringsForTables(Dat[i][0], Dat[i][1]));
+            }
         }
-        for(int i=0;i<Ch.length;i++){
-            ObList.add(new StringsForTables(Dat[i][0],Dat[i][1]));
-        }
-        if(ObList.isEmpty()){
-            ObList.add(new StringsForTables("",""));
-            Table.setSelectionModel(null);
+        else{
+                ObList.add(new StringsForTables("", ""));
+                Table.setSelectionModel(null);
         }
         Table.setItems(ObList);
     }

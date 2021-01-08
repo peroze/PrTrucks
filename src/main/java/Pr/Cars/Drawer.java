@@ -53,6 +53,10 @@ public class Drawer {
     private Button More_Button;
 
     @FXML
+    private Button Fast_Button;
+
+
+    @FXML
     private BorderPane  Panel;
 
     /**
@@ -178,6 +182,23 @@ public class Drawer {
         }
     }
 
+    @FXML
+    void Fast_Button_Pressed(ActionEvent event) {
+        if (!Active.equals("Fast")) {
+            resetBg();
+            Active = "Fast";
+            changeBg();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("FastList.fxml"));
+                new BounceInLeft(root).play();
+                Panel.setCenter(root);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @FXML
     void More_Button_Pressed(ActionEvent event) {
@@ -260,6 +281,9 @@ public class Drawer {
             case"Partners":
                 Partners_Button.setStyle(null);
                 break;
+            case"Fast":
+                Fast_Button.setStyle(null);
+                break;
         }
     }
 
@@ -291,6 +315,9 @@ public class Drawer {
                 break;
             case "Partners":
                 Partners_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                break;
+            case"Fast":
+                Fast_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 0 3; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

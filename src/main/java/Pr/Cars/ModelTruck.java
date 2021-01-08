@@ -7,7 +7,7 @@ package Pr.Cars;
  * @version 1.0 Alpha
  */
 public class ModelTruck {
-    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio,Data,ServiceInkm,GasIn,KteoIn;
+    private String id,LiscPlate,Manufactor,Model,Date,Type,Location,Kilometers,Plaisio,Data,ServiceInkm,GasIn,KteoIn,FireExtinguiser,SpeedWriter;
 
     /**
      * The constructor of th car
@@ -22,7 +22,7 @@ public class ModelTruck {
      * @param kilometers The kilometers of the car
      * @param data The Special Characteristics of the car
      */
-    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers,String data,String serviceInKm,String gasIn,String kteoIn ) {
+    public ModelTruck(String id, String liscPlate, String manufactor, String model, String date, String plaisio, String type, String location,String kilometers,String data,String serviceInKm,String gasIn,String kteoIn,String fireExtinguiser,String speedWriter ) {
         this.id = id;
         LiscPlate = liscPlate;
         Manufactor = manufactor;
@@ -36,6 +36,8 @@ public class ModelTruck {
         ServiceInkm=serviceInKm;
         GasIn=gasIn;
         KteoIn=kteoIn;
+        FireExtinguiser=fireExtinguiser;
+        SpeedWriter=speedWriter;
     }
 
 
@@ -226,6 +228,22 @@ public class ModelTruck {
 
     public void setKteoIn(String kteoIn) {
         KteoIn = kteoIn;
+    }
+
+    public String getFireExtinguiser() {
+        return FireExtinguiser;
+    }
+
+    public void setFireExtinguiser(String fireExtinguiser) {
+        FireExtinguiser = fireExtinguiser;
+    }
+
+    public String getSpeedWriter() {
+        return SpeedWriter;
+    }
+
+    public void setSpeedWriter(String speedWriter) {
+        SpeedWriter = speedWriter;
     }
 }
 

@@ -318,9 +318,12 @@ public class AddExternalPhoneList implements Initializable {
         }
         Sql sql = new Sql();
         int i;
-        String Notes=Oblist.get(0).getString();
-        for (int k = 1; k < Oblist.size(); k++) {
-            Notes=Notes+"|"+Oblist.get(k).getString();
+        String Notes;
+        Notes="";
+        if(!Oblist.isEmpty()) {
+            for (int k = 0; k < Oblist.size(); k++) {
+                Notes = Notes + "|" + Oblist.get(k).getString();
+            }
         }
         if (edit == false) {
             ModelExternalPhoneList toAdd = new ModelExternalPhoneList(Name.getText(), Phone.getText(),Address.getText(), Email.getText(),Posistion.getValue().toString(),Notes);

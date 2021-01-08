@@ -50,6 +50,25 @@ public class Sql {
     }
 
     /**
+     * This Method Returns The List With All the cars
+     *
+     * @return The Cars
+     */
+    public ResultSet Query_General_Fast() {
+        ResultSet rs = null;
+        try {
+            String sql = "Select LiscPlate,Manufactor,Trucks.Kilometers,Trucks.Location,Service.Next_Date,MAX(Service.Next_Kilometers),KTEO.DateNext,EmmisionCard.NextDate,Trucks.SpeedWriter,Trucks.FireExtiguiser FROM Trucks,Service,KTEO,EmmisionCard WHERE Trucks.id=Service.id AND Trucks.id=EmmisionCard.id ANd Trucks.id=KTEO.id GROUP BY Service.id";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+
+    }
+
+    /**
      * This Method Returns The List With All the cars of The External Comanies
      *
      * @return The Cars
@@ -834,9 +853,12 @@ public class Sql {
         car.add(a.getGasIn());
         car.add(a.getKteoIn());
         car.add(a.getServiceInkm());
+        car.add(a.getFireExtinguiser());
+        car.add(a.getSpeedWriter());
 
 
-        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data,GasIn,KTEOIn,ServiceInKm) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data,GasIn,KTEOIn,ServiceInKm,FireExtiguiser,SpeedWriter) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -857,6 +879,8 @@ public class Sql {
             pstmt.setString(11, car.get(10));
             pstmt.setString(12, car.get(9));
             pstmt.setInt(13, Integer.valueOf(car.get(11)));
+            pstmt.setString(14,car.get(12));
+            pstmt.setString(15,car.get(13));
 
 
             pstmt.executeUpdate();
@@ -864,6 +888,7 @@ public class Sql {
 
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }

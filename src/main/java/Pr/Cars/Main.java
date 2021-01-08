@@ -41,9 +41,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Drawer.fxml"));
         Parent root  = (Parent) fxmlloader.load();
-        fxmlloader.<Drawer>getController().setActive("Kteo");
+        fxmlloader.<Drawer>getController().setActive("Trucks");
         fxmlloader.<Drawer>getController().changeBg();
-        fxmlloader.<Drawer>getController().Trucks_Button_Pressed(null);
+        fxmlloader.<Drawer>getController().Fast_Button_Pressed(null);
         primaryStage.setTitle("PrTrucks");
         primaryStage.setScene(new Scene(root, 1064, 675));
         primaryStage.initStyle(StageStyle.UNDECORATED);

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="635.0" prefWidth="864.0" style="-fx-background-color: #383838;" stylesheets="@Styles/Lists.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.FastList">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="53.0" prefWidth="162.0" />
+      <TableView fx:id="Truck_Table" layoutY="49.0" prefHeight="599.0" prefWidth="864.0">
+        <columns>
+          <TableColumn fx:id="LisancePlate_Column" prefWidth="79.0" text="Πινακίδα" />
+            <TableColumn fx:id="Manufactor_Column" prefWidth="79.0" text="Μάρκα" />
+            <TableColumn fx:id="Km_Column" prefWidth="75.0" text="Χιλίομετρα" />
+            <TableColumn fx:id="Location_Column" prefWidth="101.0" text="Τοποθεσία" />
+            <TableColumn fx:id="ServiceDate_Column" prefWidth="77.0" text="Service(Ημ)" />
+            <TableColumn fx:id="ServiceKm_Column" prefWidth="79.0" text="Service(Km)" />
+            <TableColumn fx:id="Kteo_Column" prefWidth="59.0" text="Κτεο" />
+            <TableColumn fx:id="Gas_Column" prefWidth="106.0" text="Καρτα Καυσ." />
+            <TableColumn fx:id="Speed_Column" prefWidth="90.0" text="Ταχογράφος" />
+            <TableColumn fx:id="Fire_Column" prefWidth="110.0" text="Πυροσβεστήρες" />
+        </columns>
+         <padding>
+            <Insets left="3.0" />
+         </padding>
+      </TableView>
+      <Label layoutX="310.5" layoutY="9.0" text="Με Μια Ματία" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
