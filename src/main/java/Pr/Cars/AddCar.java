@@ -334,6 +334,7 @@ public class AddCar implements Initializable {
                     TFields.get(k).setOnMouseClicked(this::setFocusTFIelds);
                 }
             }
+            sql.Disconnect();
             ResetHideLabels();
         } catch (Exception e) {
             return;
@@ -658,14 +659,15 @@ public class AddCar implements Initializable {
         dat2 = LocalDate.parse(s.getFireExtinguiser());
         Fire.setValue(dat2);
         oblist.remove(0);
-        if (s.getData() != null) {
+        if (!s.getData().isEmpty()||!s.getData().equals("")) {
+            System.out.println(s.getData().isEmpty());
             String[] Ch = s.getData().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];
             for (int i = 0; i < Ch.length; i++) {
                 Dat[i] = Ch[i].split(Pattern.quote("~"));
             }
-            for (int i = 0; i < Ch.length; i++) {
-                oblist.add(new StringsForTables(Dat[i][0], Dat[i][1]));
+            for (int l = 0; l < Ch.length; l++) {
+                oblist.add(new StringsForTables(Dat[l][0], Dat[l][1]));
             }
             Table.setItems(oblist);
         }
