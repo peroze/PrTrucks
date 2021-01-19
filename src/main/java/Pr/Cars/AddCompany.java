@@ -309,7 +309,7 @@ public class AddCompany implements Initializable {
         Name.setText(a.getName());
         Phone.setText(a.getPhone());
         oblist.remove(0);
-        if (a.getPrices() != null||!a.getPrices().isEmpty()) {
+        if (a.getPrices() != null&&!a.getPrices().isEmpty()) {
             String[] Ch = a.getPrices().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];
             for (int i = 0; i < Ch.length; i++) {

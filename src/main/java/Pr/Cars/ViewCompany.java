@@ -102,13 +102,15 @@ public class ViewCompany implements Initializable {
         ObList=FXCollections.observableArrayList();
         Name.setText(truck.getName());
         Phone.setText(truck.getPhone());
-        String[] Ch=truck.getPrices().split(Pattern.quote("|"));
-        String[][] Dat= new String[Ch.length][2];
-        for (int i=0;i<Ch.length;i++){
-            Dat[i]=Ch[i].split(Pattern.quote("~"));
-        }
-        for(int i=0;i<Ch.length;i++){
-            ObList.add(new StringsForTables(Dat[i][0],Dat[i][1]));
+        if(truck.getPrices()!=null&&!truck.getPrices().isEmpty()) {
+            String[] Ch = truck.getPrices().split(Pattern.quote("|"));
+            String[][] Dat = new String[Ch.length][2];
+            for (int i = 0; i < Ch.length; i++) {
+                Dat[i] = Ch[i].split(Pattern.quote("~"));
+            }
+            for (int i = 0; i < Ch.length; i++) {
+                ObList.add(new StringsForTables(Dat[i][0], Dat[i][1]));
+            }
         }
         if(ObList.isEmpty()){
             ObList.add(new StringsForTables("",""));

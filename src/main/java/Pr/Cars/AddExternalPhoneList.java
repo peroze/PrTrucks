@@ -372,7 +372,7 @@ public class AddExternalPhoneList implements Initializable {
         if(a.getNotes()==null){
             return;
         }
-        if(a.getNotes()!=null||!a.getNotes().isEmpty()) {
+        if(a.getNotes()!=null&&!a.getNotes().isEmpty()) {
             String[] Ch = a.getNotes().split(Pattern.quote("|"));
             for (int i = 0; i < Ch.length; i++) {
                 Oblist.add(new StringsForTables(Ch[i]));

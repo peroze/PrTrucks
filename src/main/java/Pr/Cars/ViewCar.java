@@ -119,7 +119,7 @@ public class ViewCar implements Initializable {
         Kilometers.setText(truck.getKilometers());
         Plaisio.setText(truck.getPlaisio());
         Type.setText(truck.getType());
-        if(truck.getData()!=null||!truck.getData().isEmpty()||!truck.getData().equals("")) {
+        if(truck.getData()!=null&&!truck.getData().isEmpty()&&!truck.getData().equals("")) {
             String[] Ch = truck.getData().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];
             for (int i = 0; i < Ch.length; i++) {

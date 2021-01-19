@@ -659,7 +659,7 @@ public class AddCar implements Initializable {
         dat2 = LocalDate.parse(s.getFireExtinguiser());
         Fire.setValue(dat2);
         oblist.remove(0);
-        if (!s.getData().isEmpty()||!s.getData().equals("")) {
+        if (!s.getData().isEmpty()&&!s.getData().equals("")&&s.getData()!=null) {
             System.out.println(s.getData().isEmpty());
             String[] Ch = s.getData().split(Pattern.quote("|"));
             String[][] Dat = new String[Ch.length][2];

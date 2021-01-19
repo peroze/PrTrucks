@@ -140,7 +140,7 @@ public class ViewService implements Initializable {
         Price.setText(service.getPrice()+" €");
         Price1.setText(service.getWorkPrice()+" €");
         Receipt_Number.setText(service.getReceiptNum());
-        if (service.getChanges() != null) {
+        if (service.getChanges() != null&&!service.getChanges().isEmpty()&&service.getChanges().equals("")) {
             String[] Ch = service.getChanges().split(Pattern.quote("|"));
             for (int i = 0; i < Ch.length; i++) {
                 String[] Ch1=Ch[i].split(Pattern.quote("~"));

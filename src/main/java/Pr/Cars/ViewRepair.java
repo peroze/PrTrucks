@@ -133,7 +133,7 @@ public class ViewRepair implements Initializable {
         Price.setText(repair.getPrice()+" €");
         Price1.setText(repair.getWorkPrice()+" €");
         Receipt_Number.setText(repair.getReceipt_Number());
-        if (repair.getChanges() != null) {
+        if (repair.getChanges() != null&&!repair.getChanges().isEmpty()&&!repair.getChanges().equals("")) {
             String[] Ch = repair.getChanges().split(Pattern.quote("|"));
             for (int i = 0; i < Ch.length; i++) {
                 String[] Ch1=Ch[i].split(Pattern.quote("~"));

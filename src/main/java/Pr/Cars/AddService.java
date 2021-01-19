@@ -594,7 +594,7 @@ public class AddService implements Initializable {
         Lisc_Plate.setValue(s.getLiscPlate());
         Kilometers.setText(s.getKilometers());
         Receipt_Number.setText(s.getReceiptNum());
-        if (!s.getChanges().isEmpty()||s.getChanges() != null) {
+        if (!s.getChanges().isEmpty()&&s.getChanges() != null) {
             String[] Ch = s.getChanges().split(Pattern.quote("|"));
             for (int i = 0; i < Ch.length; i++) {
                 String[] Ch1 = Ch[i].split(Pattern.quote("~"));

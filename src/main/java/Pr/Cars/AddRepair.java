@@ -591,7 +591,7 @@ public class AddRepair implements Initializable {
         Lisc_Plate.setValue(s.getLiscPlate());
         Kilometers.setText(s.getKilometers());
         Receipt_Number.setText(s.getReceipt_Number());
-        if (!s.getChanges().isEmpty()||s.getChanges() != null) {
+        if (!s.getChanges().isEmpty()&&s.getChanges() != null) {
             String[] Ch = s.getChanges().split(Pattern.quote("|"));
             System.out.println(Ch[0]);
             for (int i = 0; i < Ch.length; i++) {

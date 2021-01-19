@@ -107,7 +107,7 @@ public class ViewExternalPhone implements Initializable {
         Phone.setText(list.getPhone());
         Email.setText(list.getEmail());
         Type.setText(list.getDiscreption());
-        if (list.getNotes() != null) {
+        if (list.getNotes() != null&&!list.getNotes().isEmpty()) {
             String[] Ch = list.getNotes().split(Pattern.quote("|"));
             for (int i = 0; i < Ch.length; i++) {
                 ObList.add(new StringsForTables(Ch[i]));
