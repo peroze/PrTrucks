@@ -35,14 +35,14 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
+      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
       <Button fx:id="Ok_Button" layoutX="208.0" layoutY="660.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
       <Label layoutX="114.0" layoutY="42.0" prefHeight="36.0" prefWidth="374.0" text="Εισαγωγή Εξωτερικού Συνεργάτη" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
+      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
       <Label fx:id="Name_Label" layoutX="109.0" layoutY="149.0" prefHeight="17.0" prefWidth="167.0" text="Όνομα" textFill="RED">
          <font>
             <Font size="9.0" />
@@ -53,19 +53,19 @@
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Address" layoutX="109.0" layoutY="231.0" prefHeight="25.0" prefWidth="138.0" promptText="Διεύθυνση" />
+      <TextField fx:id="Address" layoutX="109.0" layoutY="231.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Διεύθυνση" />
       <Label fx:id="Address_Label" layoutX="109.0" layoutY="221.0" prefHeight="17.0" prefWidth="167.0" text="Διευθυνση" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <ComboBox fx:id="Posistion" layoutX="374.0" layoutY="233.0" prefHeight="22.0" prefWidth="138.0" promptText="Τύπος Συνεργάτη" />
+      <ComboBox fx:id="Posistion" layoutX="374.0" layoutY="233.0" onKeyPressed="#EnterPressed" prefHeight="22.0" prefWidth="138.0" promptText="Τύπος Συνεργάτη" />
       <Label fx:id="Posistion_Label" layoutX="374.0" layoutY="221.0" prefHeight="17.0" prefWidth="167.0" text="Τύπος Συνεργάτη" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Email" layoutX="109.0" layoutY="291.0" promptText="Email" />
+      <TextField fx:id="Email" layoutX="109.0" layoutY="291.0" onKeyPressed="#EnterPressed" promptText="Email" />
       <Label fx:id="Email_Label1" layoutX="110.0" layoutY="279.0" prefHeight="17.0" prefWidth="167.0" text="Email" textFill="RED">
          <font>
             <Font size="9.0" />

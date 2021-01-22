@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -114,6 +116,19 @@ public class AddRefill implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Lisc_Plate.valueProperty().addListener((ov, oldValue, newValue)->{
+            Date.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Date)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Date)).setVisible(true);
+            Date.show();
+        });
+        Date.valueProperty().addListener((ov, oldValue, newValue)->{
+            Kilometers.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Kilometers)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Kilometers)).setVisible(true);
+        });
         Lisc_Plate.setItems(Cars);
         sql.Disconnect();
         Labels.add(Lisc_Label);
@@ -179,6 +194,31 @@ public class AddRefill implements Initializable {
         }
         Date.setStyle(null);
         Lisc_Plate.setStyle(null);
+    }
+
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            TextField ev = (TextField) event.getSource();
+            if (ev.equals(Kilometers)) {
+                Amount.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Amount)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Amount)).setVisible(true);
+
+            } else if (ev.equals(Amount)) {
+                Driver.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Driver)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Driver)).setVisible(true);
+            }
+            else if (ev.equals(Driver)) {
+                Location.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Location)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Location)).setVisible(true);
+            }
+        }
     }
 
 

@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -147,6 +149,12 @@ public class AddExternalCar implements Initializable {
                Types.add(rs.getString("Name"));
            }
            Company.setItems(Types);
+           Company.valueProperty().addListener((ov, oldValue, newValue)->{
+               manufactor.requestFocus();
+               ResetHideLabels();
+               ((Label) dict.get(manufactor)).setStyle("-fx-text-fill:  #8B74BD");
+               ((Label) dict.get(manufactor)).setVisible(true);
+           });
            Labels = new ArrayList<>();
            Labels.add(Lisc_Label);
            Labels.add(Manu_Label);
@@ -232,6 +240,57 @@ public class AddExternalCar implements Initializable {
             TFields.get(i).setStyle(null);
         }
         Company.setStyle(null);
+    }
+
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            TextField ev=(TextField)event.getSource();
+            if(ev.equals(Lisc_Plate)){
+                Company.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Company)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Company)).setVisible(true);
+                Company.show();
+            }
+            else if(ev.equals(manufactor)){
+                Model.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Model)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Model)).setVisible(true);
+            }
+            else if(ev.equals(Model)){
+                Driver.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Driver)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Driver)).setVisible(true);
+            }
+            else if(ev.equals(Driver)){
+                Phone.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Phone)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Phone)).setVisible(true);
+            }
+            else if(ev.equals(Phone)){
+                Width.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Width)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Width)).setVisible(true);
+
+            }
+            else if(ev.equals(Width)){
+                Height.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Height)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Height)).setVisible(true);
+            }
+            else if(ev.equals(Height)) {
+                Lenght.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Lenght)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Lenght)).setVisible(true);
+            }
+        }
     }
 
 

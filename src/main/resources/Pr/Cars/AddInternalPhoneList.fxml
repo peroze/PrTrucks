@@ -33,14 +33,14 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
+      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
       <Button fx:id="Ok_Button" layoutX="207.0" layoutY="310.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
-      <Label layoutX="188.0" layoutY="39.0" prefHeight="36.0" prefWidth="225.0" text="Εισαγωγή Εταιρίας" textFill="WHITE">
+      <Label layoutX="180.0" layoutY="37.0" prefHeight="36.0" prefWidth="263.0" text="Εισαγωγή Υπαλλίλου" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
+      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Όνομα" />
       <Label fx:id="Name_Label" layoutX="109.0" layoutY="149.0" prefHeight="17.0" prefWidth="167.0" text="Όνομα" textFill="RED">
          <font>
             <Font size="9.0" />
@@ -51,7 +51,7 @@
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Email" layoutX="109.0" layoutY="231.0" prefHeight="25.0" prefWidth="138.0" promptText="E-Mail" />
+      <TextField fx:id="Email" layoutX="109.0" layoutY="231.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="E-Mail" />
       <Label fx:id="Email_Label1" layoutX="109.0" layoutY="221.0" prefHeight="17.0" prefWidth="167.0" text="E-Mail" textFill="RED">
          <font>
             <Font size="9.0" />

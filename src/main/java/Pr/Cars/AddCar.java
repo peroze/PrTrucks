@@ -4,18 +4,26 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -183,7 +191,6 @@ public class AddCar implements Initializable {
 
     private ObservableList<StringsForTables> oblist;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -260,6 +267,47 @@ public class AddCar implements Initializable {
                 return row;
             }));
             Table.setItems(oblist);
+            Date.valueProperty().addListener((ov, oldValue, newValue)->{
+                Location.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Location)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Location)).setVisible(true);
+                Location.show();
+            });
+            Type.valueProperty().addListener((ov, oldValue, newValue)->{
+                Date.requestFocus();
+                Date.show();
+                ResetHideLabels();
+                ((Label) dict.get(Date)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Date)).setVisible(true);
+            });
+            Location.valueProperty().addListener((ov, oldValue, newValue)->{
+                KTEO.requestFocus();
+                KTEO.show();
+                ResetHideLabels();
+                ((Label) dict.get(KTEO)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(KTEO)).setVisible(true);
+            });
+            KTEO.valueProperty().addListener((ov, oldValue, newValue)->{
+                Service.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Service)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Service)).setVisible(true);
+            });
+            Gas.valueProperty().addListener((ov, oldValue, newValue)->{
+                Fire.requestFocus();
+                Fire.show();
+                ResetHideLabels();
+                ((Label) dict.get(Fire)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Fire)).setVisible(true);
+            });
+            Fire.valueProperty().addListener((ov, oldValue, newValue)->{
+                Speed.requestFocus();
+                Speed.show();
+                ResetHideLabels();
+                ((Label) dict.get(Speed)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Speed)).setVisible(true);
+            });
             ContextMenu Cont = new ContextMenu();
             MenuItem Del = new MenuItem("Διαγραφή");
             Del.setOnAction(this::Del);
@@ -347,6 +395,60 @@ public class AddCar implements Initializable {
         ((Label) dict.get(e.getSource())).setStyle("-fx-text-fill:  #8B74BD");
         ((Label) dict.get(e.getSource())).setVisible(true);
     }
+
+
+    @FXML
+    void EnterPress(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            TextField ev=(TextField)event.getSource();
+            if(ev.equals(Plaisio)){
+                Lisc_Plate.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Lisc_Plate)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Lisc_Plate)).setVisible(true);
+            }
+            else if(ev.equals(Lisc_Plate)){
+                manufactor.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(manufactor)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(manufactor)).setVisible(true);
+            }
+            else if(ev.equals(manufactor)){
+                Model.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Model)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Model)).setVisible(true);
+            }
+            else if(ev.equals(Model)){
+                Kilometers.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Kilometers)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Kilometers)).setVisible(true);
+            }
+            else if(ev.equals(Kilometers)){
+                Type.requestFocus();
+                Type.show();
+                ResetHideLabels();
+                ((Label) dict.get(Type)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Type)).setVisible(true);
+
+            }
+            else if(ev.equals(Service)){
+                Gas.requestFocus();
+                Gas.show();
+                ResetHideLabels();
+                ((Label) dict.get(Gas)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Gas)).setVisible(true);
+            }
+            else if(ev.equals(Char_Text)){
+                Code_Text.requestFocus();
+            }
+            else if(ev.equals(Code_Text)){
+                Char_Button_Pr(null);
+            }
+        }
+    }
+
 
     public void ResetHideLabels() {
         for (int i = 0; i < Labels.size(); i++) {

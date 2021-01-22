@@ -14,6 +14,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -197,6 +199,12 @@ public class AddExternalPhoneList implements Initializable {
             });
             return row;
         }));
+        Posistion.valueProperty().addListener((ov, oldValue, newValue)->{
+            Email.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Email)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Email)).setVisible(true);
+        });
         ContextMenu Cont=new ContextMenu();
         MenuItem Del=new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
@@ -277,7 +285,32 @@ public class AddExternalPhoneList implements Initializable {
         Note_Text.clear();
     }
 
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            TextField ev=(TextField)event.getSource();
+            if(ev.equals(Name)){
+                Phone.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Phone)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Phone)).setVisible(true);
 
+            }
+            else if(ev.equals(Phone)){
+                Address.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Address)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Address)).setVisible(true);
+            }
+            else if(ev.equals(Address)){
+                Posistion.requestFocus();
+                ResetHideLabels();
+                Posistion_Label.setStyle("-fx-text-fill:  #8B74BD");
+                Posistion_Label.setVisible(true);
+                Posistion.show();
+            }
+        }
+    }
 
     /**
      * This button adds the new KTEO in the db

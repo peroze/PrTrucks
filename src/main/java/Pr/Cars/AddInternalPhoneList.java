@@ -6,8 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -172,6 +175,32 @@ public class AddInternalPhoneList implements Initializable {
             TFields.get(i).setStyle(null);
         }
         Email.setStyle(null);
+    }
+
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            TextField ev=(TextField)event.getSource();
+            if(ev.equals(Name)){
+                Phone.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Phone)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Phone)).setVisible(true);
+
+            }
+            else if(ev.equals(Phone)){
+                Email.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Email)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Email)).setVisible(true);
+            }else if(ev.equals(Email)){
+                Posistion.requestFocus();
+                ResetHideLabels();
+                Posistion.show();
+                ((Label) dict.get(Posistion)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Posistion)).setVisible(true);
+            }
+        }
     }
 
 

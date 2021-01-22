@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -193,9 +195,29 @@ public class AddCompany implements Initializable {
             }
     }
 
+
+
     public void ResetCssTFields(){
         for(int i=0;i<TFields.size();i++){
             TFields.get(i).setStyle(null);
+        }
+    }
+
+    @FXML
+    void EnterPress(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            TextField ev = (TextField) event.getSource();
+            if (ev.equals(Name)) {
+                Phone.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Phone)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Phone)).setVisible(true);
+            } else if (ev.equals(Char_Text)) {
+                Code_Text.requestFocus();
+                ResetHideLabels();
+            } else if (ev.equals(Code_Text)) {
+                Char_Button_Pr(null);
+            }
         }
     }
 

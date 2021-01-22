@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -158,6 +160,19 @@ public class AddKTEO implements Initializable {
         );
         Oblist.add(new StringsForTables(""));
         Table.setItems(Oblist);
+        Lisc_Plate.valueProperty().addListener((ov, oldValue, newValue)->{
+            Date.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Date)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Date)).setVisible(true);
+            Date.show();
+        });
+        Date.valueProperty().addListener((ov, oldValue, newValue)->{
+            Kilometers.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Kilometers)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Kilometers)).setVisible(true);
+        });
         ContextMenu Cont = new ContextMenu();
         MenuItem Del = new MenuItem("Διαγραφή");
         Del.setOnAction(this::Del);
@@ -229,6 +244,28 @@ public class AddKTEO implements Initializable {
         }
         Date.setStyle(null);
         Lisc_Plate.setStyle(null);
+
+
+    }
+
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            TextField ev = (TextField) event.getSource();
+            System.out.println(ev.getId());
+            if (ev.equals(Kilometers)) {
+                Workshop.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Workshop)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Workshop)).setVisible(true);
+
+            } else if (ev.equals(Workshop)) {
+                Price.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Price)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Price)).setVisible(true);
+            }
+        }
     }
 
     public void Del(ActionEvent e) {

@@ -34,14 +34,14 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
+      <TextField fx:id="Phone" layoutX="374.0" layoutY="159.0" onKeyPressed="#EnterPress" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο" />
       <Button fx:id="Ok_Button" layoutX="207.0" layoutY="556.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
       <Label layoutX="188.0" layoutY="39.0" prefHeight="36.0" prefWidth="225.0" text="Εισαγωγή Εταιρίας" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
+      <TextField fx:id="Name" layoutX="109.0" layoutY="159.0" onKeyPressed="#EnterPress" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
       <Label fx:id="Name_Label" layoutX="109.0" layoutY="149.0" prefHeight="17.0" prefWidth="167.0" text="Όνομα" textFill="RED">
          <font>
             <Font size="9.0" />
@@ -52,14 +52,15 @@
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Char_Text" layoutX="109.0" layoutY="247.0" prefHeight="25.0" prefWidth="138.0" promptText="Προορισμός" />
-      <TextField fx:id="Code_Text" layoutX="109.0" layoutY="286.0" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
+      <TextField fx:id="Char_Text" layoutX="109.0" layoutY="247.0" onKeyPressed="#EnterPress" prefHeight="25.0" prefWidth="138.0" promptText="Προορισμός" />
+      <TextField fx:id="Code_Text" layoutX="109.0" layoutY="286.0" onKeyPressed="#EnterPress" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
       <TableView fx:id="Table" layoutX="119.0" layoutY="332.0" prefHeight="200.0" prefWidth="355.0">
          <columns>
             <TableColumn fx:id="Data_Col" prefWidth="179.0" text="Προορσιμός" />
             <TableColumn fx:id="Code_Col" prefWidth="175.0" text="Τιμή" />
          </columns>
       </TableView>
-      <Button fx:id="Char_Button" layoutX="374.0" layoutY="272.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="138.0" text="Προσθήκη Χαρακτ." />
+      <Button fx:id="Char_Button" layoutX="351.0" layoutY="272.0" mnemonicParsing="false" onAction="#Char_Button_Pr" prefHeight="29.0" prefWidth="205.0" text="Προσθήκη Κόστους Δρομολογίου" />
+      <Label layoutX="242.0" layoutY="221.0" text="Κόστος Δρομολογίων" textFill="WHITE" />
    </children>
 </AnchorPane>

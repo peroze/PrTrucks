@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -187,6 +189,25 @@ public class AddRepair implements Initializable {
             Oblist.add(new StringsForTables("", "", "", "", "", ""));
             placeboo = true;
             Lisc_Plate.setItems(Cars);
+            Lisc_Plate.valueProperty().addListener((ov, oldValue, newValue)->{
+                Date.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Date)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Date)).setVisible(true);
+                Date.show();
+            });
+            Date.valueProperty().addListener((ov, oldValue, newValue)->{
+                Discreption.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Discreption)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Discreption)).setVisible(true);
+            });
+            DatePart.valueProperty().addListener((ov, oldValue, newValue)->{
+                RecNum_Text.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(RecNum_Text)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(RecNum_Text)).setVisible(true);
+            });
             Table.setEditable(true);
             Parts.setCellValueFactory(new PropertyValueFactory<>("string"));
             ParCode_Col.setCellValueFactory(new PropertyValueFactory<>("string2"));
@@ -348,6 +369,54 @@ public class AddRepair implements Initializable {
         }
         Date.setStyle(null);
         Lisc_Plate.setStyle(null);
+    }
+
+    @FXML
+    void EnterPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            TextField ev = (TextField) event.getSource();
+
+            if (ev.equals(Discreption)) {
+                Kilometers.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Kilometers)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Kilometers)).setVisible(true);
+            } else if (ev.equals(Kilometers)) {
+                Workshop.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Workshop)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Workshop)).setVisible(true);
+
+            } else if (ev.equals(Workshop)) {
+                Price.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Price)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Price)).setVisible(true);
+            }
+            else if (ev.equals(Price)) {
+                Receipt_Number.requestFocus();
+                ResetHideLabels();
+                ((Label) dict.get(Receipt_Number)).setStyle("-fx-text-fill:  #8B74BD");
+                ((Label) dict.get(Receipt_Number)).setVisible(true);
+            }
+            else if (ev.equals(AddPart)) {
+                Serial_Text.requestFocus();
+                ResetHideLabels();
+            }
+            else if (ev.equals(Serial_Text)) {
+                Supplier_Text.requestFocus();
+                ResetHideLabels();
+            }
+            else if (ev.equals(Supplier_Text)) {
+                DatePart.requestFocus();
+                ResetHideLabels();
+            } else if (ev.equals(RecNum_Text)) {
+                RepPrice_Text.requestFocus();
+                ResetHideLabels();
+            }else if (ev.equals(RepPrice_Text)) {
+               AddPart_Btn_Pr(null);
+            }
+        }
     }
 
 

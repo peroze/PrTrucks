@@ -33,9 +33,9 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="manufactor" layoutX="111.0" layoutY="173.0" prefHeight="25.0" prefWidth="138.0" promptText="Μάρκα" />
-      <TextField fx:id="Model" layoutX="364.0" layoutY="173.0" prefHeight="25.0" prefWidth="138.0" promptText="Μόντέλο" />
-      <TextField fx:id="Lisc_Plate" layoutX="111.0" layoutY="125.0" prefHeight="25.0" prefWidth="138.0" promptText="Πίνακιδα" />
+      <TextField fx:id="manufactor" layoutX="111.0" layoutY="173.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Μάρκα" />
+      <TextField fx:id="Model" layoutX="364.0" layoutY="173.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Μόντέλο" />
+      <TextField fx:id="Lisc_Plate" layoutX="111.0" layoutY="125.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Πίνακιδα" />
       <Button fx:id="Ok_Button" layoutX="214.0" layoutY="394.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή Όχηματος" />
       <Label layoutX="163.0" layoutY="37.0" prefHeight="36.0" prefWidth="276.0" text="Προσθήκη Αυτοκινήτου" textFill="WHITE">
          <font>
@@ -43,9 +43,9 @@
          </font>
       </Label>
       <ComboBox fx:id="Company" layoutX="364.0" layoutY="125.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
-      <TextField fx:id="Phone" layoutX="364.0" layoutY="221.0" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο Οδηγού" />
-      <TextField fx:id="Width" layoutX="111.0" layoutY="270.0" prefHeight="25.0" prefWidth="138.0" promptText="Πλάτος" />
-      <TextField fx:id="Driver" layoutX="111.0" layoutY="221.0" prefHeight="26.0" prefWidth="138.0" promptText="Οδηγός" />
+      <TextField fx:id="Phone" layoutX="364.0" layoutY="221.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Τηλέφωνο Οδηγού" />
+      <TextField fx:id="Width" layoutX="111.0" layoutY="270.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Πλάτος" />
+      <TextField fx:id="Driver" layoutX="111.0" layoutY="221.0" onKeyPressed="#EnterPressed" prefHeight="26.0" prefWidth="138.0" promptText="Οδηγός" />
       <Label fx:id="Manu_Label" layoutX="108.0" layoutY="160.0" prefHeight="17.0" prefWidth="138.0" text="Μάρκα" textFill="RED">
          <font>
             <Font size="9.0" />
@@ -71,8 +71,8 @@
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Height" layoutX="364.0" layoutY="270.0" prefHeight="25.0" prefWidth="138.0" promptText="Ύψος" />
-      <TextField fx:id="Lenght" layoutX="111.0" layoutY="318.0" prefHeight="25.0" prefWidth="138.0" promptText="Μήκος" />
+      <TextField fx:id="Height" layoutX="364.0" layoutY="270.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Ύψος" />
+      <TextField fx:id="Lenght" layoutX="111.0" layoutY="318.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Μήκος" />
       <Label fx:id="Width_label" layoutX="109.0" layoutY="257.0" prefHeight="17.0" prefWidth="154.0" text="Πλάτος" textFill="RED">
          <font>
             <Font size="9.0" />

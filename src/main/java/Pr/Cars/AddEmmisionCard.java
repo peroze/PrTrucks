@@ -99,6 +99,19 @@ public class AddEmmisionCard implements Initializable {
             e.printStackTrace();
         }
         Lisc_Plate.setItems(Cars);
+        Lisc_Plate.valueProperty().addListener((ov, oldValue, newValue)->{
+            Date.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Date)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Date)).setVisible(true);
+            Date.show();
+        });
+        Date.valueProperty().addListener((ov, oldValue, newValue)->{
+            Kilometers.requestFocus();
+            ResetHideLabels();
+            ((Label) dict.get(Kilometers)).setStyle("-fx-text-fill:  #8B74BD");
+            ((Label) dict.get(Kilometers)).setVisible(true);
+        });
         sql.Disconnect();
         Labels.add(Lisc_Label);
         Texts.add("Πινακίδα");
