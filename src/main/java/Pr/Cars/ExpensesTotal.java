@@ -460,7 +460,7 @@ public class ExpensesTotal implements Initializable {
                     }
                     break;
             }
-            for (int m = 0; m < rs.size(); m++) {
+            //for (int m = 0; m < rs.size(); m++) {
                 double total = 0;
                 for (int l = 0; l < rs.size(); l++) {
 
@@ -483,7 +483,7 @@ public class ExpensesTotal implements Initializable {
                 model = new ModelTotal(dist, String.valueOf(total));
                 Data.add(model);
                 Table1.setItems(Data);
-            }
+           // }
             db.Disconnect();
         } catch (
                 SQLException e) {

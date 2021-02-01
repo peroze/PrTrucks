@@ -38,7 +38,7 @@ public class Sql {
     public ResultSet Query_General_Trucks() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM Trucks ORDER BY id";
+            String sql = "SELECT  * FROM Trucks WHERE Deleted=0 ORDER BY id ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -57,7 +57,7 @@ public class Sql {
     public ResultSet Query_General_Fast() {
         ResultSet rs = null;
         try {
-            String sql = "Select LiscPlate,Manufactor,Trucks.Kilometers,Trucks.Location,Service.Next_Date,MAX(Service.Next_Kilometers),KTEO.DateNext,EmmisionCard.NextDate,Trucks.SpeedWriter,Trucks.FireExtiguiser FROM Trucks,Service,KTEO,EmmisionCard WHERE Trucks.id=Service.id AND Trucks.id=EmmisionCard.id ANd Trucks.id=KTEO.id GROUP BY Service.id";
+            String sql = "Select LiscPlate,Manufactor,Trucks.Kilometers,Trucks.Location,Service.Next_Date,MAX(Service.Next_Kilometers),KTEO.DateNext,EmmisionCard.NextDate,Trucks.SpeedWriter,Trucks.FireExtiguiser FROM Trucks,Service,KTEO,EmmisionCard WHERE Trucks.id=Service.id AND Trucks.id=EmmisionCard.id ANd Trucks.id=KTEO.id AND Trucks.Deleted=0 GROUP BY Service.id";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -163,7 +163,7 @@ public class Sql {
     public ResultSet Query_General_Repair() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM Repairs  ";
+            String sql = "SELECT  * FROM Repairs JOIN Trucks ON Repairs.id=Trucks.id WHERE Deleted=0  ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -183,7 +183,7 @@ public class Sql {
     public ResultSet Query_General_KTEO() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM KTEO  ";
+            String sql = "SELECT  * FROM KTEO JOIN Trucks ON KTEO.id=Trucks.id WHERE Deleted=0 ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -202,7 +202,7 @@ public class Sql {
     public ResultSet Query_General_EmmisionCard() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM EmmisionCard  ";
+            String sql = "SELECT  * FROM EmmisionCard  JOIN Trucks ON EmmisionCard.id=Trucks.id WHERE Deleted=0  ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -220,7 +220,7 @@ public class Sql {
     public ResultSet Query_General_Refill() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  * FROM Refill  ";
+            String sql = "SELECT  * FROM Refill JOIN Trucks ON  Refill.Car_id=Trucks.id WHERE Trucks.Deleted=0  ";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -490,7 +490,7 @@ public class Sql {
     public ResultSet Query_All_Lisc() {
         ResultSet rs = null;
         try {
-            String sql = "SELECT  LiscPlate FROM  Trucks ";
+            String sql = "SELECT  LiscPlate FROM  Trucks WHERE Deleted=0";
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -524,7 +524,7 @@ public class Sql {
      * @return The Latest Service of each car
      */
     public ResultSet Query_Group_Service() {
-        String sql = "Select id, MAX(Date),Kilometers,Next_Date,Type,Changes,Workshop,Next_Kilometers,Price,Service_Id,Receipt_Number,WorkPrice From Service Group BY id";
+        String sql = "Select  Service.id, MAX(Service.Date) AS 'MAX(Date)',Service.Kilometers AS Kilometers,Service.Next_Date AS Next_Date,Service.Type AS Type,Service.Changes AS Changes ,Service.Workshop AS Workshop ,Service.Next_Kilometers AS Next_Kilometers,Service.Price AS Price ,Service.Service_Id AS Service_Id ,Service.Receipt_Number AS Receipt_Number ,Service.WorkPrice AS WorkPrice  From Service JOIN Trucks ON Service.id=Trucks.id WHERE Trucks.Deleted=0 Group BY Service.id";
         ResultSet rs = null;
         try {
             Statement stmt = conn.createStatement();
@@ -779,25 +779,25 @@ public class Sql {
             ResultSet rs;
             PreparedStatement pstm;
             if (Location == null && Type != null) {
-                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Trucks.Type=?";
+                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Trucks.Type=? AND Trucks.Deleted=0";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Trucks.Type=? AND Trucks.Deleted=0 Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Type);
             } else if (Type == null && Location != null) {
 
-                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Location=?";
+                sql = "SELECT  * FROM" + Table + ",Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Deleted=0";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Deleted=0 Group BY Service.id";
 
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);
             } else {
-                sql = "SELECT  * FROM " + Table + " ,Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Type=?";
+                sql = "SELECT  * FROM " + Table + " ,Trucks WHERE " + Table + ".id=Trucks.id AND Location=? AND Trucks.Type=? AND Trucks.Deleted=0";
                 if (Table.equals("Service")) {
-                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? Group BY Service.id";
+                    sql = "Select Service.id, MAX(Service.Date)AS Date,Service.Kilometers,Service.Next_Date,Service.Type,Service.Changes,Service.Workshop,Service.Next_Kilometers,Service.Price,Service.Service_Id,Receipt_Number,WorkPrice From Service,Trucks WHERE Service.id=Trucks.id AND Location=? AND Trucks.Type=? AND Trucks.Deleted=0 Group BY Service.id";
                 }
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, Location);
@@ -1306,17 +1306,51 @@ public class Sql {
      * @param id The id of the car to be deleted from the databse
      * @return 1 if the deletion is complete or 0if there is an error
      */
-    public int DeleteCar(int id) {
-        String stmt = "DELETE FROM Trucks WHERE id=?;";
+    public int DeleteCar(ModelTruck a) {
+        ArrayList<String> car = new ArrayList<>();
+
+        car.add(a.getLiscPlate());
+        car.add(a.getManufactor());
+        car.add(a.getModel());
+        car.add(a.getKilometers());
+        car.add(a.getPlaisio());
+        car.add(a.getLocation());
+        car.add(a.getType());
+        car.add(a.getDate());
+        car.add(a.getData());
+        car.add(a.getGasIn());
+        car.add(a.getKteoIn());
+        car.add(a.getServiceInkm());
+        car.add(a.getFireExtinguiser());
+        car.add(a.getSpeedWriter());
+
+
+
+        String sql = "INSERT OR REPLACE INTO Trucks(id,LiscPlate,Manufactor,Model,Kilometers,Plaisio,Location,Type,First_Date,Data,GasIn,KTEOIn,ServiceInKm,FireExtiguiser,SpeedWriter,Deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
         try {
-            PreparedStatement pstmt = conn.prepareStatement(stmt);
-            pstmt.setInt(1, id);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.valueOf(a.getId()));
+            pstmt.setString(2, car.get(0));
+            pstmt.setString(3, car.get(1));
+            pstmt.setString(4, car.get(2));
+            pstmt.setInt(5, Integer.valueOf(car.get(3)));
+            pstmt.setString(6, car.get(4));
+            pstmt.setString(7, car.get(5));
+            pstmt.setString(8, car.get(6));
+            pstmt.setString(9, car.get(7));
+            pstmt.setString(10, car.get(8));
+            pstmt.setString(11, car.get(10));
+            pstmt.setString(12, car.get(9));
+            pstmt.setInt(13, Integer.valueOf(car.get(11)));
+            pstmt.setString(14,car.get(12));
+            pstmt.setString(15,car.get(13));
+            pstmt.setBoolean(16,true);
             pstmt.executeUpdate();
-            conn.close();
-            Class.forName("org.sqlite.JDBC");   //The is an error with Java Sqlite when you do multiple Deletes it crashes if you dont close and reopen connection (Not always but sometimes)
-            conn = DriverManager.getConnection("jdbc:sqlite:PrTrucks.db");
             return 1;
-        } catch (SQLException | ClassNotFoundException e) {
+
+
+        } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }

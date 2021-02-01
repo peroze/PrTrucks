@@ -255,7 +255,7 @@ public class TrucksList implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Sql sql = new Sql();
-                int k = sql.DeleteCar(Integer.valueOf(temp.getId()));
+                int k = sql.DeleteCar(temp);
                 if (k == 0) {
                     Alert alert2 = new Alert(Alert.AlertType.ERROR);
                     alert2.setTitle("Αποτυχία");
