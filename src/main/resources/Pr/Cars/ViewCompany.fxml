@@ -29,7 +29,7 @@
             <TableColumn fx:id="Code_Col" prefWidth="128.0" text="Τιμή" />
         </columns>
       </TableView>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="596.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="596.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -59,12 +59,12 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
-      <Label layoutX="147.0" layoutY="127.0" style="-fx-text-fill: #FA8072;" text="Όνομα">
+      <Label layoutX="147.0" layoutY="127.0" style="-fx-text-fill: #ff6542;" text="Όνομα">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label layoutX="340.0" layoutY="128.0" style="-fx-text-fill: #FA8072;" text="Τηλέφωνο">
+      <Label layoutX="340.0" layoutY="128.0" style="-fx-text-fill: #ff6542;" text="Τηλέφωνο">
          <font>
             <Font size="9.0" />
          </font>

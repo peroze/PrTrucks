@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddService">
    <children>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -37,9 +37,9 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="Discreption" layoutX="112.0" layoutY="143.0" prefHeight="25.0" prefWidth="138.0" promptText="Τύπος" />
-      <TextField fx:id="Price" layoutX="377.0" layoutY="186.0" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
-      <TextField fx:id="Kilometers" layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
+      <TextField fx:id="Discreption" layoutX="112.0" layoutY="143.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Τύπος" />
+      <TextField fx:id="Price" layoutX="377.0" layoutY="186.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
+      <TextField fx:id="Kilometers" layoutX="377.0" layoutY="143.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
       <DatePicker fx:id="Date" layoutX="377.0" layoutY="98.0" prefHeight="25.0" prefWidth="138.0" promptText="Ημερομινία" />
       <Button fx:id="Ok_Button" layoutX="226.0" layoutY="701.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" textFill="WHITE" />
       <Label layoutX="220.0" layoutY="30.0" prefHeight="36.0" prefWidth="200.0" text="Εισαγωγή Service" textFill="WHITE">
@@ -47,7 +47,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="AddPart" layoutX="110.0" layoutY="277.0" prefHeight="26.0" prefWidth="138.0" promptText="Περιγραφή" />
+      <TextField fx:id="AddPart" layoutX="110.0" layoutY="277.0" onKeyPressed="#EnterPressed" prefHeight="26.0" prefWidth="138.0" promptText="Περιγραφή" />
       <Button fx:id="AddPart_Btn" layoutX="222.0" layoutY="412.0" mnemonicParsing="false" onAction="#AddPart_Btn_Pr" prefHeight="29.0" prefWidth="162.0" text="Εισαγωγή Ανταλλακτικού" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -62,7 +62,7 @@
             <TableColumn fx:id="ParDat_Col" prefWidth="78.0" text="Ημερομηνία" />
         </columns>
       </TableView>
-      <TextField fx:id="Workshop" layoutX="112.0" layoutY="186.0" prefHeight="25.0" prefWidth="138.0" promptText="Συνεργείο" />
+      <TextField fx:id="Workshop" layoutX="112.0" layoutY="186.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Συνεργείο" />
       <ComboBox fx:id="Lisc_Plate" layoutX="112.0" layoutY="98.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
       <Label fx:id="Workshop_Label" layoutX="112.0" layoutY="173.0" prefHeight="17.0" prefWidth="138.0" text="Συνεργείο" textFill="RED">
          <font>
@@ -94,25 +94,25 @@
             <Font size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="Supplier_Text" layoutX="110.0" layoutY="324.0" prefHeight="24.0" prefWidth="138.0" promptText="Προμυθευτής" />
-      <TextField fx:id="Serial_Text" layoutX="371.0" layoutY="278.0" prefHeight="24.0" prefWidth="138.0" promptText="Κωδικός">
+      <TextField fx:id="Supplier_Text" layoutX="110.0" layoutY="324.0" onKeyPressed="#EnterPressed" prefHeight="24.0" prefWidth="138.0" promptText="Προμυθευτής" />
+      <TextField fx:id="Serial_Text" layoutX="371.0" layoutY="278.0" onKeyPressed="#EnterPressed" prefHeight="24.0" prefWidth="138.0" promptText="Κωδικός">
          <tooltip>
             <Tooltip autoHide="true" text="Η τίμη εμφανίζεται μόνο όταν είναι από διαφορετικό προμυθευτή" />
          </tooltip>
       </TextField>
       <Label layoutX="274.0" layoutY="261.0" text="Ανταλλακτικά" textFill="WHITE" />
-      <TextField fx:id="RepPrice_Text" layoutX="371.0" layoutY="324.0" prefHeight="24.0" prefWidth="138.0" promptText="Τιμή">
+      <TextField fx:id="RepPrice_Text" layoutX="371.0" layoutY="371.0" onKeyPressed="#EnterPressed" prefHeight="24.0" prefWidth="138.0" promptText="Τιμή">
          <tooltip>
             <Tooltip autoHide="true" text="Η τίμη εμφανίζεται μόνο όταν είναι από διαφορετικό προμυθευτή" />
          </tooltip>
       </TextField>
-      <TextField fx:id="RecNum_Text" layoutX="110.0" layoutY="369.0" prefHeight="24.0" prefWidth="138.0" promptText="Αριθμός Απόδειξης">
+      <TextField fx:id="RecNum_Text" layoutX="110.0" layoutY="371.0" onKeyPressed="#EnterPressed" prefHeight="24.0" prefWidth="138.0" promptText="Αριθμός Απόδειξης">
          <tooltip>
             <Tooltip autoHide="true" text="Η τίμη εμφανίζεται μόνο όταν είναι από διαφορετικό προμυθευτή" />
          </tooltip>
       </TextField>
-      <DatePicker fx:id="DatePart" layoutX="371.0" layoutY="369.0" prefHeight="25.0" prefWidth="138.0" promptText="Ημερομηνία" />
-      <TextField fx:id="Receipt_Number" layoutX="110.0" layoutY="228.0" prefHeight="25.0" prefWidth="138.0" promptText="Αριθμός Απόδειξης" />
+      <DatePicker fx:id="DatePart" layoutX="371.0" layoutY="324.0" prefHeight="24.0" prefWidth="138.0" promptText="Ημερομηνία" />
+      <TextField fx:id="Receipt_Number" layoutX="110.0" layoutY="228.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Αριθμός Απόδειξης" />
       <Label fx:id="Receipt_Number_Label" layoutX="112.0" layoutY="214.0" prefHeight="17.0" prefWidth="138.0" text="Αριθμός Απόδειξής" textFill="RED">
          <font>
             <Font size="9.0" />

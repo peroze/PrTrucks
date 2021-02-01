@@ -234,16 +234,16 @@ public class DrawerTop implements Initializable {
     public void changeBg() {
         switch (Active) {
             case "Expenses":
-                Totals_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Totals_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Fuel":
-                Fuel_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Fuel_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Settings":
-                Backup_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Backup_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Secondary":
-                Secondary_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Secondary_Button.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

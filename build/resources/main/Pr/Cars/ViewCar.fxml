@@ -16,26 +16,26 @@
    <children>
       <TextField fx:id="LiscPlate" editable="false" layoutX="127.0" layoutY="88.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Plaisio" editable="false" layoutX="494.0" layoutY="143.0" prefHeight="24.0" prefWidth="185.0" promptText="Αριθμός Πλαισίου" stylesheets="@Styles/AddsTotals.css" />
-      <Label fx:id="Label_View" layoutX="126.0" layoutY="78.0" prefHeight="17.0" prefWidth="39.0" style="-fx-text-fill: #FA8072;" text="Πινακίδα" textFill="#fcfcfc">
+      <Label fx:id="Label_View" layoutX="126.0" layoutY="78.0" prefHeight="17.0" prefWidth="39.0" style="-fx-text-fill: #ff6542;" text="Πινακίδα" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="497.0" layoutY="132.0" prefHeight="17.0" prefWidth="75.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Πλαισίου" textFill="#fcfcfc">
+      <Label layoutX="497.0" layoutY="132.0" prefHeight="17.0" prefWidth="75.0" style="-fx-text-fill: #ff6542;" text="Αριθμος Πλαισίου" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Date" editable="false" layoutX="494.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Kilometers" editable="false" layoutX="127.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="495.0" layoutY="79.0" prefHeight="17.0" prefWidth="120.0" style="-fx-text-fill: #FA8072;" text="Ημερομινία 1ης Κυκλοφορίας" textFill="#fcfcfc">
+      <Label layoutX="495.0" layoutY="79.0" prefHeight="17.0" prefWidth="120.0" style="-fx-text-fill: #ff6542;" text="Ημερομινία 1ης Κυκλοφορίας" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label fx:id="Label_View" layoutX="124.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="WHITE">
+      <Label fx:id="Label_View" layoutX="124.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" style="-fx-text-fill: #ff6542;" text="Χιλιόμετρα" textFill="WHITE">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Location" editable="false" layoutX="127.0" layoutY="196.0" prefHeight="24.0" prefWidth="185.0" promptText="Τοποθεσία" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="125.0" layoutY="185.0" prefHeight="17.0" prefWidth="46.0" style="-fx-text-fill: #FA8072;" text="Τοποθεσία" textFill="#fcfcfc">
+      <Label layoutX="125.0" layoutY="185.0" prefHeight="17.0" prefWidth="46.0" style="-fx-text-fill: #ff6542;" text="Τοποθεσία" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font>
@@ -57,7 +57,7 @@
             <TableColumn fx:id="Code_Col" prefWidth="286.0" text="Κωδικός" />
         </columns>
       </TableView>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -78,7 +78,7 @@
          </children>
       </HBox>
       <TextField fx:id="Type" editable="false" layoutX="494.0" layoutY="198.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος Οχήματος" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="496.0" layoutY="186.0" prefHeight="17.0" prefWidth="71.0" style="-fx-text-fill: #FA8072;" text="Τύπος Οχήματος" textFill="#fcfcfc">
+      <Label layoutX="496.0" layoutY="186.0" prefHeight="17.0" prefWidth="71.0" style="-fx-text-fill: #ff6542;" text="Τύπος Οχήματος" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>

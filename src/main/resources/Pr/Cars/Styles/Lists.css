@@ -1,11 +1,11 @@
 /* .button{
 
-    -fx-background-color:  #FA8072;
+    -fx-background-color:  #ff6542;
     -fx-background-radius: 5em;
     /*-fx-border-radius: 50%;*/
 /*}*/
 .button{
-    -fx-border-color:  #FA8072;
+    -fx-border-color:  #ff6542;
     -fx-background-color:  transparent;
     -fx-border-width: 2px;
     -fx-background-radius: 5em;
@@ -13,7 +13,7 @@
 }
 
 .button:hover{
-    -fx-background-color:  #FA8072;
+    -fx-background-color:  #ff6542;
 }
 
 .text-field{
@@ -33,7 +33,7 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #FA8072;
+    -fx-background-color: #ff6542;
     -fx-background-radius: 30;
     -fx-background-insets: 0 0 10 0;
     -fx-padding: 0 0 10 0;

@@ -24,13 +24,13 @@
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-border-width: 0 0 3 0;
-    -fx-border-color: #FA8072;
-    -fx-background-color: #FA8072;
+    -fx-border-color: #ff6542;
+    -fx-background-color: #ff6542;
     -fx-text-fill: white;
 }
 
 .menu-button:hover{
-    -fx-background-color:  #FA8072;
+    -fx-background-color:  #ff6542;
 }
 
 
@@ -44,11 +44,11 @@
 }
 
 .menu-item:hover{
-    -fx-background-color: #FA8072;
+    -fx-background-color: #ff6542;
 }
 
 .menu-item:focused{
-    -fx-background-color: #FA8072;
+    -fx-background-color: #ff6542;
 }
 
 .menu-button  .arrow-button {
@@ -61,5 +61,5 @@
 
 
 .button:hover{
-    -fx-background-color: #FA8072;
+    -fx-background-color: #ff6542;
 }

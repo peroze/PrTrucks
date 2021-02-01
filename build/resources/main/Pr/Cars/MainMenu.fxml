@@ -148,7 +148,7 @@
       </BorderPane>
    </center>
    <top>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="600.0" style="-fx-background-color: #FA8072;" BorderPane.alignment="CENTER">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="600.0" style="-fx-background-color: #ff6542;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
                <image>

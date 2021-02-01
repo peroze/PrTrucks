@@ -81,7 +81,7 @@
       </VBox>
    </left>
    <top>
-      <HBox alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="200.0" style="-fx-background-color: #FA8072;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="23.0" prefWidth="200.0" style="-fx-background-color: #ff6542;" BorderPane.alignment="CENTER">
          <children>
             <Label text="PrTrucks">
                <font>

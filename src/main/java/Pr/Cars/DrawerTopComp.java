@@ -180,16 +180,16 @@ public class DrawerTopComp implements Initializable {
     public void changeBg() {
         switch (Active) {
             case "Companies":
-                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Cars":
-                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Transfer.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Partners":
-                Partners.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Partners.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
             case "Employers":
-                Employers.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #FA8072;-fx-background-color: grey; -fx-text-fill: white;");
+                Employers.setStyle("-fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 0 0 3 0; -fx-border-color: #ff6542;-fx-background-color: grey; -fx-text-fill: white;");
                 break;
         }
     }

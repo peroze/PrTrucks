@@ -273,13 +273,13 @@ public class Settings implements Initializable {
             Day14.setStyle(null);
             Day30.setStyle(null);
             if (i == 0) {
-                Day1.setStyle("-fx-text-fill: #FA8072");
+                Day1.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 33.3) {
-                Day7.setStyle("-fx-text-fill: #FA8072");
+                Day7.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 100) {
-                Day30.setStyle("-fx-text-fill: #FA8072");
+                Day30.setStyle("-fx-text-fill: #ff6542");
             } else {
-                Day14.setStyle("-fx-text-fill: #FA8072");
+                Day14.setStyle("-fx-text-fill: #ff6542");
             }
         } else if(sl==1) {
             Day11.setStyle(null);
@@ -287,13 +287,13 @@ public class Settings implements Initializable {
             Day141.setStyle(null);
             Day301.setStyle(null);
             if (i == 0) {
-                Day11.setStyle("-fx-text-fill: #FA8072");
+                Day11.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 33.3) {
-                Day71.setStyle("-fx-text-fill: #FA8072");
+                Day71.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 100) {
-                Day301.setStyle("-fx-text-fill: #FA8072");
+                Day301.setStyle("-fx-text-fill: #ff6542");
             } else {
-                Day141.setStyle("-fx-text-fill: #FA8072");
+                Day141.setStyle("-fx-text-fill: #ff6542");
             }
         }
         else if(sl==2){
@@ -302,13 +302,13 @@ public class Settings implements Initializable {
             Day1411.setStyle(null);
             Day3011.setStyle(null);
             if (i == 0) {
-                Day111.setStyle("-fx-text-fill: #FA8072");
+                Day111.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 33.3) {
-                Day711.setStyle("-fx-text-fill: #FA8072");
+                Day711.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 100) {
-                Day3011.setStyle("-fx-text-fill: #FA8072");
+                Day3011.setStyle("-fx-text-fill: #ff6542");
             } else {
-                Day1411.setStyle("-fx-text-fill: #FA8072");
+                Day1411.setStyle("-fx-text-fill: #ff6542");
             }
         }
         else if(sl==3){
@@ -317,13 +317,13 @@ public class Settings implements Initializable {
             Day1412.setStyle(null);
             Day3012.setStyle(null);
             if (i == 0) {
-                Day112.setStyle("-fx-text-fill: #FA8072");
+                Day112.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 33.3) {
-                Day712.setStyle("-fx-text-fill: #FA8072");
+                Day712.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 100) {
-                Day3012.setStyle("-fx-text-fill: #FA8072");
+                Day3012.setStyle("-fx-text-fill: #ff6542");
             } else {
-                Day1412.setStyle("-fx-text-fill: #FA8072");
+                Day1412.setStyle("-fx-text-fill: #ff6542");
             }
         }
         else if(sl==4){
@@ -333,13 +333,13 @@ public class Settings implements Initializable {
              Day1413.setStyle(null);
              Day3013.setStyle(null);
             if (i == 0) {
-                Day113.setStyle("-fx-text-fill: #FA8072");
+                Day113.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 33.3) {
-                Day713.setStyle("-fx-text-fill: #FA8072");
+                Day713.setStyle("-fx-text-fill: #ff6542");
             } else if (i == 100) {
-                Day3013.setStyle("-fx-text-fill: #FA8072");
+                Day3013.setStyle("-fx-text-fill: #ff6542");
             } else {
-                Day1413.setStyle("-fx-text-fill: #FA8072");
+                Day1413.setStyle("-fx-text-fill: #ff6542");
             }
         }
     }

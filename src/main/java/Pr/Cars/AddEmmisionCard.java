@@ -137,7 +137,7 @@ public class AddEmmisionCard implements Initializable {
     public void ResetHideLabels(){
         for(int i=0;i<Labels.size();i++) {
             Labels.get(i).setText(Texts.get(i));
-            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            Labels.get(i).setStyle("-fx-text-fill:#ff6542");
         }
 
             if (Kilometers.getText().equals("")) {

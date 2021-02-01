@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddCar">
    <children>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -63,69 +63,69 @@
       <ComboBox fx:id="KTEO" layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα ΚΤΕΟ" />
       <ComboBox fx:id="Gas" layoutX="111.0" layoutY="308.0" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Καρτας" />
       <TextField fx:id="Service" layoutX="375.0" layoutY="267.0" onKeyPressed="#EnterPress" prefHeight="26.0" prefWidth="138.0" promptText="Διάστημα Service (KM) " />
-      <Label fx:id="Plais_Label" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="174.0" style="-fx-text-fill: #FA8072;" text="Aριθμός Πλαισίου" textFill="WHITE">
+      <Label fx:id="Plais_Label" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="174.0" style="-fx-text-fill: #ff6542;" text="Aριθμός Πλαισίου" textFill="WHITE">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Manu_Label" layoutX="109.0" layoutY="122.0" prefHeight="17.0" prefWidth="149.0" style="-fx-text-fill: #FA8072;" text="Μάρκα" textFill="RED">
+      <Label fx:id="Manu_Label" layoutX="109.0" layoutY="122.0" prefHeight="17.0" prefWidth="149.0" style="-fx-text-fill: #ff6542;" text="Μάρκα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Km_Label" layoutX="109.0" layoutY="165.0" prefHeight="17.0" prefWidth="160.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="RED">
+      <Label fx:id="Km_Label" layoutX="109.0" layoutY="165.0" prefHeight="17.0" prefWidth="160.0" style="-fx-text-fill: #ff6542;" text="Χιλιόμετρα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Lisc_Label" layoutX="371.0" layoutY="79.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Πινακίδα" textFill="RED">
+      <Label fx:id="Lisc_Label" layoutX="371.0" layoutY="79.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Πινακίδα" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Model_Label" layoutX="371.0" layoutY="122.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Μοντέλο" textFill="RED">
+      <Label fx:id="Model_Label" layoutX="371.0" layoutY="122.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Μοντέλο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Date_Label" layoutX="107.0" layoutY="211.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Ημερομηνία" textFill="RED">
+      <Label fx:id="Date_Label" layoutX="107.0" layoutY="211.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Ημερομηνία" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Locat_Label" layoutX="371.0" layoutY="211.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Τοποθεσία" textFill="RED">
+      <Label fx:id="Locat_Label" layoutX="371.0" layoutY="211.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Τοποθεσία" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Emmis_Label" layoutX="109.0" layoutY="299.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Διάστ. Κάρτας" textFill="RED">
+      <Label fx:id="Emmis_Label" layoutX="109.0" layoutY="299.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Διάστ. Κάρτας" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Categ_Label" layoutX="371.0" layoutY="165.0" prefHeight="17.0" prefWidth="107.0" style="-fx-text-fill: #FA8072;" text="Κατηγόρια" textFill="RED">
+      <Label fx:id="Categ_Label" layoutX="371.0" layoutY="165.0" prefHeight="17.0" prefWidth="107.0" style="-fx-text-fill: #ff6542;" text="Κατηγόρια" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="Kteo_Label" layoutX="108.0" layoutY="258.0" prefHeight="17.0" prefWidth="123.0" style="-fx-text-fill: #FA8072;" text="Διάστημα Κτέο" textFill="RED">
+      <Label fx:id="Kteo_Label" layoutX="108.0" layoutY="258.0" prefHeight="17.0" prefWidth="123.0" style="-fx-text-fill: #ff6542;" text="Διάστημα Κτέο" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Label fx:id="ServKm_Label" layoutX="371.0" layoutY="258.0" prefHeight="17.0" prefWidth="154.0" style="-fx-text-fill: #FA8072;" text="Διάστημα Service" textFill="RED">
+      <Label fx:id="ServKm_Label" layoutX="371.0" layoutY="258.0" prefHeight="17.0" prefWidth="154.0" style="-fx-text-fill: #ff6542;" text="Διάστημα Service" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
       <DatePicker fx:id="Fire" layoutX="375.0" layoutY="308.0" prefHeight="25.0" prefWidth="138.0" promptText="Αναγωμ. Πυροσβ." />
-      <Label fx:id="Fire_Label" layoutX="373.0" layoutY="299.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Αναγώμωση Πυροσβ." textFill="RED">
+      <Label fx:id="Fire_Label" layoutX="373.0" layoutY="299.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Αναγώμωση Πυροσβ." textFill="RED">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
       <DatePicker fx:id="Speed" layoutX="111.0" layoutY="349.0" prefHeight="25.0" prefWidth="138.0" promptText="Ταχογράφος" />
-      <Label fx:id="Speed_Label" layoutX="110.0" layoutY="340.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #FA8072;" text="Ταχογράφος" textFill="RED">
+      <Label fx:id="Speed_Label" layoutX="110.0" layoutY="340.0" prefHeight="17.0" prefWidth="138.0" style="-fx-text-fill: #ff6542;" text="Ταχογράφος" textFill="RED">
          <font>
             <Font size="9.0" />
          </font>

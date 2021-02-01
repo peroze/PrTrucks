@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddRefill">
    <children>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -34,7 +34,7 @@
             </FontIcon>
          </children>
       </HBox>
-      <TextField fx:id="Kilometers" layoutX="93.0" layoutY="188.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
+      <TextField fx:id="Kilometers" layoutX="93.0" layoutY="188.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
       <DatePicker fx:id="Date" layoutX="369.0" layoutY="128.0" prefHeight="25.0" prefWidth="138.0" promptText="Ημερομηνία" />
       <Button fx:id="Ok_Button" layoutX="208.0" layoutY="321.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
       <Label layoutX="179.0" layoutY="41.0" prefHeight="36.0" prefWidth="246.0" text="Προσθήκη Ανεφοδιασμού" textFill="WHITE">
@@ -43,8 +43,8 @@
          </font>
       </Label>
       <ComboBox fx:id="Lisc_Plate" layoutX="93.0" layoutY="128.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
-      <TextField fx:id="Amount" layoutX="369.0" layoutY="188.0" prefHeight="25.0" prefWidth="138.0" promptText="Ποσότητα" />
-      <TextField fx:id="Driver" layoutX="93.0" layoutY="244.0" prefHeight="25.0" prefWidth="138.0" promptText="Οδηγός" />
+      <TextField fx:id="Amount" layoutX="369.0" layoutY="188.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Ποσότητα" />
+      <TextField fx:id="Driver" layoutX="93.0" layoutY="244.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Οδηγός" />
       <TextField fx:id="Location" layoutX="369.0" layoutY="244.0" prefHeight="25.0" prefWidth="138.0" promptText="Δρομολόγιο" />
       <Label fx:id="Amount_Label" layoutX="369.0" layoutY="178.0" prefHeight="17.0" prefWidth="138.0" text="Ποσότητα" textFill="RED" visible="false">
          <font>

@@ -18,25 +18,25 @@
       <TextField fx:id="Name" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Όνομα" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Phone" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Τηλέφωνο" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Type" editable="false" layoutX="113.0" layoutY="193.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος Συνεργάτη" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="115.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Όνομα" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Όνομα" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="115.0" layoutY="129.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τηλέφωνο" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="129.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Τηλέφωνο" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="115.0" layoutY="179.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Τύπος Συνεργάτη" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="179.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #ff6542;" text="Τύπος Συνεργάτη" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Address" editable="false" layoutX="423.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Διεύθυνση" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Email" editable="false" layoutX="423.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Email" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Διεύθυνση" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Διεύθυνση" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Email" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Email" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
@@ -54,7 +54,7 @@
           <TableColumn fx:id="Note" prefWidth="534.0" text="Σημείωση" />
         </columns>
       </TableView>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #ff6542;">
          <children>
             <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
                <image>

@@ -246,7 +246,7 @@ public class AddExternalPhoneList implements Initializable {
     public void ResetHideLabels() {
         for (int i = 0; i < Labels.size() - 1; i++) {
             Labels.get(i).setText(Texts.get(i));
-            Labels.get(i).setStyle("-fx-text-fill:#FA8072");
+            Labels.get(i).setStyle("-fx-text-fill:#ff6542");
             if(TFields.get(i).getText()==null){
                 Labels.get(i).setVisible(false);
             }
@@ -262,7 +262,7 @@ public class AddExternalPhoneList implements Initializable {
             Labels.get(4).setVisible(false);
         }
         Labels.get(4).setText(Texts.get(4));
-        Labels.get(4).setStyle("-fx-text-fill:#FA8072");
+        Labels.get(4).setStyle("-fx-text-fill:#ff6542");
     }
 
     public void ResetCssTFields() {

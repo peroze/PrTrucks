@@ -18,40 +18,40 @@
       <TextField fx:id="LiscPlate" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="24.0" prefWidth="185.0" promptText="Πινακίδα" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Workshop" editable="false" layoutX="113.0" layoutY="139.0" prefHeight="24.0" prefWidth="185.0" promptText="Συνεργείο" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="NextKm" editable="false" layoutX="113.0" layoutY="193.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (KM)" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="115.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Πινακίδα" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="72.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Πινακίδα" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="115.0" layoutY="129.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Συνεργείο" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="129.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Συνεργείο" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="115.0" layoutY="179.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Επόμενο (KM)" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="179.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #ff6542;" text="Επόμενο (KM)" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Date" editable="false" layoutX="423.0" layoutY="89.0" prefHeight="24.0" prefWidth="185.0" promptText="Ημερομινία" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="Kilometers" editable="false" layoutX="423.0" layoutY="142.0" prefHeight="24.0" prefWidth="185.0" promptText="Χιλιόμετρα" stylesheets="@Styles/AddsTotals.css" />
       <TextField fx:id="NextD" editable="false" layoutX="423.0" layoutY="197.0" prefHeight="24.0" prefWidth="185.0" promptText="Επόμενο (ΗΜ)" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Ημερομινία" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="75.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Ημερομινία" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Χιλιόμετρα" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="128.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Χιλιόμετρα" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
-      <Label layoutX="425.0" layoutY="183.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Επόμενο (ΗΜ)" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="183.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #ff6542;" text="Επόμενο (ΗΜ)" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Price" editable="false" layoutX="423.0" layoutY="296.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="425.0" layoutY="282.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="282.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Τιμή" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
       <TextField fx:id="Type" editable="false" layoutX="113.0" layoutY="243.0" prefHeight="24.0" prefWidth="185.0" promptText="Τύπος" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="115.0" layoutY="229.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #FA8072;" text="Τύπος" textFill="#fcfcfc">
+      <Label layoutX="115.0" layoutY="229.0" prefHeight="17.0" prefWidth="76.0" style="-fx-text-fill: #ff6542;" text="Τύπος" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font></Label>
@@ -74,7 +74,7 @@
             <TableColumn fx:id="ParDat_Col" prefWidth="81.0" text="Ημερομηνία" />
         </columns>
       </TableView>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="1.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="708.0" style="-fx-background-color: #ff6542;">
          <children>
             <ImageView fx:id="Minimize_Button" fitHeight="16.0" fitWidth="16.0" onMousePressed="#Minimize_Button_Pressed">
                <image>
@@ -101,13 +101,13 @@
          </children>
       </HBox>
       <TextField fx:id="Receipt_Number" editable="false" layoutX="113.0" layoutY="298.0" prefHeight="25.0" prefWidth="185.0" promptText="Αριθμός Απόδειξης" />
-      <Label layoutX="114.0" layoutY="284.0" prefHeight="17.0" prefWidth="89.0" style="-fx-text-fill: #FA8072;" text="Αριθμος Απόδειξης" textFill="#fcfcfc">
+      <Label layoutX="114.0" layoutY="284.0" prefHeight="17.0" prefWidth="89.0" style="-fx-text-fill: #ff6542;" text="Αριθμος Απόδειξης" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
       <TextField fx:id="Price1" editable="false" layoutX="423.0" layoutY="241.0" prefHeight="24.0" prefWidth="185.0" promptText="Τιμή Εργασίας" stylesheets="@Styles/AddsTotals.css" />
-      <Label layoutX="425.0" layoutY="227.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #FA8072;" text="Τιμή Εργασίας" textFill="#fcfcfc">
+      <Label layoutX="425.0" layoutY="227.0" prefHeight="17.0" prefWidth="63.0" style="-fx-text-fill: #ff6542;" text="Τιμή Εργασίας" textFill="#fcfcfc">
          <font>
             <Font size="9.0" />
          </font>

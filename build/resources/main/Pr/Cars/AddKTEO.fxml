@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" stylesheets="@Styles/AddsTotals.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pr.Cars.AddKTEO">
    <children>
-      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #FA8072;">
+      <HBox fx:id="Top_Bar" alignment="CENTER_RIGHT" layoutY="-3.0" onMouseDragged="#Top_Bar_Dragged" onMousePressed="#Top_Bar_Pressed" prefHeight="26.0" prefWidth="600.0" style="-fx-background-color: #ff6542;">
          <children>
             <FontIcon fx:id="Minimize_Button" iconLiteral="fa-window-minimize" onMouseClicked="#Minimize_Button_Pressed">
                <cursor>
@@ -37,7 +37,7 @@
          </children>
       </HBox>
       <TextField fx:id="Price" layoutX="109.0" layoutY="200.0" prefHeight="25.0" prefWidth="138.0" promptText="Τιμή" />
-      <TextField fx:id="Kilometers" layoutX="110.0" layoutY="157.0" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
+      <TextField fx:id="Kilometers" layoutX="110.0" layoutY="157.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Χιλιόμετρα" />
       <DatePicker fx:id="Date" layoutX="375.0" layoutY="112.0" prefHeight="25.0" prefWidth="138.0" promptText="Ημερομινία" />
       <Button fx:id="Ok_Button" layoutX="208.0" layoutY="528.0" mnemonicParsing="false" onAction="#Ok_Button_Pr" prefHeight="25.0" prefWidth="187.0" text="Εισαγωγή" />
       <Label layoutX="201.0" layoutY="38.0" prefHeight="36.0" prefWidth="237.0" text="Εισαγωγή ΚΤΕΟ" textFill="WHITE">
@@ -55,7 +55,7 @@
           <TableColumn fx:id="Parts" prefWidth="417.0" text="Παρατηρήσεις" />
         </columns>
       </TableView>
-      <TextField fx:id="Workshop" layoutX="375.0" layoutY="157.0" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
+      <TextField fx:id="Workshop" layoutX="375.0" layoutY="157.0" onKeyPressed="#EnterPressed" prefHeight="25.0" prefWidth="138.0" promptText="Εταιρία" />
       <ComboBox fx:id="Lisc_Plate" layoutX="110.0" layoutY="112.0" prefHeight="26.0" prefWidth="138.0" promptText="Πινακίδα" />
       <Label fx:id="Km_Label" layoutX="110.0" layoutY="147.0" prefHeight="17.0" prefWidth="167.0" text="Χίλιομετρα" textFill="RED">
          <font>
